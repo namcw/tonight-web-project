@@ -19,15 +19,15 @@
 		<% } else { %>
 			<p><%= member.getMemberName() %> 님&nbsp;&nbsp;&nbsp;</p>
 			<p><a href="#">마이페이지&nbsp;&nbsp;&nbsp;</a></p>
-			<p><a href="#">로그아웃&nbsp;&nbsp;&nbsp;</a></p>
+			<p><a href="/tonight/logout">로그아웃&nbsp;&nbsp;&nbsp;</a></p>
 		<% } %>
 	</div>
 </header>
 <nav>
 	<ul class="lfloat">
 		<li><a href="#">전체메뉴&nbsp;&nbsp;&nbsp;</a></li>
-		<li><a href="#">투어&nbsp;&nbsp;&nbsp;</a></li>
-		<li><a href="/tonight/alist">숙소&nbsp;&nbsp;&nbsp;</a></li>
+		<li><a href="/tonight/tlist">투어&nbsp;&nbsp;&nbsp;</a></li>
+		<li><a href="#">숙소&nbsp;&nbsp;&nbsp;</a></li>
 		<li><a href="#">고객센터&nbsp;&nbsp;&nbsp;</a></li>
 	</ul>
 </nav>

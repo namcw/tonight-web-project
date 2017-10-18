@@ -27,7 +27,7 @@ public class MemberDao {
 					member = new Member(memberId, memberPwd,
 									 rset.getString("MEMBER_NAME"),
 									 rset.getString("MEMBER_TYPE"),
-									 rset.getString("MEMBER_BIRTH_DATE"),
+									 rset.getString("MEMBER_BIRTHDATE"),
 									 rset.getString("MEMBER_PHONE"),
 									 rset.getString("MEMBER_EMAIL"),
 									 rset.getString("MEMBER_ADDRESS"),
