@@ -8,7 +8,7 @@
 <link rel="stylesheet" type="text/css" href="/tonight/css/style.css">
 </head>
 <body>
-<footer>
+<footer class="container-fluid text-center">
 	<address>tonight</address>
 	<small>ⓒ  Gangnam Station Exit 10</small>
 </footer>

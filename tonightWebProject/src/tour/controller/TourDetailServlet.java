@@ -1,7 +1,6 @@
 package tour.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -14,16 +13,16 @@ import tour.model.service.TourService;
 import tour.model.vo.Tour;
 
 /**
- * Servlet implementation class TourListServlet
+ * Servlet implementation class TourDetailServlet
  */
-@WebServlet("/tlist")
-public class TourListServlet extends HttpServlet {
-	private static final long serialVersionUID = 1123L;
+@WebServlet("/tdetail")
+public class TourDetailServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public TourListServlet() {
+    public TourDetailServlet() {
         super();
     }
 
@@ -31,20 +30,17 @@ public class TourListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.setContentType("text/html; charset=UTF-8");
+		response.setContentType("text/html; charset=utf-8");
+		int tid = Integer.parseInt(request.getParameter("tid"));
 		
-		ArrayList<Tour> list = new TourService().selectList();
+		Tour tour = new TourService().selectTour(tid);
 		
 		RequestDispatcher view = null;
-		if(list != null) {
-			view = request.getRequestDispatcher("views/tour/tourListView.jsp");
-			request.setAttribute("list", list);
+		if(tour != null){
+			view = request.getRequestDispatcher("views/tour/tourDetailView.jsp");
+			request.setAttribute("tour", tour);
 			view.forward(request, response);
-		} else {
-			
 		}
-		
-
 	}
 
 	/**

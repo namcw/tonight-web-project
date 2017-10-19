@@ -1,4 +1,4 @@
-package tour.controller;
+package qna.contoller;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -10,47 +10,50 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import tour.model.service.TourService;
-import tour.model.vo.Tour;
+import qna.model.service.QnaService;
+import qna.model.vo.Qna;
 
 /**
- * Servlet implementation class TourListServlet
+ * Servlet implementation class QnaListServlet
  */
-@WebServlet("/tlist")
-public class TourListServlet extends HttpServlet {
-	private static final long serialVersionUID = 1123L;
+@WebServlet("/qlist")
+public class QnaListServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public TourListServlet() {
+    public QnaListServlet() {
         super();
+        // TODO Auto-generated constructor stub
     }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.setContentType("text/html; charset=UTF-8");
+		// TODO Auto-generated method stub
+		response.setContentType("text/html; charset=utf-8");
 		
-		ArrayList<Tour> list = new TourService().selectList();
-		
+		ArrayList<Qna> list = new QnaService().selectList();
 		RequestDispatcher view = null;
-		if(list != null) {
-			view = request.getRequestDispatcher("views/tour/tourListView.jsp");
+		
+		if(list != null){
+			view = request.getRequestDispatcher("views/qna/qnaListView.jsp");
 			request.setAttribute("list", list);
 			view.forward(request, response);
-		} else {
-			
+		}else{
+			view = request.getRequestDispatcher("views/qna/qnaError.jsp");
+			request.setAttribute("message", "QNA글 전체 조회 실패");
+			view.forward(request, response);
 		}
-		
-
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 

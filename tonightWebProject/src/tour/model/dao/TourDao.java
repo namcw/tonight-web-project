@@ -1,6 +1,7 @@
 package tour.model.dao;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -18,12 +19,11 @@ public class TourDao {
 		Statement stmt = null;
 		ResultSet rset = null;
 		
-		String sql = "SELECT * FROM TOUR";
+		String sql = "SELECT * FROM TOUR ORDER BY 1 DESC";
 		
 		try {
 			stmt = con.createStatement();
 			rset = stmt.executeQuery(sql);
-			
 			if(rset != null) {
 				list = new ArrayList<Tour>();
 				while(rset.next()) {
@@ -31,27 +31,43 @@ public class TourDao {
 							rset.getInt("TOUR_ID"),
 							rset.getString("TOUR_TITLE"),
 							rset.getString("GUIDE_ID"),
-							rset.getString("TOUR_STATE"),
-							rset.getDate("START_DATE"),
-							rset.getDate("ARRIVAL_DATE"),
-							rset.getInt("TOUR_ADULT_PRICE"),
-							rset.getInt("TOUR_CHILD_PRICE"),
-							rset.getDouble("TOUR_DISCOUNT"),
-							rset.getString("TOUR_THUMNAIL"),
-							rset.getString("TOUR_DETAIL"));
+							rset.getString("TOUR_THUMNAIL_PATH"));
 					list.add(tour);
 				}
 			}
-			
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
 			close(rset);
 			close(stmt);
 		}
-		
-		
 		return list;
+	}
+
+	public Tour selectTour(Connection con, int tid) {
+		Tour tour = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = "SELECT * FROM TOUR WHERE TOUR_ID = ?";
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, tid);
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				tour = new Tour(tid,
+								rset.getString("TOUR_TITLE"),
+								rset.getString("GUIDE_ID"),
+								rset.getString("TOUR_THUMNAIL_PATH"));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return tour;
 	}
 
 }

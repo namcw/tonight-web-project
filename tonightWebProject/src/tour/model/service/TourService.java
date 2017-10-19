@@ -19,4 +19,10 @@ public class TourService {
 		return list;
 	}
 
+	public Tour selectTour(int tid) {
+		Connection con = getConnection();
+		Tour tour = new TourDao().selectTour(con, tid);
+		close(con);
+		return tour;
+	}
 }
