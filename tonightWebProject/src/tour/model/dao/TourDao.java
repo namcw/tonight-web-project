@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 import static common.JDBCTemplate.*;
 import tour.model.vo.Tour;
+import tour.model.vo.TourDetail;
 
 public class TourDao {
 	
@@ -68,6 +69,31 @@ public class TourDao {
 			close(pstmt);
 		}
 		return tour;
+	}
+
+	public TourDetail selectTourDetail(Connection con, int tid) {
+		TourDetail tdetail = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = "SELECT * FROM TOUR WHERE TOUR_ID = ?";
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, tid);
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				tdetail = new TourDetail(tid,
+								rset.getString("TOUR_TITLE"),
+								rset.getString("GUIDE_ID"),
+								rset.getString("TOUR_THUMNAIL_PATH"));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return tdetail;
 	}
 
 }

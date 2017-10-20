@@ -30,9 +30,9 @@ public class MemberSelectServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.setContentType("text/html; charset=utf-8");
+response.setContentType("text/html; charset=utf-8");
 		
-		Member member = new MemberService().selectMember(request.getParameter("userid"));
+		Member member = new MemberService().selectMember(request.getParameter("memberid"));
 		
 		RequestDispatcher view = null;
 		if(member != null) {
@@ -41,7 +41,10 @@ public class MemberSelectServlet extends HttpServlet {
 			view.forward(request, response);
 			
 		} else {
-			// TODO
+			view=request.getRequestDispatcher("views/member/memberError.jsp");
+			request.setAttribute("message", "¸마이페이지 띄우기 실패");
+			view.forward(request, response);
+		
 		}
 	}
 }

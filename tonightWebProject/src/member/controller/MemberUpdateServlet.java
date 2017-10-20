@@ -43,32 +43,33 @@ public class MemberUpdateServlet extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html; charset=utf-8");
 		
-		String userId = request.getParameter("userid");
-		String userPwd = request.getParameter("userpwd");
-		String userName = request.getParameter("username");
-		String gender = request.getParameter("gender");
-		int age = Integer.parseInt(request.getParameter("age"));
-		
+		String memberId = request.getParameter("memberid");
+		String memberPwd = request.getParameter("memberpwd");
+		String memberName = request.getParameter("membername");
+		String birthDate=request.getParameter("birthdate");
 		String email = request.getParameter("email");
 		String phone = request.getParameter("phone");
 		String address = request.getParameter("address");
-		String hobby = String.join(",", request.getParameterValues("hobby"));
+		String rank=request.getParameter("rank");
+		/*System.out.println(memberId+","+memberPwd+","+memberName+","+birthDate+","+email+","+phone+","+address+","+rank);*/
 		
-		// TODO
-		Member member = new Member();
+		
+		Member member = new Member(memberId,memberPwd,memberName,birthDate,phone,email,address,rank);
 
 		int result = new MemberService().updateMember(member);
 		
 		RequestDispatcher rd = null;
 		if(result > 0) {
-			Member smember = new MemberService().selectMember(userId);
+			Member smember = new MemberService().selectMember(memberId);
 			HttpSession session = request.getSession(false);
 			session.removeAttribute("member");
 			session.setAttribute("member", smember);
 			
-			response.sendRedirect("/first/index.jsp");
+			response.sendRedirect("/tonight/index.jsp");
 		} else {
-			// TODO
+			rd=request.getRequestDispatcher("/views/member/memberError.jsp");
+			request.setAttribute("message", "회원정보 수정 실패");
+			rd.forward(request, response);
 		}
 		
 	}

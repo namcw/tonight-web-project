@@ -67,7 +67,7 @@
       	<% if(member == null) { %>
         	<li><a href="/tonight/views/member/loginForm.jsp">로그인&nbsp;&nbsp;</a></li>
         <% } else { %>
-        	<li><a href="#">마이페이지</a></li>
+        	<li><a href="minfo?memberid=<%= member.getMemberId() %>">마이페이지</a></li>
         	<li><a href="/tonight/logout">로그아웃&nbsp;&nbsp;</a></li>
         <% } %>
         </ul>

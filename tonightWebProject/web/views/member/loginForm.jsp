@@ -163,7 +163,7 @@ body, html {
 	    <a href="#" class="forgot-password">
 			아이디/패스워드 찾기
 	    </a>
-	    <a href="#" class="forgot-password pull-right">
+	    <a href="/tonight/views/member/enrollForm.html" class="forgot-password pull-right">
 			회원가입
 	    </a>
 	</div>
