@@ -30,10 +30,13 @@ public class MemberDeleteServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html; charset=uft-8");
-		if(new MemberService().deleteMember(request.getParameter("id")) > 0) {
+		
+		if(new MemberService().deleteMember(request.getParameter("userid")) > 0) {
 			response.sendRedirect("/tonight/logout");
 		} else {
-			// TODO
+			RequestDispatcher errorPage=request.getRequestDispatcher("views/member/memberError.jsp");
+			request.setAttribute("message","회원 탈퇴 실패!");
+			errorPage.forward(request, response);
 			
 		}
 	}
