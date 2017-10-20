@@ -5,7 +5,6 @@ import java.sql.Date;
 
 public class Tour implements Serializable {
 
-
 	private static final long serialVersionUID = 3044051553377637868L;
 
 	private int tourId;

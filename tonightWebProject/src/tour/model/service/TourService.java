@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import static common.JDBCTemplate.*;
 
 import tour.model.dao.TourDao;
+import tour.model.vo.TourDetail;
 import tour.model.vo.Tour;
 
 public class TourService {
@@ -24,5 +25,12 @@ public class TourService {
 		Tour tour = new TourDao().selectTour(con, tid);
 		close(con);
 		return tour;
+	}
+
+	public TourDetail selectDetail(int tid) {
+		Connection con = getConnection();
+		TourDetail tdetail = new TourDao().selectTourDetail(con, tid);
+		close(con);
+		return tdetail;
 	}
 }

@@ -1,4 +1,4 @@
-package tour.controller;
+package accom.controller;
 
 import java.io.IOException;
 
@@ -9,48 +9,40 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import tour.model.service.TourService;
-import tour.model.vo.Tour;
-import tour.model.vo.TourDetail;
+import accom.model.dao.AccomDao;
+import accom.model.service.AccomService;
+import accom.model.vo.Accommodation;
 
 /**
- * Servlet implementation class TourDetailServlet
+ * Servlet implementation class accomInsertServlet
  */
-@WebServlet("/tdetail")
-public class TourDetailServlet extends HttpServlet {
+@WebServlet("/ainsert")
+public class AccomInsertServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public TourDetailServlet() {
+    public AccomInsertServlet() {
         super();
+        // TODO Auto-generated constructor stub
     }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.setContentType("text/html; charset=utf-8");
-		int tid = Integer.parseInt(request.getParameter("tid"));
+		//숙소 등록 처리용 컨트롤러
+		Accommodation accom = null;
+		new AccomService().insertAccom(accom);
 		
-		TourService tservice = new TourService();
-		
-		Tour tour = tservice.selectTour(tid);
-		TourDetail tdetail = tservice.selectDetail(tid);
-		
-		RequestDispatcher view = null;
-		if(tour != null){
-			view = request.getRequestDispatcher("views/tour/tourDetailView.jsp");
-			request.setAttribute("tour", tour);
-			view.forward(request, response);
-		}
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 

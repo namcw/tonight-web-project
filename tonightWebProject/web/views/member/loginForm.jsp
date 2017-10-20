@@ -151,7 +151,7 @@ body, html {
 <body>
 <div class="container">
 	<div class="card card-container">
-	    <img id="profile-img" class="profile-img-card" src="/tonight/img/logo2.png" />
+	    <img id="profile-img" class="profile-img-card" src="/tonight/img/logo.png" />
 	    <p id="profile-name" class="profile-name-card">TONIGHT</p>
 	    <form action="/tonight/login" method="post" class="sign-form">
 	        <span id="reauth-email" class="reauth-email">오신것을 환영합니다.</span>

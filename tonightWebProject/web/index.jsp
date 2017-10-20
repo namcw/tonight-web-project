@@ -23,7 +23,6 @@
 </head>
 <body>
 <%@ include file="views/includes/header.jsp" %>
-
 <div class="jumbotron">
   <div class="container text-center">
     <h1>Tonight</h1>      
@@ -96,7 +95,6 @@
     </div>
   </div>
 </div><br><br>
-
 <%@ include file="views/includes/footer.jsp" %>
 
 </body>
