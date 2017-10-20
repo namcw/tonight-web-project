@@ -82,10 +82,7 @@ public class TourDao {
 			pstmt.setInt(1, tid);
 			rset = pstmt.executeQuery();
 			if(rset.next()) {
-				tdetail = new TourDetail(tid,
-								rset.getString("TOUR_TITLE"),
-								rset.getString("GUIDE_ID"),
-								rset.getString("TOUR_THUMNAIL_PATH"));
+				
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
