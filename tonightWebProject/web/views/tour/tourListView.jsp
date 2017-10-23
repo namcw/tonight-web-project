@@ -17,15 +17,16 @@
 <meta charset="UTF-8">
 <title>tour list</title>
 <style type="text/css">
+@import url(//fonts.googleapis.com/earlyaccess/nanumpenscript.css);
 	.jumbotron {
 		margin-bottom: 0px;
-	    background-image: url(img/jumbotronbackground.jpg);
+	    background-image: url(img/tour.png);
 	    background-position: 0% 25%;
 	    background-size: cover;
 	    background-repeat: no-repeat;
 	    color: white !important;
 	    min-height: 100px;
-	}
+	     	}
 	.jumbotron > div {
 		margin-top: 30px;
 	}
@@ -42,6 +43,12 @@
 	.col-md-4 > #gid {
 		text-align: right;
 	} 
+	.jumbotron >div>h3{
+	
+	font-family: 'Nanum Pen Script';
+	font-size: 60px;
+	
+	}
 </style>
 </head>
 <body>
@@ -106,5 +113,6 @@
 	<a href="/tonight/tlist?page=<%= currentPage + 1 %>">[다음]</a>
 <% } %>
 </div>
+
 </body>
 </html>

@@ -7,9 +7,10 @@
 <meta charset="UTF-8">
 <title>Tonight</title>
 <style type="text/css">
+@import url(//fonts.googleapis.com/earlyaccess/nanumpenscript.css);
 	.jumbotron {
 		margin-bottom: 0px;
-	    background-image: url(img/jumbotronbackground.jpg);
+	    background-image: url(img/tonight.png);
 	    background-position: 0% 25%;
 	    background-size: cover;
 	    background-repeat: no-repeat;
@@ -18,7 +19,16 @@
 	}
 	.jumbotron > div {
 		margin-top: 50px;
+		
+		
+		
 	}
+	.jumbotron >div>h1{
+	font-family: 'Nanum Pen Script';
+	font-size: 100px;
+	}
+	
+	
 </style>
 </head>
 <body>
