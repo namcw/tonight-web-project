@@ -1,6 +1,7 @@
 package tour.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -11,7 +12,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import tour.model.service.TourService;
 import tour.model.vo.Tour;
+import tour.model.vo.TourConf;
 import tour.model.vo.TourDetail;
+import tour.model.vo.TourReview;
 
 /**
  * Servlet implementation class TourDetailServlet
@@ -37,14 +40,19 @@ public class TourDetailServlet extends HttpServlet {
 		TourService tservice = new TourService();
 		
 		Tour tour = tservice.selectTour(tid);
-		TourDetail tdetail = tservice.selectDetail(tid);
+		TourDetail tdetail = tservice.selectTourDetail(tid);
+		ArrayList<TourReview> treviewList = tservice.selectTourReviewList(tid);
+		double gradeAvg = tservice.getTourReviewGradeAvg(tid);
+		ArrayList<TourConf> tconfList = tservice.selectTourConfList(tid);
 		
-		RequestDispatcher view = null;
-		if(tour != null){
-			view = request.getRequestDispatcher("views/tour/tourDetailView.jsp");
-			request.setAttribute("tour", tour);
-			view.forward(request, response);
-		}
+		RequestDispatcher view = request.getRequestDispatcher("views/tour/tourDetailView.jsp");
+		request.setAttribute("tour", tour);
+		request.setAttribute("tdetail", tdetail);
+		request.setAttribute("treviewList", treviewList);
+		request.setAttribute("gradeAvg", gradeAvg);
+		request.setAttribute("tconfList", tconfList);
+
+		view.forward(request, response);
 	}
 
 	/**

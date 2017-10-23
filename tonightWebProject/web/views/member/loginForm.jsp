@@ -168,12 +168,7 @@ body, html {
 	    </a>
 	</div>
 </div>
-<!-- 	<h3>로그인</h3>
-	<form action="/tonight/login" method="post">
-	<input type="text" name="memberid" placeholder="아이디"> <br>
-	<input type="password" name="memberpwd" placeholder="패스워드"> <br>
-	<input type="submit" value="로그인">
-	</form> -->
+
 <script src="/tonight/js/jquery-3.2.1.min.js"></script>
 <script src="/tonight/js/bootstrap.min.js"></script>
 <script type ='text/JavaScript'>

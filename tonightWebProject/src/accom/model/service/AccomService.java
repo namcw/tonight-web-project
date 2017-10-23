@@ -4,8 +4,6 @@ import static common.JDBCTemplate.*;
 import java.sql.*;
 import java.util.*;
 import accom.model.vo.Accommodation;
-import room.model.dao.RoomDao;
-import room.model.vo.Room;
 import accom.model.dao.AccomDao;
 
 public class AccomService {

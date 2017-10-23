@@ -30,6 +30,13 @@ public class TourConf implements Serializable {
 		this.tourState = tourState;
 	}
 
+	@Override
+	public String toString() {
+		return "TourConf [tourId=" + tourId + ", startDate=" + startDate + ", arriavlaDate=" + arriavlaDate
+				+ ", tourAdultPrice=" + tourAdultPrice + ", tourChildPrice=" + tourChildPrice + ", tourDiscount="
+				+ tourDiscount + ", tourState=" + tourState + "]";
+	}
+
 	public int getTourId() {
 		return tourId;
 	}

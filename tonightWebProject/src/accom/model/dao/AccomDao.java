@@ -4,7 +4,6 @@ import static common.JDBCTemplate.*;
 import java.sql.*;
 import java.util.*;
 import accom.model.vo.Accommodation;
-import room.model.vo.Room;
 
 public class AccomDao {
 	//총 숙소 리스트 갯수 조회용
