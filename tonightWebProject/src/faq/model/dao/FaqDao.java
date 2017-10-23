@@ -12,16 +12,22 @@ public class FaqDao {
 
 	public FaqDao(){}
 	
-	public ArrayList<Faq> selectList(Connection con){
+	public ArrayList<Faq> selectList(Connection con, int currentPage, int limit){
 		ArrayList<Faq> list = null;
-		Statement stmt = null;
+		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		
-		String query = "select * from faq order by faq_no desc";
+		String query = "select * from (select rownum rnum, faq_no, faq_category, FAQ_TITLE, FAQ_ANSWER, FAQ_READ_COUNT FROM (SELECT * FROM FAQ ORDER BY FAQ_NO DESC)) WHERE rnum >=? AND rnum <= ?";
+		
+		int startRow = (currentPage -1) * limit + 1;
+		int endRow = startRow + limit - 1;
 		
 		try {
-			stmt = con.createStatement();
-			rset = stmt.executeQuery(query);
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, endRow);
+			
+			rset = pstmt.executeQuery();
 			
 			if(rset != null){
 				list = new ArrayList<Faq>();
@@ -42,7 +48,7 @@ public class FaqDao {
 			e.printStackTrace();
 		}finally{
 			close(rset);
-			close(stmt);
+			close(pstmt);
 		}
 		return list;
 	}
@@ -63,8 +69,8 @@ public class FaqDao {
 					Faq f = new Faq();
 					
 					f.setFaqNo(rset.getInt("faq_no"));
-					f.setFaqCategory(rset.getString("faq_category"));
 					f.setFaqTitle(rset.getString("faq_title"));
+					f.setFaqCategory(rset.getString("faq_category"));
 					f.setFaqAnswer(rset.getString("faq_answer"));
 					
 					map.put(f.getFaqNo(), f);
@@ -82,7 +88,7 @@ public class FaqDao {
 		int result = 0;
 		PreparedStatement pstmt = null;
 		
-		String query = "update faq set faqreadcount = faqreadcount + 1"
+		String query = "update faq set faq_read_count = faq_read_count + 1 "
 				+ "where faq_no = ?";
 		
 		try {
@@ -145,12 +151,12 @@ public class FaqDao {
 		PreparedStatement pstmt = null;
 		
 		String query = "update faq set faq_title = ?, "
-				+ "faq_answer = ? where faq_no = ?";
+				+ "faq_category = ?, faq_answer = ? where faq_no = ?";
 		
 		try {
 			pstmt = con.prepareStatement(query);
-			pstmt.setString(1, faq.getFaqCategory());
-			pstmt.setString(2, faq.getFaqTitle());
+			pstmt.setString(1, faq.getFaqTitle());
+			pstmt.setString(2, faq.getFaqCategory());
 			pstmt.setString(3, faq.getFaqAnswer());
 			pstmt.setInt(4, faq.getFaqNo());
 			
@@ -186,7 +192,7 @@ public class FaqDao {
 					f.setFaqCategory(rset.getString("faq_category"));
 					f.setFaqTitle(rset.getString("faq_title"));
 					f.setFaqAnswer(rset.getString("faq_answer"));
-					f.setFaqReadCount(rset.getInt("faqreadcount"));
+					f.setFaqReadCount(rset.getInt("faq_read_count"));
 					
 					list.add(f);
 				}
@@ -220,7 +226,7 @@ public class FaqDao {
 				faq.setFaqCategory(rset.getString("faq_category"));
 				faq.setFaqTitle(rset.getString("faq_title"));
 				faq.setFaqAnswer(rset.getString("faq_answer"));
-				faq.setFaqReadCount(rset.getInt("faqreadcount"));
+				faq.setFaqReadCount(rset.getInt("faq_read_count"));
 				
 			}
 		} catch (Exception e) {
@@ -230,5 +236,28 @@ public class FaqDao {
 			close(pstmt);
 		}
 		return faq;
+	}
+
+	public int getListCount(Connection con) {
+		int result = 0;
+		Statement stmt = null;
+		ResultSet rset = null;
+		
+		String query = "select count(*) from faq";
+		
+		try {
+			stmt = con.createStatement();
+			rset = stmt.executeQuery(query);
+			
+			if(rset.next())
+				result = rset.getInt(1);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally{
+			close(rset);
+			close(stmt);
+		}
+		
+		return result;
 	}
 }

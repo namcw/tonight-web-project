@@ -13,23 +13,24 @@
 <%@ include file="../includes/header.jsp" %>
 <hr>
 <br>
-<h2 align="center"><%= faq.getFaqNo() %>번 공지글 수정 페이지</h2>
+
 <br>
-<section align="center">
-	<form action="/tonight/fupdate" method="post" enctype="multipart/form-data">
-	<input type="hidden" name="no" value="<%= faq.getFaqNo() %>">
+
+	<form action="/tonight/fupdate" method="post">
+	<h2 align="center"><input type="hidden" name="faqNo" value="<%= faq.getFaqNo() %>"></input> <%= faq.getFaqNo() %> 번 게시글</h2>
 	<table align="center" width="600">
+		<tr><th width="150" bgcolor="gray">제목</th>
+		<td align="left"><input type="text" name="faqTitle" value="<%= faq.getFaqTitle() %>"></td>
+	</tr>
 	<tr><th width="150" bgcolor="gray">질문 카테고리</th>
-		<td align="left"><input type="text" name="writer" value="<%= faq.getFaqCategory() %>" readonly></td>
+		<td align="left"><input type="text" name="faqCategory" value="<%= faq.getFaqCategory() %>" readonly></td>
 	</tr>
-	<tr><th width="150" bgcolor="gray">제목</th>
-		<td align="left"><input type="text" name="title" value="<%= faq.getFaqTitle() %>"></td>
-	</tr>
+
 	
 
 	<tr><th width="150" bgcolor="gray">내용</th>
 		<td align="left">
-			<textarea rows="5" cols="50" name="content">
+			<textarea rows="5" cols="50" name="faqAnswer">
 				<%= faq.getFaqAnswer() %>
 			</textarea>
 		</td>

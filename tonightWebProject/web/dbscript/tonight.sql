@@ -5,7 +5,7 @@
 --DROP TABLE TOUR_REVIEW;
 --DROP TABLE TOUR;
 --DROP TABLE MEMBER;
-
+drop table faq;
 
 /*사용자 테이블*/
 CREATE TABLE MEMBER
@@ -839,3 +839,5 @@ INSERT INTO MESSAGE VALUES (2, DEFAULT, 'gyeontae12', 'ib1500' , '고객님께서 다�
 INSERT INTO MESSAGE VALUES (3, DEFAULT, 'ksm1225', 'SONEJH12' , '펜션에 야외바베큐를 즐길 장소가 있나요? ');
 INSERT INTO MESSAGE VALUES (4, DEFAULT, 'SONEJH12', 'ksm1225' , '넵 있습니다 ^^ ');
 INSERT INTO MESSAGE VALUES (5, DEFAULT, 'ib1500', 'gyeontae12' , '예약 변경이 가능한가요?');
+
+commit;

@@ -15,9 +15,9 @@ import faq.model.vo.Faq;
 public class FaqService {
 public FaqService(){}
 	
-	public ArrayList<Faq> selectList(){
+	public ArrayList<Faq> selectList(int currentPage, int limit){
 		Connection con = getConnection();
-		ArrayList<Faq> list = new FaqDao().selectList(con);
+		ArrayList<Faq> list = new FaqDao().selectList(con, currentPage, limit);
 		close(con);
 		return list;
 	}
@@ -77,5 +77,11 @@ public FaqService(){}
 		ArrayList<Faq> list = new FaqDao().selectTitleSearch(con, keyword);
 		close(con);
 		return list;
+	}
+
+	public int getListCount() {
+		Connection con = getConnection();
+		int listCount = new FaqDao().getListCount(con);
+		return listCount;
 	}	
 }
