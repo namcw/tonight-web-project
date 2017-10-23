@@ -82,7 +82,7 @@ public class FaqDao {
 		int result = 0;
 		PreparedStatement pstmt = null;
 		
-		String query = "update faq set faqreadcount = faqreadcount + 1"
+		String query = "update faq set faq_read_count = faq_read_count + 1"
 				+ "where faq_no = ?";
 		
 		try {
@@ -186,7 +186,7 @@ public class FaqDao {
 					f.setFaqCategory(rset.getString("faq_category"));
 					f.setFaqTitle(rset.getString("faq_title"));
 					f.setFaqAnswer(rset.getString("faq_answer"));
-					f.setFaqReadCount(rset.getInt("faqreadcount"));
+					f.setFaqReadCount(rset.getInt("faq_read_count"));
 					
 					list.add(f);
 				}
@@ -220,7 +220,7 @@ public class FaqDao {
 				faq.setFaqCategory(rset.getString("faq_category"));
 				faq.setFaqTitle(rset.getString("faq_title"));
 				faq.setFaqAnswer(rset.getString("faq_answer"));
-				faq.setFaqReadCount(rset.getInt("faqreadcount"));
+				faq.setFaqReadCount(rset.getInt("faq_read_count"));
 				
 			}
 		} catch (Exception e) {
