@@ -1,10 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="accom.model.vo.Accommodation, java.util.*" %>
-<%
-	Accommodation accom = (Accommodation)request.getAttribute("accom");
-	int currentPage = ((Integer)request.getAttribute("currentPage")).intValue();
-%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -132,7 +127,7 @@
 
 </div>
 	<div class="container" id="toTop">
-		<h3 class="text-center"><%=accom.getAccName()%></h3>
+		<h3 class="text-center">숙소 등록</h3>
 		<br>
 		<div class="row">
 	
@@ -187,7 +182,7 @@
 						<p>숙소 주소</p>
 					</div>
 					<div class="col-xs-8">
-						<p><%=accom.getAccAddress()%></p>
+						<textarea cols="30" rows="3" name="aaddress"></textarea>
 					</div>
 				</div>
 				<hr>
@@ -196,7 +191,10 @@
 						<p>숙소 등급</p>
 					</div>
 					<div class="col-xs-8">
-						<p><%=accom.getAccRank()%></p>
+						<input type="radio" name="arank" value="silver">SILVER
+						<input type="radio" name="arank" value="gold">GOLD
+						<input type="radio" name="arank" value="platinum">PLATINUM
+						<input type="radio" name="arank" value="diamond">DIAMOND
 					</div>
 				</div>
 				<hr>
@@ -205,7 +203,7 @@
 						<p>연락처</p>
 					</div>
 					<div class="col-xs-8">
-						<p><%=accom.getAccContact()%></p>
+						<input type="text" name="acontact">
 					</div>
 				</div>
 				<hr>	
@@ -250,106 +248,34 @@
 				<div class="panel panel-default">
 					<div class="panel-heading">숙소상세정보</div>
 					<div class="panel-body">
-						<%=accom.getAccInfo()%>
-					</div>
-				</div>
-				<div class="panel panel-default">
-					<div class="panel-heading">지도</div>
-					<div class="panel-body">
-						<%=accom.getAccAddress()%>
+						<textarea cols="100" rows="20" name="ainfo"></textarea>
 					</div>
 				</div>
 				<div class="panel panel-default">
 					<div class="panel-heading">이용규칙</div>
 					<div class="panel-body">
-						<%=accom.getFacilities()%>
+						<textarea cols="100" rows="20" name="arules"></textarea>
 					</div>
 				</div>
 				<div class="panel panel-default">
 					<div class="panel-heading">편의시설</div>
 					<div class="panel-body">
-						<%=accom.getFacilities()%>
+						<input type="checkbox" name="arule" value="parking">건물 내 무료주차
+						<input type="checkbox" name="arule" value="elevator">엘레베이터
+						<input type="checkbox" name="arule" value="pool">수영장
+						<input type="checkbox" name="arule" value="wifi">무선인터넷
 					</div>
 				</div>
 				<div class="panel panel-default">
 					<div class="panel-heading">환불규정</div>
 					<div class="panel-body">
-						<%=accom.getAccRefund()%>
+						<textarea cols="100" rows="20" name="arefund"></textarea>
 					</div>
 				</div>
 				<div class="panel panel-default">
 					<div class="panel-heading">객실상세정보</div>
 					<div class="panel-body">
-						
-					</div>
-				</div>
-				<div class="panel panel-default">
-					<div class="panel-heading">후기
-						<%-- <% if(treviewList.size() > 0) {%>
-							<p class="pull-right">(<%= treviewList.size() %>)</p>
-							<p class="pull-right"><%= gradeAvg %></p>
-							<img src="/tonight/img/starGrade<%= Math.round(gradeAvg) %>.png" class="col-xs-3 pull-right" style="margin-top:-10px">
-						<% } %> --%>
-					</div>
-					<div class="panel-body box-info">
-
-					<%-- <div class="tab-pane active animated fadeInRight" id="comments">
-						<div class="scroll-widget">
-							<ul class="media-list">
-							<% if (treviewList.isEmpty()) {	%>
-								<li class="media">
-									<p>후기가 없습니다.</p>
-								</li>
-							<% } else if(treviewList.size() < 4){ %>
-								<% for (TourReview treview : treviewList) { %>
-									<li class="media">
-										<a class="pull-left" href="#fakelink">
-												<img class="media-object"
-												src="https://bootdey.com/img/Content/User_for_snippets.png"
-												alt="Avatar">
-										</a>
-										<div class="media-body">
-												<h4 class="media-heading">
-													<a href="#fakelink"><%=treview.getTrWriterId() %></a>
-													<small><%=treview.getTrDate() %></small>
-												</h4>
-												<div class="row">
-												<img src="/tonight/img/starGrade<%= Math.round(treview.getTrGrade()) %>.png" class="col-xs-3" style="margin-top:-10px">
-												<div class="col-xs-9"></div>
-												</div>
-												<p><%=treview.getTrContent() %></p>
-											</div>
-										<p></p>
-									</li>
-								<% } %>
-							<% } else {%>
-								<% for (int i=0; i < 3; i++) { %>
-									<li class="media">
-										<a class="pull-left" href="#fakelink">
-												<img class="media-object"
-												src="https://bootdey.com/img/Content/User_for_snippets.png"
-												alt="Avatar">
-										</a>
-										<div class="media-body">
-											<h4 class="media-heading">
-												<a href="#fakelink"><%= treviewList.get(i).getTrWriterId() %></a>
-												<small><%=treviewList.get(i).getTrDate() %></small>
-												<small>grade <%=treviewList.get(i).getTrGrade() %></small>
-											</h4>
-											<div class="row">
-											<img src="/tonight/img/starGrade<%= Math.round(treviewList.get(i).getTrGrade()) %>.png" class="col-xs-3" style="margin-top:-10px">
-											<div class="col-xs-9"></div>
-											</div>
-											
-											<p><%= treviewList.get(i).getTrContent() %></p>
-										</div>
-									</li>
-								<% } %>
-								<li class="media"><a data-toggle="modal" data-target="#addReview"><%= treviewList.size()-3 %>개 더보기..</a></li>
-							<% } %>
-							</ul>
-						</div>
-				</div> --%>
+						<textarea cols="100" rows="20" name="aroom"></textarea>
 					</div>
 				</div>
 			</div>
@@ -367,56 +293,8 @@
 					</div>
 				</div>
 			</div>
-
-
 		</div>
 	</div>
-	
-<div class="modal fade" id="addReview" role="dialog">
-    <div class="modal-dialog">
-    
-     <%--  <!-- Modal content-->
-      <div class="modal-content">
-        <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">후기</h4>
-        </div>
-        <div class="modal-body box-info">
-        	<div class="tab-pane active animated fadeInRight" id="comments">
-				<div class="scroll-widget">
-					<ul class="media-list">
-						<% for (TourReview treview : treviewList) { %>
-							<li class="media">
-								<a class="pull-left" href="#fakelink">
-										<img class="media-object"
-										src="https://bootdey.com/img/Content/User_for_snippets.png"
-										alt="Avatar">
-								</a>
-								<div class="media-body">
-										<h4 class="media-heading">
-											<a href="#fakelink"><%=treview.getTrWriterId() %></a>
-											<small><%=treview.getTrDate() %></small>
-										</h4>
-										<div class="row">
-											<img src="/tonight/img/starGrade<%= Math.round(treview.getTrGrade()) %>.png" class="col-xs-3" style="margin-top:-10px">
-											<div class="col-xs-9"></div>
-										</div>
-										<p><%=treview.getTrContent() %></p>
-									</div>
-								<p></p>
-							</li>
-						<% } %>
-					</ul>
-				</div>
-			</div>
-        </div>
-	        <div class="modal-footer">
-				<button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
-			</div>
-		</div>
-      
-	</div>
-</div> --%>
 
 <div id="fake-footer"></div>
 <%@ include file="../includes/footer.jsp" %>
