@@ -1,6 +1,10 @@
 package faq.contoller;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -9,9 +13,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
+
+import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
+
 import faq.model.service.FaqService;
 import faq.model.vo.Faq;
-import qna.model.service.QnaService;
 
 /**
  * Servlet implementation class FaqUpdateServlet
@@ -38,10 +46,18 @@ public class FaqUpdateServlet extends HttpServlet {
 		response.setContentType("text/html; charset=utf-8");
 		
 		RequestDispatcher view = null;
-		Faq faq = null;
+		int faqNo = Integer.parseInt(request.getParameter("faqNo"));
+		String faqTitle = request.getParameter("faqTitle");
+		String faqCategory = request.getParameter("faqCategory");
+		String faqAnswer = request.getParameter("faqAnswer");
+		
+		Faq faq = new Faq(faqNo, faqTitle, faqCategory, faqAnswer);
+		
+
 		
 		if (new FaqService().updateFaq(faq) > 0) {
 			response.sendRedirect("/tonight/flist");
+			
 		} else {
 			view = request.getRequestDispatcher("views/faq/faqError.jsp");
 			request.setAttribute("message", "faQ글 수정 처리 실패!");

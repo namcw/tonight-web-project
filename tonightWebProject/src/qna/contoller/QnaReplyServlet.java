@@ -1,27 +1,23 @@
 package qna.contoller;
 
 import java.io.IOException;
-
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import qna.model.service.QnaService;
-import qna.model.vo.Qna;
 
 /**
- * Servlet implementation class QnaInsertServlet
+ * Servlet implementation class QnaReplyServlet
  */
-@WebServlet("/qinsert")
-public class QnaInsertServlet extends HttpServlet {
+@WebServlet("/qreply")
+public class QnaReplyServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public QnaInsertServlet() {
+    public QnaReplyServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,25 +27,7 @@ public class QnaInsertServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		request.setCharacterEncoding("utf-8");
-		response.setContentType("text/html; charset=utf-8");
-		
-		String qnaTitle = request.getParameter("qnaTitle");
-		String writerId = request.getParameter("writerId");
-		String question = request.getParameter("question");
-		
-		Qna qna = new Qna(qnaTitle, writerId, question);
-		
-		RequestDispatcher view = null;
-		
-		if(new QnaService().insertQna(qna) > 0){
-			response.sendRedirect("/tonight/qlist");
-		}else{
-			view = request.getRequestDispatcher("views/qna/qnaError.jsp");
-			request.setAttribute("message", "공지글 등록 실패!");
-			view.forward(request, response);
-		}	
-		
+		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	/**

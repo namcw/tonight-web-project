@@ -34,8 +34,6 @@ public class FaqDeleteServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		response.setContentType("text/html; charset=utf-8");
 		
-		response.setContentType("text/html; charset=utf-8");
-		
 		if(new FaqService().deleteFaq(Integer.parseInt(request.getParameter("no"))) > 0){
 			response.sendRedirect("/tonight/flist");
 		}else{

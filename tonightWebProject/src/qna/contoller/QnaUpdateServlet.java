@@ -39,15 +39,20 @@ public class QnaUpdateServlet extends HttpServlet {
 		response.setContentType("text/html; charset=utf-8");
 		
 		RequestDispatcher view = null;
-		Qna qna = null;
-		
-		if (new QnaService().updateQna(qna) > 0) {
+		String qnaTitle = request.getParameter("qnaTitle");
+		String writerId = request.getParameter("writerId");
+		String question = request.getParameter("question");
+		int qnaNo = Integer.parseInt(request.getParameter("qnaNo"));
+		Qna qna = new Qna(qnaTitle, writerId, question, qnaNo);
+
+		if (new QnaService().updateQna(qna) > 0){
 			response.sendRedirect("/tonight/qlist");
 		}else{
 			view = request.getRequestDispatcher("views/qna/qnaError.jsp");
-			request.setAttribute("message", "QnA글 수정 처리 실패!");
+			request.setAttribute("message", "오류");
 			view.forward(request, response);
 		}
+
 	}
 
 	/**

@@ -39,11 +39,34 @@ public class FaqSearchServlet extends HttpServlet {
 		String keyword = request.getParameter("keyword");
 		
 		ArrayList<Faq> list = new FaqService().selectSearch(keyword);
+		
+		int currentPage = 1;		
+		int limit = 10;		
+		if(request.getParameter("page") != null)
+			currentPage = Integer.parseInt(request.getParameter("page"));
+		FaqService fservice = new FaqService();
+		int listCount = list.size();
+		
+		int maxPage = (int)((double)listCount / limit + 0.9);
+		
+		int startPage = ((int)((double)currentPage / limit + 0.9) - 1) * limit + 1;
+		
+		int endPage = startPage + limit - 1;
+		if(maxPage < endPage)
+			endPage = maxPage;
+		
+		
+		
 		RequestDispatcher view = null;
 		
 		if(list != null){
 			view = request.getRequestDispatcher("views/faq/faqListView.jsp");
-			request.setAttribute("message", "FaQ 제목 검색 실패하였습니다.");
+			request.setAttribute("list", list);
+			request.setAttribute("currentPage", currentPage);
+			request.setAttribute("maxPage", maxPage);
+			request.setAttribute("startPage", startPage);
+			request.setAttribute("endPage", endPage);
+			request.setAttribute("listCount", listCount);
 			view.forward(request, response);
 		}else{
 			view = request.getRequestDispatcher("views/faq/faqError.jsp");

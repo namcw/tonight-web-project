@@ -84,7 +84,7 @@ public class QnaDao {
 		int result = 0;
 		PreparedStatement pstmt = null;
 		
-		String query = "update qna set qnareadcount = qnareadcount + 1"
+		String query = "update qna set qna_read_count = qna_read_count + 1"
 				+ "where qna_no = ?";
 		
 		try {
@@ -104,15 +104,14 @@ public class QnaDao {
 		int result = 0;
 		PreparedStatement pstmt = null;
 		
-		String query = "insert into qna values"
+		String query = "insert into qna values "
 				+ "((select max(qna_no) + 1 from qna), "
-						+ "?, ?, ?, ?, ?, default";
+						+ "?, ?, ?, null, default)";
 		try {
 			pstmt = con.prepareStatement(query);
 			pstmt.setString(1, qna.getQnaTitle());
 			pstmt.setString(2, qna.getWriterId());
 			pstmt.setString(3, qna.getQuestion());
-			pstmt.setString(4, qna.getAnswer());
 			
 			result = pstmt.executeUpdate();
 		} catch (Exception e) {
@@ -145,16 +144,16 @@ public class QnaDao {
 		int result = 0;
 		PreparedStatement pstmt = null;
 		
-		String query ="update qna set qna_title = ?, "
-				+ "qna_answer = ? where qna_no = ?";
-		
+		String query ="update qna set qna_title = ?, writer_Id = ?, question = ? where qna_no = ?";
+		System.out.println(qna);
 		try {
 			pstmt = con.prepareStatement(query);
-			pstmt.setInt(1,  qna.getQnaNo());
-			pstmt.setString(2, qna.getQnaTitle());
-			pstmt.setString(3, qna.getWriterId());
-			pstmt.setString(4, qna.getQuestion());
-			pstmt.setString(5, qna.getAnswer());
+			pstmt.setString(1, qna.getQnaTitle());
+			pstmt.setString(2, qna.getWriterId());
+			pstmt.setString(3, qna.getQuestion());
+			pstmt.setInt(4,  qna.getQnaNo());
+			result = pstmt.executeUpdate();
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}finally{
@@ -221,7 +220,7 @@ public class QnaDao {
 				qna.setWriterId(rset.getString("writer_id"));
 				qna.setQuestion(rset.getString("question"));
 				qna.setAnswer(rset.getString("answer"));
-				qna.setqnaReadcount(rset.getInt("qnareadcount"));
+				qna.setqnaReadcount(rset.getInt("qna_read_count"));
 				
 			}
 		} catch (Exception e) {
@@ -231,5 +230,28 @@ public class QnaDao {
 			close(pstmt);
 		}
 		return qna;
+	}
+
+	public int getListCount(Connection con) {
+		int result = 0;
+		Statement stmt = null;
+		ResultSet rset = null;
+		
+		String query = "select count(*) from qna";
+		
+		try {
+			stmt = con.createStatement();
+			rset = stmt.executeQuery(query);
+			
+			if(rset.next())
+				result = rset.getInt(1);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally{
+			close(rset);
+			close(stmt);
+		}
+		
+		return result;
 	}
 }

@@ -3,10 +3,7 @@ package qna.model.vo;
 import java.sql.Date;
 
 public class Qna implements java.io.Serializable{
-	
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 1L;
 	
 	private int qnaNo;
@@ -29,10 +26,16 @@ public class Qna implements java.io.Serializable{
 		this.answer = answer;
 		this.qnaReadcount = qnaReadcount;
 	}
-	public Qna(String qnaTitle, String question, String answer){
+	public Qna(String qnaTitle, String writerId, String question){
 		this.qnaTitle = qnaTitle;
+		this.writerId = writerId;
 		this.question = question;
-		this.answer = answer;
+	}
+	public Qna(String qnaTitle, String writerId, String question, int qnaNo){
+		this.qnaTitle = qnaTitle;
+		this.writerId = writerId;
+		this.question = question;
+		this.qnaNo = qnaNo;
 	}
 	public int getQnaNo() {
 		return qnaNo;

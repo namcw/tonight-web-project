@@ -19,10 +19,10 @@
 		<td align="left"><input type="text" name="qnaTitle"></td>
 	</tr>	
 	<tr><th width="150" bgcolor="gray">아이디</th>
-		<td align="left"><input type="text" name="MemberId" value="<%= member.getMemberId() %>" readonly></td>
+		<td align="left"><input type="text" name="writerId" value="<%= member.getMemberId() %>" readonly></td>
 	</tr>
 	<tr><th width="150" bgcolor="gray">질문</th>
-		<td align="left"><textarea rows="5" cols="50" name="answer"></textarea>
+		<td align="left"><textarea rows="5" cols="50" name="question"></textarea>
 		</td>
 	</tr>
 <!-- 	<tr><th width="150" bgcolor="gray">내용</th>

@@ -18,7 +18,7 @@
 <h2 align="center">Qna 게시판</h2>
 <br><br>
 <table align="center" width="1000" border="1" cellspacing="0">
-<th>번호</th><th>제목</th><th>질문내용</th><th>작성자</th><th>답변내용</th><th>조회수</th>
+<th>번호</th><th>제목</th><th>질문내용</th><th>작성자</th><th>조회수</th>
 <% 
 	for(Qna qna : list){
 %>
@@ -35,7 +35,6 @@
 	<% } %>
 	</td>
 <td align="center"><%= qna.getWriterId() %></td>
-<td align="center"><%= qna.getAnswer() %></td>
 <td align="center"><%= qna.getqnaReadcount() %></td>
 <% } %>
 

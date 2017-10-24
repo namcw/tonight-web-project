@@ -40,6 +40,7 @@ public class QnaDetailServlet extends HttpServlet {
 		nqna.addReadCount(no);
 		
 		Qna qna = nqna.selectQna(no);
+		
 		RequestDispatcher view = null;
 		if(qna != null){
 			view = request.getRequestDispatcher("views/qna/qnaDetailView.jsp");

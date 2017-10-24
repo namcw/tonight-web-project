@@ -77,5 +77,11 @@ public class QnaService {
 		ArrayList<Qna> list = new QnaDao().selectTitleSearch(con, keyword);
 		close(con);
 		return list;
+	}
+
+	public int getListCount() {
+		Connection con = getConnection();
+		int listCount = new QnaDao().getListCount(con);
+		return listCount;
 	}	
 }
