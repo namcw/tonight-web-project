@@ -1,9 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="accom.model.vo.Accommodation, java.util.*" %>
+<%@ page import="accom.model.vo.Accommodation,accom.model.vo.Room, java.util.ArrayList,  java.util.*,java.sql.Date" %>
+
+<%-- <%@ page import="room.model.vo.RoomReview, java.util.ArrayList, java.sql.Date" %> --%>
+
 <%
 	Accommodation accom = (Accommodation)request.getAttribute("accom");
-	int currentPage = ((Integer)request.getAttribute("currentPage")).intValue();
+	ArrayList<Room> list = (ArrayList<Room>)request.getAttribute("list");
+	int currentPage = ((Integer)request.getAttribute("currentPage")).intValue();  	
 %>
 <!DOCTYPE html>
 <html>
@@ -12,7 +16,15 @@
 <title>accomDetailView</title>
 </head>
 <body>
-<%@ include file="../includes/header.jsp" %>
+<script type="text/javascript" src="../js/jquery-3.2.1.min.js"></script>
+<script language="javascript">
+function chk(){
+ if(document.all.test[1].checked == true)
+	 hidden.style.display = 'none';
+ else
+  
+}
+</script>
 <hr style="clear:both">
 <h2 align="center"><%= accom.getAccName() %></h2>
 <br>
@@ -38,8 +50,49 @@
 <tr><td><%= accom.getAccRefund() %></td></tr>
 </table>
 <br>
-<h3 align="center">객실 상세 정보</h3>
+<a href="/tonight/adetail"></a><h3 align="center">객실 상세 정보</h3></a>
+<a href="/tonight/rreply"><h2>객실 이미지</h2></a>
+<hr style="clear:both">
+
+<h2 align="center">객실 목록</h2>
 <br>
+<table align="center" border="1" cellspacing="0" width="200">
+<tr bgcolor="gray"><th>객실명	</th></tr>
+<%
+	for(Room r : list){
+%>
+	<tr height="30">
+	<td align="center"><%= r.getRoomName() %>
+	<input type="radio" name="test" value="1" onclick="chk()">상세보기
+	<input type="radio" name="test" value="2" onclick="chk()">접기
+	</td>
+	</tr>
+<%  } %>
+</table>
+
+<table id="hidden" style="display:none" align="center" border="1" cellspacing="0" width="700">
+<tr bgcolor="gray"><th>성인가격</th><th>소인가격</th><th>할인율</th><th>객실 예약상태</th>
+   <th>상세정보</th></tr>
+<%
+	for(Room r : list){
+%>
+	<tr height="30">
+	<td align="center"><%= r.getAdult_Price() %></td>
+	<td align="center"><%= r.getChild_Price() %></td>
+	<td align="center"><%= r.getDiscount() %></td>
+	<td align="center"><%= r.getRoomState() %></td>
+	<td align="center"><%= r.getRoomDetails() %></td>
+	</tr>
+<%  } %>
+
+</table>
+<br>
+<!-- <a href="/tonight/rreview"><h2>test</h2></a> -->
+<br>
+<a href="/tonight/rreview"><h2>후기 게시판</h2></a>
+
+<%-- <%@ include file="../room/roomListView.jsp" %>    --%>
+
 <%@ include file="../includes/footer.jsp" %>
 </body>
 </html>

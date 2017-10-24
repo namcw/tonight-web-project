@@ -10,22 +10,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import accom.model.service.AccomService;
-import accom.model.vo.Accommodation;
 import accom.model.service.RoomService;
 import accom.model.vo.Room;
 
 /**
- * Servlet implementation class accomDetailServlet
+ * Servlet implementation class BoardListServlet
  */
-@WebServlet("/adetail")
-public class AccomDetailServlet extends HttpServlet {
+@WebServlet("/rlist")
+public class RoomListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AccomDetailServlet() {
+    public RoomListServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,33 +32,23 @@ public class AccomDetailServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//숙소 상세보기 처리용 컨트롤러
+		// 페이지 단위로 게시글 목록 조회 처리용 컨트롤러
 		response.setContentType("text/html; charset=utf-8");
 		
-		int accomId = Integer.parseInt(request.getParameter("accomId"));
-		int currentPage = Integer.parseInt(request.getParameter("page"));
-		
-		
-	
-		
-		AccomService aservice = new AccomService();
 		RoomService rservice = new RoomService();
 		
 		ArrayList<Room> list = rservice.selectList();
-		//해당 숙소정보 조회 결과 리턴받음
-		Accommodation accom = aservice.selectAccom(accomId);
-		
 		RequestDispatcher view = null;
-		if(accom != null && list != null) {
-			view = request.getRequestDispatcher("views/accom/accomDetailView.jsp");
-			request.setAttribute("accom", accom);
+		
+		if(list != null){
+			view = request.getRequestDispatcher("views/room/roomListView.jsp");
 			request.setAttribute("list", list);
-			request.setAttribute("currentPage", currentPage);
 			view.forward(request, response);
-			
+		
+		
 		}else{
-			view = request.getRequestDispatcher("views/accom/accomError.jsp");
-			request.setAttribute("message", "숙소 상세조회 실패!");
+			view = request.getRequestDispatcher("views/room/roomError.jsp");
+			request.setAttribute("message", "리스트 조회 실패!");
 			view.forward(request, response);
 		}
 	}
@@ -74,3 +62,12 @@ public class AccomDetailServlet extends HttpServlet {
 	}
 
 }
+
+
+
+
+
+
+
+
+
