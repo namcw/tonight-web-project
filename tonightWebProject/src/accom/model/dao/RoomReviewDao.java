@@ -12,6 +12,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import accom.model.vo.RoomReview;
 
+
 public class RoomReviewDao {
 	
 		// 총 게시글 갯수 조회!! 
@@ -185,7 +186,7 @@ public class RoomReviewDao {
 					review.setReviewLevel(rset.getInt("REVIEW_LEVEL"));
 					review.setReviewRef(rset.getInt("REVIEW_REF"));
 					review.setReviewReplyRef(rset.getInt("REVIEW_REPLY_REF"));
-					review.setReviewReplySeq(rset.getInt("board_reREVIEW_REPLY_SEQ"));
+					review.setReviewReplySeq(rset.getInt("REVIEW_REPLY_SEQ"));
 					
 				}
 				
@@ -200,7 +201,7 @@ public class RoomReviewDao {
 		}
 		
 		
-				//객실리뷰 삭제!!
+				//게시글 삭제!!
 				public int deleteReview(Connection con, int rnum) {
 					int result = 0;
 					PreparedStatement pstmt = null;
@@ -209,7 +210,7 @@ public class RoomReviewDao {
 					
 					try {
 						pstmt = con.prepareStatement(query);
-						pstmt.setInt(1, result);
+						pstmt.setInt(1, rnum);
 						
 						result = pstmt.executeUpdate();
 						
@@ -254,38 +255,6 @@ public class RoomReviewDao {
 		
 		
 			
-		//리뷰 수정!!
-				public int updateReview(Connection con, RoomReview review) {
-					int result = 0;
-					PreparedStatement pstmt = null;
-					
-					String query = "update review set REVIEW_TITLE  = ?, "
-							+ "REVIEW_CONTENT  = ?, "
-							+ "REVIEW_ORIGINAL_FILENAME  = ?, "
-							+ "REVIEW_RENAME_FILENAME  = ? "
-							+ "where REVIEW_NUM  = ?";
-					
-					try {
-						pstmt = con.prepareStatement(query);
-						pstmt.setString(1, review.getReviewTitle());
-						pstmt.setString(2, review.getReviewContent());
-						pstmt.setString(3, review.getReviewOriginalFileName());
-						pstmt.setString(4, review.getReviewRenameFileName());
-						pstmt.setInt(5, review.getReviewNum());
-						
-						result = pstmt.executeUpdate();
-						
-					} catch (Exception e) {
-						e.printStackTrace();
-					}finally{
-						close(pstmt);
-					}
-					
-					return result;
-				}
-				
-		
-		
 				public int insertReply(Connection con, RoomReview originReview, RoomReview replyReview) {
 					int result = 0;
 					PreparedStatement pstmt = null;
@@ -335,31 +304,65 @@ public class RoomReviewDao {
 
 
 
-		public int updateReply(Connection con, RoomReview updatereply) {
-			int result = 0;
-			PreparedStatement pstmt = null;
-			
-			String query = "update review set "
-					+ "REVIEW_REPLY_SEQ  = REVIEW_REPLY_SEQ  + 1 "
-					+ "where REVIEW_REF  = ? and REVIEW_LEVEL  = ? "
-					+ "and REVIEW_REPLY_REF  = ?";
-			
-			try {
-				pstmt = con.prepareStatement(query);
-				pstmt.setInt(1, updatereply.getReviewRef());
-				pstmt.setInt(2, updatereply.getReviewLevel());
-				pstmt.setInt(3, updatereply.getReviewReplyRef());
+				public int updateReply(Connection con, RoomReview reply) {
+					int result = 0;
+					PreparedStatement pstmt = null;
+					
+					String query = "update REVIEW set REVIEW_TITLE = ?, "
+							+ "REVIEW_CONTENT = ? where REVIEW_NUM = ?";
+					
+					try {
+						pstmt = con.prepareStatement(query);
+						pstmt.setString(1, reply.getReviewTitle());
+						pstmt.setString(2, reply.getReviewContent());
+						pstmt.setInt(3, reply.getReviewNum());
+						
+						result = pstmt.executeUpdate();
+						
+					} catch (Exception e) {
+						e.printStackTrace();
+					}finally{
+						close(pstmt);
+					}
+					
+					return result;
+				}
 				
-				result = pstmt.executeUpdate();
-				
-			} catch (Exception e) {
-				e.printStackTrace();
-			}finally{
-				close(pstmt);
-			}
-			
-			return result;
-		}
 
+				//리뷰 수정!!
+				public int updateReview(Connection con, RoomReview review) {
+					int result = 0;
+					PreparedStatement pstmt = null;
+					
+					String query = "update review set REVIEW_TITLE  = ?, "
+							+ "REVIEW_CONTENT  = ?, "
+							+ "REVIEW_ORIGINAL_FILENAME  = ?, "
+							+ "REVIEW_RENAME_FILENAME  = ? "
+							+ "where REVIEW_NUM  = ?";
+					
+					try {
+						pstmt = con.prepareStatement(query);
+						pstmt.setString(1, review.getReviewTitle());
+						pstmt.setString(2, review.getReviewContent());
+						pstmt.setString(3, review.getReviewOriginalFileName());
+						pstmt.setString(4, review.getReviewRenameFileName());
+						pstmt.setInt(5, review.getReviewNum());
+						
+						result = pstmt.executeUpdate();
+						
+					} catch (Exception e) {
+						e.printStackTrace();
+					}finally{
+						close(pstmt);
+					}
+					
+					return result;
+				}
+				
+		
+		
+				
+				
+				
 }
 

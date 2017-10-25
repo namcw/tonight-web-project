@@ -1,4 +1,4 @@
-package room.controller;
+package accom.controller;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -18,9 +18,9 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
-import room.model.service.RoomReviewService;
-import room.model.service.RoomService;
-import room.model.vo.RoomReview;
+import accom.model.service.RoomReviewService;
+import accom.model.service.RoomService;
+import accom.model.vo.RoomReview;
 
 /**
  * Servlet implementation class RoomInsertServlet

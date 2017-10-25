@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>boardError</title>
+<title>ReviewError</title>
 </head>
 <body>
 <h2>roomReview 서비스 에러 발생 : <%= request.getAttribute("message") %></h2>

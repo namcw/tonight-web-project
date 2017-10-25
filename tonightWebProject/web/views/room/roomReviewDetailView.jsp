@@ -40,6 +40,7 @@ RoomReview RoomReview = (RoomReview)request.getAttribute("review");
 <%  if(member != null){ %>
 	<a href="/tonight/views/room/roomReviewReplyView.jsp?rnum=<%= RoomReview.getReviewNum() %>&page=<%= currentPage %>">[댓글달기]</a>
 <% if(member.getMemberId().equals(RoomReview.getReviewriter())){ %>
+	
 	<a href="/tonight/rrupdate?rnum=<%= RoomReview.getReviewNum() %>&page=<%= currentPage %>">[수정페이지로 이동]</a>
 	&nbsp;
 	<a href="/tonight/rrdelete?rnum=<%= RoomReview.getReviewNum() %>">[삭제]</a>

@@ -9,11 +9,18 @@
 	ArrayList<Room> list = (ArrayList<Room>)request.getAttribute("list");
 	int currentPage = ((Integer)request.getAttribute("currentPage")).intValue();  	
 %>
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" type="text/css"
+   href="/tonight/css/bootstrap.min.css">
+
 <title>accomDetailView</title>
+
+
 </head>
 <body>
 <script type="text/javascript" src="../js/jquery-3.2.1.min.js"></script>
@@ -94,5 +101,7 @@ function chk(){
 <%-- <%@ include file="../room/roomListView.jsp" %>    --%>
 
 <%@ include file="../includes/footer.jsp" %>
+
+
 </body>
 </html>

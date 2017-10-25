@@ -81,7 +81,7 @@ public class RoomReviewService {
 
 		
 		//게시글 수정
-		public int updateBoard(RoomReview b) {
+		public int updateRoomReview(RoomReview b) {
 			Connection con = getConnection();
 			int result = new RoomReviewDao().updateReview(con, b);
 			if(result > 0)

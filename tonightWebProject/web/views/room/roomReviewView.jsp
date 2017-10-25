@@ -23,7 +23,7 @@
 <meta charset="UTF-8">
 <title>roomReviewView</title>
 <script type="text/javascript">
-	function showWriteReview(){
+	function Review(){
 		location.href = "views/room/roomReviewWriter.jsp";
 	}
 </script>
@@ -36,7 +36,7 @@
 <br>
 <% if(member != null){ %>
 	<div align="center">
-	<button onclick="showWriteBoard();">글쓰기</button>
+	<button onclick="Review();">글쓰기</button>
 	</div>
 <% } %>
 <br>
@@ -102,11 +102,9 @@
 <% } %>
 </div>
 
-
 <br><br><br>
 </body>
 </html>
-
 
 
 

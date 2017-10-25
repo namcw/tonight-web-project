@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
-<%@ page import="room.model.vo.Room, java.util.ArrayList, java.sql.Date" %>
+<%@ page import="accom.model.vo.Room, java.util.ArrayList, java.sql.Date" %>
 
 <%
 	ArrayList<Room> list = (ArrayList<Room>)request.getAttribute("list");
