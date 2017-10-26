@@ -114,7 +114,7 @@
 <br>
 <% if(member != null){ %>
 	<div align="center">
-	<button class="btn btn-outline-secondary" onclick="showWriteAccom();">숙소추가</button>
+	<button class="btn btn-default" onclick="showWriteAccom();">숙소추가</button>
 	</div>
 <% } %>
 <br><br><br>

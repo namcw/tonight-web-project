@@ -18,13 +18,31 @@ public class Accommodation implements java.io.Serializable{
 	private String accRefund;
 	
 	public Accommodation() {}
-	
-	public Accommodation(int accId, String bizId, String accName, String accInfo, String accType, String accAddress,
+
+	public Accommodation(String bizId, String accName, String accInfo, String accType, String accAddress,
+			String accContact, String accRank, String accImagePath, String accRules, String facilities,
+			String accRefund) {
+		super();
+		this.bizId = bizId;
+		this.accName = accName;
+		this.accInfo = accInfo;
+		this.accType = accType;
+		this.accAddress = accAddress;
+		this.accContact = accContact;
+		this.accRank = accRank;
+		this.accImagePath = accImagePath;
+		this.accRules = accRules;
+		this.facilities = facilities;
+		this.accRefund = accRefund;
+	}
+
+
+
+	public Accommodation(int accId, String accName, String accInfo, String accType, String accAddress,
 			String accContact, String accRank, String accImagePath, String accRules, String facilities,
 			String accRefund) {
 		super();
 		this.accId = accId;
-		this.bizId = bizId;
 		this.accName = accName;
 		this.accInfo = accInfo;
 		this.accType = accType;

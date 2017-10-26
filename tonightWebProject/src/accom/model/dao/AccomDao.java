@@ -129,10 +129,26 @@ public class AccomDao {
 		int result = 0;
 		PreparedStatement pstmt = null;
 		
-		String query = null;
+		String query = "insert into accommodation values ("
+				+ "(select max(acc_id) + 1 from accommodation), "
+				+ "?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 		
 		try {
-			//
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, a.getBizId());
+			pstmt.setString(2, a.getAccName());
+			pstmt.setString(3, a.getAccInfo());
+			pstmt.setString(4, a.getAccType());
+			pstmt.setString(5, a.getAccAddress());
+			pstmt.setString(6, a.getAccContact());
+			pstmt.setString(7, a.getAccRank());
+			pstmt.setString(8, a.getAccImagePath());
+			pstmt.setString(9, a.getAccRules());
+			pstmt.setString(10, a.getFacilities());
+			pstmt.setString(11, a.getAccRefund());
+			
+			result = pstmt.executeUpdate();
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
