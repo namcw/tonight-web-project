@@ -967,3 +967,21 @@ Caused by: org.apache.http.client.CircularRedirectException: Circular redirect t
 	at org.apache.http.impl.client.DefaultRequestDirector.execute(DefaultRequestDirector.java:515)
 	at org.apache.http.impl.client.AbstractHttpClient.doExecute(AbstractHttpClient.java:863)
 	... 6 more
+
+!ENTRY org.eclipse.jface.text 2 0 2017-10-27 10:48:19.326
+!MESSAGE Duplicate template id: 'org.eclipse.wst.xslt.templates.xpath.number'
+
+!ENTRY org.eclipse.jface.text 2 0 2017-10-27 10:48:19.326
+!MESSAGE Duplicate template id: 'org.eclipse.wst.xslt.templates.xpath.round'
+
+!ENTRY org.eclipse.jface.text 2 0 2017-10-27 13:43:56.021
+!MESSAGE Duplicate template id: 'org.eclipse.wst.xslt.templates.xpath.number'
+
+!ENTRY org.eclipse.jface.text 2 0 2017-10-27 13:43:56.021
+!MESSAGE Duplicate template id: 'org.eclipse.wst.xslt.templates.xpath.round'
+
+!ENTRY org.eclipse.jface.text 2 0 2017-10-27 14:34:07.992
+!MESSAGE Duplicate template id: 'org.eclipse.wst.xslt.templates.xpath.number'
+
+!ENTRY org.eclipse.jface.text 2 0 2017-10-27 14:34:07.995
+!MESSAGE Duplicate template id: 'org.eclipse.wst.xslt.templates.xpath.round'

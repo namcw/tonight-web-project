@@ -127,6 +127,13 @@
     width: auto;
 }
 </style>
+<script type="text/javascript">
+function delete_event() {
+	if(confirm("정말 삭제하시겠습니까?") == true) {
+		location.href='/tonight/adelete?anum=<%=accom.getAccId()%>';
+	}
+}
+</script>
 <body>
 <%@ include file="../includes/header.jsp" %>
 <div class="jumbotron">
@@ -222,6 +229,19 @@
                   <p>사업자 소개글 공간 입니다</p>
                   <button>쪽지남기기</button>
                </div>
+               <hr>
+               <div class="col-xs-12">
+               <%  if(member != null){ %>
+			   <% if(member.getMemberId().equals(accom.getBizId())) { %>
+			   <div align="center">
+			   <a class="btn btn-default" href="#" role="button">수정하기</a> 
+				&nbsp; 
+			   <a class="btn btn-default" role="button" onclick="delete_event();">삭제하기</a>
+			   </div>
+				<%  }} %>
+               </div>
+               
+               
             </div>
             <hr>
          </div>
@@ -233,12 +253,31 @@
             <div class="panel panel-default">
                <div class="panel-heading">달력 공간</div>
                <div class="panel-body">
-                  <img src="https://placehold.it/150x80?text=IMAGE"
-                     class="img-responsive" style="width: 100%" alt="Image">
-                  <h5>여행 가능 날짜</h5>
+	                  <img src="https://placehold.it/150x80?text=IMAGE"
+	                     class="img-responsive" style="width: 50%" alt="Image">
+	                     <br>
+			                   <table class="table table-hover">
+			                   <tr><th>객실명</th><th>성인가격</th><th>소인가격</th><th>할인율</th><th>객실 예약상태</th>
+									   <th>상세정보</th></tr>
+									<%
+										for(Room r : list){
+									%>
+										<tr height="30">
+										<td><%= r.getRoomName() %></td>
+										<td><%= r.getAdult_Price() %></td>
+										<td><%= r.getChild_Price() %></td>
+										<td><%= r.getDiscount() %></td>
+										<td><%= r.getRoomState() %></td>
+										<td><%= r.getRoomDetails() %></td>
+									<!--<input type="radio" name="test" value="1" onclick="chk()">상세보기
+										<input type="radio" name="test" value="2" onclick="chk()">접기 -->
+										</tr>
+									<%  } %>
+									</table>
                   <%-- <% for(TourConf tconf : tconfList) { %>
                      <p>시작일: <%= tconf.getStartDate() %>, 도착일: <%= tconf.getArriavlaDate() %>, 성인금액:<%= tconf.getTourAdultPrice() %>, 소인가격: <%= tconf.getTourChildPrice() %> </p>
                   <% } %> --%>
+                  
                </div>
             </div>
             <div class="panel panel-default hidden-md hidden-lg">
@@ -263,7 +302,7 @@
             <div class="panel panel-default">
                <div class="panel-heading">이용규칙</div>
                <div class="panel-body">
-                  <%=accom.getFacilities()%>
+                  <%=accom.getAccRules() %>
                </div>
             </div>
             <div class="panel panel-default">
@@ -278,30 +317,31 @@
                   <%=accom.getAccRefund()%>
                </div>
             </div>
-            <div class="panel panel-default">
+           <%--  <div class="panel panel-default">
                <div class="panel-heading">객실상세정보</div>
                <div class="panel-body">
                   <!-- 객실추가 -->
-                  <table align="center" border="1" cellspacing="0" width="600">
-						<tr bgcolor="gray"><th>객실명	</th><th>성인가격</th><th>소인가격</th><th>할인율</th><th>객실 예약상태</th>
+                 <!--  <table align="center" border="1" cellspacing="0" width="600"> -->
+                 <table class="table table-hover">
+                 <tr><th>객실명</th><th>성인가격</th><th>소인가격</th><th>할인율</th><th>객실 예약상태</th>
 						   <th>상세정보</th></tr>
 						<%
 							for(Room r : list){
 						%>
 							<tr height="30">
-							<td align="center"><%= r.getRoomName() %></td>
-							<td align="center"><%= r.getAdult_Price() %></td>
-							<td align="center"><%= r.getChild_Price() %></td>
-							<td align="center"><%= r.getDiscount() %></td>
-							<td align="center"><%= r.getRoomState() %></td>
-							<td align="center"><%= r.getRoomDetails() %></td>
+							<td><%= r.getRoomName() %></td>
+							<td><%= r.getAdult_Price() %></td>
+							<td><%= r.getChild_Price() %></td>
+							<td><%= r.getDiscount() %></td>
+							<td><%= r.getRoomState() %></td>
+							<td><%= r.getRoomDetails() %></td>
 						<!--<input type="radio" name="test" value="1" onclick="chk()">상세보기
 							<input type="radio" name="test" value="2" onclick="chk()">접기 -->
 							</tr>
 						<%  } %>
 						</table>
                </div>
-            </div>
+            </div> --%>
             <div class="panel panel-default">
                <div class="panel-heading">후기
                   <%-- <% if(treviewList.size() > 0) {%>
@@ -372,7 +412,6 @@
                </div>
             </div>
          </div>
-         
          <div class="col-md-4 hidden-sm hidden-xs">
             <div class="panel panel-default panel-affix" id="myScrollspy">
 
@@ -436,7 +475,6 @@
       
    </div>
 </div> --%>
-
 <div id="fake-footer"></div>
 <%@ include file="../includes/footer.jsp" %>
 </body>

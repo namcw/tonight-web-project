@@ -59,9 +59,9 @@ container {
 <div class="jumbotron">
 
 </div>
-	<h3>1단계 숙소 등록</h3>
+	<h3>2단계 객실 등록</h3>
 <div class="progress">
-  <div class="progress-bar bg-success" role="progressbar" style="width: 50%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+  <div class="progress-bar bg-success" role="progressbar" style="width: 75%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
 </div>
 </body>
 </html>

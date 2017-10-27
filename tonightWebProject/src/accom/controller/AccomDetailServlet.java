@@ -45,7 +45,7 @@ public class AccomDetailServlet extends HttpServlet {
 		
 		//해당 숙소정보 조회 결과 리턴받음
 		Accommodation accom = aservice.selectAccom(accomId);
-		ArrayList<Room> list = rservice.selectList();
+		ArrayList<Room> list = rservice.selectList(accomId);
 		
 		RequestDispatcher view = null;
 		if(accom != null) {

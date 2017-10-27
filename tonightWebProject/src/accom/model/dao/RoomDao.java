@@ -9,17 +9,19 @@ import accom.model.vo.Room;
 
 public class RoomDao {
 	
-	//객실(Room)여러개 조회!!
-	public ArrayList<Room> selectList(Connection con) {
+	//숙소에 맞는 객실리스트 조회
+	public ArrayList<Room> selectList(Connection con, int no) {
 		ArrayList<Room> list = null;
-		Statement stmt = null;
+		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		
-		String query = "select * from room ";
+		String query = "select * from room where acc_id = ?";
 		
 		try {
-			stmt = con.createStatement();
-			rset = stmt.executeQuery(query);
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, no);
+			
+			rset = pstmt.executeQuery();
 			
 			if(rset != null){
 				list = new ArrayList<Room>();
@@ -27,13 +29,15 @@ public class RoomDao {
 				while(rset.next()){
 					Room r = new Room();
 					
-					r.setRoomId(rset.getInt("ROOM_ID"));
-					r.setRoomName(rset.getString("ROOM_NAME"));
-					r.setAdult_Price(rset.getInt("ROOM_ADULT_PRICE"));
-					r.setChild_Price(rset.getInt("ROOM_CHILD_PRICE"));
-					r.setDiscount(rset.getDouble("ROOM_DISCOUNT"));
-					r.setRoomDetails(rset.getString("ROOM_DETAILS"));
-					r.setRoomState(rset.getString("ROOM_STATE"));
+					r.setRoomId(rset.getInt("room_id"));
+					r.setAccId(rset.getInt("acc_id"));
+					r.setRoomName(rset.getString("room_name"));
+					r.setRoomState(rset.getString("room_state"));
+					r.setAdult_Price(rset.getInt("room_adult_price"));
+					r.setChild_Price(rset.getInt("room_child_price"));
+					r.setDiscount(rset.getDouble("room_discount"));
+					r.setRoomImage(rset.getString("room_image_path"));
+					r.setRoomDetails(rset.getString("room_details"));
 					
 					list.add(r);
 				}
@@ -43,10 +47,30 @@ public class RoomDao {
 			e.printStackTrace();
 		}finally{
 			close(rset);
-			close(stmt);
+			close(pstmt);
 		}
 		
 		return list;
+	}
+
+	public int deleteRoom(Connection con, int no) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String query = "delete from room where acc_id = ?";
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, no);
+			
+			result = pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
 	}
 	
 	

@@ -179,10 +179,13 @@ public class AccomDao {
 		int result = 0;
 		PreparedStatement pstmt = null;
 		
-		String query = null;
+		String query = "delete from accommodation where acc_id = ?";
 		
 		try {
-			//
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, no);
+			
+			result = pstmt.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {

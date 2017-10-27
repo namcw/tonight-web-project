@@ -11,11 +11,23 @@ import accom.model.vo.RoomReview;
 
 public class RoomService {
 	//객실 전체 조회용
-	public ArrayList<Room> selectList() {
+	public ArrayList<Room> selectList(int no) {
 		Connection con = getConnection();
-		ArrayList<Room> list = new RoomDao().selectList(con);
+		ArrayList<Room> list = new RoomDao().selectList(con, no);
 		close(con);
 		return list;
+	}
+	
+	//객실 삭제 처리용
+	public int deleteRoom(int no) {
+		Connection con = getConnection();
+		int result = new RoomDao().deleteRoom(con, no);
+		if(result > 0)
+			commit(con);
+		else
+			rollback(con);
+		close(con);
+		return result;	
 	}
 	
 /*	//객실 상세 조회용
@@ -50,19 +62,6 @@ public class RoomService {
 			rollback(con);
 		close(con);
 		return result;
-	}
-	
-	//객실 삭제 처리용
-	public int deleteRoom(int no) {
-		Connection con = getConnection();
-		int result = new RoomDao().deleteRoom(con, no);
-		if(result > 0)
-			commit(con);
-		else
-			rollback(con);
-		close(con);
-		return result;
-		
 	}
 
 		//전체 게시글 갯수 조회용
