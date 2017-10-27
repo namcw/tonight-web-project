@@ -34,6 +34,7 @@ public class QnaDao {
 					q.setWriterId(rset.getString("writer_id"));
 					q.setQuestion(rset.getString("question"));
 					q.setAnswer(rset.getString("answer"));
+					q.setqnaReadcount(rset.getInt("qna_read_count"));
 	
 					list.add(q);
 				}
@@ -84,8 +85,7 @@ public class QnaDao {
 		int result = 0;
 		PreparedStatement pstmt = null;
 		
-		String query = "update qna set qna_read_count = qna_read_count + 1"
-				+ "where qna_no = ?";
+		String query = "update qna set qna_read_count = qna_read_count + 1 where qna_no = ?";
 		
 		try {
 			pstmt = con.prepareStatement(query);
@@ -107,6 +107,11 @@ public class QnaDao {
 		String query = "insert into qna values "
 				+ "((select max(qna_no) + 1 from qna), "
 						+ "?, ?, ?, null, default)";
+		
+//		String query = "insert into qna values "
+//				+ "((select max(qna_no) + 1 from qna), "
+//						+ "?, ?, ?, null, null, null, default, default, default)";
+
 		try {
 			pstmt = con.prepareStatement(query);
 			pstmt.setString(1, qna.getQnaTitle());
@@ -145,7 +150,7 @@ public class QnaDao {
 		PreparedStatement pstmt = null;
 		
 		String query ="update qna set qna_title = ?, writer_Id = ?, question = ? where qna_no = ?";
-		System.out.println(qna);
+		
 		try {
 			pstmt = con.prepareStatement(query);
 			pstmt.setString(1, qna.getQnaTitle());
@@ -229,6 +234,7 @@ public class QnaDao {
 			close(rset);
 			close(pstmt);
 		}
+		
 		return qna;
 	}
 
@@ -252,6 +258,56 @@ public class QnaDao {
 			close(stmt);
 		}
 		
+		return result;
+	}
+
+	public int updateReplySeq(Connection con, Qna replyQna) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String query = "update qna set qna_title = ?, answer = ?, where qna_no = ? ";
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, replyQna.getQnaTitle());
+			pstmt.setString(2, replyQna.getAnswer());
+			pstmt.setInt(3,  replyQna.getQnaNo());
+			
+			result = pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally{
+			close(pstmt);
+		}
+		return result;
+	}
+
+	public int insertReply(Connection con, Qna originQna, Qna replyQna) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String query = null;
+		
+		if(replyQna.getQnaLevel() == 1){
+			query = "insert into qna values ((select max(qna_no) + 1 from qna), ?, ?, ?, ?, null, default, ?, (select max(qna_no) + 1 from qna), + 1)";
+		}
+		
+		if(replyQna.getQnaLevel() == 2){
+			query = "insert into qna values ((select max(qna_no) + 1 from qna), ?, ?, ?, ?, null, default, ?, ?, + 1)";
+		}
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, replyQna.getQnaTitle());
+			pstmt.setString(2, replyQna.getWriterId());
+			pstmt.setString(3, replyQna.getAnswer());
+			pstmt.setInt(4, replyQna.getQnaLevel());
+			pstmt.setInt(5, replyQna.getQnaRef());
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally{
+			close(pstmt);
+		}
 		return result;
 	}
 }

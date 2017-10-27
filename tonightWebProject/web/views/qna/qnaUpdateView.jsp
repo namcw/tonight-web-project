@@ -8,6 +8,18 @@
 <head>
 <meta charset=UTF-8">
 <title>qnaUpdateView</title>
+  <style>
+    #contentForm {
+      width: 40%;
+      margin: 0 auto;
+      padding-top: 12%;
+    }
+ 
+    .table > thead > tr > th, .table > tbody > tr > th {
+      background-color: #e6ecff;
+      text-align: center;
+    }
+  </style>
 </head>
 <body>
 <%@ include file="../includes/header.jsp" %>

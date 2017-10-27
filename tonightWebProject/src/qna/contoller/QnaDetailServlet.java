@@ -34,13 +34,11 @@ public class QnaDetailServlet extends HttpServlet {
 		response.setContentType("text/html; charset=utf-8");
 		
 		int no = Integer.parseInt(request.getParameter("no"));
-		
 		QnaService nqna = new QnaService();
 
 		nqna.addReadCount(no);
 		
 		Qna qna = nqna.selectQna(no);
-		
 		RequestDispatcher view = null;
 		if(qna != null){
 			view = request.getRequestDispatcher("views/qna/qnaDetailView.jsp");
@@ -51,6 +49,7 @@ public class QnaDetailServlet extends HttpServlet {
 			request.setAttribute("message", "상세 조회 실패");
 			view.forward(request, response);
 		}
+		
 	}
 
 	/**

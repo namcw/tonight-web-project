@@ -83,5 +83,27 @@ public class QnaService {
 		Connection con = getConnection();
 		int listCount = new QnaDao().getListCount(con);
 		return listCount;
+	}
+
+	public void updateReplySeq(Qna replyQna) {
+		Connection con = getConnection();
+		int result = new QnaDao().updateReplySeq(con, replyQna);
+		if(result > 0)
+			commit(con);
+		else
+			rollback(con);
+		close(con);
+	}
+
+	public int insertReply(Qna originQna, Qna replyQna) {
+		Connection con = getConnection();
+		int result = new QnaDao().insertReply(con, originQna, replyQna);
+		if(result > 0)
+			commit(con);
+		else
+			rollback(con);
+		close(con);
+		return result;
+		
 	}	
 }

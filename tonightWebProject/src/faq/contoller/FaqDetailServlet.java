@@ -41,7 +41,6 @@ public class FaqDetailServlet extends HttpServlet {
 		FaqService nfaq = new FaqService();
 
 		nfaq.addReadCount(no);
-		
 		Faq faq = nfaq.selectFaq(no);
 		
 		RequestDispatcher view = null;

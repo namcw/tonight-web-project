@@ -41,12 +41,14 @@ public class QnaListServlet extends HttpServlet {
 		
 		if(request.getParameter("page") != null)
 			currentPage = Integer.parseInt(request.getParameter("page"));
+		
 		QnaService qservice = new QnaService();
 		
 		int listCount = qservice.getListCount();
 		
 		ArrayList<Qna> list = new QnaService().selectList();
-int maxPage = (int)((double)listCount / limit + 0.9);
+
+		int maxPage = (int)((double)listCount / limit + 0.9);
 		
 		int startPage = ((int)((double)currentPage / limit + 0.9) - 1) * limit + 1;
 		
