@@ -93,7 +93,7 @@ public class AccomInsertServlet extends HttpServlet {
 		
 		//처리결과에 따라 뷰 지정함
 		if(new AccomService().insertAccom(accom) > 0){
-			response.sendRedirect("views/room/roomWriterForm.jsp");
+			response.sendRedirect("views/room/roomWriteForm.jsp");
 		}else{
 			view = request.getRequestDispatcher("views/accom/accomError.jsp");
 			request.setAttribute("message", "accom 서비스 : 숙소 등록 실패!");

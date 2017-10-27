@@ -1,6 +1,7 @@
 package accom.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,7 +11,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import accom.model.service.AccomService;
+import accom.model.service.RoomService;
 import accom.model.vo.Accommodation;
+import accom.model.vo.Room;
 
 /**
  * Servlet implementation class accomDetailServlet
@@ -38,14 +41,17 @@ public class AccomDetailServlet extends HttpServlet {
 		int currentPage = Integer.parseInt(request.getParameter("page"));
 		
 		AccomService aservice = new AccomService();
+		RoomService rservice = new RoomService();
 		
 		//해당 숙소정보 조회 결과 리턴받음
 		Accommodation accom = aservice.selectAccom(accomId);
-				
+		ArrayList<Room> list = rservice.selectList();
+		
 		RequestDispatcher view = null;
 		if(accom != null) {
 			view = request.getRequestDispatcher("views/accom/accomDetailView.jsp");
 			request.setAttribute("accom", accom);
+			request.setAttribute("list", list);
 			request.setAttribute("currentPage", currentPage);
 			view.forward(request, response);
 		}else{
