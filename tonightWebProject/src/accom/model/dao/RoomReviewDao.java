@@ -11,6 +11,7 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 import accom.model.vo.RoomReview;
+import tour.model.vo.TourReview;
 
 
 public class RoomReviewDao {
@@ -358,7 +359,77 @@ public class RoomReviewDao {
 					
 					return result;
 				}
-				
+
+
+
+
+				public ArrayList<RoomReview> getRoomReviewList(Connection con, int accomId) {
+					ArrayList<RoomReview> rreviewList = null;
+					
+					PreparedStatement pstmt = null;
+					ResultSet rset = null;
+					
+					String sql = "SELECT * FROM REVIEW WHERE REVIEW_RR_GRADE = ?";
+					
+					try {
+						pstmt = con.prepareStatement(sql);
+						pstmt.setInt(1, accomId);
+						rset = pstmt.executeQuery();
+						if(rset != null) {
+							rreviewList = new ArrayList<RoomReview>();
+							while(rset.next()) {
+								RoomReview rreview = new RoomReview(
+												rset.getInt("REVIEW_NUM"),
+											/*	accomId,*/
+												rset.getDate("REVIEW_DATE"),
+												rset.getString("REVIEW_WRITER"),
+												rset.getString("REVIEW_TITLE"),
+												rset.getString("REVIEW_CONTENT"),
+												rset.getDouble("REVIEW_RR_GRADE"));
+								
+								rreviewList.add(rreview);
+							}
+						}
+						
+					} catch (Exception e) {
+						e.printStackTrace();
+					} finally {
+						close(pstmt);
+						close(rset);
+					}
+					
+					return rreviewList;
+				}
+
+
+				//여기 수정
+
+				public double getRoomReviewGradeAvg(Connection con, int accomId) {
+					double rrGradeAvg = 0;
+					
+					PreparedStatement pstmt = null;
+					ResultSet rset = null;
+					
+					String sql = "SELECT ROUND(AVG(REVIEW_RR_GRADE),2) avg FROM REVIEW WHERE ACC_ID = ?";
+					
+					try {
+						pstmt = con.prepareStatement(sql);
+						pstmt.setInt(1, accomId);
+						rset = pstmt.executeQuery();
+						if(rset.next()) {
+							rrGradeAvg = rset.getDouble(1);
+						}
+						
+					} catch (Exception e) {
+						e.printStackTrace();
+					} finally {
+						close(pstmt);
+						close(rset);
+					}
+					
+					return rrGradeAvg;
+				}
+
 		
 		
 				

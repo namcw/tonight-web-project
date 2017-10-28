@@ -1,6 +1,7 @@
 package accom.model.vo;
 
 import java.sql.Date;
+import java.util.ArrayList;
 
 public class RoomReview {
 
@@ -16,14 +17,16 @@ public class RoomReview {
 	private int reviewRef;
 	private int reviewReplyRef;
 	private int reviewReplySeq;
+	private double rrGrade;
+/*	private int accomId;*/
 	
-	
+
 	public RoomReview(){}
 	
 	
 	public RoomReview(int reviewNum, String reviewTitle, String reviewriter, String reviewContent, String reviewOriginalFileName,
 			String reviewRenameFileName, Date reviewDate, int reviewReadCount, int reviewLevel, int reviewRef,
-			int reviewReplyRef, int reviewReplySeq) {
+			int reviewReplyRef, int reviewReplySeq, double rrGrade) {
 		
 		super();
 		this.reviewNum = reviewNum;
@@ -38,16 +41,34 @@ public class RoomReview {
 		this.reviewRef = reviewRef;
 		this.reviewReplyRef = reviewReplyRef;
 		this.reviewReplySeq = reviewReplySeq;
+		this.rrGrade=rrGrade;
 	}
 	
 	
-	public RoomReview(int reviewNum, String reviewTitle, String reviewContent) {
+
+	public double getRrGrade() {
+		return rrGrade;
+	}
+
+
+	public void setRrGrade(double rrGrade) {
+		this.rrGrade = rrGrade;
+	}
+
+	
+	
+	public RoomReview(int reviewNum, /*int accomId,*/ Date reviewDate, String reviewTitle, String reviewContent, String reviewriter, double rrGrade) {
 		super();
 		this.reviewNum = reviewNum;
 		this.reviewTitle = reviewTitle;
 		this.reviewContent = reviewContent;
+		this.reviewDate=reviewDate;
+		this.reviewriter=reviewriter;
+		this.rrGrade=rrGrade;
+	/*	this.accomId=accomId;*/
 	}
 
+	
 	public RoomReview(int reviewNum, String reviewTitle, String reviewriter, String reviewContent) {
 		super();
 		this.reviewNum = reviewNum;
@@ -160,4 +181,7 @@ public class RoomReview {
 				this.reviewLevel + ", " + this.reviewRef + ", " +
 				this.reviewReplyRef + ", " + this.reviewReplySeq;
 	}
+
+
+
 }

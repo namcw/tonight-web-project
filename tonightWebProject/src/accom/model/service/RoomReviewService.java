@@ -10,6 +10,8 @@ import java.util.ArrayList;
 
 import accom.model.dao.RoomReviewDao;
 import accom.model.vo.RoomReview;
+import tour.model.dao.TourDao;
+import tour.model.vo.TourReview;
 
 
 public class RoomReviewService {
@@ -132,6 +134,19 @@ public class RoomReviewService {
 				rollback(con);
 			close(con);
 			return result;
+		}
+
+		public ArrayList<RoomReview> selectRoomReviewList(int accomId) {
+			Connection con = getConnection();
+			ArrayList<RoomReview> rreviewList = new RoomReviewDao().getRoomReviewList(con, accomId);
+			return rreviewList;
+		}
+
+		public double getRoomReviewGradeAvg(int accomId) {
+			Connection con = getConnection();
+			double rrGradeAvg = new RoomReviewDao().getRoomReviewGradeAvg(con, accomId);
+			return rrGradeAvg;
+		
 		}
 
 	

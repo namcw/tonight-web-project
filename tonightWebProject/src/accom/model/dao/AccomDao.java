@@ -38,10 +38,9 @@ public class AccomDao {
 		
 		//currentPage 에 해당되는 목록만 조회
 		String query = "select * from ("
-				+ "select rownum rnum, acc_id, biz_id, acc_name, "
+				+ "select rownum rnum, acc_id, biz_id, acc_name, acc_info, "
 				+ "acc_type, acc_address, acc_contact, acc_rank, "
-				+ "acc_image_path, acc_rules, acc_locationinfo, "
-				+ "acc_facilities, acc_refund from "
+				+ "acc_image_path, acc_rules, acc_facilities, acc_refund from "
 				+ "(select * from accommodation order by acc_name asc)) "
 				+ "where rnum >= ? and rnum <= ?";
 		
@@ -64,13 +63,13 @@ public class AccomDao {
 					a.setAccId(rset.getInt("acc_id"));
 					a.setBizId(rset.getString("biz_id"));
 					a.setAccName(rset.getString("acc_name"));
+					a.setAccInfo(rset.getString("acc_info"));
 					a.setAccType(rset.getString("acc_type"));
 					a.setAccAddress(rset.getString("acc_address"));
 					a.setAccContact(rset.getString("acc_contact"));
 					a.setAccRank(rset.getString("acc_rank"));
 					a.setAccImagePath(rset.getString("acc_image_path"));
 					a.setAccRules(rset.getString("acc_rules"));
-					a.setAccLocationInfo(rset.getString("acc_locationinfo"));
 					a.setFacilities(rset.getString("acc_facilities"));
 					a.setAccRefund(rset.getString("acc_refund"));
 					list.add(a);
@@ -106,13 +105,13 @@ public class AccomDao {
 				accom.setAccId(rset.getInt("acc_id"));
 				accom.setBizId(rset.getString("biz_id"));
 				accom.setAccName(rset.getString("acc_name"));
+				accom.setAccInfo(rset.getString("acc_info"));
 				accom.setAccType(rset.getString("acc_type"));
 				accom.setAccAddress(rset.getString("acc_address"));
 				accom.setAccContact(rset.getString("acc_contact"));
 				accom.setAccRank(rset.getString("acc_rank"));
 				accom.setAccImagePath(rset.getString("acc_image_path"));
 				accom.setAccRules(rset.getString("acc_rules"));
-				accom.setAccLocationInfo(rset.getString("acc_locationinfo"));
 				accom.setFacilities(rset.getString("acc_facilities"));
 				accom.setAccRefund(rset.getString("acc_refund"));
 			}
@@ -130,10 +129,26 @@ public class AccomDao {
 		int result = 0;
 		PreparedStatement pstmt = null;
 		
-		String query = null;
+		String query = "insert into accommodation values ("
+				+ "(select max(acc_id) + 1 from accommodation), "
+				+ "?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 		
 		try {
-			//
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, a.getBizId());
+			pstmt.setString(2, a.getAccName());
+			pstmt.setString(3, a.getAccInfo());
+			pstmt.setString(4, a.getAccType());
+			pstmt.setString(5, a.getAccAddress());
+			pstmt.setString(6, a.getAccContact());
+			pstmt.setString(7, a.getAccRank());
+			pstmt.setString(8, a.getAccImagePath());
+			pstmt.setString(9, a.getAccRules());
+			pstmt.setString(10, a.getFacilities());
+			pstmt.setString(11, a.getAccRefund());
+			
+			result = pstmt.executeUpdate();
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -164,10 +179,13 @@ public class AccomDao {
 		int result = 0;
 		PreparedStatement pstmt = null;
 		
-		String query = null;
+		String query = "delete from accommodation where acc_id = ?";
 		
 		try {
-			//
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, no);
+			
+			result = pstmt.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -182,10 +200,36 @@ public class AccomDao {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		
-		String query = null;
+		String query = "select * from accommodation "
+				+ "where acc_name like ? order by acc_name asc";
 		
 		try {
-			//
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, "%" + keyword + "%");
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset != null){
+				list = new ArrayList<Accommodation>();
+				
+				while(rset.next()) {
+					Accommodation a = new Accommodation();
+					
+					a.setAccId(rset.getInt("acc_id"));
+					a.setBizId(rset.getString("biz_id"));
+					a.setAccName(rset.getString("acc_name"));
+					a.setAccInfo(rset.getString("acc_info"));
+					a.setAccType(rset.getString("acc_type"));
+					a.setAccAddress(rset.getString("acc_address"));
+					a.setAccContact(rset.getString("acc_contact"));
+					a.setAccRank(rset.getString("acc_rank"));
+					a.setAccImagePath(rset.getString("acc_image_path"));
+					a.setAccRules(rset.getString("acc_rules"));
+					a.setFacilities(rset.getString("acc_facilities"));
+					a.setAccRefund(rset.getString("acc_refund"));
+					list.add(a);
+				}
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {

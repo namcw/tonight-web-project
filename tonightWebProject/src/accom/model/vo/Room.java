@@ -8,27 +8,47 @@ import java.sql.Date;
 	public class Room implements Serializable{
 		
 		private int roomId; 			//객실 아이디
-		private int accId; 			//숙소 번호
+		private int accId; 				//숙소 번호
 		private String roomState; 		//객실 예약 가능 상태
 		private int adult_Price; 		//성인 가격
 		private int child_Price; 		//소인 가격
-		private double discount; 	//할인율
+		private double discount; 		//할인율
 		private String roomImage; 		//객실 이미지 경로
-		private String roomDetails; 		//상세정보
-		private String roomName;      //객실명
+		private String roomDetails; 	//상세정보
+		private String roomName;      	//객실명
 		public Room() {}
 
-		public Room(String roomName,  int adult_Price, int child_Price, double discount, 
-				String roomState, String roomDetails) {
+		
+		public Room(String roomName, String roomState, int adult_Price, int child_Price, double discount, 
+				String roomImage, String roomDetails ) {
 			super();
 		
-			this.roomState = roomState;
-			this.adult_Price = adult_Price;
-			this.child_Price = child_Price;
-			this.discount = discount;
-			this.roomDetails = roomDetails;
-			this.roomName = roomName;
+		this.roomName=roomName;
+		this.roomState=roomState;
+		this.adult_Price=adult_Price;
+		this.child_Price=child_Price;
+		this.discount=discount;
+		this.roomImage=roomImage;
+		this.roomDetails=roomDetails;
+		
 		}
+		
+/*		
+		public Room(String roomName, String roomState, int adult_Price, int child_Price, double discount, String roomDetails) {
+			this.roomName=roomName;
+			this.roomState=roomState;
+			this.adult_Price=adult_Price;
+			this.child_Price=child_Price;
+			this.discount=discount;
+			this.roomDetails=roomDetails;
+		}*/
+		
+		
+		
+		
+		
+		
+	
 
 		public int getRoomId() {
 			return roomId;
@@ -107,7 +127,7 @@ import java.sql.Date;
 		
 		@Override
 		public String toString(){
-			return this.roomId + ", " + this.accId + ", " + this.roomState + ", " + this.adult_Price + ", " 
+			return this.roomName + "," + this.roomId + ", " + this.accId + ", " + this.roomState + ", " + this.adult_Price + ", " 
 				 + this.child_Price + ", " + this.discount + this.roomImage+ ", " + this.roomDetails;
 		}
 	}

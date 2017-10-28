@@ -7,32 +7,50 @@ public class Accommodation implements java.io.Serializable{
 	private int accId;
 	private String bizId;
 	private String accName;
+	private String accInfo;
 	private String accType;
 	private String accAddress;
 	private String accContact;
 	private String accRank;
 	private String accImagePath;
 	private String accRules;
-	private String accLocationInfo;
 	private String facilities;
 	private String accRefund;
 	
 	public Accommodation() {}
 
-	public Accommodation(int accId, String bizId, String accName, String accType, String accAddress, String accContact,
-			String accRank, String accImagePath, String accRules, String accLocationInfo, String facilities,
+	public Accommodation(String bizId, String accName, String accInfo, String accType, String accAddress,
+			String accContact, String accRank, String accImagePath, String accRules, String facilities,
 			String accRefund) {
 		super();
-		this.accId = accId;
 		this.bizId = bizId;
 		this.accName = accName;
+		this.accInfo = accInfo;
 		this.accType = accType;
 		this.accAddress = accAddress;
 		this.accContact = accContact;
 		this.accRank = accRank;
 		this.accImagePath = accImagePath;
 		this.accRules = accRules;
-		this.accLocationInfo = accLocationInfo;
+		this.facilities = facilities;
+		this.accRefund = accRefund;
+	}
+
+
+
+	public Accommodation(int accId, String accName, String accInfo, String accType, String accAddress,
+			String accContact, String accRank, String accImagePath, String accRules, String facilities,
+			String accRefund) {
+		super();
+		this.accId = accId;
+		this.accName = accName;
+		this.accInfo = accInfo;
+		this.accType = accType;
+		this.accAddress = accAddress;
+		this.accContact = accContact;
+		this.accRank = accRank;
+		this.accImagePath = accImagePath;
+		this.accRules = accRules;
 		this.facilities = facilities;
 		this.accRefund = accRefund;
 	}
@@ -59,6 +77,14 @@ public class Accommodation implements java.io.Serializable{
 
 	public void setAccName(String accName) {
 		this.accName = accName;
+	}
+
+	public String getAccInfo() {
+		return accInfo;
+	}
+
+	public void setAccInfo(String accInfo) {
+		this.accInfo = accInfo;
 	}
 
 	public String getAccType() {
@@ -109,14 +135,6 @@ public class Accommodation implements java.io.Serializable{
 		this.accRules = accRules;
 	}
 
-	public String getAccLocationInfo() {
-		return accLocationInfo;
-	}
-
-	public void setAccLocationInfo(String accLocationInfo) {
-		this.accLocationInfo = accLocationInfo;
-	}
-
 	public String getFacilities() {
 		return facilities;
 	}
@@ -132,12 +150,12 @@ public class Accommodation implements java.io.Serializable{
 	public void setAccRefund(String accRefund) {
 		this.accRefund = accRefund;
 	}
-	
+
 	@Override
 	public String toString(){
-		return  this.accId + ", " + this.bizId + ", " + this.accName + ", " + this.accType + ", " + 
-				this.accAddress + ", " + this.accContact + ", " +  this.accRank +", "+ this.accImagePath + ", " + 
-				this.accRules + ", " + this.accLocationInfo + ", " + this.facilities + ", " + this.accRefund;
+		return  this.accId + ", " + this.bizId + ", " + this.accName + ", " + this.accInfo + ", " 
+				+ this.accType + ", " + this.accAddress + ", " + this.accContact + ", " +  this.accRank + ", " 
+				+ this.accImagePath + ", " + this.accRules + ", " + ", " + this.facilities + ", " + this.accRefund;
 	}
 }
 

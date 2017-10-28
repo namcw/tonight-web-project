@@ -14,6 +14,11 @@
 <head>
 <meta charset="UTF-8">
 <title>accomListView</title>
+<script type="text/javascript">
+	function showWriteAccom(){
+		location.href = "views/accom/accomWriteForm.jsp";
+	}
+</script>
 <style type="text/css">
 	.jumbotron {
 		margin-bottom: 0px;
@@ -54,7 +59,12 @@
     <p>가나다라마바사아자차카타파하</p>
   </div>
 </div>
-
+<div align="center">
+	<form action="/tonight/asearch" method="post">
+	<input type="search" autocomplete name="keyword" length="50"> &nbsp;
+	<input type="submit" value="숙소검색">
+	</form>
+</div>
 <div class="container-fluid bg-3 text-center">
 	<br><br>
 	<% int cnt = 0; %>
@@ -101,6 +111,12 @@
 	<a href="/tonight/alist?page=<%= currentPage + 1 %>">[다음]</a>
 <% } %>
 </div>
+<br>
+<% if(member != null){ %>
+	<div align="center">
+	<button class="btn btn-default" onclick="showWriteAccom();">숙소추가</button>
+	</div>
+<% } %>
 <br><br><br>
 <%@ include file="../includes/footer.jsp" %>
 </body>
