@@ -19,6 +19,21 @@ import java.sql.Date;
 		public Room() {}
 
 		
+		public Room(int roomId, int accId, String roomName,
+				String roomState,int adult_Price,int child_Price,
+				double discount,String roomImage,String roomDetails) {
+			this.roomId=roomId;
+			this.accId=accId;
+			this.roomName=roomName;
+			this.roomState=roomState;
+			this.adult_Price=adult_Price;
+			this.child_Price=child_Price;
+			this.discount=discount;
+			this.roomImage=roomImage;
+			this.roomDetails=roomDetails;
+			
+		}
+		
 		public Room(String roomName, String roomState, int adult_Price, int child_Price, double discount, 
 				String roomImage, String roomDetails ) {
 			super();

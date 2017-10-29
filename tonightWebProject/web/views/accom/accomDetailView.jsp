@@ -1,12 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="accom.model.vo.Accommodation,accom.model.vo.RoomReview, accom.model.vo.Room, java.util.*, java.sql.Date" %>
+<%@ page import="accom.model.vo.Accommodation, accom.model.vo.Room, java.util.*, java.sql.Date" %>
 <%
    Accommodation accom = (Accommodation)request.getAttribute("accom");
 	ArrayList<Room> list = (ArrayList<Room>)request.getAttribute("list");
-	ArrayList<RoomReview> rreviewList = (ArrayList<RoomReview>) request.getAttribute("rreviewList");
-	double gradeAvg = Double.parseDouble(String.valueOf(request.getAttribute("gradeAvg")));
-	int currentPage = ((Integer)request.getAttribute("currentPage")).intValue();
+   int currentPage = ((Integer)request.getAttribute("currentPage")).intValue();
 %>
 <!DOCTYPE html>
 <html>
@@ -17,7 +15,6 @@
    href="/tonight/css/bootstrap.min.css">
 </head>
 <style type="text/css">
-
 .jumbotron {
       margin-bottom: 0px;
        background-image: url(img/loginbackground.jpg);
@@ -27,11 +24,9 @@
        color: white !important;
        height: 20px;
    }
-
 .container {
    padding: 80px 60px;
 }
-
 .person {
    border: 10px solid transparent;
    margin-bottom: 25px;
@@ -39,38 +34,31 @@
    height: 80%;
    opacity: 0.7;
 }
-
 .person:hover {
    border-color: #f1f1f1;
 }
-
 .carousel-inner img {
    -webkit-filter: grayscale(90%);
    filter: grayscale(90%); /* make all photos black and white */
    width: 100%; /* Set width to 100% */
    margin: auto;
 }
-
 .carousel-caption h3 {
    color: #fff !important;
 }
-
 @media ( max-width : 600px) {
    .carousel-caption {
       display: none;
       /* Hide the carousel text when the screen is less than 600 pixels wide */
    }
 }
-
 /**/
 .box-info.full {
    padding: 0px;
 }
-
 .box-info:hover {
    color: #393E48;
 }
-
 .box-info {
    position: relative;
    padding: 15px;
@@ -83,11 +71,9 @@
    background: #FFFFFF;
    margin-top: 20px;
 }
-
 .box-info .nav-tabs {
    background: #1B1E24;
 }
-
 .box-info .nav-tabs  li.active  a, .box-info .nav-tabs  li.active  a:hover,
    .box-info .nav-tabs  li.active  a:focus {
    cursor: default;
@@ -98,36 +84,30 @@
    background-color: #ffffff;
    color: #1B1E24;
 }
-
 .box-info .nav-tabs  li.active  a i, .box-info .nav-tabs  li.active  a:hover i,
    .box-info .nav-tabs  li.active  a:focus i {
    color: #212121;
 }
-
 .box-info .nav-tabs  li  a i {
    color: #fff;
 }
-
 .box-info.full .box-footer {
    padding: 20px 20px 15px 20px;
 }
-
 .box-info .media-list {
    margin-top: 30px;
 }
-
 .box-info .media-list .media {
    padding: 5px 20px;
    border-bottom: 1px solid #eaeaea;
 }
-
 .box-info .media-list .media .media-object {
    width: 50px;
 }
 .scroll-widget{
     overflow: hidden;
     width: auto;
-}
+}    
 </style>
 <script type="text/javascript">
 function delete_event() {
@@ -236,7 +216,7 @@ function delete_event() {
                <%  if(member != null){ %>
 			   <% if(member.getMemberId().equals(accom.getBizId())) { %>
 			   <div align="center">
-			   <a class="btn btn-default" href="#" role="button">수정하기</a> 
+			   <a class="btn btn-default" role="button" href="/tonight/aupview?anum=<%=accom.getAccId()%>">수정하기</a>
 				&nbsp; 
 			   <a class="btn btn-default" role="button" onclick="delete_event();">삭제하기</a>
 			   </div>
@@ -271,8 +251,8 @@ function delete_event() {
 										<td><%= r.getDiscount() %></td>
 										<td><%= r.getRoomState() %></td>
 										<td><%= r.getRoomDetails() %></td>
-									<input type="radio" name="test" value="1" onclick="chk()">상세보기
-										<input type="radio" name="test" value="2" onclick="chk()">접기 
+									<!--<input type="radio" name="test" value="1" onclick="chk()">상세보기
+										<input type="radio" name="test" value="2" onclick="chk()">접기 -->
 										</tr>
 									<%  } %>
 									</table>
@@ -299,6 +279,8 @@ function delete_event() {
                <div class="panel-heading">지도</div>
                <div class="panel-body">
                   <%=accom.getAccAddress()%>
+                 
+					    
                </div>
             </div>
             <div class="panel panel-default">
@@ -310,7 +292,85 @@ function delete_event() {
             <div class="panel panel-default">
                <div class="panel-heading">편의시설</div>
                <div class="panel-body">
-                  <%=accom.getFacilities()%>
+                  <%-- <%=accom.getFacilities()%> --%>
+                  <% 
+                  String[] facilitiess = accom.getFacilities().split(",");
+                  boolean[] checked = new boolean[9];
+                  for(int i = 0; i < facilitiess.length; i++) {
+                	  if(facilitiess[i].equals("주차장"))
+                		  checked[0] = true;
+                      if(facilitiess[i].equals("수영장"))
+                    	  checked[1] = true;
+                      if(facilitiess[i].equals("엘레베이터"))
+                    	  checked[2] = true;
+                      if(facilitiess[i].equals("무선인터넷"))
+                    	  checked[3] = true;
+                      if(facilitiess[i].equals("부엌"))
+                    	  checked[4] = true;
+                      if(facilitiess[i].equals("욕조"))
+                    	  checked[5] = true;
+                      if(facilitiess[i].equals("에어컨"))
+                    	  checked[6] = true;
+                      if(facilitiess[i].equals("세탁기"))
+                    	  checked[7] = true;
+                      if(facilitiess[i].equals("TV"))
+                    	  checked[8] = true;
+                  }
+                  %>
+                  
+                  <table width="100%">
+						<tr>
+						<%	if(checked[0] == true){ %>
+						<td><input type="checkbox" name="afacilities" value="주차장" checked> 주차장</td>
+						<%  }else{  %>
+						<td><input type="checkbox" name="afacilities" value="주차장"> 주차장</td>	
+						<%  } %>
+						<%	if(checked[1] == true){ %>
+						<td><input type="checkbox" name="afacilities" value="수영장" checked> 수영장</td>
+						<%  }else{  %>
+						<td><input type="checkbox" name="afacilities" value="수영장"> 수영장</td>
+						<%  } %>
+						<%	if(checked[2] == true){ %>
+						<td><input type="checkbox" name="afacilities" value="엘레베이터" checked> 엘레베이터</td>
+						<%  }else{  %>
+						<td><input type="checkbox" name="afacilities" value="엘레베이터"> 엘레베이터</td>
+						<%  } %>
+						</tr>
+						<tr>
+						<%	if(checked[3] == true){ %>
+						<td><input type="checkbox" name="afacilities" value="무선인터넷" checked> 무선인터넷</td>
+						<%  }else{  %>
+						<td><input type="checkbox" name="afacilities" value="무선인터넷" > 무선인터넷</td>
+						<%  } %>
+						<%	if(checked[4] == true){ %>
+						<td><input type="checkbox" name="afacilities" value="부엌" checked> 부엌</td>
+						<%  }else{  %>
+						<td><input type="checkbox" name="afacilities" value="부엌" > 부엌</td>
+						<%  } %>
+						<%	if(checked[5] == true){ %>
+						<td><input type="checkbox" name="afacilities" value="욕조" checked> 욕조</td>
+						<%  }else{  %>
+						<td><input type="checkbox" name="afacilities" value="욕조" > 욕조</td>
+						<%  } %>
+						</tr>
+						<tr>
+						<%	if(checked[6] == true){ %>
+						<td><input type="checkbox" name="afacilities" value="에어컨" checked> 에어컨</td>
+						<%  }else{  %>
+						<td><input type="checkbox" name="afacilities" value="에어컨" > 에어컨</td>
+						<%  } %>
+						<%	if(checked[7] == true){ %>	
+						<td><input type="checkbox" name="afacilities" value="세탁기" checked> 세탁기</td>
+						<%  }else{  %>
+						<td><input type="checkbox" name="afacilities" value="세탁기" > 세탁기</td>
+						<%  } %>
+						<%	if(checked[8] == true){ %>
+						<td><input type="checkbox" name="afacilities" value="TV" checked> TV</td>
+						<%  }else{  %>
+						<td><input type="checkbox" name="afacilities" value="TV" > TV</td>
+						<%  } %>
+						</tr>
+					</table>
                </div>
             </div>
             <div class="panel panel-default">
@@ -344,86 +404,76 @@ function delete_event() {
 						</table>
                </div>
             </div> --%>
-            
-            
-            
-            
-           <div class="panel panel-default">
-					<div class="panel-heading">후기
-						<% if(rreviewList.size() > 0) {%>
-							<p class="pull-right">(<%= rreviewList.size() %>)</p>
-							<p class="pull-right"><%= gradeAvg %></p>
-							<img src="/tonight/img/starGrade<%= Math.round(gradeAvg) %>.png" class="col-xs-3 pull-right" style="margin-top:-10px">
-						<% } %>
-					</div>
-					<div class="panel-body box-info">
-
-					<div class="tab-pane active animated fadeInRight" id="comments">
-						<div class="scroll-widget">
-							<ul class="media-list">
-							<% if (rreviewList.isEmpty()) {	%>
-								<li class="media">
-									<p>후기가 없습니다.</p>
-								</li>
-							<% } else if(rreviewList.size() < 4){ %>
-								<% for (RoomReview rreview : rreviewList) { %>
-									<li class="media">
-										<a class="pull-left" href="#fakelink">
-												<img class="media-object"
-												src="https://bootdey.com/img/Content/User_for_snippets.png"
-												alt="Avatar">
-										</a>
-										<div class="media-body">
-												<h4 class="media-heading">
-													<a href="#fakelink"><%=rreview.getReviewriter() %></a>
-													<small><%=rreview.getReviewDate() %></small>
-												</h4>
-												<div class="row">
-												<img src="/tonight/img/starGrade<%= Math.round(rreview.getRrGrade()) %>.png" class="col-xs-3" style="margin-top:-10px">
-												<div class="col-xs-9"></div>
-												</div>
-												<p><%=rreview.getReviewContent() %></p>
-											</div>
-										<p></p>
-									</li>
-								<% } %>
-							<% } else {%>
-								<% for (int i=0; i < 3; i++) { %>
-									<li class="media">
-										<a class="pull-left" href="#fakelink">
-												<img class="media-object"
-												src="https://bootdey.com/img/Content/User_for_snippets.png"
-												alt="Avatar">
-										</a>
-										<div class="media-body">
-											<h4 class="media-heading">
-												<a href="#fakelink"><%= rreviewList.get(i).getReviewriter() %></a>
-												<small><%=rreviewList.get(i).getReviewDate() %></small>
-												<small>grade <%=rreviewList.get(i).getRrGrade() %></small>
-											</h4>
-											<div class="row">
-											<img src="/tonight/img/starGrade<%= Math.round(rreviewList.get(i).getRrGrade()) %>.png" class="col-xs-3" style="margin-top:-10px">
-											<div class="col-xs-9"></div>
-											</div>
-											
-											<p><%= rreviewList.get(i).getReviewContent() %></p>
-										</div>
-									</li>
-								<% } %>
-								<li class="media"><a data-toggle="modal" data-target="#addReview"><%= rreviewList.size()-3 %>개 더보기..</a></li>
-							<% } %>
-							</ul>
-						</div>
-				</div>
-					</div>
-				</div>
-			</div>
-			
-			
-			
-			
-			
-			
+            <div class="panel panel-default">
+               <div class="panel-heading">후기
+                  <%-- <% if(treviewList.size() > 0) {%>
+                     <p class="pull-right">(<%= treviewList.size() %>)</p>
+                     <p class="pull-right"><%= gradeAvg %></p>
+                     <img src="/tonight/img/starGrade<%= Math.round(gradeAvg) %>.png" class="col-xs-3 pull-right" style="margin-top:-10px">
+                  <% } %> --%>
+               </div>
+               <div class="panel-body box-info">
+					<a href="/tonight/rreview"><h2>후기게시판</h2></a>
+               <%-- <div class="tab-pane active animated fadeInRight" id="comments">
+                  <div class="scroll-widget">
+                     <ul class="media-list">
+                     <% if (treviewList.isEmpty()) {   %>
+                        <li class="media">
+                           <p>후기가 없습니다.</p>
+                        </li>
+                     <% } else if(treviewList.size() < 4){ %>
+                        <% for (TourReview treview : treviewList) { %>
+                           <li class="media">
+                              <a class="pull-left" href="#fakelink">
+                                    <img class="media-object"
+                                    src="https://bootdey.com/img/Content/User_for_snippets.png"
+                                    alt="Avatar">
+                              </a>
+                              <div class="media-body">
+                                    <h4 class="media-heading">
+                                       <a href="#fakelink"><%=treview.getTrWriterId() %></a>
+                                       <small><%=treview.getTrDate() %></small>
+                                    </h4>
+                                    <div class="row">
+                                    <img src="/tonight/img/starGrade<%= Math.round(treview.getTrGrade()) %>.png" class="col-xs-3" style="margin-top:-10px">
+                                    <div class="col-xs-9"></div>
+                                    </div>
+                                    <p><%=treview.getTrContent() %></p>
+                                 </div>
+                              <p></p>
+                           </li>
+                        <% } %>
+                     <% } else {%>
+                        <% for (int i=0; i < 3; i++) { %>
+                           <li class="media">
+                              <a class="pull-left" href="#fakelink">
+                                    <img class="media-object"
+                                    src="https://bootdey.com/img/Content/User_for_snippets.png"
+                                    alt="Avatar">
+                              </a>
+                              <div class="media-body">
+                                 <h4 class="media-heading">
+                                    <a href="#fakelink"><%= treviewList.get(i).getTrWriterId() %></a>
+                                    <small><%=treviewList.get(i).getTrDate() %></small>
+                                    <small>grade <%=treviewList.get(i).getTrGrade() %></small>
+                                 </h4>
+                                 <div class="row">
+                                 <img src="/tonight/img/starGrade<%= Math.round(treviewList.get(i).getTrGrade()) %>.png" class="col-xs-3" style="margin-top:-10px">
+                                 <div class="col-xs-9"></div>
+                                 </div>
+                                 
+                                 <p><%= treviewList.get(i).getTrContent() %></p>
+                              </div>
+                           </li>
+                        <% } %>
+                        <li class="media"><a data-toggle="modal" data-target="#addReview"><%= treviewList.size()-3 %>개 더보기..</a></li>
+                     <% } %>
+                     </ul>
+                  </div>
+            </div> --%>
+               </div>
+            </div>
+         </div>
          <div class="col-md-4 hidden-sm hidden-xs">
             <div class="panel panel-default panel-affix" id="myScrollspy">
 

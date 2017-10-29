@@ -147,11 +147,26 @@ container {
 					</div>
 				</div>
 	</div>
+			
+			
+			<div class="row">
+					<div class="col-xs-4">
+						<p>숙소 상세화면 이미지</p>
+					</div>
+					<div class="col-xs-8">
+						<div class="form-group">
+    						<label for="exampleInputFile">이미지 파일 업로드</label>
+    						<input type="file" id="exampleInputFile" name="rimage">
+    						<p class="help-block">여기에 숙소 상세페이지에 올라갈 이미지를 올려주세요.</p>
+ 						 </div>
+					</div>
+				</div>	
+				
 				
 	</div><!-- end <div class="container" id="toTop"> -->
 	
 	
- <input class="btn btn-default" type="submit" value="등록하기"> &nbsp;
+	<input class="btn btn-default" type="submit" value="객실등록하기">&nbsp;
 	<input class="btn btn-default" type="reset" value="취소하기">
 </form>
 <div id="fake-footer"></div>

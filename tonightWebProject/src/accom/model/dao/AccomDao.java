@@ -162,10 +162,29 @@ public class AccomDao {
 		int result = 0;
 		PreparedStatement pstmt = null;
 		
-		String query = null;
+		String query = "update accommodation set "
+				+ "acc_name = ?, acc_info = ?, "
+				+ "acc_type = ?, acc_address = ?, "
+				+ "acc_contact = ?, acc_rank = ?, "
+				+ "acc_image_path = ?, acc_rules = ?, "
+				+ "acc_facilities = ?, acc_refund = ? "
+				+ "where acc_id = ?";
 		
 		try {
-			//
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, a.getAccName());
+			pstmt.setString(2, a.getAccInfo());
+			pstmt.setString(3, a.getAccType());
+			pstmt.setString(4, a.getAccAddress());
+			pstmt.setString(5, a.getAccContact());
+			pstmt.setString(6, a.getAccRank());
+			pstmt.setString(7, a.getAccImagePath());
+			pstmt.setString(8, a.getAccRules());
+			pstmt.setString(9, a.getFacilities());
+			pstmt.setString(10, a.getAccRefund());
+			pstmt.setInt(11, a.getAccId());
+			
+			result = pstmt.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {

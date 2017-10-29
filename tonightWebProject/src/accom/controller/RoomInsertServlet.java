@@ -19,6 +19,7 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
+import accom.model.vo.Accommodation;
 import accom.model.vo.Room;
 import accom.model.dao.RoomDao;
 import accom.model.service.RoomService;
@@ -68,7 +69,7 @@ public class RoomInsertServlet extends HttpServlet {
 		//자동 지정된 경로에 파일 저장됨
 		MultipartRequest mrequest = new MultipartRequest(request, savePath,maxSize, "UTF-8", new DefaultFileRenamePolicy());
 		
-		
+	
 
 		String rname = mrequest.getParameter("rname");
 		String rstate = mrequest.getParameter("rstate");
@@ -76,21 +77,30 @@ public class RoomInsertServlet extends HttpServlet {
 		int rchild = Integer.parseInt(mrequest.getParameter("rchild"));
 		double rdiscount = Double.parseDouble(mrequest.getParameter("rdiscount"));
 		String rdetail = mrequest.getParameter("rdetail");
-	
-		
+		/*String rimage = mrequest.getParameter("rimage");*/
+		String rimage= "/tonight/uploadfiles/" + mrequest.getFilesystemName("rimage");
 		
 		Room room = null;
 		
 		/*if(accid != null ){ //숙소존재
-*/			room = new Room( rname,rstate, radult, rchild, rdiscount, null, rdetail);
+		 
+*/	
+		if(rimage != null ){ //숙소대표이미지파일 존재, 숙소상세이미지파일 존재
+			
+		room = new Room( rname,rstate, radult, rchild, rdiscount, rimage, rdetail);
+	   
+	 
+	   
+		}
 		
-		
+
 	
-		
 		//처리결과에 따라 뷰 지정함
 		if(new RoomService().insertRoom(room) > 0){
-			response.sendRedirect("views/room/roomWriteForm.jsp");
+			 System.out.println(room);
+			 response.sendRedirect("/tonight/alist?page=1");
 		}else{
+			
 			view = request.getRequestDispatcher("views/room/roomErrorView.jsp");
 			request.setAttribute("message", "room 서비스 : 객실 등록 실패!");
 			view.forward(request, response);

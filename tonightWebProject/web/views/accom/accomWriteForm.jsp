@@ -9,7 +9,6 @@
 	href="/tonight/css/bootstrap.min.css">
 </head>
 <style type="text/css">
-
 .jumbotron {
 		margin-bottom: 0px;
 	    background-image: url(img/loginbackground.jpg);
@@ -19,11 +18,9 @@
 	    color: white !important;
 	    height: 20px;
 	}
-
 container {
 	padding: 80px 60px;
 } 
-
 .person {
 	border: 10px solid transparent;
 	margin-bottom: 25px;
@@ -31,22 +28,18 @@ container {
 	height: 80%;
 	opacity: 0.7;
 }
-
 .person:hover {
 	border-color: #f1f1f1;
 }
-
 .carousel-inner img {
 	-webkit-filter: grayscale(90%);
 	filter: grayscale(90%); /* make all photos black and white */
 	width: 100%; /* Set width to 100% */
 	margin: auto;
 }
-
 .carousel-caption h3 {
 	color: #fff !important;
 }
-
 @media ( max-width : 600px) {
 	.carousel-caption {
 		display: none;
@@ -175,33 +168,33 @@ container {
 					</div>
 					<div class="col-xs-8">
 						<label class="checkbox-inline">
-							<input type="checkbox" id="inlineCheckbox1" name="afailities" value="parking"> 주차장
+							<input type="checkbox" id="inlineCheckbox1" name="afacilities" value="주차장"> 주차장
 						</label>
 						<label class="checkbox-inline">
-  							<input type="checkbox" id="inlineCheckbox2" name="afailities" value="pool"> 수영장
+  							<input type="checkbox" id="inlineCheckbox2" name="afacilities" value="수영장"> 수영장
 						</label>
 						<label class="checkbox-inline">
-  							<input type="checkbox" id="inlineCheckbox3" name="afailities" value="elevator"> 엘레베이터
-						</label>
-						<br><br>
-						<label class="checkbox-inline">
-							<input type="checkbox" id="inlineCheckbox1" name="afailities" value="wifi"> 무선인터넷
-						</label>
-						<label class="checkbox-inline">
-  							<input type="checkbox" id="inlineCheckbox2" name="afailities" value="kitchen"> 부엌
-						</label>
-						<label class="checkbox-inline">
-  							<input type="checkbox" id="inlineCheckbox3" name="afailities" value="bathtub"> 욕조
+  							<input type="checkbox" id="inlineCheckbox3" name="afacilities" value="엘레베이터"> 엘레베이터
 						</label>
 						<br><br>
 						<label class="checkbox-inline">
-							<input type="checkbox" id="inlineCheckbox1" name="afailities" value="air"> 에어컨
+							<input type="checkbox" id="inlineCheckbox1" name="afacilities" value="무선인터넷"> 무선인터넷
 						</label>
 						<label class="checkbox-inline">
-  							<input type="checkbox" id="inlineCheckbox2" name="afailities" value="wash"> 세탁기
+  							<input type="checkbox" id="inlineCheckbox2" name="afacilities" value="부엌"> 부엌
 						</label>
 						<label class="checkbox-inline">
-  							<input type="checkbox" id="inlineCheckbox3" name="afailities" value="tv"> TV
+  							<input type="checkbox" id="inlineCheckbox3" name="afacilities" value="욕조"> 욕조
+						</label>
+						<br><br>
+						<label class="checkbox-inline">
+							<input type="checkbox" id="inlineCheckbox1" name="afacilities" value="air"> 에어컨
+						</label>
+						<label class="checkbox-inline">
+  							<input type="checkbox" id="inlineCheckbox2" name="afacilities" value="wash"> 세탁기
+						</label>
+						<label class="checkbox-inline">
+  							<input type="checkbox" id="inlineCheckbox3" name="afacilities" value="tv"> TV
 						</label>
 					</div>
 				</div>
@@ -226,7 +219,8 @@ container {
 			</div>
 		</div>
 	</div><!-- end <div class="container" id="toTop"> -->
-<button><a href="../room/roomWriteForm.jsp">2단계 객실 추가</a></button>
+	<!-- <button><a href="../room/roomWriteForm.jsp">2단계 객실 추가</a></button> -->
+	<input class="btn btn-default" type="submit" value="숙소등록하기"> &nbsp;
 	<input class="btn btn-default" type="reset" value="취소하기">
 </form>
 <div id="fake-footer"></div>
