@@ -69,7 +69,18 @@ public class AccomInsertServlet extends HttpServlet {
 		String aAddress = mrequest.getParameter("aaddress");
 		String aContact = mrequest.getParameter("acontact");
 		String aInfo = mrequest.getParameter("ainfo");
-		String aFailities = mrequest.getParameter("afailities");
+		String[] aFacilitiess = mrequest.getParameterValues("afacilities");
+		
+		StringBuilder hb = new StringBuilder();
+		for(int i = 0; i < aFacilitiess.length; i++) {
+			if(i< aFacilitiess.length - 1)
+				hb.append(aFacilitiess[i] + ",");
+			else
+				hb.append(aFacilitiess[i]);
+		}
+		
+		String aFacilities = hb.toString();
+		
 		String aRules = mrequest.getParameter("arules");
 		String aRefund = mrequest.getParameter("arefund");
 		
@@ -80,14 +91,14 @@ public class AccomInsertServlet extends HttpServlet {
 		
 		if(aFileName1 != null && aFileName2 != null){ //숙소대표이미지파일 존재, 숙소상세이미지파일 존재
 			accom = new Accommodation(aWriter, aName, aInfo, aType, aAddress,
-					aContact, aRank, aFileName1, aRules, aFailities, aRefund);
+					aContact, aRank, aFileName1, aRules, aFacilities, aRefund);
 		}else if(aFileName1 != null && aFileName2 == null){ //숙소대표이미지파일 존재, 숙소상세이미지파일 미존재 
 			
 		}else if(aFileName1 == null && aFileName2 != null){	//숙소대표이미지파일 미존재, 숙소상세이미지파일 존재
 			
 		}else{ //숙소 대표이미지 미존재, 숙소 상세페이지 미존재
 			accom = new Accommodation(aWriter, aName, aInfo, aType, aAddress,
-					aContact, aRank, null, aRules, aFailities, aRefund);
+					aContact, aRank, null, aRules, aFacilities, aRefund);
 			//System.out.println(accom);
 		}
 		

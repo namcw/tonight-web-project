@@ -175,33 +175,33 @@ container {
 					</div>
 					<div class="col-xs-8">
 						<label class="checkbox-inline">
-							<input type="checkbox" id="inlineCheckbox1" name="afailities" value="parking"> 주차장
+							<input type="checkbox" id="inlineCheckbox1" name="afacilities" value="주차장"> 주차장
 						</label>
 						<label class="checkbox-inline">
-  							<input type="checkbox" id="inlineCheckbox2" name="afailities" value="pool"> 수영장
+  							<input type="checkbox" id="inlineCheckbox2" name="afacilities" value="수영장"> 수영장
 						</label>
 						<label class="checkbox-inline">
-  							<input type="checkbox" id="inlineCheckbox3" name="afailities" value="elevator"> 엘레베이터
-						</label>
-						<br><br>
-						<label class="checkbox-inline">
-							<input type="checkbox" id="inlineCheckbox1" name="afailities" value="wifi"> 무선인터넷
-						</label>
-						<label class="checkbox-inline">
-  							<input type="checkbox" id="inlineCheckbox2" name="afailities" value="kitchen"> 부엌
-						</label>
-						<label class="checkbox-inline">
-  							<input type="checkbox" id="inlineCheckbox3" name="afailities" value="bathtub"> 욕조
+  							<input type="checkbox" id="inlineCheckbox3" name="afacilities" value="엘레베이터"> 엘레베이터
 						</label>
 						<br><br>
 						<label class="checkbox-inline">
-							<input type="checkbox" id="inlineCheckbox1" name="afailities" value="air"> 에어컨
+							<input type="checkbox" id="inlineCheckbox1" name="afacilities" value="무선인터넷"> 무선인터넷
 						</label>
 						<label class="checkbox-inline">
-  							<input type="checkbox" id="inlineCheckbox2" name="afailities" value="wash"> 세탁기
+  							<input type="checkbox" id="inlineCheckbox2" name="afacilities" value="부엌"> 부엌
 						</label>
 						<label class="checkbox-inline">
-  							<input type="checkbox" id="inlineCheckbox3" name="afailities" value="tv"> TV
+  							<input type="checkbox" id="inlineCheckbox3" name="afacilities" value="욕조"> 욕조
+						</label>
+						<br><br>
+						<label class="checkbox-inline">
+							<input type="checkbox" id="inlineCheckbox1" name="afacilities" value="air"> 에어컨
+						</label>
+						<label class="checkbox-inline">
+  							<input type="checkbox" id="inlineCheckbox2" name="afacilities" value="wash"> 세탁기
+						</label>
+						<label class="checkbox-inline">
+  							<input type="checkbox" id="inlineCheckbox3" name="afacilities" value="tv"> TV
 						</label>
 					</div>
 				</div>
