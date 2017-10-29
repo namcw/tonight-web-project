@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import accom.model.service.AccomService;
 import accom.model.service.RoomService;
+import accom.model.vo.AccomReview;
 import accom.model.vo.Accommodation;
 import accom.model.vo.Room;
 
@@ -45,6 +46,8 @@ public class AccomDetailServlet extends HttpServlet {
 		
 		//해당 숙소정보 조회 결과 리턴받음
 		Accommodation accom = aservice.selectAccom(accomId);
+		ArrayList<AccomReview> areviewList = aservice.selectAccomReviewList(accomId);
+		double gradeAvg = aservice.getAccomReviewGradeAvg(accomId);
 		ArrayList<Room> list = rservice.selectList(accomId);
 		
 		RequestDispatcher view = null;
@@ -52,6 +55,8 @@ public class AccomDetailServlet extends HttpServlet {
 			view = request.getRequestDispatcher("views/accom/accomDetailView.jsp");
 			request.setAttribute("accom", accom);
 			request.setAttribute("list", list);
+			request.setAttribute("areviewList", areviewList);
+			request.setAttribute("gradeAvg", gradeAvg);
 			request.setAttribute("currentPage", currentPage);
 			view.forward(request, response);
 		}else{

@@ -48,8 +48,6 @@ public class AccomSearchServlet extends HttpServlet {
 		//페이지 숫자가 전송이 왔을 경우
 		if(request.getParameter("page") != null)
 			currentPage = Integer.parseInt(request.getParameter("page"));
-		
-		AccomService aservice = new AccomService();
 	
 		int listCount = list.size();
 		
@@ -67,8 +65,6 @@ public class AccomSearchServlet extends HttpServlet {
 		int endPage = startPage + limit - 1;
 		if(maxPage < endPage)
 				endPage = maxPage;
-		
-		
 		
 		RequestDispatcher view = null;
 		

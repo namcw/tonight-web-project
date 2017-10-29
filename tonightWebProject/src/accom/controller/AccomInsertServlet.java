@@ -92,6 +92,7 @@ public class AccomInsertServlet extends HttpServlet {
 		if(aFileName1 != null && aFileName2 != null){ //숙소대표이미지파일 존재, 숙소상세이미지파일 존재
 			accom = new Accommodation(aWriter, aName, aInfo, aType, aAddress,
 					aContact, aRank, aFileName1, aRules, aFacilities, aRefund);
+			//System.out.println(accom);
 		}else if(aFileName1 != null && aFileName2 == null){ //숙소대표이미지파일 존재, 숙소상세이미지파일 미존재 
 			
 		}else if(aFileName1 == null && aFileName2 != null){	//숙소대표이미지파일 미존재, 숙소상세이미지파일 존재

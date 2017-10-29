@@ -1,9 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="accom.model.vo.Accommodation, accom.model.vo.Room, java.util.*, java.sql.Date" %>
+<%@ page import="accom.model.vo.Accommodation, accom.model.vo.Room, accom.model.vo.AccomReview, java.util.*, java.sql.Date" %>
 <%
    Accommodation accom = (Accommodation)request.getAttribute("accom");
-	ArrayList<Room> list = (ArrayList<Room>)request.getAttribute("list");
+   ArrayList<Room> list = (ArrayList<Room>)request.getAttribute("list");
+   ArrayList<AccomReview> areviewList = (ArrayList<AccomReview>) request.getAttribute("areviewList");
+   double gradeAvg = Double.parseDouble(String.valueOf(request.getAttribute("gradeAvg")));
    int currentPage = ((Integer)request.getAttribute("currentPage")).intValue();
 %>
 <!DOCTYPE html>
@@ -397,101 +399,76 @@ function delete_event() {
                   <%=accom.getAccRefund()%>
                </div>
             </div>
-           <%--  <div class="panel panel-default">
-               <div class="panel-heading">객실상세정보</div>
-               <div class="panel-body">
-                  <!-- 객실추가 -->
-                 <!--  <table align="center" border="1" cellspacing="0" width="600"> -->
-                 <table class="table table-hover">
-                 <tr><th>객실명</th><th>성인가격</th><th>소인가격</th><th>할인율</th><th>객실 예약상태</th>
-						   <th>상세정보</th></tr>
-						<%
-							for(Room r : list){
-						%>
-							<tr height="30">
-							<td><%= r.getRoomName() %></td>
-							<td><%= r.getAdult_Price() %></td>
-							<td><%= r.getChild_Price() %></td>
-							<td><%= r.getDiscount() %></td>
-							<td><%= r.getRoomState() %></td>
-							<td><%= r.getRoomDetails() %></td>
-						<!--<input type="radio" name="test" value="1" onclick="chk()">상세보기
-							<input type="radio" name="test" value="2" onclick="chk()">접기 -->
-							</tr>
-						<%  } %>
-						</table>
-               </div>
-            </div> --%>
             <div class="panel panel-default">
                <div class="panel-heading">후기
-                  <%-- <% if(treviewList.size() > 0) {%>
-                     <p class="pull-right">(<%= treviewList.size() %>)</p>
+                 <% if(areviewList.size() > 0) {%>
+                     <p class="pull-right">(<%= areviewList.size() %>)</p>
                      <p class="pull-right"><%= gradeAvg %></p>
                      <img src="/tonight/img/starGrade<%= Math.round(gradeAvg) %>.png" class="col-xs-3 pull-right" style="margin-top:-10px">
-                  <% } %> --%>
+                  <% } %>
                </div>
                <div class="panel-body box-info">
-					<a href="/tonight/rreview"><h2>후기게시판</h2></a>
-               <%-- <div class="tab-pane active animated fadeInRight" id="comments">
-                  <div class="scroll-widget">
-                     <ul class="media-list">
-                     <% if (treviewList.isEmpty()) {   %>
-                        <li class="media">
-                           <p>후기가 없습니다.</p>
-                        </li>
-                     <% } else if(treviewList.size() < 4){ %>
-                        <% for (TourReview treview : treviewList) { %>
-                           <li class="media">
-                              <a class="pull-left" href="#fakelink">
-                                    <img class="media-object"
-                                    src="https://bootdey.com/img/Content/User_for_snippets.png"
-                                    alt="Avatar">
-                              </a>
-                              <div class="media-body">
-                                    <h4 class="media-heading">
-                                       <a href="#fakelink"><%=treview.getTrWriterId() %></a>
-                                       <small><%=treview.getTrDate() %></small>
-                                    </h4>
-                                    <div class="row">
-                                    <img src="/tonight/img/starGrade<%= Math.round(treview.getTrGrade()) %>.png" class="col-xs-3" style="margin-top:-10px">
-                                    <div class="col-xs-9"></div>
-                                    </div>
-                                    <p><%=treview.getTrContent() %></p>
-                                 </div>
-                              <p></p>
-                           </li>
-                        <% } %>
-                     <% } else {%>
-                        <% for (int i=0; i < 3; i++) { %>
-                           <li class="media">
-                              <a class="pull-left" href="#fakelink">
-                                    <img class="media-object"
-                                    src="https://bootdey.com/img/Content/User_for_snippets.png"
-                                    alt="Avatar">
-                              </a>
-                              <div class="media-body">
-                                 <h4 class="media-heading">
-                                    <a href="#fakelink"><%= treviewList.get(i).getTrWriterId() %></a>
-                                    <small><%=treviewList.get(i).getTrDate() %></small>
-                                    <small>grade <%=treviewList.get(i).getTrGrade() %></small>
-                                 </h4>
-                                 <div class="row">
-                                 <img src="/tonight/img/starGrade<%= Math.round(treviewList.get(i).getTrGrade()) %>.png" class="col-xs-3" style="margin-top:-10px">
-                                 <div class="col-xs-9"></div>
-                                 </div>
-                                 
-                                 <p><%= treviewList.get(i).getTrContent() %></p>
-                              </div>
-                           </li>
-                        <% } %>
-                        <li class="media"><a data-toggle="modal" data-target="#addReview"><%= treviewList.size()-3 %>개 더보기..</a></li>
-                     <% } %>
-                     </ul>
-                  </div>
-            </div> --%>
-               </div>
-            </div>
-         </div>
+
+					<div class="tab-pane active animated fadeInRight" id="comments">
+						<div class="scroll-widget">
+							<ul class="media-list">
+							<% if (areviewList.isEmpty()) {	%>
+								<li class="media">
+									<p>후기가 없습니다.</p>
+								</li>
+							<% } else if(areviewList.size() < 4){ %>
+								<% for (AccomReview areview : areviewList) { %>
+									<li class="media">
+										<a class="pull-left" href="#fakelink">
+												<img class="media-object"
+												src="https://bootdey.com/img/Content/User_for_snippets.png"
+												alt="Avatar">
+										</a>
+										<div class="media-body">
+												<h4 class="media-heading">
+													<a href="#fakelink"><%=areview.getArWriterId() %></a>
+													<small><%=areview.getArGrade() %></small>
+												</h4>
+												<div class="row">
+												<img src="/tonight/img/starGrade<%= Math.round(areview.getArGrade()) %>.png" class="col-xs-3" style="margin-top:-10px">
+												<div class="col-xs-9"></div>
+												</div>
+												<p><%=areview.getArContent() %></p>
+											</div>
+										<p></p>
+									</li>
+								<% } %>
+							<% } else {%>
+								<% for (int i=0; i < 3; i++) { %>
+									<li class="media">
+										<a class="pull-left" href="#fakelink">
+												<img class="media-object"
+												src="https://bootdey.com/img/Content/User_for_snippets.png"
+												alt="Avatar">
+										</a>
+										<div class="media-body">
+											<h4 class="media-heading">
+												<a href="#fakelink"><%= areviewList.get(i).getArWriterId() %></a>
+												<small><%=areviewList.get(i).getArDate() %></small>
+												<small>grade <%=areviewList.get(i).getArGrade() %></small>
+											</h4>
+											<div class="row">
+											<img src="/tonight/img/starGrade<%= Math.round(areviewList.get(i).getArGrade()) %>.png" class="col-xs-3" style="margin-top:-10px">
+											<div class="col-xs-9"></div>
+											</div>
+											
+											<p><%= areviewList.get(i).getArContent() %></p>
+										</div>
+									</li>
+								<% } %>
+								<li class="media"><a data-toggle="modal" data-target="#addReview"><%= areviewList.size()-3 %>개 더보기..</a></li>
+							<% } %>
+							</ul>
+						</div>
+				</div>
+					</div>
+				</div>
+			</div>
          <div class="col-md-4 hidden-sm hidden-xs">
             <div class="panel panel-default panel-affix" id="myScrollspy">
 
@@ -513,7 +490,7 @@ function delete_event() {
 <div class="modal fade" id="addReview" role="dialog">
     <div class="modal-dialog">
     
-     <%--  <!-- Modal content-->
+     <!-- Modal content-->
       <div class="modal-content">
         <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -523,7 +500,7 @@ function delete_event() {
            <div class="tab-pane active animated fadeInRight" id="comments">
             <div class="scroll-widget">
                <ul class="media-list">
-                  <% for (TourReview treview : treviewList) { %>
+                  <% for (AccomReview areview : areviewList) { %>
                      <li class="media">
                         <a class="pull-left" href="#fakelink">
                               <img class="media-object"
@@ -532,14 +509,14 @@ function delete_event() {
                         </a>
                         <div class="media-body">
                               <h4 class="media-heading">
-                                 <a href="#fakelink"><%=treview.getTrWriterId() %></a>
-                                 <small><%=treview.getTrDate() %></small>
+                                 <a href="#fakelink"><%=areview.getArWriterId() %></a>
+                                 <small><%=areview.getArDate() %></small>
                               </h4>
                               <div class="row">
-                                 <img src="/tonight/img/starGrade<%= Math.round(treview.getTrGrade()) %>.png" class="col-xs-3" style="margin-top:-10px">
+                                 <img src="/tonight/img/starGrade<%= Math.round(areview.getArGrade()) %>.png" class="col-xs-3" style="margin-top:-10px">
                                  <div class="col-xs-9"></div>
                               </div>
-                              <p><%=treview.getTrContent() %></p>
+                              <p><%=areview.getArContent() %></p>
                            </div>
                         <p></p>
                      </li>
@@ -554,8 +531,71 @@ function delete_event() {
       </div>
       
    </div>
-</div> --%>
+</div> 
 <div id="fake-footer"></div>
-<%@ include file="../includes/footer.jsp" %>
+<%@ include file="../includes/footer.jsp"%>
+<script src="/tonight/js/jquery-3.2.1.min.js"></script>
+<script src="/tonight/js/bootstrap.min.js"></script>
+<script>
+	$(function() {
+
+		// name your elements here
+		var stickyElement = '.panel-affix', // the element you want to make sticky
+		bottomElement = '#fake-footer'; // the bottom element where you want the sticky element to stop (usually the footer) 
+
+		// make sure the element exists on the page before trying to initalize
+		if ($(stickyElement).length) {
+			$(stickyElement).each(
+				function() {
+
+					// let's save some messy code in clean variables
+					// when should we start affixing? (the amount of pixels to the top from the element)
+					var fromTop = $(this).offset().top,
+					// where is the bottom of the element?
+					fromBottom = $(document).height()
+							- ($(this).offset().top + $(this)
+									.outerHeight()),
+					// where should we stop? (the amount of pixels from the top where the bottom element is)
+					// also add the outer height mismatch to the height of the element to account for padding and borders
+					stopOn = $(document).height()
+							- ($(bottomElement).offset().top)
+							+ ($(this).outerHeight() - $(this)
+									.height());
+
+					// if the element doesn't need to get sticky, then skip it so it won't mess up your layout
+					if ((fromBottom - stopOn) > 200) {
+						// let's put a sticky width on the element and assign it to the top
+						$(this).css('width', $(this).width())
+								.css('top', 0).css('position',
+										'');
+						// assign the affix to the element
+						$(this)
+								.affix({
+									offset : {
+										// make it stick where the top pixel of the element is
+										top : fromTop - 80,
+										// make it stop where the top pixel of the bottom element is
+										bottom : stopOn
+									}
+								// when the affix get's called then make sure the position is the default (fixed) and it's at the top
+								})
+								.on(
+									'affix.bs.affix',
+									function() {
+										$(this)
+											.css('top',
+													'80px')
+											.css(
+													'position',
+													'');
+									});
+					}
+					// trigger the scroll event so it always activates 
+					$(window).trigger('scroll');
+				});
+		}
+
+	});
+</script>
 </body>
 </html>

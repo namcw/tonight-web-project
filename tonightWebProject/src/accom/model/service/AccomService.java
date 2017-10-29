@@ -3,7 +3,11 @@ package accom.model.service;
 import static common.JDBCTemplate.*;
 import java.sql.*;
 import java.util.*;
+
+import accom.model.vo.AccomReview;
 import accom.model.vo.Accommodation;
+import tour.model.dao.TourDao;
+import tour.model.vo.TourReview;
 import accom.model.dao.AccomDao;
 
 public class AccomService {
@@ -74,5 +78,17 @@ public class AccomService {
 		ArrayList<Accommodation> list = new AccomDao().selectTitleSearch(con, keyword);
 		close(con);
 		return list;
+	}
+
+	public ArrayList<AccomReview> selectAccomReviewList(int accomId) {
+		Connection con = getConnection();
+		ArrayList<AccomReview> areviewList = new AccomDao().getAccomReviewList(con, accomId);
+		return areviewList;
+	}
+
+	public double getAccomReviewGradeAvg(int accomId) {
+		Connection con = getConnection();
+		double arGradeAvg = new AccomDao().getAccomReviewGradeAvg(con, accomId);
+		return arGradeAvg;
 	}
 }

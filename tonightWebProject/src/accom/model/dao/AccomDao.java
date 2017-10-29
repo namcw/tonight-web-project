@@ -3,7 +3,10 @@ package accom.model.dao;
 import static common.JDBCTemplate.*;
 import java.sql.*;
 import java.util.*;
+
+import accom.model.vo.AccomReview;
 import accom.model.vo.Accommodation;
+import tour.model.vo.TourReview;
 
 public class AccomDao {
 	//총 숙소 리스트 갯수 조회용
@@ -257,5 +260,72 @@ public class AccomDao {
 		}
 		
 		return list;
+	}
+
+	public ArrayList<AccomReview> getAccomReviewList(Connection con, int accomId) {
+		ArrayList<AccomReview> areviewList = null;
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String query = "select * from accom_review where ar_accom_id = ?";
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, accomId);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset != null) {
+				areviewList = new ArrayList<AccomReview>();
+				
+				while(rset.next()) {
+					AccomReview areview = new AccomReview(
+									rset.getInt("ar_no"),
+									accomId,
+									rset.getDate("ar_date"),
+									rset.getString("ar_writer_id"),
+									rset.getString("ar_title"),
+									rset.getString("ar_content"),
+									rset.getDouble("ar_grade"));
+					
+					areviewList.add(areview);
+				}
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rset);
+		}
+		
+		return areviewList;
+	}
+
+	public double getAccomReviewGradeAvg(Connection con, int accomId) {
+		double arGradeAvg = 0;
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String query = "select round(avg(ar_grade),2) avg from accom_review where ar_accom_id = ?";
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, accomId);
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				arGradeAvg = rset.getDouble(1);
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rset);
+		}
+		
+		return arGradeAvg;
 	}
 }
