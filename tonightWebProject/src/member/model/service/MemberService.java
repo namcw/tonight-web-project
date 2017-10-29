@@ -58,6 +58,13 @@ public class MemberService {
 		
 		return result;
 	}
+
+	public String searchMyId(String memberName, String memberEmail) {
+		Connection con = getConnection();
+		String memberId = new MemberDao().searchMyId(con, memberName, memberEmail);
+		close(con);
+		return memberId;
+	}
 }
 
 

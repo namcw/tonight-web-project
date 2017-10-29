@@ -7,6 +7,7 @@ import static common.JDBCTemplate.*;
 
 import tour.model.dao.TourDao;
 import tour.model.vo.TourDetail;
+import tour.model.vo.TourImage;
 import tour.model.vo.TourReview;
 import tour.model.vo.Tour;
 import tour.model.vo.TourConf;
@@ -71,5 +72,51 @@ public class TourService {
 		Connection con = getConnection();
 		ArrayList<TourConf> tconfList = new TourDao().getTourConfList(con, tid);
 		return tconfList;
+	}
+
+	public int insertTour(Tour tour) {
+		Connection con = getConnection();
+		int result = new TourDao().insertTour(con, tour);
+		if(result > 0)
+			commit(con);
+		else
+			rollback(con);
+		return result;
+	}
+
+	public int insertTourDetail(TourDetail tdetail) {
+		Connection con = getConnection();
+		int result = new TourDao().insertTourDetail(con, tdetail);
+		if(result > 0)
+			commit(con);
+		else
+			rollback(con);
+		return result;
+	}
+
+	public int insertTourConfList(ArrayList<TourConf> tconfList) {
+		Connection con = getConnection();
+		int result = new TourDao().insertTourConfList(con, tconfList);
+		if(result > 0)
+			commit(con);
+		else
+			rollback(con);
+		return result;
+	}
+
+	public int insertTourImageList(ArrayList<TourImage> timageList) {
+		Connection con = getConnection();
+		int result = new TourDao().insertTourImageList(con, timageList);
+		if(result > 0)
+			commit(con);
+		else
+			rollback(con);
+		return result;
+	}
+
+	public ArrayList<TourImage> selectTourImageList(int tid) {
+		Connection con = getConnection();
+		ArrayList<TourImage> timageList = new TourDao().selectTourImageList(con, tid);
+		return timageList;
 	}
 }

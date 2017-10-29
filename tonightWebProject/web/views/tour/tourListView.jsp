@@ -58,7 +58,7 @@
 	<% for(Tour tour : list) { %>
 		<div class="col-sm-6 col-md-4">
 			<a href="/tonight/tdetail?tid=<%= tour.getTourId() %>&page=<%= currentPage %>">
-				<img src="<%= tour.getTourThumnailPath() %>" class="img-responsive" style="width:100%" alt="Image">
+				<img src="/tonight/tuploadfiles/<%= tour.getTourRname() %>" class="img-responsive" style="width:100%" alt="Image">
 			</a>
 			<p id="title"><%= tour.getTourTitle() %></p>
 			
@@ -84,7 +84,7 @@
 </div>
 <br>
 <%-- 페이지 번호 처리 --%>
-<div align="center">
+<div class="container" align="center">
 <%-- 이전 페이지 있을 경우에 대한 처리 --%>
 <% if(currentPage <= 1){ %>
 	[이전] &nbsp;
@@ -105,6 +105,20 @@
 <% }else{ %>
 	<a href="/tonight/tlist?page=<%= currentPage + 1 %>">[다음]</a>
 <% } %>
+	<button id="register" class="pull-right">등록하기</button>
 </div>
+<%@ include file="../includes/footer.jsp" %>
+<script type="text/javascript">
+	$(register).click(function() {
+		<% if(member == null) { %>
+			alert("로그인해야됩니다.");
+			location.href="/tonight/views/member/loginForm.jsp";
+		<% } else if(member.getMemberType().equals("G")) { %>
+			location.href="/tonight/views/tour/tourInsertView.jsp";
+		<% } else { %>
+			alert("가이드 회원만 등록할 수 있습니다.");
+		<% } %>
+	});
+</script>
 </body>
 </html>

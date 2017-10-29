@@ -29,6 +29,16 @@ public class Member implements java.io.Serializable {
 		this.address = address;
 		this.rank = rank;
 	}
+	
+	public Member(String memberId, String memberPwd, String phone, String email, String address) {
+		super();
+		this.memberId = memberId;
+		this.memberPwd = memberPwd;
+		this.birthDate = birthDate;
+		this.phone = phone;
+		this.email = email;
+		this.address = address;
+	}
 
 	public String getMemberId() {
 		return memberId;

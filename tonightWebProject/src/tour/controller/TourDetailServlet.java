@@ -14,6 +14,7 @@ import tour.model.service.TourService;
 import tour.model.vo.Tour;
 import tour.model.vo.TourConf;
 import tour.model.vo.TourDetail;
+import tour.model.vo.TourImage;
 import tour.model.vo.TourReview;
 
 /**
@@ -44,14 +45,22 @@ public class TourDetailServlet extends HttpServlet {
 		ArrayList<TourReview> treviewList = tservice.selectTourReviewList(tid);
 		double gradeAvg = tservice.getTourReviewGradeAvg(tid);
 		ArrayList<TourConf> tconfList = tservice.selectTourConfList(tid);
+		ArrayList<TourImage> timageList = tservice.selectTourImageList(tid);
 		
-		RequestDispatcher view = request.getRequestDispatcher("views/tour/tourDetailView.jsp");
-		request.setAttribute("tour", tour);
-		request.setAttribute("tdetail", tdetail);
-		request.setAttribute("treviewList", treviewList);
-		request.setAttribute("gradeAvg", gradeAvg);
-		request.setAttribute("tconfList", tconfList);
-
+		
+		RequestDispatcher view = null;
+		if(tconfList == null || tconfList.size() == 0) {
+			view = request.getRequestDispatcher("views/tour/tourError.jsp");
+			request.setAttribute("emsg", "예약 가능한 상품이 없습니다.");
+		} else {
+			view = request.getRequestDispatcher("views/tour/tourDetailView.jsp");
+			request.setAttribute("tour", tour);
+			request.setAttribute("tdetail", tdetail);
+			request.setAttribute("treviewList", treviewList);
+			request.setAttribute("gradeAvg", gradeAvg);
+			request.setAttribute("tconfList", tconfList);
+			request.setAttribute("timageList", timageList);
+		}
 		view.forward(request, response);
 	}
 

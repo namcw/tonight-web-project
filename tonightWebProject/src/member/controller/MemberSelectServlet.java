@@ -30,7 +30,7 @@ public class MemberSelectServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-response.setContentType("text/html; charset=utf-8");
+		response.setContentType("text/html; charset=utf-8");
 		
 		Member member = new MemberService().selectMember(request.getParameter("memberid"));
 		

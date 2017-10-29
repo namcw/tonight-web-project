@@ -1,12 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"
-	import="java.util.ArrayList, tour.model.vo.Tour, tour.model.vo.TourDetail, tour.model.vo.TourReview, tour.model.vo.TourConf"%>
+	import="java.util.ArrayList, java.text.SimpleDateFormat, tour.model.vo.Tour, tour.model.vo.TourDetail, tour.model.vo.TourReview, tour.model.vo.TourConf, tour.model.vo.TourImage, java.text.SimpleDateFormat"%>
 <%
 	Tour tour = (Tour) request.getAttribute("tour");
 	TourDetail tdetail = (TourDetail) request.getAttribute("tdetail");
 	ArrayList<TourReview> treviewList = (ArrayList<TourReview>) request.getAttribute("treviewList");
 	double gradeAvg = Double.parseDouble(String.valueOf(request.getAttribute("gradeAvg")));
 	ArrayList<TourConf> tconfList = (ArrayList<TourConf>) request.getAttribute("tconfList");
+	ArrayList<TourImage> timageList = (ArrayList<TourImage>)request.getAttribute("timageList");
 %>
 <!DOCTYPE html>
 <html lang="ko">
@@ -15,18 +16,19 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" type="text/css"
 	href="/tonight/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css"
+	href="/tonight/css/pignose.calendar.min.css" />
 </head>
 <style type="text/css">
-
 .jumbotron {
-		margin-bottom: 0px;
-	    background-image: url(img/loginbackground.jpg);
-	    background-position: 0% 25%;
-	    background-size: cover;
-	    background-repeat: no-repeat;
-	    color: white !important;
-	    height: 20px;
-	}
+	margin-bottom: 0px;
+	background-image: url(img/loginbackground.jpg);
+	background-position: 0% 25%;
+	background-size: cover;
+	background-repeat: no-repeat;
+	color: white !important;
+	height: 20px;
+}
 
 .container {
 	padding: 80px 60px;
@@ -45,8 +47,6 @@
 }
 
 .carousel-inner img {
-	-webkit-filter: grayscale(90%);
-	filter: grayscale(90%); /* make all photos black and white */
 	width: 100%; /* Set width to 100% */
 	margin: auto;
 }
@@ -124,353 +124,543 @@
 .box-info .media-list .media .media-object {
 	width: 50px;
 }
-.scroll-widget{
-    overflow: hidden;
-    width: auto;
+
+.scroll-widget {
+	overflow: hidden;
+	width: auto;
+}
+
+/**/
+@media ( min-width : 768px) {
+	.pignose-calendar {
+		margin-right: 0 !important;
+		padding: 0 !important;
+		width: 100% !important;
+	}
+	
+	.pignose-calendar-light {
+		margin: 0 0 0 0 !important;
+		padding: 0 !important;
+	}
+	
+	.pignose-calendar-default {
+		margin: 0 0 0 0 !important;
+		padding: 0 !important;
+	}
 }
 </style>
 <body>
 <%@ include file="../includes/header.jsp"%>
-<div class="jumbotron">
+<div class="jumbotron"></div>
+<div class="container" id="toTop">
+	<h3 class="text-center"><%=tour.getTourTitle()%></h3>
+	<br>
+	<div class="row">
 
-</div>
-	<div class="container" id="toTop">
-		<h3 class="text-center"><%=tour.getTourTitle()%></h3>
-		<br>
-		<div class="row">
-	
-			<div id="myCarousel" class="carousel slide col-md-8"
-				data-ride="carousel">
-				<!-- Indicators -->
-				<ol class="carousel-indicators">
-					<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-					<li data-target="#myCarousel" data-slide-to="1"></li>
-					<li data-target="#myCarousel" data-slide-to="2"></li>
-				</ol>
+		<div id="myCarousel" class="carousel slide col-md-8"
+			data-ride="carousel">
+			<!-- Indicators -->
+			<ol class="carousel-indicators">
+				<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+				<% for(int i = 1; i < timageList.size()+1 ; i++) { %>
+					<li data-target="#myCarousel" data-slide-to="<%= i %>"></li>
+				<% } %>
+			</ol>
 
-				<!-- Wrapper for slides -->
-				<div class="carousel-inner">
-					<div class="item active">
-						<img src="/tonight/uploadfiles/la.jpg" alt="Los Angeles"
-							style="width: 100%;">
-						<div class="carousel-caption">
-							<h3>New York</h3>
-							<p>The atmosphere in New York is lorem ipsum.</p>
-						</div>
-					</div>
-
+			<!-- Wrapper for slides -->
+			<div class="carousel-inner">
+				<div class="item active">
+					<img src="/tonight/tuploadfiles/<%= tour.getTourRname() %>"
+						style="width: 100%;">
+				</div>
+				<% for(TourImage timage : timageList) { %>
 					<div class="item">
-						<img src="/tonight/uploadfiles/chicago.jpg" alt="Chicago"
-							style="width: 100%;">
-						<div class="carousel-caption">
-							<h3>Chicago</h3>
-							<p>Thank you, Chicago - A night we won't forget.</p>
-						</div>
+					<img src="/tonight/tuploadfiles/<%= timage.getImageRname() %>"
+						style="width: 100%;">
 					</div>
-
-					<div class="item">
-						<img src="/tonight/uploadfiles/ny.jpg" alt="New york"
-							style="width: 100%;">
-						<div class="carousel-caption">
-							<h3>LA</h3>
-							<p>Even though the traffic was a mess, we had the best time
-								playing at Venice Beach!</p>
-						</div>
-					</div>
+				<% } %>
 
 
-					<!-- Left and right controls -->
-					<a class="left carousel-control" href="#myCarousel"
-						data-slide="prev"> <span
-						class="glyphicon glyphicon-chevron-left"></span> <span
-						class="sr-only">Previous</span>
-					</a> <a class="right carousel-control" href="#myCarousel"
-						data-slide="next"> <span
-						class="glyphicon glyphicon-chevron-right"></span> <span
-						class="sr-only">Next</span>
-					</a>
-				</div>
-			</div>
-			<div class="col-md-4">
-				<hr>
-				<div class="row">
-					<div class="col-xs-4">
-						<p>투어 소개</p>
-					</div>
-					<div class="col-xs-8">
-						<p><%=tdetail.getTourIntro()%></p>
-					</div>
-				</div>
-				<hr>
-				<div class="row">
-					<div class="col-xs-4">
-						<p>투어 리스트</p>
-					</div>
-					<div class="col-xs-8">
-						<p><%=tdetail.getTourList()%></p>
-					</div>
-				</div>
-				<hr>
-				<div class="row">
-
-					<div class="col-xs-4">
-						<a href="#"> <img src="/tonight/uploadfiles/bandmember.jpg"
-							class="img-circle person" alt="Random Name"></a>
-
-					</div>
-					<div class="col-xs-8">
-						<p></p>
-						<p>가이드 소개글 공간 입니다</p>
-					</div>
-				</div>
-				<hr>
+				<!-- Left and right controls -->
+				<a class="left carousel-control" href="#myCarousel"
+					data-slide="prev"> <span
+					class="glyphicon glyphicon-chevron-left"></span> <span
+					class="sr-only">Previous</span>
+				</a> <a class="right carousel-control" href="#myCarousel"
+					data-slide="next"> <span
+					class="glyphicon glyphicon-chevron-right"></span> <span
+					class="sr-only">Next</span>
+				</a>
 			</div>
 		</div>
+		<div class="col-md-4">
+			<hr>
+			<div class="row">
+				<div class="col-xs-4">
+					<p>투어 소개</p>
+				</div>
+				<div class="col-xs-8">
+					<p><%=tdetail.getTourInfo()%></p>
+				</div>
+			</div>
+			<hr>
+			<div class="row">
+				<div class="col-xs-4">
+					<p>투어 리스트</p>
+				</div>
+				<div class="col-xs-8">
+					<p><%=tdetail.getTourList()%></p>
+				</div>
+			</div>
+			<hr>
+			<div class="row">
+
+				<div class="col-xs-4">
+					<a href="#"> <img src="/tonight/uploadfiles/bandmember.jpg"
+						class="img-circle person" alt="Random Name"></a>
+
+				</div>
+				<div class="col-xs-8">
+					<p></p>
+					<p><%= tdetail.getTourGuideMent() %></p>
+				</div>
+			</div>
+			<hr>
+		</div>
 	</div>
-	<div class="container">
-		<div class="row">
-			<div class="col-md-8">
-				<div class="panel panel-default">
-					<div class="panel-heading">달력 공간</div>
-					<div class="panel-body">
-						<img src="https://placehold.it/150x80?text=IMAGE"
-							class="img-responsive" style="width: 100%" alt="Image">
-						<h5>여행 가능 날짜</h5>
-						<% for(TourConf tconf : tconfList) { %>
-							<p>시작일: <%= tconf.getStartDate() %>, 도착일: <%= tconf.getArriavlaDate() %>, 성인금액:<%= tconf.getTourAdultPrice() %>, 소인가격: <%= tconf.getTourChildPrice() %> </p>
-						<% } %>
+</div>
+
+<div class="container">
+	<div class="row">
+		<div class="col-md-8">
+			<div class="panel panel-default">
+				<div class="panel-heading">날짜</div>
+				<div class="panel-body row">
+					<div class="col-sm-6">
+						<div id="schedules">
+				        	<div class="calendar-schedules"></div>
+				        	
+				        	
+				    	</div>
+					</div>
+					<div class="col-sm-6 text-center">
+						<hr>
+						<div class="row">
+							<div class="col-xs-4">
+								여행 기간
+							</div>
+							<div id="tconf1" class="col-xs-8">
+							</div>
+						</div>
+						<hr>
+						<div class="row">
+							<div class="col-xs-4">
+								출 &nbsp;발 &nbsp;일
+							</div>
+							<div id="tconf2" class="col-xs-8">
+							</div>
+						</div>
+						<hr>
+						<div class="row">
+							<div class="col-xs-4">
+								도 &nbsp;착 &nbsp;일
+							</div>
+							<div id="tconf3" class="col-xs-8">
+							</div>
+						</div>
+						<hr>
+						<div class="row">
+							<div class="col-xs-4">
+								성인 가격
+							</div>
+							<div id="tconf4" class="col-xs-8">
+							</div>
+						</div>
+						<hr>
+						<div class="row">
+							<div class="col-xs-4">
+								소인 가격
+							</div>
+							<div id="tconf5" class="col-xs-8">
+							</div>
+						</div>
+						<hr>
+						<div>
+						<button class="btn btn-default pull-right" data-toggle="modal"
+									data-target="#selectDate">날짜 모두 보기</button>
+						</div>
+						
 					</div>
 				</div>
-				<div class="panel panel-default hidden-md hidden-lg">
-					<div class="panel-heading">선택 확인/예약 공간</div>
-					<div class="panel-body">
-						<img src="https://placehold.it/150x80?text=IMAGE"
-							class="img-responsive" style="width: 100%" alt="Image">
+			</div>
+			<div class="panel panel-default hidden-md hidden-lg">
+				<div class="panel-heading">예약</div>
+				<div class="panel-body">
+				</div>
+			</div>
+			<div class="panel panel-default">
+				<div class="panel-heading">상세일정</div>
+				<div class="panel-body">
+					<%=tdetail.getTourSchedule()%>
+				</div>
+			</div>
+			<div class="panel panel-default">
+				<div class="panel-heading">모이는 장소</div>
+				<div class="panel-body row">
+					<div id="map" style="height:350px; width:auto;">
+						
 					</div>
 				</div>
-				<div class="panel panel-default">
-					<div class="panel-heading">상세일정</div>
-					<div class="panel-body">
-						<%=tdetail.getTourSchedule()%>
-					</div>
+			</div>
+			<div class="panel panel-default">
+				<div class="panel-heading">포함내역</div>
+				<div class="panel-body">
+					<%=tdetail.getTourHistory()%>
 				</div>
-				<div class="panel panel-default">
-					<div class="panel-heading">포함내역</div>
-					<div class="panel-body">
-						<%=tdetail.getTourHistory()%>
-					</div>
+			</div>
+			<div class="panel panel-default">
+				<div class="panel-heading">옵션</div>
+				<div class="panel-body">
+					<%=tdetail.getTourOption()%>
 				</div>
-				<div class="panel panel-default">
-					<div class="panel-heading">옵션</div>
-					<div class="panel-body">
-						<%=tdetail.getTourOption()%>
-					</div>
+			</div>
+			<div class="panel panel-default">
+				<div class="panel-heading">환불/취소 정책</div>
+				<div class="panel-body">
+					<%=tdetail.getTourPolicy()%>
 				</div>
-				<div class="panel panel-default">
-					<div class="panel-heading">환불/취소 정책</div>
-					<div class="panel-body">
-						<%=tdetail.getTourPolicy()%>
-					</div>
+			</div>
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					후기
+					<%
+					if (treviewList.size() > 0) {
+				%>
+					<p class="pull-right">
+						(<%=treviewList.size()%>)
+					</p>
+					<p class="pull-right"><b><%=gradeAvg%></b></p>
+					<img src="/tonight/img/starGrade<%=Math.round(gradeAvg)%>.png"
+						class="col-xs-3 pull-right" style="margin-top: -6px">
+					<%
+						}
+					%>
 				</div>
-				<div class="panel panel-default">
-					<div class="panel-heading">후기
-						<% if(treviewList.size() > 0) {%>
-							<p class="pull-right">(<%= treviewList.size() %>)</p>
-							<p class="pull-right"><%= gradeAvg %></p>
-							<img src="/tonight/img/starGrade<%= Math.round(gradeAvg) %>.png" class="col-xs-3 pull-right" style="margin-top:-10px">
-						<% } %>
-					</div>
-					<div class="panel-body box-info">
+				<div class="panel-body box-info">
 
 					<div class="tab-pane active animated fadeInRight" id="comments">
 						<div class="scroll-widget">
 							<ul class="media-list">
-							<% if (treviewList.isEmpty()) {	%>
+								<%
+									if (treviewList.isEmpty()) {
+								%>
 								<li class="media">
 									<p>후기가 없습니다.</p>
 								</li>
-							<% } else if(treviewList.size() < 4){ %>
-								<% for (TourReview treview : treviewList) { %>
-									<li class="media">
-										<a class="pull-left" href="#fakelink">
-												<img class="media-object"
-												src="https://bootdey.com/img/Content/User_for_snippets.png"
-												alt="Avatar">
-										</a>
-										<div class="media-body">
-												<h4 class="media-heading">
-													<a href="#fakelink"><%=treview.getTrWriterId() %></a>
-													<small><%=treview.getTrDate() %></small>
-												</h4>
-												<div class="row">
-												<img src="/tonight/img/starGrade<%= Math.round(treview.getTrGrade()) %>.png" class="col-xs-3" style="margin-top:-10px">
-												<div class="col-xs-9"></div>
-												</div>
-												<p><%=treview.getTrContent() %></p>
-											</div>
-										<p></p>
-									</li>
-								<% } %>
-							<% } else {%>
-								<% for (int i=0; i < 3; i++) { %>
-									<li class="media">
-										<a class="pull-left" href="#fakelink">
-												<img class="media-object"
-												src="https://bootdey.com/img/Content/User_for_snippets.png"
-												alt="Avatar">
-										</a>
-										<div class="media-body">
-											<h4 class="media-heading">
-												<a href="#fakelink"><%= treviewList.get(i).getTrWriterId() %></a>
-												<small><%=treviewList.get(i).getTrDate() %></small>
-												<small>grade <%=treviewList.get(i).getTrGrade() %></small>
-											</h4>
-											<div class="row">
-											<img src="/tonight/img/starGrade<%= Math.round(treviewList.get(i).getTrGrade()) %>.png" class="col-xs-3" style="margin-top:-10px">
-											<div class="col-xs-9"></div>
-											</div>
-											
-											<p><%= treviewList.get(i).getTrContent() %></p>
-										</div>
-									</li>
-								<% } %>
-								<li class="media"><a data-toggle="modal" data-target="#addReview"><%= treviewList.size()-3 %>개 더보기..</a></li>
-							<% } %>
-							</ul>
-						</div>
-				</div>
-					</div>
-				</div>
-			</div>
-			
-			<div class="col-md-4 hidden-sm hidden-xs">
-				<div class="panel panel-default panel-affix" id="myScrollspy">
-
-					<div class="panel-heading">결제 공간</div>
-					<div class="panel-body">
-						<div class="nav nav-pills nav-stacked">
-							<img src="https://placehold.it/150x80?text=IMAGE"
-								class="img-responsive" style="width: 100%" alt="Image"> <a
-								href="#toTop">Back To Top </a>
-						</div>
-					</div>
-				</div>
-			</div>
-
-
-		</div>
-	</div>
-	
-<div class="modal fade" id="addReview" role="dialog">
-    <div class="modal-dialog">
-    
-      <!-- Modal content-->
-      <div class="modal-content">
-        <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">후기</h4>
-        </div>
-        <div class="modal-body box-info">
-        	<div class="tab-pane active animated fadeInRight" id="comments">
-				<div class="scroll-widget">
-					<ul class="media-list">
-						<% for (TourReview treview : treviewList) { %>
-							<li class="media">
-								<a class="pull-left" href="#fakelink">
+								<%
+									} else if (treviewList.size() < 4) {
+								%>
+								<%
+									for (TourReview treview : treviewList) {
+								%>
+								<li class="media"><a class="pull-left" href="#fakelink">
 										<img class="media-object"
 										src="https://bootdey.com/img/Content/User_for_snippets.png"
 										alt="Avatar">
 								</a>
-								<div class="media-body">
+									<div class="media-body">
 										<h4 class="media-heading">
-											<a href="#fakelink"><%=treview.getTrWriterId() %></a>
-											<small><%=treview.getTrDate() %></small>
+											<a href="#fakelink"><%=treview.getTrWriterId()%></a> <small><%=treview.getTrDate()%></small>
 										</h4>
 										<div class="row">
-											<img src="/tonight/img/starGrade<%= Math.round(treview.getTrGrade()) %>.png" class="col-xs-3" style="margin-top:-10px">
+											<img
+												src="/tonight/img/starGrade<%=Math.round(treview.getTrGrade())%>.png"
+												class="col-xs-3" style="margin-top: -10px">
 											<div class="col-xs-9"></div>
 										</div>
-										<p><%=treview.getTrContent() %></p>
+										<p><%=treview.getTrContent()%></p>
 									</div>
-								<p></p>
-							</li>
-						<% } %>
-					</ul>
+									<p></p></li>
+								<%
+									}
+								%>
+								<%
+									} else {
+								%>
+								<%
+									for (int i = 0; i < 3; i++) {
+								%>
+								<li class="media"><a class="pull-left" href="#fakelink">
+										<img class="media-object"
+										src="https://bootdey.com/img/Content/User_for_snippets.png"
+										alt="Avatar">
+								</a>
+									<div class="media-body">
+										<h4 class="media-heading">
+											<a href="#fakelink"><%=treviewList.get(i).getTrWriterId()%></a>
+											<small><%=treviewList.get(i).getTrDate()%></small>
+										</h4>
+										<div class="row">
+											<img
+												src="/tonight/img/starGrade<%=Math.round(treviewList.get(i).getTrGrade())%>.png"
+												class="col-xs-3" style="margin-top: -10px">
+											<div class="col-xs-9"></div>
+										</div>
+
+										<p><%=treviewList.get(i).getTrContent()%></p>
+									</div></li>
+								<%
+									}
+								%>
+								<li class="media"><a class="pull-right" data-toggle="modal"
+									data-target="#addReview"><%=treviewList.size() - 3%>개
+										더보기..</a></li>
+								<%
+									}
+								%>
+							</ul>
+						</div>
+					</div>
 				</div>
 			</div>
-        </div>
-	        <div class="modal-footer">
+		</div>
+
+		<div class="col-md-4 hidden-sm hidden-xs text-center">
+			<div class="panel-affix" id="myScrollspy">
+
+				<div class="panel panel-default">
+					<div class="panel-heading">예약/결제</div>
+					<div class="panel-body">
+							<a href="#toTop">Back To Top </a>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+	</div>
+</div>
+<div class="modal fade" id="selectDate" role="dialog">
+	<div class="modal-dialog">
+
+		<!-- Modal content-->
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title">선택 가능 날짜</h4>
+			</div>
+			<div class="modal-body box-info">
+				<div class="tab-pane active animated fadeInRight" id="comments">
+					<div class="scroll-widget">
+						<ul class="media-list">
+							<% for (TourConf tconf : tconfList) { %>
+								<li class="media"><%= tconf.getStartDate() %> ~ <%= tconf.getArrivalDate() %></li>
+							<% } %>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div class="modal-footer">
 				<button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
 			</div>
 		</div>
-      
+
+	</div>
+</div>
+<div class="modal fade" id="addReview" role="dialog">
+	<div class="modal-dialog">
+
+		<!-- Modal content-->
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title">후기</h4>
+			</div>
+			<div class="modal-body box-info">
+				<div class="tab-pane active animated fadeInRight" id="comments">
+					<div class="scroll-widget">
+						<ul class="media-list">
+							<%
+								for (TourReview treview : treviewList) {
+							%>
+							<li class="media"><a class="pull-left" href="#fakelink">
+									<img class="media-object"
+									src="https://bootdey.com/img/Content/User_for_snippets.png"
+									alt="Avatar">
+							</a>
+								<div class="media-body">
+									<h4 class="media-heading">
+										<a href="#fakelink"><%=treview.getTrWriterId()%></a> <small><%=treview.getTrDate()%></small>
+									</h4>
+									<div class="row">
+										<img
+											src="/tonight/img/starGrade<%=Math.round(treview.getTrGrade())%>.png"
+											class="col-xs-3" style="margin-top: -10px">
+										<div class="col-xs-9"></div>
+									</div>
+									<p><%=treview.getTrContent()%></p>
+								</div>
+								<p></p></li>
+							<%
+								}
+							%>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+			</div>
+		</div>
+
 	</div>
 </div>
 
+    
 <div id="fake-footer"></div>
 <%@ include file="../includes/footer.jsp"%>
 <script src="/tonight/js/jquery-3.2.1.min.js"></script>
 <script src="/tonight/js/bootstrap.min.js"></script>
-<script>
-	$(function() {
+<script type="text/javascript" src="/tonight/js/moment.latest.min.js"></script>
+<script type="text/javascript"
+	src="/tonight/js/pignose.calendar.min.js"></script>
+<script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=1524280cea98188e73c2051d02dc247c&libraries=services"></script>
+<script type="text/javascript">
+$(function() {
 
-		// name your elements here
-		var stickyElement = '.panel-affix', // the element you want to make sticky
-		bottomElement = '#fake-footer'; // the bottom element where you want the sticky element to stop (usually the footer) 
-
-		// make sure the element exists on the page before trying to initalize
-		if ($(stickyElement).length) {
-			$(stickyElement).each(
-				function() {
-
-					// let's save some messy code in clean variables
-					// when should we start affixing? (the amount of pixels to the top from the element)
-					var fromTop = $(this).offset().top,
-					// where is the bottom of the element?
-					fromBottom = $(document).height()
-							- ($(this).offset().top + $(this)
-									.outerHeight()),
-					// where should we stop? (the amount of pixels from the top where the bottom element is)
-					// also add the outer height mismatch to the height of the element to account for padding and borders
-					stopOn = $(document).height()
-							- ($(bottomElement).offset().top)
-							+ ($(this).outerHeight() - $(this)
-									.height());
-
-					// if the element doesn't need to get sticky, then skip it so it won't mess up your layout
-					if ((fromBottom - stopOn) > 200) {
-						// let's put a sticky width on the element and assign it to the top
-						$(this).css('width', $(this).width())
-								.css('top', 0).css('position',
-										'');
-						// assign the affix to the element
-						$(this)
-								.affix({
-									offset : {
-										// make it stick where the top pixel of the element is
-										top : fromTop - 80,
-										// make it stop where the top pixel of the bottom element is
-										bottom : stopOn
-									}
-								// when the affix get's called then make sure the position is the default (fixed) and it's at the top
-								})
-								.on(
-									'affix.bs.affix',
-									function() {
-										$(this)
-											.css('top',
-													'80px')
-											.css(
-													'position',
-													'');
-									});
-					}
-					// trigger the scroll event so it always activates 
-					$(window).trigger('scroll');
+	/* affix 스크롤 */
+	var stickyElement = '.panel-affix', bottomElement = '#fake-footer';
+	if ($(stickyElement).length) {
+		$(stickyElement).each(function() {
+			var fromTop = $(this).offset().top,
+			fromBottom = $(document).height() - ($(this).offset().top + $(this).outerHeight()),
+			stopOn = $(document).height() - ($(bottomElement).offset().top) + ($(this).outerHeight() - $(this).height());
+	
+			if ((fromBottom - stopOn) > 200) {
+				$(this).css('width', $(this).width()).css('top', 0).css('position', '');
+				$(this).affix({
+					offset : {top : fromTop - 80, bottom : stopOn}
+				}).on('affix.bs.affix', function() {
+					$(this).css('top', '80px').css('position', '');
 				});
+			}
+			$(window).trigger('scroll');
+		});
+	}
+	
+	/* calendar */
+	var dateObj = new Date();
+	var year = dateObj.getFullYear();
+	var month = dateObj.getMonth()+1;
+	var day = dateObj.getDate();
+	var today = year + "-" + month + "-" + day;
+	
+	$('.calendar-schedules').pignoseCalendar({
+        scheduleOptions: {
+            colors: {
+                Y: '#2fabb7',
+                N: 'red'
+            }
+        },
+        schedules: [
+        
+        <% for (TourConf tconf : tconfList) { %>
+        	
+        	{name: "<%= tconf.getTourState() %>", date:  "<%= tconf.getStartDate() %>"},
+        <% } %>
+       	],
+        
+        select: function (date, context) {
+        	var sdate = (date[0] === null ? 'null' :date[0].format('YYYY-MM-DD'));
+        	
+			<% for (TourConf tconf : tconfList) { %>
+				if(sdate == "<%= tconf.getStartDate() %>") {
+					var dur = <%= (int)((tconf.getArrivalDate().getTime()-tconf.getStartDate().getTime())/(1000 * 60 * 60 * 24)) %>;
+					$('#tconf1').text(dur+"박"+(dur+1)+"일");
+					$('#tconf2').text("<%= tconf.getStartDate() %>");
+					$('#tconf3').text("<%= tconf.getArrivalDate() %>");
+					$('#tconf4').text("<%= tconf.getTourAdultPrice() %> 원");
+					$('#tconf5').text("<%= tconf.getTourChildPrice() %> 원");
+				}
+	        <% } %>
+	        
+        },
+        lang: 'ko',
+        minDate: today
+    });
+	function moveCalendar() {
+		var months = (parseInt('<%=tconfList.get(0).getStartDate()%>'.substring(0,4))-parseInt(today.substring(0,4)))*12;
+		months += (parseInt('<%=tconfList.get(0).getStartDate()%>'.substring(5,7))-parseInt(today.substring(5,7)));
+		
+		$('.pignose-calendar-unit-active').removeClass('pignose-calendar-unit-active');
+		$('.pignose-calendar-unit-first-active').removeClass('pignose-calendar-unit-first-active');
+		for(var i = 0; i < months; i++) {
+			$('.pignose-calendar-top-next').click();
 		}
-
-	});
+		$('[data-date='+"<%=tconfList.get(0).getStartDate()%>"+']').addClass('pignose-calendar-unit-active');
+		$('[data-date='+"<%=tconfList.get(0).getStartDate()%>"+']').addClass('pignose-calendar-unit-first-active');
+		var dur = <%= (int)((tconfList.get(0).getArrivalDate().getTime()-tconfList.get(0).getStartDate().getTime())/(1000 * 60 * 60 * 24)) %>;
+		$('#tconf1').text(dur+"박"+(dur+1)+"일");
+		$('#tconf2').text("<%= tconfList.get(0).getStartDate() %>");
+		$('#tconf3').text("<%= tconfList.get(0).getArrivalDate() %>");
+		$('#tconf4').text("<%= tconfList.get(0).getTourAdultPrice() %> 원");
+		$('#tconf5').text("<%= tconfList.get(0).getTourChildPrice() %> 원");
+	}
+	
+	moveCalendar();
+	
+});
 </script>
+<script>
+var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+mapOption = {
+    center: new daum.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+    level: 3 // 지도의 확대 레벨
+};  
+
+//지도를 생성합니다    
+var map = new daum.maps.Map(mapContainer, mapOption); 
+
+//지도 타입 변경 컨트롤을 생성한다
+var mapTypeControl = new daum.maps.MapTypeControl();
+
+// 지도의 상단 우측에 지도 타입 변경 컨트롤을 추가한다
+map.addControl(mapTypeControl, daum.maps.ControlPosition.TOPRIGHT);	
+
+// 지도에 확대 축소 컨트롤을 생성한다
+var zoomControl = new daum.maps.ZoomControl();
+
+// 지도의 우측에 확대 축소 컨트롤을 추가한다
+map.addControl(zoomControl, daum.maps.ControlPosition.RIGHT);
+
+//주소-좌표 변환 객체를 생성합니다
+var geocoder = new daum.maps.services.Geocoder();
+
+//주소로 좌표를 검색합니다
+geocoder.addressSearch('<%=tdetail.getTourMeetingPlace() %>', function(result, status) {
+
+// 정상적으로 검색이 완료됐으면 
+ if (status === daum.maps.services.Status.OK) {
+
+    var coords = new daum.maps.LatLng(result[0].y, result[0].x);
+
+    // 결과값으로 받은 위치를 마커로 표시합니다
+    var marker = new daum.maps.Marker({
+        map: map,
+        position: coords
+    });
+
+    // 인포윈도우로 장소에 대한 설명을 표시합니다
+    var infowindow = new daum.maps.InfoWindow({
+        content: '<div style="width:150px;text-align:center;padding:6px 0;">모임장소</div>'
+    });
+    infowindow.open(map, marker);
+
+    // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+    map.setCenter(coords);
+} 
+});    
+</script>
+
 </body>
 </html>
