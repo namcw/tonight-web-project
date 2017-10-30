@@ -72,6 +72,37 @@ public class RoomDao {
 		
 		return result;
 	}
+
+	public int insertRoom(Connection con, Room r) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+	
+		String query = "insert into room values ("
+				+ "(select max(ROOM_ID) + 1 from room), "
+				+ "2,?, ?, ?, ?, ?, ?, ?)";
+		
+		try {
+			pstmt = con.prepareStatement(query);
+		/*	pstmt.setInt(1, r.getAccId(accid)); */
+			pstmt.setString(1, r.getRoomName());
+			pstmt.setString(2, r.getRoomState());
+			pstmt.setInt(3, r.getAdult_Price());
+			pstmt.setInt(4, r.getChild_Price());
+			pstmt.setDouble(5, r.getDiscount());
+			pstmt.setString(6, r.getRoomImage());
+			pstmt.setString(7, r.getRoomDetails());
+			
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
 	
 	
 /*
