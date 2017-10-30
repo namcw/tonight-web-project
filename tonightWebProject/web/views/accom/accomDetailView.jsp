@@ -16,6 +16,8 @@
 <link rel="stylesheet" type="text/css"
    href="/tonight/css/bootstrap.min.css">
 </head>
+<link rel="stylesheet" type="text/css"
+	href="/tonight/css/pignose.calendar.min.css" />
 <style type="text/css">
 
 .jumbotron {
@@ -127,7 +129,27 @@
 .scroll-widget{
     overflow: hidden;
     width: auto;
-}    
+} 
+
+/**/
+@media ( min-width : 768px) {
+	.pignose-calendar {
+		margin-right: 0 !important;
+		padding: 0 !important;
+		width: 100% !important;
+	}
+	
+	.pignose-calendar-light {
+		margin: 0 0 0 0 !important;
+		padding: 0 !important;
+	}
+	
+	.pignose-calendar-default {
+		margin: 0 0 0 0 !important;
+		padding: 0 !important;
+	}
+}
+   
 </style>
 <script type="text/javascript">
 function delete_event() {
@@ -253,29 +275,78 @@ function delete_event() {
       <div class="row">
          <div class="col-md-8">
             <div class="panel panel-default">
-               <div class="panel-heading">달력 공간</div>
-               <div class="panel-body">
-	                  <img src="https://placehold.it/150x80?text=IMAGE"
-	                     class="img-responsive" style="width: 50%" alt="Image">
-	                     <br>
-			                   <table class="table table-hover">
-			                   <tr><th>객실명</th><th>성인가격</th><th>소인가격</th><th>할인율</th><th>객실 예약상태</th>
-									   <th>상세정보</th></tr>
+               <div class="panel-heading">날짜 및 객실정보</div>
+               <div class="panel-body row">
+               		<div class="col-sm-6">
+               			<div id="schedules">
+				        	<div class="calendar-schedules"></div>
+				    	</div>
+               		</div>
+               		<div class="col-sm-6 text-center">
+               		
+               			<hr>
+               			<% for(Room room : list) { %>
+               			<div class="row" data-toggle="collapse" data-target="#rinfo<%= room.getRoomId() %>">
+							<div>
+								<%= room.getRoomName() %>
+							</div>
+						</div>
+						
+						<div id="rinfo<%= room.getRoomId() %>" class="collapse">
+							<hr>
+							<div class="row">
+								<div class="col-xs-4">
+									상세정보
+								</div>
+								<div id="tconf2" class="col-xs-8">
+									<%=room.getRoomDetails() %>
+								</div>
+							</div>
+							<hr>
+							<div class="row">
+								<div class="col-xs-4">
+									성인 가격
+								</div>
+								<div id="tconf4" class="col-xs-8">
+									
+								</div>
+							</div>
+							<hr>
+							<div class="row">
+								<div class="col-xs-4">
+									소인 가격
+								</div>
+								<div id="tconf5" class="col-xs-8">
+								</div>
+							</div>
+							<hr>
+						</div>
+						<hr>
+						<% } %>
+						
+						<div>
+						<button class="btn btn-default pull-right" data-toggle="modal"
+									data-target="#selectDate">날짜 모두 보기</button>
+						</div>
+               		</div>
+	                     <br><br><br><br>
+			                 <%--   <table class="table table-hover">
+			                   <tr><th>객실명</th><th>객실상세정보</th><th>주말성인가격</th><th>주말소인가격</th><th>주중성인가격</th><th>주중소인가격</th></tr>
 									<%
 										for(Room r : list){
 									%>
 										<tr height="30">
 										<td><%= r.getRoomName() %></td>
-										<td><%= r.getAdult_Price() %></td>
-										<td><%= r.getChild_Price() %></td>
-										<td><%= r.getDiscount() %></td>
-										<td><%= r.getRoomState() %></td>
 										<td><%= r.getRoomDetails() %></td>
+										<td><%= r.getWeekendAdultPrice() %></td>
+										<td><%= r.getWeekendChildPrice()%></td>
+										<td><%= r.getWeekdaysAdultPrice() %></td>
+										<td><%= r.getWeekdaysChildPrice() %></td>
 									<!--<input type="radio" name="test" value="1" onclick="chk()">상세보기
 										<input type="radio" name="test" value="2" onclick="chk()">접기 -->
 										</tr>
 									<%  } %>
-									</table>
+									</table> --%>
                   <%-- <% for(TourConf tconf : tconfList) { %>
                      <p>시작일: <%= tconf.getStartDate() %>, 도착일: <%= tconf.getArriavlaDate() %>, 성인금액:<%= tconf.getTourAdultPrice() %>, 소인가격: <%= tconf.getTourChildPrice() %> </p>
                   <% } %> --%>
@@ -534,66 +605,90 @@ function delete_event() {
 <%@ include file="../includes/footer.jsp"%>
 <script src="/tonight/js/jquery-3.2.1.min.js"></script>
 <script src="/tonight/js/bootstrap.min.js"></script>
-<script>
-	$(function() {
+<script type="text/javascript" src="/tonight/js/moment.latest.min.js"></script>
+<script type="text/javascript"
+	src="/tonight/js/pignose.calendar.min.js"></script>
+<script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=1524280cea98188e73c2051d02dc247c&libraries=services"></script>
+<script type="text/javascript">
+$(function() {
 
-		// name your elements here
-		var stickyElement = '.panel-affix', // the element you want to make sticky
-		bottomElement = '#fake-footer'; // the bottom element where you want the sticky element to stop (usually the footer) 
-
-		// make sure the element exists on the page before trying to initalize
-		if ($(stickyElement).length) {
-			$(stickyElement).each(
-				function() {
-
-					// let's save some messy code in clean variables
-					// when should we start affixing? (the amount of pixels to the top from the element)
-					var fromTop = $(this).offset().top,
-					// where is the bottom of the element?
-					fromBottom = $(document).height()
-							- ($(this).offset().top + $(this)
-									.outerHeight()),
-					// where should we stop? (the amount of pixels from the top where the bottom element is)
-					// also add the outer height mismatch to the height of the element to account for padding and borders
-					stopOn = $(document).height()
-							- ($(bottomElement).offset().top)
-							+ ($(this).outerHeight() - $(this)
-									.height());
-
-					// if the element doesn't need to get sticky, then skip it so it won't mess up your layout
-					if ((fromBottom - stopOn) > 200) {
-						// let's put a sticky width on the element and assign it to the top
-						$(this).css('width', $(this).width())
-								.css('top', 0).css('position',
-										'');
-						// assign the affix to the element
-						$(this)
-								.affix({
-									offset : {
-										// make it stick where the top pixel of the element is
-										top : fromTop - 80,
-										// make it stop where the top pixel of the bottom element is
-										bottom : stopOn
-									}
-								// when the affix get's called then make sure the position is the default (fixed) and it's at the top
-								})
-								.on(
-									'affix.bs.affix',
-									function() {
-										$(this)
-											.css('top',
-													'80px')
-											.css(
-													'position',
-													'');
-									});
-					}
-					// trigger the scroll event so it always activates 
-					$(window).trigger('scroll');
+	/* affix 스크롤 */
+	var stickyElement = '.panel-affix', bottomElement = '#fake-footer';
+	if ($(stickyElement).length) {
+		$(stickyElement).each(function() {
+			var fromTop = $(this).offset().top,
+			fromBottom = $(document).height() - ($(this).offset().top + $(this).outerHeight()),
+			stopOn = $(document).height() - ($(bottomElement).offset().top) + ($(this).outerHeight() - $(this).height());
+	
+			if ((fromBottom - stopOn) > 200) {
+				$(this).css('width', $(this).width()).css('top', 0).css('position', '');
+				$(this).affix({
+					offset : {top : fromTop - 80, bottom : stopOn}
+				}).on('affix.bs.affix', function() {
+					$(this).css('top', '80px').css('position', '');
 				});
+			}
+			$(window).trigger('scroll');
+		});
+	}
+	
+	 /* calendar */
+	var dateObj = new Date();
+	var year = dateObj.getFullYear();
+	var month = dateObj.getMonth()+1;
+	var day = dateObj.getDate();
+	var today = year + "-" + month + "-" + day;
+	
+	$('.calendar-schedules').pignoseCalendar({
+        scheduleOptions: {
+            colors: {
+                Y: '#2fabb7',
+                N: 'red'
+            }
+        },
+        
+        select: function (date, context) {
+        	var sdate = (date[0] === null ? 'null' :date[0].format('YYYY-MM-DD'));
+        	
+			<%-- <% for (TourConf tconf : tconfList) { %>
+				if(sdate == "<%= tconf.getStartDate() %>") {
+					var dur = <%= (int)((tconf.getArrivalDate().getTime()-tconf.getStartDate().getTime())/(1000 * 60 * 60 * 24)) %>;
+					$('#tconf1').text(dur+"박"+(dur+1)+"일");
+					$('#tconf2').text("<%= tconf.getStartDate() %>");
+					$('#tconf3').text("<%= tconf.getArrivalDate() %>");
+					$('#tconf4').text("<%= tconf.getTourAdultPrice() %> 원");
+					$('#tconf5').text("<%= tconf.getTourChildPrice() %> 원");
+				}
+	        <% } %> --%>
+	        
+        },
+        lang: 'ko',
+        minDate: today
+    });
+	
+	
+	<%-- function moveCalendar() {
+		var months = (parseInt('<%=tconfList.get(0).getStartDate()%>'.substring(0,4))-parseInt(today.substring(0,4)))*12;
+		months += (parseInt('<%=tconfList.get(0).getStartDate()%>'.substring(5,7))-parseInt(today.substring(5,7)));
+		
+		$('.pignose-calendar-unit-active').removeClass('pignose-calendar-unit-active');
+		$('.pignose-calendar-unit-first-active').removeClass('pignose-calendar-unit-first-active');
+		for(var i = 0; i < months; i++) {
+			$('.pignose-calendar-top-next').click();
 		}
+		$('[data-date='+"<%=tconfList.get(0).getStartDate()%>"+']').addClass('pignose-calendar-unit-active');
+		$('[data-date='+"<%=tconfList.get(0).getStartDate()%>"+']').addClass('pignose-calendar-unit-first-active');
+		var dur = <%= (int)((tconfList.get(0).getArrivalDate().getTime()-tconfList.get(0).getStartDate().getTime())/(1000 * 60 * 60 * 24)) %>;
+		$('#tconf1').text(dur+"박"+(dur+1)+"일");
+		$('#tconf2').text("<%= tconfList.get(0).getStartDate() %>");
+		$('#tconf3').text("<%= tconfList.get(0).getArrivalDate() %>");
+		$('#tconf4').text("<%= tconfList.get(0).getTourAdultPrice() %> 원");
+		$('#tconf5').text("<%= tconfList.get(0).getTourChildPrice() %> 원");
+	}
+	
+	moveCalendar();  --%>
 
-	});
+});
 </script>
 <script>
 var mapContainer = document.getElementById('map'), // 지도를 표시할 div 

@@ -29,15 +29,14 @@ public class RoomDao {
 				while(rset.next()){
 					Room r = new Room();
 					
-					r.setRoomId(rset.getInt("room_id"));
 					r.setAccId(rset.getInt("acc_id"));
+					r.setRoomId(rset.getInt("room_id"));
 					r.setRoomName(rset.getString("room_name"));
-					r.setRoomState(rset.getString("room_state"));
-					r.setAdult_Price(rset.getInt("room_adult_price"));
-					r.setChild_Price(rset.getInt("room_child_price"));
-					r.setDiscount(rset.getDouble("room_discount"));
-					r.setRoomImage(rset.getString("room_image_path"));
 					r.setRoomDetails(rset.getString("room_details"));
+					r.setWeekendAdultPrice(rset.getInt("room_weekend_adult_price"));
+					r.setWeekendChildPrice(rset.getInt("room_weekend_child_price"));
+					r.setWeekdaysAdultPrice(rset.getInt("room_weekdays_adult_price"));
+					r.setWeekdaysChildPrice(rset.getInt("room_weekdays_child_price"));
 					
 					list.add(r);
 				}

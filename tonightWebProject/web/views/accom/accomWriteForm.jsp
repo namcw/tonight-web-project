@@ -6,7 +6,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" type="text/css"
-	href="/tonight/css/bootstrap.min.css">
+	href="/tonight/css/bootstrap.fd.css">
+<link rel="stylesheet" type="text/css"
+	href="/tonight/css/pignose.calendar.min.css" />
 </head>
 <style type="text/css">
 
@@ -149,10 +151,9 @@ container {
 					</div>
 					<div class="col-xs-8">
 						<div class="form-group">
-    						<label for="exampleInputFile">이미지 파일 업로드</label>
-    						<input type="file" id="exampleInputFile" name="aupfile1">
-    						<p class="help-block">여기에 숙소 대표 이미지를 올려주세요.</p>
- 						 </div>
+	    						<a id="img_btn1" class="btn btn-default"><span class="glyphicon glyphicon-plus"></span>이미지 추가</a>
+								<div id="output1"></div>
+	 						</div>
 					</div>
 				</div>
 				<hr>
@@ -162,10 +163,9 @@ container {
 					</div>
 					<div class="col-xs-8">
 						<div class="form-group">
-    						<label for="exampleInputFile">이미지 파일 업로드</label>
-    						<input type="file" id="exampleInputFile" name="aupfile2">
-    						<p class="help-block">여기에 숙소 상세페이지에 올라갈 이미지를 올려주세요.</p>
- 						 </div>
+								<a id="img_btn2" class="btn btn-default"><span class="glyphicon glyphicon-plus"></span>이미지 추가</a>
+								<div id="output2"></div>
+	 					</div>
 					</div>
 				</div>
 				<hr>
@@ -231,5 +231,51 @@ container {
 </form>
 <div id="fake-footer"></div>
 <%@ include file="../includes/footer.jsp" %>
+<script type="text/javascript" src="/tonight/js/moment.latest.min.js"></script>
+<script type="text/javascript"
+	src="/tonight/js/pignose.calendar.min.js"></script>
+<script src="/tonight/js/bootstrap.fd.js"></script>
+<script type="text/javascript">
+$("#img_btn1").click(function() {
+    $.FileDialog({
+    	title: "이미지 등록",
+    	multiple: false,
+    	drag_message: "파일을 드래그하세요!",
+    	dropheight: 200,
+    	ok_button:"확인",
+    	cancel_button:"취소"
+    }).on('files.bs.filedialog', function(ev) {
+        var files = ev.files;
+        var text = "";
+        files.forEach(function(f) {
+            text += f.name + "<br/>";
+            formData.append('timg', f, f.name);
+        });
+        $("#output1").html(text);
+    }).on('cancel.bs.filedialog', function(ev) {
+    });
+});
+
+
+$("#img_btn2").click(function() {
+    $.FileDialog({
+    	title: "이미지 등록",
+    	multiple: true,
+    	drag_message: "파일을 드래그하세요!",
+    	dropheight: 200,
+    	ok_button:"확인",
+    	cancel_button:"취소"
+    }).on('files.bs.filedialog', function(ev) {
+        var files = ev.files;
+        var text = "";
+        files.forEach(function(f, idx) {
+            text += f.name + "<br/>";
+            formData.append('tdimg['+idx+"]", f, f.name);
+        });
+        $("#output2").html(text);
+    }).on('cancel.bs.filedialog', function(ev) {
+    });
+});
+</script>
 </body>
 </html>

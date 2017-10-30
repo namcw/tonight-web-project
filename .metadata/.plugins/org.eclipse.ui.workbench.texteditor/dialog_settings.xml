@@ -2,17 +2,20 @@
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="" key="selection"/>
+		<item value="img_btn1" key="selection"/>
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
-			<item value="숙소등록"/>
-			<item value="편의시설"/>
-			<item value="데스크탑"/>
-			<item value="사업자"/>
-			<item value="결제공간"/>
+			<item value="img_btn1"/>
+			<item value="날짜"/>
+			<item value="sch"/>
+			<item value="rinfo"/>
+			<item value="rinfo1"/>
+			<item value="collapse"/>
+			<item value="hidden"/>
+			<item value="tconf"/>
 		</list>
 		<list key="replacehistory">
 		</list>

@@ -1,149 +1,101 @@
 package accom.model.vo;
 
-
 import java.io.Serializable;
-import java.sql.Date;
-
 
 	public class Room implements Serializable{
 		
 		private int roomId; 			//객실 아이디
 		private int accId; 				//숙소 번호
-		private String roomState; 		//객실 예약 가능 상태
-		private int adult_Price; 		//성인 가격
-		private int child_Price; 		//소인 가격
-		private double discount; 		//할인율
-		private String roomImage; 		//객실 이미지 경로
-		private String roomDetails; 	//상세정보
 		private String roomName;      	//객실명
-		public Room() {}
+		private String roomDetails; 	//주말상세정보
+		private int WeekendAdultPrice;	//주말성인가격
+		private int WeekendChildPrice;	//주말소인가격
+		private int WeekdaysAdultPrice; //평일성인가격
+		private int WeekdaysChildPrice; //평일소인가격
+		
+		public Room() { }
 
-		
-		public Room(int roomId, int accId, String roomName,
-				String roomState,int adult_Price,int child_Price,
-				double discount,String roomImage,String roomDetails) {
-			this.roomId=roomId;
-			this.accId=accId;
-			this.roomName=roomName;
-			this.roomState=roomState;
-			this.adult_Price=adult_Price;
-			this.child_Price=child_Price;
-			this.discount=discount;
-			this.roomImage=roomImage;
-			this.roomDetails=roomDetails;
-			
-		}
-		
-		public Room(String roomName, String roomState, int adult_Price, int child_Price, double discount, 
-				String roomImage, String roomDetails ) {
+		public Room(int roomId, int accId, String roomName, String roomDetails, int weekendAdultPrice,
+				int weekendChildPrice, int weekdaysAdultPrice, int weekdaysChildPrice) {
 			super();
-		
-		this.roomName=roomName;
-		this.roomState=roomState;
-		this.adult_Price=adult_Price;
-		this.child_Price=child_Price;
-		this.discount=discount;
-		this.roomImage=roomImage;
-		this.roomDetails=roomDetails;
-		
+			this.roomId = roomId;
+			this.accId = accId;
+			this.roomName = roomName;
+			this.roomDetails = roomDetails;
+			WeekendAdultPrice = weekendAdultPrice;
+			WeekendChildPrice = weekendChildPrice;
+			WeekdaysAdultPrice = weekdaysAdultPrice;
+			WeekdaysChildPrice = weekdaysChildPrice;
 		}
-		
-/*		
-		public Room(String roomName, String roomState, int adult_Price, int child_Price, double discount, String roomDetails) {
-			this.roomName=roomName;
-			this.roomState=roomState;
-			this.adult_Price=adult_Price;
-			this.child_Price=child_Price;
-			this.discount=discount;
-			this.roomDetails=roomDetails;
-		}*/
-		
-		
-		
-		
-		
-		
-	
 
 		public int getRoomId() {
 			return roomId;
 		}
 
-		public String getRoomName(){
-			return roomName;
+		public void setRoomId(int roomId) {
+			this.roomId = roomId;
 		}
-		
+
 		public int getAccId() {
 			return accId;
 		}
 
-		public String getRoomState() {
-			return roomState;
+		public void setAccId(int accId) {
+			this.accId = accId;
 		}
 
-		public int getAdult_Price() {
-			return adult_Price;
+		public String getRoomName() {
+			return roomName;
 		}
 
-		public int getChild_Price() {
-			return child_Price;
-		}
-
-		public double getDiscount() {
-			return discount;
-		}
-
-		public String getRoomImage() {
-			return roomImage;
+		public void setRoomName(String roomName) {
+			this.roomName = roomName;
 		}
 
 		public String getRoomDetails() {
 			return roomDetails;
 		}
 
-		public void setRoomId(int roomId) {
-			this.roomId = roomId;
-		}
-		
-		public void setRoomName(String roomName){
-			this.roomName = roomName;
-		}
-		
-		public void setAccId(int accId) {
-			this.accId = accId;
-		}
-
-		public void setRoomState(String roomState) {
-			this.roomState = roomState;
-		}
-
-		public void setAdult_Price(int adult_Price) {
-			this.adult_Price = adult_Price;
-		}
-
-		public void setChild_Price(int child_Price) {
-			this.child_Price = child_Price;
-		}
-
-		public void setDiscount(double discount) {
-			this.discount = discount;
-		}
-
-		public void setRoomImage(String roomImage) {
-			this.roomImage = roomImage;
-		}
-		
-		
-
 		public void setRoomDetails(String roomDetails) {
 			this.roomDetails = roomDetails;
 		}
 
+		public int getWeekendAdultPrice() {
+			return WeekendAdultPrice;
+		}
+
+		public void setWeekendAdultPrice(int weekendAdultPrice) {
+			WeekendAdultPrice = weekendAdultPrice;
+		}
+
+		public int getWeekendChildPrice() {
+			return WeekendChildPrice;
+		}
+
+		public void setWeekendChildPrice(int weekendChildPrice) {
+			WeekendChildPrice = weekendChildPrice;
+		}
+
+		public int getWeekdaysAdultPrice() {
+			return WeekdaysAdultPrice;
+		}
+
+		public void setWeekdaysAdultPrice(int weekdaysAdultPrice) {
+			WeekdaysAdultPrice = weekdaysAdultPrice;
+		}
+
+		public int getWeekdaysChildPrice() {
+			return WeekdaysChildPrice;
+		}
+
+		public void setWeekdaysChildPrice(int weekdaysChildPrice) {
+			WeekdaysChildPrice = weekdaysChildPrice;
+		}
 		
 		@Override
-		public String toString(){
-			return this.roomName + "," + this.roomId + ", " + this.accId + ", " + this.roomState + ", " + this.adult_Price + ", " 
-				 + this.child_Price + ", " + this.discount + this.roomImage+ ", " + this.roomDetails;
+		public String toString() {
+			return roomId + ", " + accId + ", " + roomName + ", " + roomDetails + ", " + WeekendAdultPrice + ", " +
+					WeekendChildPrice + ", " + WeekdaysAdultPrice + ", " + WeekdaysChildPrice;
 		}
 	}
 
