@@ -18,52 +18,17 @@ import java.sql.Date;
 		private String roomName;      	//객실명
 		public Room() {}
 
-		
-		public Room(int roomId, int accId, String roomName,
-				String roomState,int adult_Price,int child_Price,
-				double discount,String roomImage,String roomDetails) {
-			this.roomId=roomId;
-			this.accId=accId;
-			this.roomName=roomName;
-			this.roomState=roomState;
-			this.adult_Price=adult_Price;
-			this.child_Price=child_Price;
-			this.discount=discount;
-			this.roomImage=roomImage;
-			this.roomDetails=roomDetails;
-			
-		}
-		
-		public Room(String roomName, String roomState, int adult_Price, int child_Price, double discount, 
-				String roomImage, String roomDetails ) {
+		public Room(String roomName,  int adult_Price, int child_Price, double discount, 
+				String roomState, String roomDetails) {
 			super();
 		
-		this.roomName=roomName;
-		this.roomState=roomState;
-		this.adult_Price=adult_Price;
-		this.child_Price=child_Price;
-		this.discount=discount;
-		this.roomImage=roomImage;
-		this.roomDetails=roomDetails;
-		
+			this.roomState = roomState;
+			this.adult_Price = adult_Price;
+			this.child_Price = child_Price;
+			this.discount = discount;
+			this.roomDetails = roomDetails;
+			this.roomName = roomName;
 		}
-		
-/*		
-		public Room(String roomName, String roomState, int adult_Price, int child_Price, double discount, String roomDetails) {
-			this.roomName=roomName;
-			this.roomState=roomState;
-			this.adult_Price=adult_Price;
-			this.child_Price=child_Price;
-			this.discount=discount;
-			this.roomDetails=roomDetails;
-		}*/
-		
-		
-		
-		
-		
-		
-	
 
 		public int getRoomId() {
 			return roomId;
@@ -142,7 +107,7 @@ import java.sql.Date;
 		
 		@Override
 		public String toString(){
-			return this.roomName + "," + this.roomId + ", " + this.accId + ", " + this.roomState + ", " + this.adult_Price + ", " 
+			return this.roomId + ", " + this.accId + ", " + this.roomState + ", " + this.adult_Price + ", " 
 				 + this.child_Price + ", " + this.discount + this.roomImage+ ", " + this.roomDetails;
 		}
 	}
