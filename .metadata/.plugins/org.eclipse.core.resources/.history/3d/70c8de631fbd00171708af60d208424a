@@ -18,18 +18,6 @@ public class RoomService {
 		return list;
 	}
 	
-	//객실 등록 처리용
-	public int insertRoom(Room r) {
-		Connection con = getConnection();
-		int result = new RoomDao().insertRoom(con, r);
-		if(result > 0)
-			commit(con);
-		else
-			rollback(con);
-		close(con);
-		return result;
-		}
-	
 	//객실 삭제 처리용
 	public int deleteRoom(int no) {
 		Connection con = getConnection();
@@ -51,6 +39,18 @@ public class RoomService {
 	*/
 	
 	/*
+
+	//객실 등록 처리용
+	public int insertRoom(Room r) {
+		Connection con = getConnection();
+		int result = new RoomDao().insertRoom(con, r);
+		if(result > 0)
+			commit(con);
+		else
+			rollback(con);
+		close(con);
+		return result;
+	}
 	
 	//객실 수정 처리용
 	public int updateRoom(Room r) {
