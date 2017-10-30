@@ -5,7 +5,9 @@ import java.sql.*;
 import java.util.ArrayList;
 
 import accom.model.dao.RoomDao;
+import accom.model.dao.RoomReviewDao;
 import accom.model.vo.Room;
+import accom.model.vo.RoomReview;
 
 public class RoomService {
 	//객실 전체 조회용

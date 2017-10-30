@@ -195,10 +195,10 @@ function delete_event() {
             <div class="row">
                <div class="col-xs-4">
                   <p>숙소 주소</p>
-               </div>  
-               <div class="col-xs-8">
-                  <p><%=accom.getAccRank()%></p>
                </div>
+               <div id="map" style="height:350px; width:auto;">
+						
+				</div>
             </div>
             <hr>
             <div class="row">
@@ -298,7 +298,9 @@ function delete_event() {
             <div class="panel panel-default">
                <div class="panel-heading">지도</div>
                <div class="panel-body">
-                <div id="map" style="height:350px; width:auto;"></div>
+                  <%=accom.getAccAddress()%>
+                 
+					    
                </div>
             </div>
             <div class="panel panel-default">
