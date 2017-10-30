@@ -112,10 +112,12 @@
 <% } %>
 </div>
 <br>
-<% if(member != null){ %>
+<% if(member != null /* && member.getMemberType() =="B" */){ %>
 	<div align="center">
+	<%if(member.getMemberType().equals("B")){ %>
 	<button class="btn btn-default" onclick="showWriteAccom();">숙소추가</button>
 	</div>
+<% } %>
 <% } %>
 <br><br><br>
 <%@ include file="../includes/footer.jsp" %>

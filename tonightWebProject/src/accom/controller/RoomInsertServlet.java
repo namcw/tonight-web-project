@@ -69,29 +69,20 @@ public class RoomInsertServlet extends HttpServlet {
 		//자동 지정된 경로에 파일 저장됨
 		MultipartRequest mrequest = new MultipartRequest(request, savePath,maxSize, "UTF-8", new DefaultFileRenamePolicy());
 		
-		/*	int accomId = Integer.parseInt(request.getParameter("accomId"));
-		Accommodation accom = aservice.selectAccom(accomId);
+		
+		/*Accommodation accom = aservice.selectAccom(accomId);
 		ArrayList<Room> list = rservice.selectList(accomId);*/
 
 		String rname = mrequest.getParameter("rname");
-		String rstate = mrequest.getParameter("rstate");
-		int radult = Integer.parseInt(mrequest.getParameter("radult"));
-		int rchild = Integer.parseInt(mrequest.getParameter("rchild"));
-		double rdiscount = Double.parseDouble(mrequest.getParameter("rdiscount"));
 		String rdetail = mrequest.getParameter("rdetail");
-		/*String rimage = mrequest.getParameter("rimage");*/
-		String rimage= "/tonight/uploadfiles/" + mrequest.getFilesystemName("rimage");
+		int wkadult = Integer.parseInt(mrequest.getParameter("wkadult"));
+		int wkchild = Integer.parseInt(mrequest.getParameter("wkchild"));
+		int wdadult = Integer.parseInt(mrequest.getParameter("wddult"));
+		int wdchild = Integer.parseInt(mrequest.getParameter("wdchild"));
+		int accomId = Integer.parseInt(mrequest.getParameter("aid"));
 		
-		Room room = null;
-		
-	
-		if(rimage != null ){ //숙소대표이미지파일 존재, 숙소상세이미지파일 존재
-			
-		room = new Room( rname,rstate, radult, rchild, rdiscount, rimage, rdetail);
-	   
-	 
-	   
-		}
+		Room room = null;	
+		room = new Room(accomId, rname,rdetail, wkadult, wkchild, wdadult, wdchild);
 		
 
 	
@@ -99,7 +90,7 @@ public class RoomInsertServlet extends HttpServlet {
 		if(new RoomService().insertRoom(room) > 0){
 			 System.out.println(room);
 			 response.sendRedirect("/tonight/alist?page=1");
-		}else{
+	}else{
 			
 			view = request.getRequestDispatcher("views/room/roomErrorView.jsp");
 			request.setAttribute("message", "room 서비스 : 객실 등록 실패!");

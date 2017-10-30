@@ -1,4 +1,4 @@
-package accom.model.vo;
+﻿package accom.model.vo;
 
 import java.io.Serializable;
 
@@ -15,19 +15,43 @@ import java.io.Serializable;
 		
 		public Room() { }
 
-		public Room(int roomId, int accId, String roomName, String roomDetails, int weekendAdultPrice,
+		public Room(int accId, int roomId, String roomName, String roomDetails, int weekendAdultPrice,
 				int weekendChildPrice, int weekdaysAdultPrice, int weekdaysChildPrice) {
 			super();
 			this.roomId = roomId;
 			this.accId = accId;
 			this.roomName = roomName;
 			this.roomDetails = roomDetails;
-			WeekendAdultPrice = weekendAdultPrice;
-			WeekendChildPrice = weekendChildPrice;
-			WeekdaysAdultPrice = weekdaysAdultPrice;
-			WeekdaysChildPrice = weekdaysChildPrice;
+			this.WeekendAdultPrice = weekendAdultPrice;
+			this.WeekendChildPrice = weekendChildPrice;
+			this.WeekdaysAdultPrice = weekdaysAdultPrice;
+			this.WeekdaysChildPrice = weekdaysChildPrice;
+		}
+		
+		public Room(int accId, String roomName, String roomDetails, int weekendAdultPrice,
+				int weekendChildPrice, int weekdaysAdultPrice, int weekdaysChildPrice) {
+			super();
+			
+			this.accId = accId;
+			this.roomName = roomName;
+			this.roomDetails = roomDetails;
+			this.WeekendAdultPrice = weekendAdultPrice;
+			this.WeekendChildPrice = weekendChildPrice;
+			this.WeekdaysAdultPrice = weekdaysAdultPrice;
+			this.WeekdaysChildPrice = weekdaysChildPrice;
+		}
+		
+
+		public Room(String rname, String rdetail, int wkadult, int wkchild, int wdadult, int wdchild) {
+			this.roomName = rname;
+			this.roomDetails = rdetail;
+			WeekendAdultPrice = wkadult;
+			WeekendChildPrice = wkchild;
+			WeekdaysAdultPrice = wdadult;
+			WeekdaysChildPrice = wdchild;
 		}
 
+		
 		public int getRoomId() {
 			return roomId;
 		}

@@ -87,11 +87,15 @@ public class AccomInsertServlet extends HttpServlet {
 		String aFileName1 = "/tonight/uploadfiles/" + mrequest.getFilesystemName("aupfile1");
 		String aFileName2 = mrequest.getFilesystemName("aupfile2");
 		
+		
+
 		Accommodation accom = null;
 		
 		if(aFileName1 != null && aFileName2 != null){ //숙소대표이미지파일 존재, 숙소상세이미지파일 존재
 			accom = new Accommodation(aWriter, aName, aInfo, aType, aAddress,
 					aContact, aRank, aFileName1, aRules, aFacilities, aRefund);
+			
+			
 			//System.out.println(accom);
 		}else if(aFileName1 != null && aFileName2 == null){ //숙소대표이미지파일 존재, 숙소상세이미지파일 미존재 
 			
@@ -105,7 +109,13 @@ public class AccomInsertServlet extends HttpServlet {
 		
 		//처리결과에 따라 뷰 지정함
 		if(new AccomService().insertAccom(accom) > 0){
-			response.sendRedirect("views/room/roomWriteForm.jsp");
+			int aid = new AccomService().getListCount();
+			
+			view = request.getRequestDispatcher("views/room/roomWriteForm.jsp");
+			request.setAttribute("aid", aid);
+			view.forward(request, response);
+			//response.sendRedirect("views/room/roomWriteForm.jsp");
+	/*		response.sendRedirect("/tonight/rinsert?page=1");*/
 		}else{
 			view = request.getRequestDispatcher("views/accom/accomError.jsp");
 			request.setAttribute("message", "accom 서비스 : 숙소 등록 실패!");
