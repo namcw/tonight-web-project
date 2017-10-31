@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -44,12 +43,9 @@ public class TourReserveServlet extends HttpServlet {
 		
 		
 		TourReserve treserve = new TourReserve(0, memberId, tourId, sdate, adate, acnt, ccnt, totalPrice);
-		System.out.println(treserve);
+		
 		int result = new TourService().insertTourReserve(treserve);
 		
-		if(result > 0) {
-			response.sendRedirect("/tonight/minfo?memberid="+memberId);
-		}
 	}
 
 	/**

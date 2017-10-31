@@ -94,13 +94,6 @@ public class TourReserve implements Serializable {
 	public void setTrTprice(int trTprice) {
 		this.trTprice = trTprice;
 	}
-
-	@Override
-	public String toString() {
-		return "TourReserve [trId=" + trId + ", memberId=" + memberId + ", tourId=" + tourId + ", trSdate=" + trSdate
-				+ ", trAdate=" + trAdate + ", trAdult=" + trAdult + ", trChild=" + trChild + ", trTprice=" + trTprice
-				+ "]";
-	}
 	
 	
 	
