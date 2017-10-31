@@ -84,26 +84,7 @@ public class FaqDao {
 		}
 		return null;
 	}
-	public int updateReadCount(Connection con, int no){
-		int result = 0;
-		PreparedStatement pstmt = null;
-		
-		String query = "update faq set faq_read_count = faq_read_count + 1 "
-				+ "where faq_no = ?";
-		
-		try {
-			pstmt = con.prepareStatement(query);
-			pstmt.setInt(1,  no);
-			
-			result = pstmt.executeUpdate();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}finally{
-			close(pstmt);
-		}
-		
-		return result;
-	}
+
 	public int insertFaq(Connection con, Faq faq){
 		int result = 0;
 		PreparedStatement pstmt = null;
@@ -168,43 +149,7 @@ public class FaqDao {
 		}
 		return result;
 	}
-	public ArrayList<Faq> selectTitleSearch(Connection con, String keyword){
-		ArrayList<Faq> list = null;
-		PreparedStatement pstmt = null;
-		ResultSet rset = null;
-		
-		String query = "select * from faq "
-				+ "where faq_title like ? order by faq_no desc";
-		
-		try {
-			pstmt = con.prepareStatement(query);
-			pstmt.setString(1, "%" + keyword + "%");
-			
-			rset = pstmt.executeQuery();
-			
-			if(rset != null){
-				list = new ArrayList<Faq>();
-				
-				while(rset.next()){
-					Faq f = new Faq();
-				
-					f.setFaqNo(rset.getInt("faq_no"));
-					f.setFaqCategory(rset.getString("faq_category"));
-					f.setFaqTitle(rset.getString("faq_title"));
-					f.setFaqAnswer(rset.getString("faq_answer"));
-					f.setFaqReadCount(rset.getInt("faq_read_count"));
-					
-					list.add(f);
-				}
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}finally{
-			close(rset);
-			close(pstmt);
-		}
-		return list;
-	}
+	
 
 	public Faq selectOne(Connection con, int no) {
 		Faq faq = null;
@@ -260,4 +205,44 @@ public class FaqDao {
 		
 		return result;
 	}
+	
+	public ArrayList<Faq> selectSearch(Connection con, String keyword){
+		ArrayList<Faq> list = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String query = "select * from faq "
+				+ "where faq_category like ? order by faq_no desc";
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, "%" + keyword + "%");
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset != null){
+				list = new ArrayList<Faq>();
+				
+				while(rset.next()){
+					Faq f = new Faq();
+				
+					f.setFaqNo(rset.getInt("faq_no"));
+					f.setFaqCategory(rset.getString("faq_category"));
+					f.setFaqTitle(rset.getString("faq_title"));
+					f.setFaqAnswer(rset.getString("faq_answer"));
+					f.setFaqReadCount(rset.getInt("faq_read_count"));
+					
+					list.add(f);
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally{
+			close(rset);
+			close(pstmt);
+		}
+		return list;
+	}
+	
+
 }

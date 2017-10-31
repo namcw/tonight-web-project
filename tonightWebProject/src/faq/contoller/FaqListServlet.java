@@ -39,7 +39,7 @@ public class FaqListServlet extends HttpServlet {
 		
 		int currentPage = 1;
 		
-		int limit = 10;
+		int limit = 5;
 		
 		if(request.getParameter("page") != null)
 			currentPage = Integer.parseInt(request.getParameter("page"));

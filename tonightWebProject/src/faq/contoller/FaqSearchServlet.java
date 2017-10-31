@@ -37,14 +37,12 @@ public class FaqSearchServlet extends HttpServlet {
 		response.setContentType("text/html; charset=utf-8");
 		
 		String keyword = request.getParameter("keyword");
-		
 		ArrayList<Faq> list = new FaqService().selectSearch(keyword);
-		
 		int currentPage = 1;		
-		int limit = 10;		
+		int limit = 5;		
 		if(request.getParameter("page") != null)
 			currentPage = Integer.parseInt(request.getParameter("page"));
-		FaqService fservice = new FaqService();
+		
 		int listCount = list.size();
 		
 		int maxPage = (int)((double)listCount / limit + 0.9);
