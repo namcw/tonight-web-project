@@ -1,13 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
-<!DOCTYPE html>
+<!DOCTYPE>
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" type="text/css" href="/tonight/css/bootstrap.min.css">
-<title>Login Page</title>
+<title>아이디/패스워드 찾기</title>
 <style type="text/css">
 
 body, html {
@@ -90,14 +89,12 @@ body, html {
     height: 44px;
     font-size: 16px;
 }
-
-.sign-form input[type=email],
-.sign-form input[type=password],
-.sign-form input[type=text],
+.form-inline,
+.sign-form input,
 .sign-form button {
     width: 100%;
     display: block;
-    margin-bottom: 10px;
+    margin-bottom: 3px;
     z-index: 1;
     position: relative;
     -moz-box-sizing: border-box;
@@ -145,38 +142,38 @@ body, html {
 .forgot-password:focus{
     color: rgb(12, 97, 33);
 }
-	
 </style>
 </head>
 <body>
 <div class="container">
 	<div class="card card-container">
-	    <img id="profile-img" class="profile-img-card" src="/tonight/img/logo.png" />
+		<img id="profile-img" class="profile-img-card" src="/tonight/img/logo.png" />
 	    <p id="profile-name" class="profile-name-card">TONIGHT</p>
-	    <form action="/tonight/login" method="post" class="sign-form">
-	        <span id="reauth-email" class="reauth-email">오신것을 환영합니다.</span>
-	        <input type="text" class="form-control" name="memberid" placeholder="아이디" required autofocus>
-	        <input type="password" class="form-control" name="memberpwd" placeholder="패스워드" required>
-	
-	        <button class="btn btn-lg btn-primary btn-block btn-signin" type="submit">로그인</button>
-	    </form><!-- /form -->
-	    <a href="/tonight/views/member/searchMyInfo.jsp" class="forgot-password">
-			아이디/패스워드 찾기
-	    </a>
-	    <a href="/tonight/views/member/enrollForm.jsp" class="forgot-password pull-right">
-			회원가입
-	    </a>
+	    
+		<br>
+		<ul class="nav nav-tabs">
+			<li class="active"><a data-toggle="tab" href="#mid">아이디 찾기</a></li>
+			<li><a data-toggle="tab" href="#mpwd">패스워드 찾기</a></li>
+		</ul>
+		<div class="tab-content">
+		    <div id="mid" class="tab-pane fade in active">
+				<form action="/tonight/msearchmyid" method="post" class="sign-form">
+					<input type="text" class="form-control" name="membername" placeholder="이름" required>
+					<input type="email" class="form-control" name="memberemail" placeholder="이메일 주소" required>
+					<button class="btn btn-lg btn-primary btn-block btn-signin" type="submit">아이디 찾기</button>
+				</form>
+			</div>
+			<div id="mpwd" class="tab-pane fade">
+				준비중
+				<form action="/tonight/msearchMyPwd" method="post" class="sign-form">
+					
+				</form>
+			</div>
+		</div>
 	</div>
 </div>
 
 <script src="/tonight/js/jquery-3.2.1.min.js"></script>
 <script src="/tonight/js/bootstrap.min.js"></script>
-<script type ='text/JavaScript'>
-	<%if(("1").equals(request.getParameter("error"))){%>
-		alert('아이디 또는 비밀번호를 잘못 입력하셨습니다!');
-		
-		location.href="<%= request.getRequestURI() %>";
-	<% } %>
-</script> 
 </body>
 </html>

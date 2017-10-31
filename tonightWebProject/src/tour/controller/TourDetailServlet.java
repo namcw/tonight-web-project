@@ -1,6 +1,7 @@
 package tour.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
@@ -14,6 +15,7 @@ import tour.model.service.TourService;
 import tour.model.vo.Tour;
 import tour.model.vo.TourConf;
 import tour.model.vo.TourDetail;
+import tour.model.vo.TourImage;
 import tour.model.vo.TourReview;
 
 /**
@@ -44,15 +46,30 @@ public class TourDetailServlet extends HttpServlet {
 		ArrayList<TourReview> treviewList = tservice.selectTourReviewList(tid);
 		double gradeAvg = tservice.getTourReviewGradeAvg(tid);
 		ArrayList<TourConf> tconfList = tservice.selectTourConfList(tid);
+		ArrayList<TourImage> timageList = tservice.selectTourImageList(tid);
 		
-		RequestDispatcher view = request.getRequestDispatcher("views/tour/tourDetailView.jsp");
-		request.setAttribute("tour", tour);
-		request.setAttribute("tdetail", tdetail);
-		request.setAttribute("treviewList", treviewList);
-		request.setAttribute("gradeAvg", gradeAvg);
-		request.setAttribute("tconfList", tconfList);
-
-		view.forward(request, response);
+		
+		RequestDispatcher view = null;
+		if(tconfList == null || tconfList.size() == 0) {
+			PrintWriter out = response.getWriter();
+			 
+			out.println("<script language='javascript'>");
+			out.println("alert('예약 가능 상품이 없습니다.');");
+			out.println("history.back();");
+			out.println("</script>");
+			out.close();
+			
+		} else {
+			view = request.getRequestDispatcher("views/tour/tourDetailView.jsp");
+			request.setAttribute("tour", tour);
+			request.setAttribute("tdetail", tdetail);
+			request.setAttribute("treviewList", treviewList);
+			request.setAttribute("gradeAvg", gradeAvg);
+			request.setAttribute("tconfList", tconfList);
+			request.setAttribute("timageList", timageList);
+			view.forward(request, response);
+		}
+		
 	}
 
 	/**

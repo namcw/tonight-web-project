@@ -4,6 +4,9 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+
+import java.io.PrintWriter;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Enumeration;
@@ -38,7 +41,6 @@ public class TourInsertServlet extends HttpServlet {
      */
     public TourInsertServlet() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**
@@ -126,26 +128,12 @@ public class TourInsertServlet extends HttpServlet {
 			tconfList.add(tconf);
 		}
 		
-		
-		
-		System.out.println("tour---------------------------------------");
-		
-		int resultInsertTour = tservice.insertTour(tour);
-		
-		System.out.println("tour detail---------------------------------------");
-		
-		int resultInsertTdetail = tservice.insertTourDetail(tdetail);
-		
-		System.out.println("tour conf---------------------------------------");
-		
-		int resultInsertTconf = tservice.insertTourConfList(tconfList);
-		
-		System.out.println("tour image---------------------------------------");
-		int resultInsertTimage = tservice.insertTourImageList(timageList);
-		
-		for(TourImage ti : timageList) {
-			System.out.println(ti);
-		}
+
+		int rInsertTour = tservice.insertTour(tour);
+		int rInsertTdetail = tservice.insertTourDetail(tdetail);
+		int rInsertTconf = tservice.insertTourConfList(tconfList);
+		int rInsertTimage = tservice.insertTourImageList(timageList);
+
 	}
 
 	/**

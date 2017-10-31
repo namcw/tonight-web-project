@@ -45,16 +45,12 @@ public class MemberUpdateServlet extends HttpServlet {
 		
 		String memberId = request.getParameter("memberid");
 		String memberPwd = request.getParameter("memberpwd");
-		String memberName = request.getParameter("membername");
-		String birthDate=request.getParameter("birthdate");
-		String email = request.getParameter("email");
-		String phone = request.getParameter("phone");
-		String address = request.getParameter("address");
-		String rank=request.getParameter("rank");
-		/*System.out.println(memberId+","+memberPwd+","+memberName+","+birthDate+","+email+","+phone+","+address+","+rank);*/
+		String email = request.getParameter("memberemail");
+		String phone = request.getParameter("memberphone");
+		String address = request.getParameter("memberaddress");
 		
 		
-		Member member = new Member(memberId,memberPwd,memberName,birthDate,phone,email,address,rank);
+		Member member = new Member(memberId, memberPwd, phone, email, address);
 
 		int result = new MemberService().updateMember(member);
 		

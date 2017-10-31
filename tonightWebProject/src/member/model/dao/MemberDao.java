@@ -133,18 +133,17 @@ public class MemberDao {
 	         int result = 0;
 	         PreparedStatement pstmt = null;
 	         
-	         String query = "update member set member_pwd =?,"
-	               + " member_birth_date = ?, member_phone = ?, member_email =?, member_address =?"
+	         String query = "update member set member_pwd =?, "
+	               + "member_phone = ?, member_email =?, member_address =?"
 	               + "where member_id =?";
 	         
 	         try {   
 	            pstmt = con.prepareStatement(query);
 	            pstmt.setString(1, member.getMemberPwd());
-	            pstmt.setString(2, member.getBirthDate());
-	            pstmt.setString(3, member.getPhone());
-	            pstmt.setString(4, member.getEmail());
-	            pstmt.setString(5, member.getAddress());
-	            pstmt.setString(6, member.getMemberId());
+	            pstmt.setString(2, member.getPhone());
+	            pstmt.setString(3, member.getEmail());
+	            pstmt.setString(4, member.getAddress());
+	            pstmt.setString(5, member.getMemberId());
 	            
 	            result = pstmt.executeUpdate();
 	            
@@ -157,4 +156,30 @@ public class MemberDao {
 	         return result;
 	      }
 
+		public String searchMyId(Connection con, String memberName, String memberEmail) {
+			String memberId = null;
+			PreparedStatement pstmt = null;
+	         ResultSet rset = null;
+	         
+	         String query = "SELECT MEMBER_ID FROM MEMBER WHERE MEMBER_NAME=? AND MEMBER_EMAIL=?";
+	         
+	         try {
+	            pstmt = con.prepareStatement(query);
+	            pstmt.setString(1,  memberName);
+	            pstmt.setString(2,  memberEmail);
+	            
+	            rset = pstmt.executeQuery();
+	            
+	            if(rset.next()){
+	            	memberId = rset.getString("MEMBER_ID");
+	            }
+	            
+	         } catch (Exception e) {
+	            e.printStackTrace();
+	         } finally {
+	            close(rset);
+	            close(pstmt);
+	         }
+	         return memberId;
+		}
 }

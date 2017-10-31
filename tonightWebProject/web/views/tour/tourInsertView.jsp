@@ -324,8 +324,14 @@ $("#submit").click(function() {
         data: formData,
         type: 'POST',
         success: function(result){
+
+            alert("상품등록이 완료되었습니다.");
+            location.href="/tonight/tlist";
+        },
+        error: function(result){
             $('.container').addClass("hidden");
-            $('#ment').html("<h2>상품 등록이 완료되었습니다:D</h2>")
+            $('#ment').html("<h2>상품 등록에 실패했습니다:D</h2>")
+
         }
     });
 });

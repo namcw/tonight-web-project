@@ -10,31 +10,22 @@ public class TourConf implements Serializable {
 
 	private int tourId;
 	private Date startDate;
-	private Date arriavlaDate;
+	private Date arrivalDate;
 	private int tourAdultPrice;
 	private int tourChildPrice;
-	private double tourDiscount;
 	private String tourState;
 	
 	public TourConf() {}
 
-	public TourConf(int tourId, Date startDate, Date arriavlaDate, int tourAdultPrice, int tourChildPrice,
-			double tourDiscount, String tourState) {
+	public TourConf(int tourId, Date startDate, Date arrivalDate, int tourAdultPrice,
+				int tourChildPrice, String tourState) {
 		super();
 		this.tourId = tourId;
 		this.startDate = startDate;
-		this.arriavlaDate = arriavlaDate;
+		this.arrivalDate = arrivalDate;
 		this.tourAdultPrice = tourAdultPrice;
 		this.tourChildPrice = tourChildPrice;
-		this.tourDiscount = tourDiscount;
 		this.tourState = tourState;
-	}
-
-	@Override
-	public String toString() {
-		return "TourConf [tourId=" + tourId + ", startDate=" + startDate + ", arriavlaDate=" + arriavlaDate
-				+ ", tourAdultPrice=" + tourAdultPrice + ", tourChildPrice=" + tourChildPrice + ", tourDiscount="
-				+ tourDiscount + ", tourState=" + tourState + "]";
 	}
 
 	public int getTourId() {
@@ -53,12 +44,12 @@ public class TourConf implements Serializable {
 		this.startDate = startDate;
 	}
 
-	public Date getArriavlaDate() {
-		return arriavlaDate;
+	public Date getArrivalDate() {
+		return arrivalDate;
 	}
 
-	public void setArriavlaDate(Date arriavlaDate) {
-		this.arriavlaDate = arriavlaDate;
+	public void setArrivalDate(Date arrivalDate) {
+		this.arrivalDate = arrivalDate;
 	}
 
 	public int getTourAdultPrice() {
@@ -77,14 +68,6 @@ public class TourConf implements Serializable {
 		this.tourChildPrice = tourChildPrice;
 	}
 
-	public double getTourDiscount() {
-		return tourDiscount;
-	}
-
-	public void setTourDiscount(double tourDiscount) {
-		this.tourDiscount = tourDiscount;
-	}
-
 	public String getTourState() {
 		return tourState;
 	}
@@ -92,5 +75,13 @@ public class TourConf implements Serializable {
 	public void setTourState(String tourState) {
 		this.tourState = tourState;
 	}
+
+	@Override
+	public String toString() {
+		return "TourConf [tourId=" + tourId + ", startDate=" + startDate + ", arrivalDate=" + arrivalDate
+				+ ", tourAdultPrice=" + tourAdultPrice + ", tourChildPrice=" + tourChildPrice + ", tourState="
+				+ tourState + "]";
+	}
+
 	
 }

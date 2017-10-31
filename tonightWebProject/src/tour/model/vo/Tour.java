@@ -10,16 +10,18 @@ public class Tour implements Serializable {
 	private int tourId;
 	private String tourTitle;
 	private String guideId;
-	private String tourThumnailPath;
+	private String tourOname;
+	private String tourRname;
 	
 	public Tour() {}
 
-	public Tour(int tourId, String tourTitle, String guideId, String tourThumnailPath) {
+	public Tour(int tourId, String tourTitle, String guideId, String tourOname, String tourRname) {
 		super();
 		this.tourId = tourId;
 		this.tourTitle = tourTitle;
 		this.guideId = guideId;
-		this.tourThumnailPath = tourThumnailPath;
+		this.tourOname = tourOname;
+		this.tourRname = tourRname;
 	}
 
 	public int getTourId() {
@@ -46,11 +48,26 @@ public class Tour implements Serializable {
 		this.guideId = guideId;
 	}
 
-	public String getTourThumnailPath() {
-		return tourThumnailPath;
+	public String getTourOname() {
+		return tourOname;
 	}
 
-	public void setTourThumnailPath(String tourThumnailPath) {
-		this.tourThumnailPath = tourThumnailPath;
+	public void setTourOname(String tourOname) {
+		this.tourOname = tourOname;
 	}
+
+	public String getTourRname() {
+		return tourRname;
+	}
+
+	public void setTourRname(String tourRname) {
+		this.tourRname = tourRname;
+	}
+
+	@Override
+	public String toString() {
+		return "Tour [tourId=" + tourId + ", tourTitle=" + tourTitle + ", guideId=" + guideId + ", tourOname="
+				+ tourOname + ", tourRname=" + tourRname + "]";
+	}
+
 }

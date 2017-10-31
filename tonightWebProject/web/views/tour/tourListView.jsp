@@ -57,7 +57,9 @@
 	<% int cnt = 0; %>
 	<% for(Tour tour : list) { %>
 		<div class="col-sm-6 col-md-4">
-			<a href="/tonight/tdetail?tid=<%= tour.getTourId() %>&page=<%= currentPage %>">
+
+			<a href="/tonight/tdetail?tid=<%= tour.getTourId() %>">
+
 				<img src="/tonight/tuploadfiles/<%= tour.getTourRname() %>" class="img-responsive" style="width:100%" alt="Image">
 			</a>
 			<p id="title"><%= tour.getTourTitle() %></p>
@@ -85,6 +87,9 @@
 <br>
 <%-- 페이지 번호 처리 --%>
 <div class="container" align="center">
+
+<button type="button" id="register" class="btn btn-default pull-right">등록하기</button>
+
 <%-- 이전 페이지 있을 경우에 대한 처리 --%>
 <% if(currentPage <= 1){ %>
 	[이전] &nbsp;
@@ -105,7 +110,6 @@
 <% }else{ %>
 	<a href="/tonight/tlist?page=<%= currentPage + 1 %>">[다음]</a>
 <% } %>
-	<button id="register" class="pull-right">등록하기</button>
 </div>
 <%@ include file="../includes/footer.jsp" %>
 <script type="text/javascript">
