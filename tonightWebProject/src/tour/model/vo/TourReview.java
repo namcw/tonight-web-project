@@ -16,6 +16,14 @@ public class TourReview implements Serializable {
 	private double trGrade;
 	
 	public TourReview() {}
+	
+	public TourReview(int trTourId, String trWriterId, String trContent, double trGrade) {
+		super();
+		this.trTourId = trTourId;
+		this.trWriterId = trWriterId;
+		this.trContent = trContent;
+		this.trGrade = trGrade;
+	}
 
 	public TourReview(int trNo, int trTourId, Date trDate, String trWriterId, String trTitle, String trContent,
 			double trGrade) {

@@ -23,7 +23,7 @@ public class TourDao {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		
-		String sql = "SELECT * FROM TOUR WHERE TOUR_ID BETWEEN ? AND ? ORDER BY 1 DESC";
+		String sql = "SELECT * FROM (SELECT ROW_NUMBER() OVER (ORDER BY TOUR_ID DESC) IDX, TOUR_ID, TOUR_TITLE, GUIDE_ID, TOUR_ONAME, TOUR_RNAME FROM TOUR) WHERE IDX BETWEEN ? AND ?";
 		
 		int startRow = (currentPage - 1) * limit + 1;
 		int endRow = startRow + limit - 1;
@@ -143,7 +143,7 @@ public class TourDao {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		
-		String sql = "SELECT * FROM TOUR_REVIEW WHERE TR_TOUR_ID = ?";
+		String sql = "SELECT * FROM TOUR_REVIEW WHERE TR_TOUR_ID = ? ORDER BY 1 DESC";
 		
 		try {
 			pstmt = con.prepareStatement(sql);
@@ -438,6 +438,51 @@ public class TourDao {
 		}
 		
 		return timageList;
+	}
+
+	public int deleteTour(Connection con, int tid) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String query = "DELETE FROM TOUR WHERE TOUR_ID = ?";
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, tid);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally{
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	public int insertTourReview(Connection con, TourReview tr) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String query = "INSERT INTO TOUR_REVIEW VALUES((SELECT MAX(TR_NO)+1 FROM TOUR_REVIEW), ?, DEFAULT, ?, ?, ?, ?)";
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, tr.getTrTourId());
+			pstmt.setString(2, tr.getTrWriterId());
+			pstmt.setString(3, tr.getTrContent());
+			pstmt.setString(4, tr.getTrContent());
+			pstmt.setDouble(5, tr.getTrGrade());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally{
+			close(pstmt);
+		}
+		return result;
 	}
 
 }

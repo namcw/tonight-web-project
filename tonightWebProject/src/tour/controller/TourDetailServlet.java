@@ -1,6 +1,7 @@
 package tour.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
@@ -50,8 +51,14 @@ public class TourDetailServlet extends HttpServlet {
 		
 		RequestDispatcher view = null;
 		if(tconfList == null || tconfList.size() == 0) {
-			view = request.getRequestDispatcher("views/tour/tourError.jsp");
-			request.setAttribute("emsg", "예약 가능한 상품이 없습니다.");
+			PrintWriter out = response.getWriter();
+			 
+			out.println("<script language='javascript'>");
+			out.println("alert('예약 가능 상품이 없습니다.');");
+			out.println("history.back();");
+			out.println("</script>");
+			out.close();
+			
 		} else {
 			view = request.getRequestDispatcher("views/tour/tourDetailView.jsp");
 			request.setAttribute("tour", tour);
@@ -60,8 +67,9 @@ public class TourDetailServlet extends HttpServlet {
 			request.setAttribute("gradeAvg", gradeAvg);
 			request.setAttribute("tconfList", tconfList);
 			request.setAttribute("timageList", timageList);
+			view.forward(request, response);
 		}
-		view.forward(request, response);
+		
 	}
 
 	/**

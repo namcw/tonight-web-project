@@ -154,6 +154,12 @@
 <div class="jumbotron"></div>
 <div class="container" id="toTop">
 	<h3 class="text-center"><%=tour.getTourTitle()%></h3>
+	<% if(member != null && member.getMemberId().equals(tour.getGuideId())) { %>
+	<div class="pull-right">
+		<button type="button" class="btn btn-default">수정</button>
+		<a href="/tonight/tdelete?tid=<%= tour.getTourId() %>" type="button" class="btn btn-default">삭제</a>
+	</div>
+	<% } %>
 	<br>
 	<div class="row">
 
@@ -335,7 +341,7 @@
 					후기
 					<%
 					if (treviewList.size() > 0) {
-				%>
+					%>
 					<p class="pull-right">
 						(<%=treviewList.size()%>)
 					</p>
@@ -349,8 +355,53 @@
 				<div class="panel-body box-info">
 
 					<div class="tab-pane active animated fadeInRight" id="comments">
+						
 						<div class="scroll-widget">
 							<ul class="media-list">
+								<% if(member != null) { %>
+								<li id="reviewst" class="media"><a class="pull-left" href="#fakelink">
+										<img class="media-object"
+										src="https://bootdey.com/img/Content/User_for_snippets.png"
+										alt="Avatar">
+								</a>
+									<div class="media-body">
+										<form action="/tonight/trinsert" method="post" id="submit">
+										
+											<input type="hidden" name="tid" value="<%= tour.getTourId() %>">
+											
+											<div class="row">
+										        <div class="col-xs-9 form-group">
+										        	<input type="text" name="writerid" class="form-control col-xs-3" value="<%=member.getMemberId()%>" readonly>
+										        </div>
+										        <div class="col-xs-3 form-group pull-right">
+										        	<select class="selectpicker form-control col-xs-3" name="grade">
+													<option>10</option>
+													<option>9</option>
+													<option>8</option>
+													<option>7</option>
+													<option>6</option>
+													<option>5</option>
+													<option>4</option>
+													<option>3</option>
+													<option>2</option>
+													<option>1</option>
+												</select>
+										        </div>
+									      	</div>
+										    	<textarea class="form-control" id="comments" name="comments" placeholder="Comment" rows="5"></textarea>
+										      	<br>
+											    <div class="row">
+											    	<div class="col-md-12 form-group">
+											        	<input  class="btn pull-right" type="submit">Send
+											        </div>
+											   	</div>
+											</form> 
+										
+										
+										
+									</div>
+									<p></p></li>
+									<% } %>
 								<%
 									if (treviewList.isEmpty()) {
 								%>
@@ -525,6 +576,56 @@
 <script type="text/javascript"
 	src="/tonight/js/pignose.calendar.min.js"></script>
 <script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=1524280cea98188e73c2051d02dc247c&libraries=services"></script>
+<script type="text/javascript">
+	$("#submit").submit(function(e) {
+		var postData = $(this).serializeArray();
+	    var formURL = $(this).attr("action");
+		$.ajax({
+	        url: formURL,
+	        data: postData,
+	        type: 'POST',
+	        success: function(result){
+	        	var tag =
+	        		'<li class="media">' +
+	        		'<a class="pull-left" href="#fakelink">' +
+	        		'<img class="media-object" src="https://bootdey.com/img/Content/User_for_snippets.png" alt="Avatar"></a>' +
+	        		'<div class="media-body">' +
+	        		'<h4 class="media-heading">' +
+	        		'<a href="#fakelink">' +
+	        		result["writerId"]+
+	        		'</a> <small>'+
+	        		result["today"]+
+	        		'</small></h4>' +
+	        		'<div class="row">' +
+	        		'<img src="/tonight/img/starGrade'+
+	        		result["grade"]+
+	        		'.png" class="col-xs-3" style="margin-top: -10px">' +
+	        		'<div class="col-xs-9"></div></div>' +
+	        		'<p>'+
+	        		result["comment"]+
+	        		'</p>' +
+	        		'</div><p></p></li>';
+	        	$('#reviewst').after(tag);
+	        },
+	        error: function(result){
+	        }
+	    });
+		e.preventDefault();
+		//e.unbind();
+	});
+	
+										
+											
+												
+											
+										
+										
+									
+									
+
+	
+
+</script>
 <script type="text/javascript">
 $(function() {
 

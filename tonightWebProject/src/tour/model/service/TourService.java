@@ -119,4 +119,26 @@ public class TourService {
 		ArrayList<TourImage> timageList = new TourDao().selectTourImageList(con, tid);
 		return timageList;
 	}
+
+	public int deleteTour(int tid) {
+		Connection con = getConnection();
+		int result = new TourDao().deleteTour(con, tid);
+		if(result > 0)
+			commit(con);
+		else
+			rollback(con);
+		close(con);
+		return result;
+	}
+
+	public int insertTourReview(TourReview tr) {
+		Connection con = getConnection();
+		int result = new TourDao().insertTourReview(con, tr);
+		if(result > 0)
+			commit(con);
+		else
+			rollback(con);
+		return result;
+		
+	}
 }
