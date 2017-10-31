@@ -2,6 +2,8 @@
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -13,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import member.model.service.MemberService;
 import member.model.vo.Member;
 import tour.model.service.TourService;
+import tour.model.vo.Tour;
 import tour.model.vo.TourReserve;
 
 /**
@@ -42,7 +45,20 @@ public class MemberSelectServlet extends HttpServlet {
 			String mtype = member.getMemberType();
 			if(mtype.equals("U")) {
 				ArrayList<TourReserve> treserveList = new TourService().selectTourReserveList(member.getMemberId());
+				List<Integer> items = new ArrayList<Integer>();
+				for(TourReserve tr : treserveList) {
+					items.add(tr.getTourId());
+				}
+				items = new ArrayList<Integer>(new HashSet<Integer>(items));
+				ArrayList<Tour> tList = new ArrayList<Tour>();
+				for(int tid : items) {
+					 Tour tour = new TourService().selectTour(tid);
+					 tList.add(tour);
+				}
+				
 				request.setAttribute("treserveList", treserveList);
+				request.setAttribute("tList", tList);
+				
 			} else if(mtype.equals("G")) {
 				
 			} else if(mtype.equals("B")) {
