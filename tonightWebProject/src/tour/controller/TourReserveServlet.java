@@ -1,11 +1,17 @@
 package tour.controller;
 
 import java.io.IOException;
+import java.sql.Date;
+import java.text.SimpleDateFormat;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import tour.model.service.TourService;
+import tour.model.vo.TourReserve;
 
 /**
  * Servlet implementation class TourReserveServlet
@@ -28,22 +34,18 @@ public class TourReserveServlet extends HttpServlet {
 		response.setContentType("text/html; charset=UTF-8");
 		
 		int tourId = Integer.parseInt(request.getParameter("tourid"));
-		String sdate = request.getParameter("sdatein");
-		String adate = request.getParameter("adatein");
+		Date sdate = java.sql.Date.valueOf(request.getParameter("sdatein"));
+		Date adate = java.sql.Date.valueOf(request.getParameter("adatein"));
 		int acnt = Integer.parseInt(request.getParameter("adult"));
 		int ccnt = Integer.parseInt(request.getParameter("child"));
 		int totalPrice = Integer.parseInt(request.getParameter("totalPrice"));
-		String registerId = request.getParameter("registerid");
+		String memberId = request.getParameter("registerid");
 		
-		System.out.println(registerId);
-		System.out.println(totalPrice);
-		System.out.println(ccnt);
-		System.out.println(acnt);
-		System.out.println(adate);
-		System.out.println(sdate);
-		System.out.println(tourId);
 		
-		//int result = new TourService().insertTourReserve();
+		TourReserve treserve = new TourReserve(0, memberId, tourId, sdate, adate, acnt, ccnt, totalPrice);
+		
+		int result = new TourService().insertTourReserve(treserve);
+		
 	}
 
 	/**

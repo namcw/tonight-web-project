@@ -8,6 +8,7 @@ import static common.JDBCTemplate.*;
 import tour.model.dao.TourDao;
 import tour.model.vo.TourDetail;
 import tour.model.vo.TourImage;
+import tour.model.vo.TourReserve;
 import tour.model.vo.TourReview;
 import tour.model.vo.Tour;
 import tour.model.vo.TourConf;
@@ -140,5 +141,21 @@ public class TourService {
 			rollback(con);
 		return result;
 		
+	}
+
+	public int insertTourReserve(TourReserve treserve) {
+		Connection con = getConnection();
+		int result = new TourDao().insertTourReserve(con, treserve);
+		if(result > 0)
+			commit(con);
+		else
+			rollback(con);
+		return result;
+	}
+
+	public ArrayList<TourReserve> selectTourReserveList(String memberId) {
+		Connection con = getConnection();
+		ArrayList<TourReserve> treserveList = new TourDao().selectTourReserveList(con, memberId);
+		return treserveList;
 	}
 }

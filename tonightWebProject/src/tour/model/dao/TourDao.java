@@ -11,6 +11,7 @@ import tour.model.vo.Tour;
 import tour.model.vo.TourConf;
 import tour.model.vo.TourDetail;
 import tour.model.vo.TourImage;
+import tour.model.vo.TourReserve;
 import tour.model.vo.TourReview;
 
 public class TourDao {
@@ -483,6 +484,71 @@ public class TourDao {
 			close(pstmt);
 		}
 		return result;
+	}
+
+	public int insertTourReserve(Connection con, TourReserve treserve) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String query = "INSERT INTO TOUR_RESERVE VALUES((SELECT COUNT(*)+1 FROM TOUR_RESERVE), ?, ?, ?, ?, ?, ?, ?)";
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, treserve.getMemberId());
+			pstmt.setInt(2, treserve.getTourId());
+			pstmt.setDate(3, treserve.getTrSdate());
+			pstmt.setDate(4, treserve.getTrAdate());
+			pstmt.setInt(5, treserve.getTrAdult());
+			pstmt.setInt(6, treserve.getTrChild());
+			pstmt.setInt(7, treserve.getTrTprice());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally{
+			close(pstmt);
+		}
+		return result;
+	}
+
+	public ArrayList<TourReserve> selectTourReserveList(Connection con, String memberId) {
+		ArrayList<TourReserve> treserveList = null;
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = "SELECT * FROM TOUR_RESERVE WHERE MEMBER_ID = ?";
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, memberId);
+			rset = pstmt.executeQuery();
+			if(rset != null) {
+				treserveList = new ArrayList<TourReserve>();
+				while(rset.next()) {
+					TourReserve treserve = new TourReserve(
+									rset.getInt("TR_ID"),
+									memberId,
+									rset.getInt("TOUR_ID"),
+									rset.getDate("TR_SDATE"),
+									rset.getDate("TR_ADATE"),
+									rset.getInt("TR_ADULT"),
+									rset.getInt("TR_CHILD"),
+									rset.getInt("TR_TPRICE"));
+					
+					treserveList.add(treserve);
+				}
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rset);
+		}
+		
+		return treserveList;
 	}
 
 }

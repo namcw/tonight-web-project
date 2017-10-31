@@ -1,6 +1,7 @@
  package member.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -11,6 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import member.model.service.MemberService;
 import member.model.vo.Member;
+import tour.model.service.TourService;
+import tour.model.vo.TourReserve;
 
 /**
  * Servlet implementation class MemberSelectServlet
@@ -36,6 +39,15 @@ public class MemberSelectServlet extends HttpServlet {
 		
 		RequestDispatcher view = null;
 		if(member != null) {
+			String mtype = member.getMemberType();
+			if(mtype.equals("U")) {
+				ArrayList<TourReserve> treserveList = new TourService().selectTourReserveList(member.getMemberId());
+				request.setAttribute("treserveList", treserveList);
+			} else if(mtype.equals("G")) {
+				
+			} else if(mtype.equals("B")) {
+				
+			}
 			view = request.getRequestDispatcher("views/member/myInfo.jsp");
 			request.setAttribute("member", member);
 			view.forward(request, response);
