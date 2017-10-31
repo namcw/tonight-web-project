@@ -36,23 +36,24 @@ public class AccomSearchServlet extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html; charset=utf-8");
 		
+		String asType = request.getParameter("astype"); 
 		String keyword = request.getParameter("keyword");
 		
-		ArrayList<Accommodation> list = new AccomService().selectSearch(keyword);
+		AccomService aservice = new AccomService();
+		
+		ArrayList<Accommodation> list = aservice.selectSearch(keyword, asType);
+		ArrayList<Integer> arCntList = aservice.getAccomReviewCntList();
+		ArrayList<Double> arAvgList = aservice.getAccomReviewAvgList();
 		
 		//페이지 처리용
 		int currentPage = 1;
 		//한 페이지에 출력할 페이지 갯수 지정
 		int limit = 9;
 		
-		//페이지 숫자가 전송이 왔을 경우
 		if(request.getParameter("page") != null)
 			currentPage = Integer.parseInt(request.getParameter("page"));
 	
 		int listCount = list.size();
-		
-		//해당 페이지용 목록 조회
-		//ArrayList<Board> list = bservice.selectList(currentPage, limit);
 		
 		//총 페이지 수 계산 : 목록이 최소 1개일 때는 한 페이지로 처리함
 		//페이지 1이 되려면 = 목록 0.1 개 + 0.9 계산되게 함
@@ -68,22 +69,17 @@ public class AccomSearchServlet extends HttpServlet {
 		
 		RequestDispatcher view = null;
 		
-		if(list != null) {
 			view = request.getRequestDispatcher("views/accom/accomListView.jsp");
-			
 			request.setAttribute("list", list);
+			request.setAttribute("listCount", listCount);
 			request.setAttribute("currentPage", currentPage);
-			request.setAttribute("maxPage", maxPage);
 			request.setAttribute("startPage", startPage);
 			request.setAttribute("endPage", endPage);
-			request.setAttribute("listCount", listCount);
+			request.setAttribute("maxPage", maxPage);
+			request.setAttribute("arCntList", arCntList);
+			request.setAttribute("arAvgList", arAvgList);
 			
 			view.forward(request, response);
-		}else{
-			view = request.getRequestDispatcher("views/accom/accomError.jsp");
-			request.setAttribute("message", "숙소 검색 실패!");
-			view.forward(request, response);
-		}
 	}
 
 	/**

@@ -42,12 +42,18 @@ public class AccomDao {
 		ResultSet rset = null;
 		
 		//currentPage 에 해당되는 목록만 조회
-		String query = "select * from ("
+		/*String query = "select * from ("
 				+ "select rownum rnum, acc_id, biz_id, acc_name, acc_info, "
 				+ "acc_type, acc_address, acc_contact, acc_rank, "
 				+ "acc_oname, acc_rname, acc_rules, acc_facilities, acc_refund from "
 				+ "(select * from accommodation order by acc_name asc)) "
-				+ "where rnum >= ? and rnum <= ?";
+				+ "where rnum >= ? and rnum <= ?";*/
+		
+		String query = "select * from (select row_number() OVER (ORDER BY acc_id DESC) IDX, "
+				+ "acc_id, biz_id, acc_name, acc_info, acc_type, acc_address, "
+				+ "acc_contact, acc_rank, acc_oname, acc_rname, acc_rules, "
+				+ "acc_facilities, acc_refund from accommodation)"
+				+ "where idx between ? and ?";
 		
 		int startRow = (currentPage -1) * limit + 1;
 		int endRow = startRow + limit - 1;
@@ -344,8 +350,8 @@ public class AccomDao {
 		try {
 			for(AccomImage aimage : aimageList) {
 				pstmt = con.prepareStatement(query);
-				pstmt.setString(1, aimage.getImageOname());
-				pstmt.setString(2, aimage.getImageRname());
+				pstmt.setString(1, aimage.getImageRname());
+				pstmt.setString(2, aimage.getImageOname());
 				pstmt.setInt(3, aimage.getAccomId());
 				
 				result = pstmt.executeUpdate();
@@ -383,5 +389,143 @@ public class AccomDao {
 	      }
 	      return result;
 	   }
+
+	public ArrayList<AccomImage> selectAccomImageList(Connection con, int accomId) {
+		ArrayList<AccomImage> aimageList = null;
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String query = "select * from accommodation_image where acc_id = ?";
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, accomId);
+			rset = pstmt.executeQuery();
+			
+			if(rset != null) {
+				aimageList = new ArrayList<AccomImage>();
+				while(rset.next()) {
+					AccomImage aimage = new AccomImage(
+									rset.getString("IMAGE_RNAME"),
+									rset.getString("IMAGE_ONAME"),
+									accomId);
+					
+					aimageList.add(aimage);
+				}
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rset);
+		}
+		
+		return aimageList;
+	}
+
+	public ArrayList<Accommodation> selectTitleSearch(Connection con, String keyword, String asType) {
+		ArrayList<Accommodation> list = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String query = "select * from accommodation "
+				+ "where acc_name like ? and acc_type like ? order by acc_name asc";
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, "%" + keyword + "%");
+			pstmt.setString(2, asType);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset != null){
+				list = new ArrayList<Accommodation>();
+				
+				while(rset.next()) {
+					Accommodation a = new Accommodation();
+					
+					a.setAccId(rset.getInt("acc_id"));
+					a.setBizId(rset.getString("biz_id"));
+					a.setAccName(rset.getString("acc_name"));
+					a.setAccInfo(rset.getString("acc_info"));
+					a.setAccType(rset.getString("acc_type"));
+					a.setAccAddress(rset.getString("acc_address"));
+					a.setAccContact(rset.getString("acc_contact"));
+					a.setAccRank(rset.getString("acc_rank"));
+					a.setAccOname(rset.getString("acc_oname"));
+					a.setAccRname(rset.getString("acc_rname"));
+					a.setAccRules(rset.getString("acc_rules"));
+					a.setFacilities(rset.getString("acc_facilities"));
+					a.setAccRefund(rset.getString("acc_refund"));
+					list.add(a);
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return list;
+	}
+
+	public ArrayList<Integer> getAccomReviewCntList(Connection con) {
+		ArrayList<Integer> arCntList = null;
+		Statement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = "SELECT NVL(aNUM, 0) aNUM FROM ACCOMMODATION " + 
+				"LEFT JOIN (SELECT ar_accom_ID, COUNT(*) aNUM FROM ACCOM_REVIEW  GROUP BY ar_accom_id) " + 
+				"ON (acc_ID = aR_accom_ID) ORDER BY acc_id";
+		try {
+			pstmt = con.createStatement();
+			rset = pstmt.executeQuery(sql);
+			
+			if(rset != null) {
+				arCntList = new ArrayList<Integer>();
+				while(rset.next()) {
+					arCntList.add(rset.getInt("aNUM"));
+				}
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			
+		}
+		return arCntList;
+	}
+
+	public ArrayList<Double> getTourReviewAvgList(Connection con) {
+		ArrayList<Double> arAvgList = null;
+		Statement pstmt = null;
+		ResultSet rset = null;
+		
+		String query = "SELECT ROUND(NVL(aAVG, 0),2) aAVG from accommodation "
+				+ "LEFT JOIN (SELECT ar_accom_id, avg(ar_grade) aAVG " + 
+				"FROM accom_review " + 
+				"GROUP BY ar_accom_ID) ON (acc_ID = ar_accom_ID) " + 
+				"ORDER BY acc_id";
+		try {
+			pstmt = con.createStatement();
+			rset = pstmt.executeQuery(query);
+			
+			if(rset != null) {
+				arAvgList = new ArrayList<Double>();
+				while(rset.next()) {
+					arAvgList.add(rset.getDouble("aAVG"));
+				}
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			
+		}
+		return arAvgList;
+	}
 	
 }

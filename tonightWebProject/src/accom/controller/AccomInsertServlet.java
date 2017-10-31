@@ -95,6 +95,12 @@ public class AccomInsertServlet extends HttpServlet {
 			AccomImage aimage = null;
 			
 			if(originalFileName != null) {
+				
+				try {
+					Thread.sleep(1);
+				} catch (Exception e) {
+					
+				}
 				String renameFileName = new SimpleDateFormat("yyyyMMddHHmmssSSS").format(
 						new java.sql.Date(System.currentTimeMillis())) + "."
 						+ originalFileName.substring(originalFileName.lastIndexOf(".") + 1);
@@ -122,6 +128,7 @@ public class AccomInsertServlet extends HttpServlet {
 					System.out.println("대표이미지");
 				} else {
 					aimage = new AccomImage(renameFileName, originalFileName, accomId);
+					System.out.println("DKDKDK");
 					aimageList.add(aimage);
 					System.out.println("상세이미지");
 				}

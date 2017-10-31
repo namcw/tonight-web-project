@@ -66,6 +66,9 @@ public class AccomListServlet extends HttpServlet {
 		int endPage = startPage + limit - 1;
 			if(maxPage < endPage)
 				endPage = maxPage;
+			
+		ArrayList<Integer> arCntList = aservice.getAccomReviewCntList();
+		ArrayList<Double> arAvgList = aservice.getAccomReviewAvgList();
 		
 		RequestDispatcher view = null;
 		
@@ -77,6 +80,8 @@ public class AccomListServlet extends HttpServlet {
 			request.setAttribute("startPage", startPage);
 			request.setAttribute("endPage", endPage);
 			request.setAttribute("maxPage", maxPage);
+			request.setAttribute("arCntList", arCntList);
+			request.setAttribute("arAvgList", arAvgList);
 			view.forward(request, response);
 		}else{
 			view = request.getRequestDispatcher("views/accom/accomError.jsp");

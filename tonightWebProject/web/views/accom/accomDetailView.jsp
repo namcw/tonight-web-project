@@ -1,10 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="accom.model.vo.Accommodation, accom.model.vo.Room, accom.model.vo.AccomReview, java.util.*, java.sql.Date" %>
+<%@ page import="accom.model.vo.Accommodation, accom.model.vo.Room, accom.model.vo.AccomReview, accom.model.vo.AccomImage, java.util.*, java.sql.Date" %>
 <%
    Accommodation accom = (Accommodation)request.getAttribute("accom");
    ArrayList<Room> list = (ArrayList<Room>)request.getAttribute("list");
    ArrayList<AccomReview> areviewList = (ArrayList<AccomReview>) request.getAttribute("areviewList");
+   ArrayList<AccomImage> aimageList = (ArrayList<AccomImage>) request.getAttribute("aimageList");
    double gradeAvg = Double.parseDouble(String.valueOf(request.getAttribute("gradeAvg")));
    int currentPage = ((Integer)request.getAttribute("currentPage")).intValue();
 %>
@@ -50,8 +51,6 @@
 }
 
 .carousel-inner img {
-   -webkit-filter: grayscale(90%);
-   filter: grayscale(90%); /* make all photos black and white */
    width: 100%; /* Set width to 100% */
    margin: auto;
 }
@@ -163,58 +162,48 @@ function delete_event() {
 </script>
 <body>
 <%@ include file="../includes/header.jsp" %>
-<div class="jumbotron">
-
-</div>
+<div class="jumbotron"></div>
    <div class="container" id="toTop">
       <h3 class="text-center"><%=accom.getAccName()%></h3>
       <br>
       <div class="row">
    
          <div id="myCarousel" class="carousel slide col-md-8" data-ride="carousel"><!-- 이미지슬라이더 -->
-            <!-- Indicators -->
-            <ol class="carousel-indicators">
-               <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-               <li data-target="#myCarousel" data-slide-to="1"></li>
-               <li data-target="#myCarousel" data-slide-to="2"></li>
-            </ol>
+           <!-- Indicators -->
+			<ol class="carousel-indicators">
+				<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+				<% for(int i = 1; i < aimageList.size()+1 ; i++) { %>
+					<li data-target="#myCarousel" data-slide-to="<%= i %>"></li>
+				<% } %>
+			</ol>
 
-            <!-- Wrapper for slides -->
-            <div class="carousel-inner">
-               <div class="item active">
-                  <img src="/tonight/uploadfiles/la.jpg" alt="Los Angeles" style="width: 100%;">
-                  <div class="carousel-caption">
-                     <h3>New York</h3>
-                     <p>The atmosphere in New York is lorem ipsum.</p>
-                  </div>
-               </div>
-
-               <div class="item">
-                  <img src="/tonight/uploadfiles/chicago.jpg" alt="Chicago" style="width: 100%;">
-                  <div class="carousel-caption">
-                     <h3>Chicago</h3>
-                     <p>Thank you, Chicago - A night we won't forget.</p>
-                  </div>
-               </div>
-
-               <div class="item">
-                  <img src="/tonight/uploadfiles/ny.jpg" alt="New york" style="width: 100%;">
-                  <div class="carousel-caption">
-                     <h3>LA</h3>
-                     <p>Even though the traffic was a mess, we had the best time
-                        playing at Venice Beach!</p>
-                  </div>
-               </div>
+			<!-- Wrapper for slides -->
+			<div class="carousel-inner">
+				<div class="item active">
+					<img src="/tonight/auploadfiles/<%= accom.getAccRname() %>"
+						style="width: 100%;"> 
+				</div>
+			<% for(AccomImage aimage : aimageList) { %>
+					<div class="item">
+					<img src="/tonight/auploadfiles/<%= aimage.getImageRname() %>"
+						style="width: 100%;">
+					</div>
+				<% } %> 
 
 
-               <!-- Left and right controls -->
-               <a class="left carousel-control" href="#myCarousel" data-slide="prev"> 
-               <span class="glyphicon glyphicon-chevron-left"></span> <span class="sr-only">Previous</span>
-               </a> <a class="right carousel-control" href="#myCarousel" data-slide="next">
-               <span class="glyphicon glyphicon-chevron-right"></span> <span class="sr-only">Next</span>
-               </a>
-            </div>
-         </div><!-- end 이미지슬라이더 -->
+				<!-- Left and right controls -->
+				<a class="left carousel-control" href="#myCarousel"
+					data-slide="prev"> <span
+					class="glyphicon glyphicon-chevron-left"></span> <span
+					class="sr-only">Previous</span>
+				</a> <a class="right carousel-control" href="#myCarousel"
+					data-slide="next"> <span
+					class="glyphicon glyphicon-chevron-right"></span> <span
+					class="sr-only">Next</span>
+				</a>
+			</div>
+		</div>
+
          <div class="col-md-4">
             <hr>
             <div class="row">
@@ -222,7 +211,17 @@ function delete_event() {
                   <p>숙소 타입</p>
                </div>  
                <div class="col-xs-8">
-                  <p><%=accom.getAccType()%></p>
+               	  
+               	  <% if(accom.getAccType().equals("H")) { %>
+               	  		<p>호텔</p>
+               	  <% } else if(accom.getAccType().equals("M")) { %>
+               	  		<p>모텔</p>
+               	  <% } else if(accom.getAccType().equals("G")) { %>
+               	  		<p>게스트하우스</p>
+               	  <% } else{ %>
+               	  		<p>펜션</p>
+               	  <% } %>
+                  <%-- <p><%=accom.getAccType()%></p> --%>
                </div>
             </div>
             <hr>
@@ -274,6 +273,7 @@ function delete_event() {
          </div>
       </div><!-- end <div class="row">  -->
    </div><!-- end <div class="container" id="toTop"> -->
+
 <div class="container">
       <div class="row">
          <div class="col-md-8">

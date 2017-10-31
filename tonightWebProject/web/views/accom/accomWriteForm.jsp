@@ -152,35 +152,23 @@ container {
 						<p>편의시설</p>
 					</div>
 					<div class="col-xs-8">
-						<label class="checkbox-inline">
-							<input type="checkbox" id="inlineCheckbox1" name="afacilities" value="주차장"> 주차장
-						</label>
-						<label class="checkbox-inline">
-  							<input type="checkbox" id="inlineCheckbox2" name="afacilities" value="수영장"> 수영장
-						</label>
-						<label class="checkbox-inline">
-  							<input type="checkbox" id="inlineCheckbox3" name="afacilities" value="엘레베이터"> 엘레베이터
-						</label>
-						<br><br>
-						<label class="checkbox-inline">
-							<input type="checkbox" id="inlineCheckbox1" name="afacilities" value="무선인터넷"> 무선인터넷
-						</label>
-						<label class="checkbox-inline">
-  							<input type="checkbox" id="inlineCheckbox2" name="afacilities" value="부엌"> 부엌
-						</label>
-						<label class="checkbox-inline">
-  							<input type="checkbox" id="inlineCheckbox3" name="afacilities" value="욕조"> 욕조
-						</label>
-						<br><br>
-						<label class="checkbox-inline">
-							<input type="checkbox" id="inlineCheckbox1" name="afacilities" value="air"> 에어컨
-						</label>
-						<label class="checkbox-inline">
-  							<input type="checkbox" id="inlineCheckbox2" name="afacilities" value="wash"> 세탁기
-						</label>
-						<label class="checkbox-inline">
-  							<input type="checkbox" id="inlineCheckbox3" name="afacilities" value="tv"> TV
-						</label>
+						<table width="100%">
+						<tr>
+							<td><input type="checkbox" id="inlineCheckbox1" name="afacilities" value="주차장"> 주차장</td>
+							<td><input type="checkbox" id="inlineCheckbox2" name="afacilities" value="수영장"> 수영장</td>
+							<td><input type="checkbox" id="inlineCheckbox3" name="afacilities" value="엘레베이터"> 엘레베이터</td>
+						</tr>
+						<tr>
+							<td><input type="checkbox" id="inlineCheckbox1" name="afacilities" value="무선인터넷"> 무선인터넷</td>
+							<td><input type="checkbox" id="inlineCheckbox2" name="afacilities" value="부엌"> 부엌</td>
+							<td><input type="checkbox" id="inlineCheckbox3" name="afacilities" value="욕조"> 욕조</td>
+						</tr>
+						<tr>
+							<td><input type="checkbox" id="inlineCheckbox1" name="afacilities" value="air"> 에어컨</td>
+							<td><input type="checkbox" id="inlineCheckbox2" name="afacilities" value="wash"> 세탁기</td>
+							<td><input type="checkbox" id="inlineCheckbox3" name="afacilities" value="tv"> TV</td>
+						</tr>
+						</table>
 					</div>
 				</div>
 				<hr>

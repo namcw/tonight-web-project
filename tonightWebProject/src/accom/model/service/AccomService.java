@@ -75,13 +75,6 @@ public class AccomService {
 		return result;
 	}
 
-	//숙소 검색 처리용
-	public ArrayList<Accommodation> selectSearch(String keyword) {
-		Connection con =getConnection();
-		ArrayList<Accommodation> list = new AccomDao().selectTitleSearch(con, keyword);
-		close(con);
-		return list;
-	}
 */
 	public ArrayList<AccomReview> selectAccomReviewList(int accomId) {
 		Connection con = getConnection();
@@ -115,4 +108,30 @@ public class AccomService {
 	      return result;
 	      
 	   }
+
+	public ArrayList<AccomImage> selectAccomImageList(int accomId) {
+		Connection con = getConnection();
+		ArrayList<AccomImage> aimageList = new AccomDao().selectAccomImageList(con, accomId);
+		return aimageList;
+	}
+
+	public ArrayList<Accommodation> selectSearch(String keyword, String asType) {
+		Connection con =getConnection();
+		ArrayList<Accommodation> list = new AccomDao().selectTitleSearch(con, keyword, asType);
+		close(con);
+		return list;
+	}
+
+	public ArrayList<Integer> getAccomReviewCntList() {
+		Connection con = getConnection();
+		ArrayList<Integer> arCntList = new AccomDao().getAccomReviewCntList(con);
+		return arCntList;
+	}
+
+	public ArrayList<Double> getAccomReviewAvgList() {
+		Connection con = getConnection();
+		ArrayList<Double> arAvgList = new AccomDao().getTourReviewAvgList(con);
+		return arAvgList;
+	}
 }
+

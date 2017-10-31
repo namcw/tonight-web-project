@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import accom.model.service.AccomService;
 import accom.model.service.RoomService;
+import accom.model.vo.AccomImage;
 import accom.model.vo.AccomReview;
 import accom.model.vo.Accommodation;
 import accom.model.vo.Room;
@@ -49,6 +50,7 @@ public class AccomDetailServlet extends HttpServlet {
 		ArrayList<AccomReview> areviewList = aservice.selectAccomReviewList(accomId);
 		double gradeAvg = aservice.getAccomReviewGradeAvg(accomId);
 		ArrayList<Room> list = rservice.selectList(accomId);
+		ArrayList<AccomImage> aimageList = aservice.selectAccomImageList(accomId);
 		
 		RequestDispatcher view = null;
 		if(accom != null) {
@@ -58,6 +60,7 @@ public class AccomDetailServlet extends HttpServlet {
 			request.setAttribute("areviewList", areviewList);
 			request.setAttribute("gradeAvg", gradeAvg);
 			request.setAttribute("currentPage", currentPage);
+			request.setAttribute("aimageList", aimageList);
 			view.forward(request, response);
 		}else{
 			view = request.getRequestDispatcher("views/accom/accomError.jsp");
