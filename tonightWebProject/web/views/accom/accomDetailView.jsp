@@ -35,6 +35,7 @@
    }
 
 .container {
+   width: 600px;
    padding: 80px 60px;
 }
 
@@ -635,21 +636,73 @@ function delete_event() {
                </div>
             </div>
          </div>
-         <div class="col-md-4 hidden-sm hidden-xs">
-            <div class="panel panel-default panel-affix" id="myScrollspy">
-
-    
-    
-    
-    
-               <div class="panel-heading">결제 공간</div>
-               <div class="panel-body">
-                  <div class="nav nav-pills nav-stacked">
-                     <img src="https://placehold.it/150x80?text=IMAGE"
-                        class="img-responsive" style="width: 100%" alt="Image"> <a
-                        href="#toTop">Back To Top </a>
-                  </div>
-               </div>
+        <div class="col-md-4 hidden-sm hidden-xs text-center">
+			<div class="panel-affix" id="myScrollspy">
+				
+				<div class="panel panel-default">	
+   					<div class="panel-heading">결제 공간</div>
+               		<div class="panel-body">
+                  	<form action="/tonight/areserve" method="post" id="reserveform">
+                  		<input type="hidden" name="accid" value="<%= accom.getAccId() %>">
+                  		<% if(member != null) { %>
+							<input type="hidden" name="registerid" value="<%= member.getMemberId() %>">
+						<% } %>
+						<div class="form-group">
+							<label class="control-label col-sm-4" style="padding-top:6px">체 크 인</label>
+							<div class="input-group col-sm-8">
+								<input type="hidden" name="sdatein" class="sdatein">
+								<input type="text" disabled class="form-control text-center sdatein">
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="control-label col-sm-4" style="padding-top:6px">체크아웃</label>
+							<div class="input-group col-sm-8">
+								<input type="hidden" name="adatein" class="adatein">
+								<input type="text" disabled class="form-control text-center adatein">
+							</div>
+						</div>
+						<div class="form-group">
+		                     <label class="control-label col-sm-4" style="padding-top:6px">성인</label>
+		                     <div class="input-group number-spinner col-sm-8">
+		                        <span class="input-group-btn">
+		                            <a class="btn btn-danger" data-dir="dwn"><span class="glyphicon glyphicon-minus"></span></a>
+		                        </span>
+		                        
+		                        <input type="text" disabled id="adult" class="form-control text-center" value="1" max=9 min=1>
+		                        <input type="hidden" name="adult" value="1">
+		                        <span class="input-group-btn">
+		                            <a class="btn btn-info" data-dir="up"><span class="glyphicon glyphicon-plus"></span></a>
+		                        </span>
+		                    </div>
+		                </div>
+		                <div class="form-group">
+		                   <label class="control-label col-sm-4" style="padding-top:6px"><strong>소인</strong></label>
+		                   <div class="input-group number-spinner col-sm-8">
+		                        <span class="input-group-btn">
+		                            <a class="btn btn-danger" data-dir="dwn"><span class="glyphicon glyphicon-minus"></span></a>
+		                        </span>
+		                        <input type="text" disabled id="child" class="form-control text-center" value="0" max=9 min=0>
+		                        <input type="hidden" name="child" value="0">
+		                        <span class="input-group-btn">
+		                            <a class="btn btn-info" data-dir="up"><span class="glyphicon glyphicon-plus"></span></a>
+		                        </span>
+		                    </div>
+		                </div>
+		                <div class="form-group">
+		                   <label class="control-label col-sm-4" style="padding-top:20px"><strong>총 가격</strong></label>
+		                   <div class="input-group number-spinner col-sm-8">
+		                   		<input type="hidden" name="totalPrice" id="totalPricein">
+		                        <h3><b id="totalPrice"></b> 원</h3>
+		                    </div>
+		                </div>
+		                <div>
+		                	<button id="reserveBtn" type="button" class="btn btn-info col-sm-12" style="height:50px !important">예약</button>
+		                </div>
+                  	</form>
+               		</div>
+               		<hr>
+					<a href="#toTop">위로 가기 </a>
+				</div>
             </div>
          </div>
 
@@ -755,10 +808,10 @@ $(function() {
             }
         },
         
-        select: function (date, context) {
+        <%-- select: function (date, context) {
            var sdate = (date[0] === null ? 'null' :date[0].format('YYYY-MM-DD'));
            
-         <%-- <% for (TourConf tconf : tconfList) { %>
+         <% for (TourConf tconf : tconfList) { %>
             if(sdate == "<%= tconf.getStartDate() %>") {
                var dur = <%= (int)((tconf.getArrivalDate().getTime()-tconf.getStartDate().getTime())/(1000 * 60 * 60 * 24)) %>;
                $('#tconf1').text(dur+"박"+(dur+1)+"일");
@@ -767,34 +820,39 @@ $(function() {
                $('#tconf4').text("<%= tconf.getTourAdultPrice() %> 원");
                $('#tconf5').text("<%= tconf.getTourChildPrice() %> 원");
             }
-           <% } %> --%>
+           <% } %> 
            
-        },
+        }, --%>
         lang: 'ko',
         minDate: today
     });
    
    
    <%-- function moveCalendar() {
-      var months = (parseInt('<%=tconfList.get(0).getStartDate()%>'.substring(0,4))-parseInt(today.substring(0,4)))*12;
-      months += (parseInt('<%=tconfList.get(0).getStartDate()%>'.substring(5,7))-parseInt(today.substring(5,7)));
-      
-      $('.pignose-calendar-unit-active').removeClass('pignose-calendar-unit-active');
-      $('.pignose-calendar-unit-first-active').removeClass('pignose-calendar-unit-first-active');
-      for(var i = 0; i < months; i++) {
-         $('.pignose-calendar-top-next').click();
-      }
-      $('[data-date='+"<%=tconfList.get(0).getStartDate()%>"+']').addClass('pignose-calendar-unit-active');
-      $('[data-date='+"<%=tconfList.get(0).getStartDate()%>"+']').addClass('pignose-calendar-unit-first-active');
-      var dur = <%= (int)((tconfList.get(0).getArrivalDate().getTime()-tconfList.get(0).getStartDate().getTime())/(1000 * 60 * 60 * 24)) %>;
-      $('#tconf1').text(dur+"박"+(dur+1)+"일");
-      $('#tconf2').text("<%= tconfList.get(0).getStartDate() %>");
-      $('#tconf3').text("<%= tconfList.get(0).getArrivalDate() %>");
-      $('#tconf4').text("<%= tconfList.get(0).getTourAdultPrice() %> 원");
-      $('#tconf5').text("<%= tconfList.get(0).getTourChildPrice() %> 원");
+	   var months = (parseInt('<%=tconfList.get(0).getStartDate()%>'.substring(0,4))-parseInt(today.substring(0,4)))*12;
+		months += (parseInt('<%=tconfList.get(0).getStartDate()%>'.substring(5,7))-parseInt(today.substring(5,7)));
+		
+		$('.pignose-calendar-unit-active').removeClass('pignose-calendar-unit-active');
+		$('.pignose-calendar-unit-first-active').removeClass('pignose-calendar-unit-first-active');
+		for(var i = 0; i < months; i++) {
+			$('.pignose-calendar-top-next').click();
+		}
+		$('[data-date='+"<%=tconfList.get(0).getStartDate()%>"+']').addClass('pignose-calendar-unit-active');
+		$('[data-date='+"<%=tconfList.get(0).getStartDate()%>"+']').addClass('pignose-calendar-unit-first-active');
+		var dur = <%= (int)((tconfList.get(0).getArrivalDate().getTime()-tconfList.get(0).getStartDate().getTime())/(1000 * 60 * 60 * 24)) %>;
+		$('#tconf1').text(dur+"박"+(dur+1)+"일");
+		$('#tconf2').text("<%= tconfList.get(0).getStartDate() %>");
+		$('.sdatein').val("<%= tconfList.get(0).getStartDate() %>");
+		$('#tconf3').text("<%= tconfList.get(0).getArrivalDate() %>");
+		$('.adatein').val("<%= tconfList.get(0).getArrivalDate() %>");
+		$('#tconf4').text("<%= tconfList.get(0).getTourAdultPrice() %> 원");
+		$('#tconf5').text("<%= tconfList.get(0).getTourChildPrice() %> 원");
+		$('#totalPrice').text($('#adult').val()*<%= tconfList.get(0).getTourAdultPrice() %>
+									+ $('#child').val()*<%= tconfList.get(0).getTourChildPrice() %>);
+		$('#totalPricein').val($('#totalPrice').text());
    }
    
-   moveCalendar();  --%>
+   moveCalendar(); --%>
 
 });
 </script>

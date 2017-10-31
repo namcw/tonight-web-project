@@ -31,6 +31,7 @@
 }
 
 .container {
+	width: 600px;
 	padding: 80px 60px;
 }
 
@@ -154,6 +155,12 @@
 <div class="jumbotron"></div>
 <div class="container" id="toTop">
 	<h3 class="text-center"><%=tour.getTourTitle()%></h3>
+	<% if(member != null && member.getMemberId().equals(tour.getGuideId())) { %>
+	<div class="pull-right">
+		<button type="button" class="btn btn-default">수정</button>
+		<a href="/tonight/tdelete?tid=<%= tour.getTourId() %>" type="button" class="btn btn-default">삭제</a>
+	</div>
+	<% } %>
 	<br>
 	<div class="row">
 
@@ -239,8 +246,6 @@
 					<div class="col-sm-6">
 						<div id="schedules">
 				        	<div class="calendar-schedules"></div>
-				        	
-				        	
 				    	</div>
 					</div>
 					<div class="col-sm-6 text-center">
@@ -335,7 +340,7 @@
 					후기
 					<%
 					if (treviewList.size() > 0) {
-				%>
+					%>
 					<p class="pull-right">
 						(<%=treviewList.size()%>)
 					</p>
@@ -349,8 +354,53 @@
 				<div class="panel-body box-info">
 
 					<div class="tab-pane active animated fadeInRight" id="comments">
+						
 						<div class="scroll-widget">
 							<ul class="media-list">
+								<% if(member != null) { %>
+								<li id="reviewst" class="media"><a class="pull-left" href="#fakelink">
+										<img class="media-object"
+										src="https://bootdey.com/img/Content/User_for_snippets.png"
+										alt="Avatar">
+								</a>
+									<div class="media-body">
+										<form action="/tonight/trinsert" method="post" id="submit">
+										
+											<input type="hidden" name="tid" value="<%= tour.getTourId() %>">
+											
+											<div class="row">
+										        <div class="col-xs-9 form-group">
+										        	<input type="text" name="writerid" class="form-control col-xs-3" value="<%=member.getMemberId()%>" readonly>
+										        </div>
+										        <div class="col-xs-3 form-group pull-right">
+										        	<select class="selectpicker form-control col-xs-3" name="grade">
+													<option>10</option>
+													<option>9</option>
+													<option>8</option>
+													<option>7</option>
+													<option>6</option>
+													<option>5</option>
+													<option>4</option>
+													<option>3</option>
+													<option>2</option>
+													<option>1</option>
+												</select>
+										        </div>
+									      	</div>
+										    	<textarea class="form-control" id="comments" name="comments" placeholder="Comment" rows="5"></textarea>
+										      	<br>
+											    <div class="row">
+											    	<div class="col-md-12 form-group">
+											        	<input  class="btn pull-right" type="submit">
+											        </div>
+											   	</div>
+											</form> 
+										
+										
+										
+									</div>
+									<p></p></li>
+									<% } %>
 								<%
 									if (treviewList.isEmpty()) {
 								%>
@@ -431,8 +481,66 @@
 				<div class="panel panel-default">
 					<div class="panel-heading">예약/결제</div>
 					<div class="panel-body">
-							<a href="#toTop">Back To Top </a>
+					<form action="/tonight/treserve" method="post" id="reserveform">
+						<input type="hidden" name="tourid" value="<%= tour.getTourId() %>">
+						<% if(member != null) { %>
+							<input type="hidden" name="registerid" value="<%= member.getMemberId() %>">
+						<% } %>
+						<div class="form-group">
+							<label class="control-label col-sm-4" style="padding-top:6px">출발일</label>
+							<div class="input-group col-sm-8">
+								<input type="hidden" name="sdatein" class="sdatein">
+								<input type="text" disabled class="form-control text-center sdatein">
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="control-label col-sm-4" style="padding-top:6px">도착일</label>
+							<div class="input-group col-sm-8">
+								<input type="hidden" name="adatein" class="adatein">
+								<input type="text" disabled class="form-control text-center adatein">
+							</div>
+						</div>
+						<div class="form-group">
+		                     <label class="control-label col-sm-4" style="padding-top:6px">성인</label>
+		                     <div class="input-group number-spinner col-sm-8">
+		                        <span class="input-group-btn">
+		                            <a class="btn btn-danger" data-dir="dwn"><span class="glyphicon glyphicon-minus"></span></a>
+		                        </span>
+		                        
+		                        <input type="text" disabled id="adult" class="form-control text-center" value="1" max=9 min=1>
+		                        <input type="hidden" name="adult" value="1">
+		                        <span class="input-group-btn">
+		                            <a class="btn btn-info" data-dir="up"><span class="glyphicon glyphicon-plus"></span></a>
+		                        </span>
+		                    </div>
+		                </div>
+		                <div class="form-group">
+		                   <label class="control-label col-sm-4" style="padding-top:6px"><strong>소인</strong></label>
+		                   <div class="input-group number-spinner col-sm-8">
+		                        <span class="input-group-btn">
+		                            <a class="btn btn-danger" data-dir="dwn"><span class="glyphicon glyphicon-minus"></span></a>
+		                        </span>
+		                        <input type="text" disabled id="child" class="form-control text-center" value="0" max=9 min=0>
+		                        <input type="hidden" name="child" value="0">
+		                        <span class="input-group-btn">
+		                            <a class="btn btn-info" data-dir="up"><span class="glyphicon glyphicon-plus"></span></a>
+		                        </span>
+		                    </div>
+		                </div>
+		                <div class="form-group">
+		                   <label class="control-label col-sm-4" style="padding-top:20px"><strong>총 가격</strong></label>
+		                   <div class="input-group number-spinner col-sm-8">
+		                   		<input type="hidden" name="totalPrice" id="totalPricein">
+		                        <h3><b id="totalPrice"></b> 원</h3>
+		                    </div>
+		                </div>
+		                <div>
+		                	<button id="reserveBtn" type="button" class="btn btn-info col-sm-12" style="height:50px !important">예약</button>
+		                </div>
+		            </form>
 					</div>
+					<hr>
+					<a href="#toTop">위로 가기 </a>
 				</div>
 			</div>
 		</div>
@@ -525,6 +633,82 @@
 <script type="text/javascript"
 	src="/tonight/js/pignose.calendar.min.js"></script>
 <script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=1524280cea98188e73c2051d02dc247c&libraries=services"></script>
+<script>
+$('#reserveBtn').click(function() {
+	<% if(member != null) { %>
+		$('#reserveform').submit();
+	<% } else { %>
+		alert("로그인해야됩니다!");
+	<% } %>
+});
+</script>
+<script>
+$(document).on('click', '.number-spinner a', function () {
+    var btn = $(this),
+    input = btn.closest('.number-spinner').find('input'),
+    oldValue = input.val().trim();
+
+if (btn.attr('data-dir') == 'up') {
+  if(oldValue < input.attr('max')){
+    oldValue++;
+  }
+} else {
+  if (oldValue > input.attr('min')) {
+    oldValue--;
+  }
+}
+input.val(oldValue);
+input.next().val(oldValue);
+changeTotalPrice();
+
+});
+
+function changeTotalPrice() {
+	$('#totalPrice').text($('#tconf4').text().substring(0,$('#tconf4').text().length-1)*$('#adult').val()
+			+ $('#tconf5').text().substring(0,$('#tconf5').text().length-1)*$('#child').val());
+	$('#totalPricein').val($('#totalPrice').text());
+}
+</script>
+
+<script type="text/javascript">
+	$("#submit").submit(function(e) {
+		var postData = $(this).serializeArray();
+	    var formURL = $(this).attr("action");
+		$.ajax({
+	        url: formURL,
+	        data: postData,
+	        type: 'POST',
+	        success: function(result){
+	        	var tag =
+	        		'<li class="media">' +
+	        		'<a class="pull-left" href="#fakelink">' +
+	        		'<img class="media-object" src="https://bootdey.com/img/Content/User_for_snippets.png" alt="Avatar"></a>' +
+	        		'<div class="media-body">' +
+	        		'<h4 class="media-heading">' +
+	        		'<a href="#fakelink">' +
+	        		result["writerId"]+
+	        		'</a> <small>'+
+	        		result["today"]+
+	        		'</small></h4>' +
+	        		'<div class="row">' +
+	        		'<img src="/tonight/img/starGrade'+
+	        		result["grade"]+
+	        		'.png" class="col-xs-3" style="margin-top: -10px">' +
+	        		'<div class="col-xs-9"></div></div>' +
+	        		'<p>'+
+	        		result["comment"]+
+	        		'</p>' +
+	        		'</div><p></p></li>';
+	        	$('#reviewst').after(tag);
+	        },
+	        error: function(result){
+	        }
+	    });
+		e.preventDefault();
+		//e.unbind();
+	});
+
+</script>
 <script type="text/javascript">
 $(function() {
 
@@ -564,10 +748,10 @@ $(function() {
         },
         schedules: [
         
-        <% for (TourConf tconf : tconfList) { %>
+            <% for (TourConf tconf : tconfList) { %>
         	
         	{name: "<%= tconf.getTourState() %>", date:  "<%= tconf.getStartDate() %>"},
-        <% } %>
+        	<% } %>
        	],
         
         select: function (date, context) {
@@ -578,9 +762,14 @@ $(function() {
 					var dur = <%= (int)((tconf.getArrivalDate().getTime()-tconf.getStartDate().getTime())/(1000 * 60 * 60 * 24)) %>;
 					$('#tconf1').text(dur+"박"+(dur+1)+"일");
 					$('#tconf2').text("<%= tconf.getStartDate() %>");
+					$('.sdatein').val("<%= tconf.getStartDate() %>");
 					$('#tconf3').text("<%= tconf.getArrivalDate() %>");
+					$('.adatein').val("<%= tconf.getArrivalDate() %>");
 					$('#tconf4').text("<%= tconf.getTourAdultPrice() %> 원");
 					$('#tconf5').text("<%= tconf.getTourChildPrice() %> 원");
+					$('#totalPrice').text($('#adult').val()*<%= tconf.getTourAdultPrice() %>
+										+ $('#child').val()*<%= tconf.getTourChildPrice() %>);
+					$('#totalPricein').val($('#totalPrice').text());
 				}
 	        <% } %>
 	        
@@ -602,13 +791,16 @@ $(function() {
 		var dur = <%= (int)((tconfList.get(0).getArrivalDate().getTime()-tconfList.get(0).getStartDate().getTime())/(1000 * 60 * 60 * 24)) %>;
 		$('#tconf1').text(dur+"박"+(dur+1)+"일");
 		$('#tconf2').text("<%= tconfList.get(0).getStartDate() %>");
+		$('.sdatein').val("<%= tconfList.get(0).getStartDate() %>");
 		$('#tconf3').text("<%= tconfList.get(0).getArrivalDate() %>");
+		$('.adatein').val("<%= tconfList.get(0).getArrivalDate() %>");
 		$('#tconf4').text("<%= tconfList.get(0).getTourAdultPrice() %> 원");
 		$('#tconf5').text("<%= tconfList.get(0).getTourChildPrice() %> 원");
+		$('#totalPrice').text($('#adult').val()*<%= tconfList.get(0).getTourAdultPrice() %>
+									+ $('#child').val()*<%= tconfList.get(0).getTourChildPrice() %>);
+		$('#totalPricein').val($('#totalPrice').text());
 	}
-	
 	moveCalendar();
-	
 });
 </script>
 <script>
