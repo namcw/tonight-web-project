@@ -73,33 +73,33 @@ public class RoomDao {
 	}
 
 	public int insertRoom(Connection con, Room r) {
-		int result = 0;
-		PreparedStatement pstmt = null;
-	
-		String query = "insert into room values ("
-				+ "(select max(ROOM_ID) + 1 from room), "
-				+ "?,?, ?, ?, ?, ?, ?)";
-		
-		try {
-			pstmt = con.prepareStatement(query);
-			pstmt.setInt(1, r.getAccId());
-			pstmt.setString(2, r.getRoomName());
-			pstmt.setString(3, r.getRoomDetails());
-			pstmt.setInt(4, r.getWeekendAdultPrice());
-			pstmt.setInt(5, r.getWeekendChildPrice());
-			pstmt.setDouble(6, r.getWeekdaysAdultPrice());
-			pstmt.setInt(7, r.getWeekdaysChildPrice());
-			
-			result = pstmt.executeUpdate();
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			close(pstmt);
-		}
-		
-		return result;
-	}
+	      int result = 0;
+	      PreparedStatement pstmt = null;
+	   
+	      String query = "insert into room values ("
+	            + "(select max(ROOM_ID) + 1 from room), "
+	            + "?,?, ?, ?, ?, ?, ?)";
+	      
+	      try {
+	         pstmt = con.prepareStatement(query);
+	         pstmt.setInt(1, r.getAccId());
+	         pstmt.setString(2, r.getRoomName());
+	         pstmt.setString(3, r.getRoomDetails());
+	         pstmt.setInt(4, r.getWeekendAdultPrice());
+	         pstmt.setInt(5, r.getWeekendChildPrice());
+	         pstmt.setDouble(6, r.getWeekdaysAdultPrice());
+	         pstmt.setInt(7, r.getWeekdaysChildPrice());
+	         
+	         result = pstmt.executeUpdate();
+	         
+	      } catch (Exception e) {
+	         e.printStackTrace();
+	      } finally {
+	         close(pstmt);
+	      }
+	      
+	      return result;
+	   }
 	
 	
 /*

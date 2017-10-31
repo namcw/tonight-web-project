@@ -288,7 +288,7 @@ function delete_event() {
 
                   <div class="col-sm-6 text-center">
 
-                     <hr>
+                                          <hr>
                      <%
                         for (Room room : list) {
                      %>
@@ -343,23 +343,23 @@ function delete_event() {
                      %>
                   </div>
                   <br> <br> <br> <br>
-			                 <%--   <table class="table table-hover">
-			                   <tr><th>객실명</th><th>객실상세정보</th><th>주말성인가격</th><th>주말소인가격</th><th>주중성인가격</th><th>주중소인가격</th></tr>
-									<%
-										for(Room r : list){
-									%>
-										<tr height="30">
-										<td><%= r.getRoomName() %></td>
-										<td><%= r.getRoomDetails() %></td>
-										<td><%= r.getWeekendAdultPrice() %></td>
-										<td><%= r.getWeekendChildPrice()%></td>
-										<td><%= r.getWeekdaysAdultPrice() %></td>
-										<td><%= r.getWeekdaysChildPrice() %></td>
-									<!--<input type="radio" name="test" value="1" onclick="chk()">상세보기
-										<input type="radio" name="test" value="2" onclick="chk()">접기 -->
-										</tr>
-									<%  } %>
-									</table> --%>
+                          <%--   <table class="table table-hover">
+                            <tr><th>객실명</th><th>객실상세정보</th><th>주말성인가격</th><th>주말소인가격</th><th>주중성인가격</th><th>주중소인가격</th></tr>
+                           <%
+                              for(Room r : list){
+                           %>
+                              <tr height="30">
+                              <td><%= r.getRoomName() %></td>
+                              <td><%= r.getRoomDetails() %></td>
+                              <td><%= r.getWeekendAdultPrice() %></td>
+                              <td><%= r.getWeekendChildPrice()%></td>
+                              <td><%= r.getWeekdaysAdultPrice() %></td>
+                              <td><%= r.getWeekdaysChildPrice() %></td>
+                           <!--<input type="radio" name="test" value="1" onclick="chk()">상세보기
+                              <input type="radio" name="test" value="2" onclick="chk()">접기 -->
+                              </tr>
+                           <%  } %>
+                           </table> --%>
                   <%-- <% for(TourConf tconf : tconfList) { %>
                      <p>시작일: <%= tconf.getStartDate() %>, 도착일: <%= tconf.getArriavlaDate() %>, 성인금액:<%= tconf.getTourAdultPrice() %>, 소인가격: <%= tconf.getTourChildPrice() %> </p>
                   <% } %> --%>
@@ -399,80 +399,80 @@ function delete_event() {
                   String[] facilitiess = accom.getFacilities().split(",");
                   boolean[] checked = new boolean[9];
                   for(int i = 0; i < facilitiess.length; i++) {
-                	  if(facilitiess[i].equals("주차장"))
-                		  checked[0] = true;
+                     if(facilitiess[i].equals("주차장"))
+                        checked[0] = true;
                       if(facilitiess[i].equals("수영장"))
-                    	  checked[1] = true;
+                         checked[1] = true;
                       if(facilitiess[i].equals("엘레베이터"))
-                    	  checked[2] = true;
+                         checked[2] = true;
                       if(facilitiess[i].equals("무선인터넷"))
-                    	  checked[3] = true;
+                         checked[3] = true;
                       if(facilitiess[i].equals("부엌"))
-                    	  checked[4] = true;
+                         checked[4] = true;
                       if(facilitiess[i].equals("욕조"))
-                    	  checked[5] = true;
+                         checked[5] = true;
                       if(facilitiess[i].equals("에어컨"))
-                    	  checked[6] = true;
+                         checked[6] = true;
                       if(facilitiess[i].equals("세탁기"))
-                    	  checked[7] = true;
+                         checked[7] = true;
                       if(facilitiess[i].equals("TV"))
-                    	  checked[8] = true;
+                         checked[8] = true;
                   }
                   %>
                   
                   <table width="100%">
-						<tr>
-						<%	if(checked[0] == true){ %>
-						<td><input type="checkbox" name="afacilities" value="주차장" checked> 주차장</td>
-						<%  }else{  %>
-						<td><input type="checkbox" name="afacilities" value="주차장"> 주차장</td>	
-						<%  } %>
-						<%	if(checked[1] == true){ %>
-						<td><input type="checkbox" name="afacilities" value="수영장" checked> 수영장</td>
-						<%  }else{  %>
-						<td><input type="checkbox" name="afacilities" value="수영장"> 수영장</td>
-						<%  } %>
-						<%	if(checked[2] == true){ %>
-						<td><input type="checkbox" name="afacilities" value="엘레베이터" checked> 엘레베이터</td>
-						<%  }else{  %>
-						<td><input type="checkbox" name="afacilities" value="엘레베이터"> 엘레베이터</td>
-						<%  } %>
-						</tr>
-						<tr>
-						<%	if(checked[3] == true){ %>
-						<td><input type="checkbox" name="afacilities" value="무선인터넷" checked> 무선인터넷</td>
-						<%  }else{  %>
-						<td><input type="checkbox" name="afacilities" value="무선인터넷" > 무선인터넷</td>
-						<%  } %>
-						<%	if(checked[4] == true){ %>
-						<td><input type="checkbox" name="afacilities" value="부엌" checked> 부엌</td>
-						<%  }else{  %>
-						<td><input type="checkbox" name="afacilities" value="부엌" > 부엌</td>
-						<%  } %>
-						<%	if(checked[5] == true){ %>
-						<td><input type="checkbox" name="afacilities" value="욕조" checked> 욕조</td>
-						<%  }else{  %>
-						<td><input type="checkbox" name="afacilities" value="욕조" > 욕조</td>
-						<%  } %>
-						</tr>
-						<tr>
-						<%	if(checked[6] == true){ %>
-						<td><input type="checkbox" name="afacilities" value="에어컨" checked> 에어컨</td>
-						<%  }else{  %>
-						<td><input type="checkbox" name="afacilities" value="에어컨" > 에어컨</td>
-						<%  } %>
-						<%	if(checked[7] == true){ %>	
-						<td><input type="checkbox" name="afacilities" value="세탁기" checked> 세탁기</td>
-						<%  }else{  %>
-						<td><input type="checkbox" name="afacilities" value="세탁기" > 세탁기</td>
-						<%  } %>
-						<%	if(checked[8] == true){ %>
-						<td><input type="checkbox" name="afacilities" value="TV" checked> TV</td>
-						<%  }else{  %>
-						<td><input type="checkbox" name="afacilities" value="TV" > TV</td>
-						<%  } %>
-						</tr>
-					</table>
+                  <tr>
+                  <%   if(checked[0] == true){ %>
+                  <td><input type="checkbox" name="afacilities" value="주차장" checked> 주차장</td>
+                  <%  }else{  %>
+                  <td><input type="checkbox" name="afacilities" value="주차장"> 주차장</td>   
+                  <%  } %>
+                  <%   if(checked[1] == true){ %>
+                  <td><input type="checkbox" name="afacilities" value="수영장" checked> 수영장</td>
+                  <%  }else{  %>
+                  <td><input type="checkbox" name="afacilities" value="수영장"> 수영장</td>
+                  <%  } %>
+                  <%   if(checked[2] == true){ %>
+                  <td><input type="checkbox" name="afacilities" value="엘레베이터" checked> 엘레베이터</td>
+                  <%  }else{  %>
+                  <td><input type="checkbox" name="afacilities" value="엘레베이터"> 엘레베이터</td>
+                  <%  } %>
+                  </tr>
+                  <tr>
+                  <%   if(checked[3] == true){ %>
+                  <td><input type="checkbox" name="afacilities" value="무선인터넷" checked> 무선인터넷</td>
+                  <%  }else{  %>
+                  <td><input type="checkbox" name="afacilities" value="무선인터넷" > 무선인터넷</td>
+                  <%  } %>
+                  <%   if(checked[4] == true){ %>
+                  <td><input type="checkbox" name="afacilities" value="부엌" checked> 부엌</td>
+                  <%  }else{  %>
+                  <td><input type="checkbox" name="afacilities" value="부엌" > 부엌</td>
+                  <%  } %>
+                  <%   if(checked[5] == true){ %>
+                  <td><input type="checkbox" name="afacilities" value="욕조" checked> 욕조</td>
+                  <%  }else{  %>
+                  <td><input type="checkbox" name="afacilities" value="욕조" > 욕조</td>
+                  <%  } %>
+                  </tr>
+                  <tr>
+                  <%   if(checked[6] == true){ %>
+                  <td><input type="checkbox" name="afacilities" value="에어컨" checked> 에어컨</td>
+                  <%  }else{  %>
+                  <td><input type="checkbox" name="afacilities" value="에어컨" > 에어컨</td>
+                  <%  } %>
+                  <%   if(checked[7] == true){ %>   
+                  <td><input type="checkbox" name="afacilities" value="세탁기" checked> 세탁기</td>
+                  <%  }else{  %>
+                  <td><input type="checkbox" name="afacilities" value="세탁기" > 세탁기</td>
+                  <%  } %>
+                  <%   if(checked[8] == true){ %>
+                  <td><input type="checkbox" name="afacilities" value="TV" checked> TV</td>
+                  <%  }else{  %>
+                  <td><input type="checkbox" name="afacilities" value="TV" > TV</td>
+                  <%  } %>
+                  </tr>
+               </table>
                </div>
             </div>
             <div class="panel panel-default">
@@ -925,4 +925,3 @@ $('.soomgim').on('click', function() {
 </script>
 </body>
 </html>
-            

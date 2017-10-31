@@ -22,8 +22,10 @@ import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 import accom.model.dao.AccomDao;
 import accom.model.service.AccomService;
+import accom.model.service.RoomService;
 import accom.model.vo.AccomImage;
 import accom.model.vo.Accommodation;
+import accom.model.vo.Room;
 
 /**
  * Servlet implementation class accomInsertServlet
@@ -142,7 +144,33 @@ public class AccomInsertServlet extends HttpServlet {
 		for(AccomImage ai : aimageList) {
 			System.out.println(ai);
 		}
+		
+		//객실추가
+		RequestDispatcher view = null;
+	      
+		ArrayList<Room> roomList = new ArrayList<Room>();      
+		int confCnt = Integer.parseInt(mrequest.getParameter("confcnt"));
+		Room room = null;
+		System.out.println(confCnt);
+		for(int i = 0; i < confCnt+1; i++) {
+		   room = new Room(i+1, accomId,
+		            mrequest.getParameter("rname"+i),mrequest.getParameter("rdetail"+i),
+		            Integer.parseInt(mrequest.getParameter("wkadult"+i)), Integer.parseInt(mrequest.getParameter("wkchild"+i)),
+		            Integer.parseInt(mrequest.getParameter("wdadult"+i)), Integer.parseInt(mrequest.getParameter("wdchild"+i)));
+		   System.out.println(room);
+		   roomList.add(room);
+		}
+		    
+		for(Room r : roomList) {
+		   if(new RoomService().insertRoom(r) <= 0) {
+		      view = request.getRequestDispatcher("views/room/roomErrorView.jsp");
+		      request.setAttribute("message", "room 서비스 : 객실 등록 실패!");
+		      view.forward(request, response);
+		   }
+		}
+		   response.sendRedirect("/tonight/alist?page=1");
 	}
+	
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
