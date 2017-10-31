@@ -8,12 +8,19 @@
 	int startPage = ((Integer)request.getAttribute("startPage")).intValue();
 	int endPage = ((Integer)request.getAttribute("endPage")).intValue();
 	int maxPage = ((Integer)request.getAttribute("maxPage")).intValue();
+	ArrayList<Integer> arCntList = (ArrayList<Integer>)request.getAttribute("arCntList");
+	ArrayList<Double> arAvgList = (ArrayList<Double>)request.getAttribute("arAvgList");
 %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>accomListView</title>
+<script type="text/javascript">
+	function showWriteAccom(){
+		location.href = "views/accom/accomWriteForm.jsp";
+	}
+</script>
 <style type="text/css">
 	.jumbotron {
 		margin-bottom: 0px;
@@ -54,18 +61,45 @@
     <p>가나다라마바사아자차카타파하</p>
   </div>
 </div>
+<form action="/tonight/asearch" method="post">
+<div class="col-md-4"></div>
+<div class="row" >
+  <div class="col-md-1">
+  	<select class="form-control" name="astype">
+  		<option value="H">호텔</option>
+  		<option value="M">모텔</option>
+  		<option value="G">게스트하우스</option>
+  		<option value="P">펜션</option>
+	</select>
+  </div>
+  <div class="col-md-2">
+	<input type="search" class="form-control" name="keyword" placeholder="숙소 이름 검색">
+  </div>
+  <div class="col-md-2">
+  	<input class="btn btn-default" type="submit" value="숙소검색">
+  </div> 
+</div>
+<div class="col-md-3"></div>
+</form>
 
 <div class="container-fluid bg-3 text-center">
 	<br><br>
 	<% int cnt = 0; %>
-	<%
-		for(Accommodation a : list){
-	%>
-		<div class="col-sm-4">
-				<a href="/tonight/adetail?accomId=<%= a.getAccId() %>&page=<%= currentPage %>"><img src="<%= a.getAccImagePath() %>" class="img-responsive" style="width:100%" alt="Image"></a>
+	<% for(Accommodation a : list){ %>
+		<div class="col-sm-6 col-md-4">
+				<a href="/tonight/adetail?accomId=<%= a.getAccId() %>&page=<%= currentPage %>">
+					<img src="/tonight/auploadfiles/<%= a.getAccRname() %>" class="img-responsive" style="width:100%" alt="Image">
+				</a>
 				<p id="title"><%= a.getAccName() %></p>
-				<p class="else"><%= a.getAccAddress() %></p>
-				<p class="else"><%= a.getAccRank() %></p>
+				<div class="row">
+					<img src="/tonight/img/starGrade<%= Math.round(arAvgList.get(a.getAccId()-1)) %>.png" class="col-xs-4">
+				
+					<p class="col-xs-1">
+					(<%= arCntList.get(a.getAccId()-1) %>)
+				
+					</p>
+				</div>
+				<br>
 		</div>
 	    <% 
 	    	cnt++;
@@ -101,6 +135,14 @@
 	<a href="/tonight/alist?page=<%= currentPage + 1 %>">[다음]</a>
 <% } %>
 </div>
+<br>
+<% if(member != null /* && member.getMemberType() =="B" */){ %>
+	<div align="center">
+	<%if(member.getMemberType().equals("B")){ %>
+	<button class="btn btn-default" onclick="showWriteAccom();">숙소추가</button>
+	</div>
+<% } %>
+<% } %>
 <br><br><br>
 <%@ include file="../includes/footer.jsp" %>
 </body>

@@ -155,6 +155,7 @@
 <div class="jumbotron"></div>
 <div class="container" id="toTop">
 	<h3 class="text-center"><%=tour.getTourTitle()%></h3>
+
 	<% if(member != null && member.getMemberId().equals(tour.getGuideId())) { %>
 	<div class="pull-right">
 		<button type="button" class="btn btn-default">수정</button>
@@ -246,6 +247,7 @@
 					<div class="col-sm-6">
 						<div id="schedules">
 				        	<div class="calendar-schedules"></div>
+
 				    	</div>
 					</div>
 					<div class="col-sm-6 text-center">
@@ -340,7 +342,9 @@
 					후기
 					<%
 					if (treviewList.size() > 0) {
+
 					%>
+
 					<p class="pull-right">
 						(<%=treviewList.size()%>)
 					</p>
@@ -357,6 +361,7 @@
 						
 						<div class="scroll-widget">
 							<ul class="media-list">
+
 								<% if(member != null) { %>
 								<li id="reviewst" class="media"><a class="pull-left" href="#fakelink">
 										<img class="media-object"
@@ -401,6 +406,7 @@
 									</div>
 									<p></p></li>
 									<% } %>
+
 								<%
 									if (treviewList.isEmpty()) {
 								%>
@@ -475,6 +481,7 @@
 			</div>
 		</div>
 
+
 		<div class="col-md-4 hidden-sm hidden-xs text-center">
 			<div class="panel-affix" id="myScrollspy">
 
@@ -538,6 +545,7 @@
 		                	<button id="reserveBtn" type="button" class="btn btn-info col-sm-12" style="height:50px !important">예약</button>
 		                </div>
 		            </form>
+
 					</div>
 					<hr>
 					<a href="#toTop">위로 가기 </a>
@@ -633,6 +641,7 @@
 <script type="text/javascript"
 	src="/tonight/js/pignose.calendar.min.js"></script>
 <script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=1524280cea98188e73c2051d02dc247c&libraries=services"></script>
+
 <script>
 $('#reserveBtn').click(function() {
 	<% if(member != null) { %>
@@ -709,6 +718,7 @@ function changeTotalPrice() {
 	});
 
 </script>
+
 <script type="text/javascript">
 $(function() {
 
@@ -748,10 +758,12 @@ $(function() {
         },
         schedules: [
         
+
             <% for (TourConf tconf : tconfList) { %>
         	
         	{name: "<%= tconf.getTourState() %>", date:  "<%= tconf.getStartDate() %>"},
         	<% } %>
+
        	],
         
         select: function (date, context) {
@@ -762,6 +774,7 @@ $(function() {
 					var dur = <%= (int)((tconf.getArrivalDate().getTime()-tconf.getStartDate().getTime())/(1000 * 60 * 60 * 24)) %>;
 					$('#tconf1').text(dur+"박"+(dur+1)+"일");
 					$('#tconf2').text("<%= tconf.getStartDate() %>");
+
 					$('.sdatein').val("<%= tconf.getStartDate() %>");
 					$('#tconf3').text("<%= tconf.getArrivalDate() %>");
 					$('.adatein').val("<%= tconf.getArrivalDate() %>");
@@ -770,6 +783,7 @@ $(function() {
 					$('#totalPrice').text($('#adult').val()*<%= tconf.getTourAdultPrice() %>
 										+ $('#child').val()*<%= tconf.getTourChildPrice() %>);
 					$('#totalPricein').val($('#totalPrice').text());
+
 				}
 	        <% } %>
 	        
@@ -791,6 +805,7 @@ $(function() {
 		var dur = <%= (int)((tconfList.get(0).getArrivalDate().getTime()-tconfList.get(0).getStartDate().getTime())/(1000 * 60 * 60 * 24)) %>;
 		$('#tconf1').text(dur+"박"+(dur+1)+"일");
 		$('#tconf2').text("<%= tconfList.get(0).getStartDate() %>");
+
 		$('.sdatein').val("<%= tconfList.get(0).getStartDate() %>");
 		$('#tconf3').text("<%= tconfList.get(0).getArrivalDate() %>");
 		$('.adatein').val("<%= tconfList.get(0).getArrivalDate() %>");
@@ -801,6 +816,7 @@ $(function() {
 		$('#totalPricein').val($('#totalPrice').text());
 	}
 	moveCalendar();
+
 });
 </script>
 <script>
@@ -810,6 +826,7 @@ mapOption = {
     level: 3 // 지도의 확대 레벨
 };  
 
+
 //지도를 생성합니다    
 var map = new daum.maps.Map(mapContainer, mapOption); 
 
@@ -818,6 +835,7 @@ var mapTypeControl = new daum.maps.MapTypeControl();
 
 // 지도의 상단 우측에 지도 타입 변경 컨트롤을 추가한다
 map.addControl(mapTypeControl, daum.maps.ControlPosition.TOPRIGHT);	
+
 
 // 지도에 확대 축소 컨트롤을 생성한다
 var zoomControl = new daum.maps.ZoomControl();

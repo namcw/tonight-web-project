@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;tonightWebProject/web/views/room/roomWriterForm.jsp&apos; to &apos;roomWriteForm.jsp&apos;" description="Rename resource &apos;roomWriterForm.jsp&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="web/views/room/roomWriterForm.jsp" name="roomWriteForm.jsp" stamp="1509066453626" updateReferences="true"/>
+</session>
