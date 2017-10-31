@@ -489,7 +489,6 @@ public class TourDao {
 	public int insertTourReserve(Connection con, TourReserve treserve) {
 		int result = 0;
 		PreparedStatement pstmt = null;
-		
 		String query = "INSERT INTO TOUR_RESERVE VALUES((SELECT COUNT(*)+1 FROM TOUR_RESERVE), ?, ?, ?, ?, ?, ?, ?)";
 		
 		try {
