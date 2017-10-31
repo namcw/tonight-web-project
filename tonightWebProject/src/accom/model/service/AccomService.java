@@ -4,6 +4,7 @@ import static common.JDBCTemplate.*;
 import java.sql.*;
 import java.util.*;
 
+import accom.model.vo.AccomImage;
 import accom.model.vo.AccomReview;
 import accom.model.vo.Accommodation;
 import tour.model.dao.TourDao;
@@ -36,6 +37,7 @@ public class AccomService {
 		return accom;
 	}
 	
+	
 	//숙소 등록 처리용
 	public int insertAccom(Accommodation a) {
 		Connection con = getConnection();
@@ -47,7 +49,8 @@ public class AccomService {
 		close(con);
 		return result;
 	}
-
+	
+	/*
 	//숙소 수정 처리용
 	public int updateAccom(Accommodation a) {
 		Connection con = getConnection();
@@ -79,7 +82,7 @@ public class AccomService {
 		close(con);
 		return list;
 	}
-
+*/
 	public ArrayList<AccomReview> selectAccomReviewList(int accomId) {
 		Connection con = getConnection();
 		ArrayList<AccomReview> areviewList = new AccomDao().getAccomReviewList(con, accomId);
@@ -91,4 +94,25 @@ public class AccomService {
 		double arGradeAvg = new AccomDao().getAccomReviewGradeAvg(con, accomId);
 		return arGradeAvg;
 	}
+
+	public int insertAccomImageList(ArrayList<AccomImage> aimageList) {
+		Connection con = getConnection();
+		int result = new AccomDao().insertTourImageList(con, aimageList);
+		if(result > 0)
+			commit(con);
+		else
+			rollback(con);
+		return result;
+	}
+	
+	public int insertAccomReview(AccomReview ar) {
+	      Connection con = getConnection();
+	      int result = new AccomDao().insertAccomReview(con, ar);
+	      if(result > 0)
+	         commit(con);
+	      else
+	         rollback(con);
+	      return result;
+	      
+	   }
 }

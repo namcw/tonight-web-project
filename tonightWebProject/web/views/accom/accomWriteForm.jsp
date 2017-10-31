@@ -14,7 +14,6 @@
 
 .jumbotron {
 		margin-bottom: 0px;
-	    background-image: url(img/loginbackground.jpg);
 	    background-position: 0% 25%;
 	    background-size: cover;
 	    background-repeat: no-repeat;
@@ -65,12 +64,15 @@ container {
 <div class="progress">
   <div class="progress-bar bg-success" role="progressbar" style="width: 50%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
 </div>
-<form action="/tonight/ainsert" method="post" enctype="multipart/form-data">
-	<div class="container" id="toTop">
-		<h3 class="text-center"><%=member.getMemberId()%> 회원님의 숙소등록을 도와드리겠습니다</h3>
-		<br>
-		<div class="row">
-			<div class="col-md-10">
+<h3 class="text-center" id="ment"><%=member.getMemberId()%> 회원님의 숙소등록을 도와드리겠습니다</h3>
+<div class="container" id="toTop">
+
+
+<div class="row">
+	<div class="col-md-2"></div>
+	<div class="col-md-8">
+	<form  method="post" enctype="multipart/form-data" name="accomForm">
+		<div class="step" data-step="1">
 				<hr>
 				<div class="row">
 					<div class="col-xs-4">
@@ -147,30 +149,6 @@ container {
 				<hr>	
 				<div class="row">
 					<div class="col-xs-4">
-						<p>숙소 대표 이미지</p>
-					</div>
-					<div class="col-xs-8">
-						<div class="form-group">
-	    						<a id="img_btn1" class="btn btn-default"><span class="glyphicon glyphicon-plus"></span>이미지 추가</a>
-								<div id="output1"></div>
-	 						</div>
-					</div>
-				</div>
-				<hr>
-				<div class="row">
-					<div class="col-xs-4">
-						<p>숙소 상세화면 이미지</p>
-					</div>
-					<div class="col-xs-8">
-						<div class="form-group">
-								<a id="img_btn2" class="btn btn-default"><span class="glyphicon glyphicon-plus"></span>이미지 추가</a>
-								<div id="output2"></div>
-	 					</div>
-					</div>
-				</div>
-				<hr>
-				<div class="row">
-					<div class="col-xs-4">
 						<p>편의시설</p>
 					</div>
 					<div class="col-xs-8">
@@ -223,20 +201,89 @@ container {
 						<textarea class="form-control" rows="7" name="arefund"></textarea>
 					</div>
 				</div>
+				<hr>
+			</div><!-- 1단계 -->
+			
+			<div class="step hidden" data-step="2">
+				<hr>
+				<div class="row">
+					<div class="col-xs-4">
+						<p>숙소 대표 이미지</p>
+					</div>
+					<div class="col-xs-8">
+						<div class="form-group">
+	    						<a id="img_btn1" class="btn btn-default"><span class="glyphicon glyphicon-plus"></span>이미지 추가</a>
+								<div id="output1"></div>
+	 					</div>
+					</div>
+				</div>
+				<hr>
+				<div class="row">
+					<div class="col-xs-4">
+						<p>숙소 상세화면 이미지</p>
+					</div>
+					<div class="col-xs-8">
+						<div class="form-group">
+								<a id="img_btn2" class="btn btn-default"><span class="glyphicon glyphicon-plus"></span>이미지 추가</a>
+								<div id="output2"></div>
+	 					</div>
+					</div>
+				</div>
+			</div><!-- 2단계 -->
+			
+			<div class="step hidden" data-step="3">
+			<hr>
+				<div class="row">
+					<button type="button" id="submit" class="btn btn-default" >숙소등록하기</button>
+					<!-- <input class="btn btn-default" type="submit" value="숙소등록하기"> &nbsp; -->
+					<input class="btn btn-default" type="reset" value="취소하기">
+				</div>
+				<hr>
 			</div>
+			</form>
+			</div>
+			<div class="col-md-2"></div>
 		</div>
-	</div><!-- end <div class="container" id="toTop"> -->
-	<input class="btn btn-default" type="submit" value="숙소등록하기"> &nbsp;
-	<input class="btn btn-default" type="reset" value="취소하기">
-</form>
-<div id="fake-footer"></div>
+	
+	
+<button class="btn btn-default pull-right" data-step="1">다음 단계</button>
+<button class="btn btn-default hidden" id="pstep2" data-step="2">이전 단계</button>
+<button class="btn btn-default pull-right hidden"  id="nstep2" data-step="2">다음 단계</button>
+<button class="btn btn-default hidden" data-step="3">이전 단계</button>	
+	
+</div><!-- end <div class="container" id="toTop"> -->
+
 <%@ include file="../includes/footer.jsp" %>
 <script type="text/javascript" src="/tonight/js/moment.latest.min.js"></script>
 <script type="text/javascript"
 	src="/tonight/js/pignose.calendar.min.js"></script>
 <script src="/tonight/js/bootstrap.fd.js"></script>
+<script>
+	var formData = new FormData();
+	
+	$('button[data-step=1]').click(function() {
+		$('[data-step=1]').addClass('hidden');
+		$('[data-step=2]').removeClass('hidden');
+		formData = new FormData(document.forms.namedItem("accomForm"));
+	});
+	$('#pstep2').click(function() {
+		$('[data-step=2]').addClass('hidden');
+		$('[data-step=1]').removeClass('hidden');
+	});
+	$('#nstep2').click(function() {
+		
+		$('[data-step=2]').addClass('hidden');
+		$('[data-step=3]').removeClass('hidden');
+		
+	});
+	$('button[data-step=3]').click(function() {
+		$('[data-step=3]').addClass('hidden');
+		$('[data-step=2]').removeClass('hidden');
+	});
+</script>
 <script type="text/javascript">
 $("#img_btn1").click(function() {
+	//var formData = new FormData(document.forms.namedItem("accomForm"));
     $.FileDialog({
     	title: "이미지 등록",
     	multiple: false,
@@ -249,7 +296,8 @@ $("#img_btn1").click(function() {
         var text = "";
         files.forEach(function(f) {
             text += f.name + "<br/>";
-            formData.append('timg', f, f.name);
+            formData.append('aimg', f, f.name);
+            
         });
         $("#output1").html(text);
     }).on('cancel.bs.filedialog', function(ev) {
@@ -270,12 +318,27 @@ $("#img_btn2").click(function() {
         var text = "";
         files.forEach(function(f, idx) {
             text += f.name + "<br/>";
-            formData.append('tdimg['+idx+"]", f, f.name);
+            formData.append('adimg['+idx+"]", f, f.name);
+            
         });
         $("#output2").html(text);
     }).on('cancel.bs.filedialog', function(ev) {
     });
 });
+
+$("#submit").click(function() {
+	$.ajax({
+        url: '/tonight/ainsert',
+        processData: false,
+        contentType: false,
+        data: formData,
+        type: 'POST',
+        success: function(result){
+            /* $('.container').addClass("hidden"); */
+           $('#ment').html("<h2>상품 등록이 완료되었습니다:D</h2>")
+        }
+    });
+}); 
 </script>
 </body>
 </html>

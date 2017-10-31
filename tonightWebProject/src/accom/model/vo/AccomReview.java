@@ -15,17 +15,24 @@ public class AccomReview implements Serializable{
 
 	public AccomReview() {}
 
-	public AccomReview(int arNo, int arAccomId, Date arDate, String arWriterId, String arTitle, String arContent,
-			double arGrade) {
-		super();
-		this.arNo = arNo;
-		this.arAccomId = arAccomId;
-		this.arDate = arDate;
-		this.arWriterId = arWriterId;
-		this.arTitle = arTitle;
-		this.arContent = arContent;
-		this.arGrade = arGrade;
-	}
+	public AccomReview(int arAccomId, String arWriterId, String arContent, double arGrade) {
+	      super();
+	      this.arAccomId = arAccomId;
+	      this.arWriterId = arWriterId;
+	      this.arContent = arContent;
+	      this.arGrade = arGrade;
+	   }
+	   
+	 public AccomReview(int arNo, int arAccomId, Date arDate, String arWriterId, String arTitle, String arContent, double arGrade) {
+	      super();
+	      this.arNo = arNo;
+	      this.arAccomId = arAccomId;
+	      this.arDate = arDate;
+	      this.arWriterId = arWriterId;
+	      this.arTitle = arTitle;
+	      this.arContent = arContent;
+	      this.arGrade = arGrade;
+	   }
 
 	public int getArNo() {
 		return arNo;

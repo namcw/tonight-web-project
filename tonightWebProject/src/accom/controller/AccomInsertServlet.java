@@ -1,6 +1,12 @@
 package accom.controller;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Enumeration;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -16,6 +22,7 @@ import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 import accom.model.dao.AccomDao;
 import accom.model.service.AccomService;
+import accom.model.vo.AccomImage;
 import accom.model.vo.Accommodation;
 
 /**
@@ -40,28 +47,17 @@ public class AccomInsertServlet extends HttpServlet {
 		//숙소 등록 처리용 컨트롤러
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html; charset=utf-8");
-		
-		//업로드할 파일의 용량 제한 : 10Mbyte 로 제한한다면
+		System.out.println("시작!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 		int maxSize = 1024 * 1024 * 10;
-		
-		//enctype="multipart/form-data" 로 전송되었는지 확인
-		RequestDispatcher view = null;
-		if(!ServletFileUpload.isMultipartContent(request)){
-			view = request.getRequestDispatcher("views/accom/accomError.jsp");
-			request.setAttribute("message", "form enctype 속성 사용 안 함!");
-			view.forward(request, response);
-		}
-		
-		//해당 컨테이너에서 구동중인 웹 애플리케이션의 루트 경로 알아냄
 		String root = request.getSession().getServletContext().getRealPath("/");
-		//업로드되는 파일이 저장될 폴더명과 루트 경로 연결 처리
-		String savePath = root + "uploadfiles";
-		//web/buploadfiles 로 지정됨
+		String savePath = root + "auploadfiles";
 		
-		//request 를 MultipartRequest 객체로 변환함
-		//자동 지정된 경로에 파일 저장됨
 		MultipartRequest mrequest = new MultipartRequest(request, savePath, maxSize, "UTF-8", new DefaultFileRenamePolicy());
 		
+		AccomService aservice = new AccomService();
+		
+		int accomId = aservice.getListCount() + 1;		
+	
 		String aName = mrequest.getParameter("aname");
 		String aWriter = mrequest.getParameter("awriter");
 		String aRank = mrequest.getParameter("arank");
@@ -80,48 +76,65 @@ public class AccomInsertServlet extends HttpServlet {
 		}
 		
 		String aFacilities = hb.toString();
-		
+	
 		String aRules = mrequest.getParameter("arules");
 		String aRefund = mrequest.getParameter("arefund");
 		
-		String aFileName1 = "/tonight/uploadfiles/" + mrequest.getFilesystemName("aupfile1");
-		String aFileName2 = mrequest.getFilesystemName("aupfile2");
+		Accommodation accom = new Accommodation(accomId, aWriter, aName, aInfo, aType, aAddress,
+				aContact, aRank, null, null, aRules, aFacilities, aRefund);
+		System.out.println(accom);
 		
+		ArrayList<AccomImage> aimageList = new ArrayList<AccomImage>();
+		Enumeration files = mrequest.getFileNames();
 		
-
-		Accommodation accom = null;
-		
-		if(aFileName1 != null && aFileName2 != null){ //숙소대표이미지파일 존재, 숙소상세이미지파일 존재
-			accom = new Accommodation(aWriter, aName, aInfo, aType, aAddress,
-					aContact, aRank, aFileName1, aRules, aFacilities, aRefund);
+		while(files.hasMoreElements()) {
+			System.out.println("aaaa");
+			String name = (String) files.nextElement();
+			String originalFileName = mrequest.getFilesystemName(name);
 			
+			AccomImage aimage = null;
 			
-			//System.out.println(accom);
-		}else if(aFileName1 != null && aFileName2 == null){ //숙소대표이미지파일 존재, 숙소상세이미지파일 미존재 
-			
-		}else if(aFileName1 == null && aFileName2 != null){	//숙소대표이미지파일 미존재, 숙소상세이미지파일 존재
-			
-		}else{ //숙소 대표이미지 미존재, 숙소 상세페이지 미존재
-			accom = new Accommodation(aWriter, aName, aInfo, aType, aAddress,
-					aContact, aRank, null, aRules, aFacilities, aRefund);
-			//System.out.println(accom);
+			if(originalFileName != null) {
+				String renameFileName = new SimpleDateFormat("yyyyMMddHHmmssSSS").format(
+						new java.sql.Date(System.currentTimeMillis())) + "."
+						+ originalFileName.substring(originalFileName.lastIndexOf(".") + 1);
+				File originalFile = new File(savePath + "\\" + originalFileName);
+				File renameFile = new File(savePath + "\\" + renameFileName);
+				
+				if(!originalFile.renameTo(renameFile)){
+					int read = -1;
+					byte[] buf = new byte[1024];
+					
+					FileInputStream fin = new FileInputStream(originalFile);
+					FileOutputStream fout = new FileOutputStream(renameFile);
+					
+					while((read = fin.read(buf, 0, buf.length)) != -1)
+						fout.write(buf, 0, read);
+					
+					fin.close();
+					fout.close();
+					originalFile.delete();
+				}
+				System.out.println("-----------"+name);
+				if(name.equals("aimg")) {
+					accom.setAccOname(originalFileName);
+					accom.setAccRname(renameFileName);
+					System.out.println("대표이미지");
+				} else {
+					aimage = new AccomImage(renameFileName, originalFileName, accomId);
+					aimageList.add(aimage);
+					System.out.println("상세이미지");
+				}
+			}
 		}
 		
-		//처리결과에 따라 뷰 지정함
-		if(new AccomService().insertAccom(accom) > 0){
-			int aid = new AccomService().getListCount();
-			
-			view = request.getRequestDispatcher("views/room/roomWriteForm.jsp");
-			request.setAttribute("aid", aid);
-			view.forward(request, response);
-			//response.sendRedirect("views/room/roomWriteForm.jsp");
-	/*		response.sendRedirect("/tonight/rinsert?page=1");*/
-		}else{
-			view = request.getRequestDispatcher("views/accom/accomError.jsp");
-			request.setAttribute("message", "accom 서비스 : 숙소 등록 실패!");
-			view.forward(request, response);
-		}
+		aservice.insertAccom(accom);
 		
+		aservice.insertAccomImageList(aimageList);
+		
+		for(AccomImage ai : aimageList) {
+			System.out.println(ai);
+		}
 	}
 
 	/**
@@ -130,6 +143,7 @@ public class AccomInsertServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
+
 	}
 
 }

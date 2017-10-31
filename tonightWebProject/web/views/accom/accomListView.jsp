@@ -72,7 +72,9 @@
 		for(Accommodation a : list){
 	%>
 		<div class="col-sm-4">
-				<a href="/tonight/adetail?accomId=<%= a.getAccId() %>&page=<%= currentPage %>"><img src="<%= a.getAccImagePath() %>" class="img-responsive" style="width:100%" alt="Image"></a>
+				<a href="/tonight/adetail?accomId=<%= a.getAccId() %>&page=<%= currentPage %>">
+					<img src="/tonight/auploadfiles/<%= a.getAccRname() %>" class="img-responsive" style="width:100%" alt="Image">
+				</a>
 				<p id="title"><%= a.getAccName() %></p>
 				<p class="else"><%= a.getAccAddress() %></p>
 				<p class="else"><%= a.getAccRank() %></p>

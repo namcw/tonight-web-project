@@ -19,6 +19,9 @@
 <link rel="stylesheet" type="text/css"
 	href="/tonight/css/pignose.calendar.min.css" />
 <style type="text/css">
+.soomgim {
+   background-color: red;
+}
 
 .jumbotron {
       margin-bottom: 0px;
@@ -216,10 +219,10 @@ function delete_event() {
             <hr>
             <div class="row">
                <div class="col-xs-4">
-                  <p>숙소 주소</p>
+                  <p>숙소 타입</p>
                </div>  
                <div class="col-xs-8">
-                  <p><%=accom.getAccRank()%></p>
+                  <p><%=accom.getAccType()%></p>
                </div>
             </div>
             <hr>
@@ -271,65 +274,75 @@ function delete_event() {
          </div>
       </div><!-- end <div class="row">  -->
    </div><!-- end <div class="container" id="toTop"> -->
-   <div class="container">
+<div class="container">
       <div class="row">
          <div class="col-md-8">
             <div class="panel panel-default">
                <div class="panel-heading">날짜 및 객실정보</div>
                <div class="panel-body row">
-               		<div class="col-sm-6">
-               			<div id="schedules">
-				        	<div class="calendar-schedules"></div>
-				    	</div>
-               		</div>
-               		<div class="col-sm-6 text-center">
-               		
-               			<hr>
-               			<% for(Room room : list) { %>
-               			<div class="row" data-toggle="collapse" data-target="#rinfo<%= room.getRoomId() %>">
-							<div>
-								<%= room.getRoomName() %>
-							</div>
-						</div>
-						
-						<div id="rinfo<%= room.getRoomId() %>" class="collapse">
-							<hr>
-							<div class="row">
-								<div class="col-xs-4">
-									상세정보
-								</div>
-								<div id="tconf2" class="col-xs-8">
-									<%=room.getRoomDetails() %>
-								</div>
-							</div>
-							<hr>
-							<div class="row">
-								<div class="col-xs-4">
-									성인 가격
-								</div>
-								<div id="tconf4" class="col-xs-8">
-									
-								</div>
-							</div>
-							<hr>
-							<div class="row">
-								<div class="col-xs-4">
-									소인 가격
-								</div>
-								<div id="tconf5" class="col-xs-8">
-								</div>
-							</div>
-							<hr>
-						</div>
-						<hr>
-						<% } %>
-						
-						<div>
-						<button class="btn btn-default pull-right" data-toggle="modal"
-									data-target="#selectDate">날짜 모두 보기</button>
-						</div>
-               		</div>
-	                     <br><br><br><br>
+                  <div class="col-sm-6">
+                     <div id="schedules">
+                        <div class="calendar-schedules"></div>
+                     </div>
+                  </div>
+
+                  <div class="col-sm-6 text-center">
+
+                     <hr>
+                     <%
+                        for (Room room : list) {
+                     %>
+                     <div class="soomgim">
+                        <div>
+                           <%=room.getRoomName()%>
+                        </div>
+                     </div>
+
+                     <div style="display: none;">
+                        <hr>
+                        <div class="row">
+                           <div class="col-xs-4">상세정보</div>
+                           <div id="tconf2" class="col-xs-8">
+                              <%=room.getRoomDetails()%>
+                           </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                           <div class="col-xs-4">성인 가격</div>
+                           <div id="tconf4" class="col-xs-8">
+                              <%=room.getWeekdaysAdultPrice()%>
+
+                           </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                           <div class="col-xs-4">소인 가격</div>
+                           <div id="tconf5" class="col-xs-8">
+                              <%=room.getWeekdaysChildPrice()%>
+                           </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                           <div class="col-xs-4">성인 가격</div>
+                           <div id="tconf4" class="col-xs-8">
+                              <%=room.getWeekendAdultPrice()%>
+
+                           </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                           <div class="col-xs-4">소인 가격</div>
+                           <div id="tconf5" class="col-xs-8">
+                              <%=room.getWeekendChildPrice()%>
+                           </div>
+                        </div>
+                     </div>
+                     <hr>
+                     <%
+                        }
+                     %>
+                  </div>
+                  <br> <br> <br> <br>
 			                 <%--   <table class="table table-hover">
 			                   <tr><th>객실명</th><th>객실상세정보</th><th>주말성인가격</th><th>주말소인가격</th><th>주중성인가격</th><th>주중소인가격</th></tr>
 									<%
@@ -469,78 +482,166 @@ function delete_event() {
                </div>
             </div>
             <div class="panel panel-default">
-               <div class="panel-heading">후기
-                 <% if(areviewList.size() > 0) {%>
-                     <p class="pull-right">(<%= areviewList.size() %>)</p>
-                     <p class="pull-right"><%= gradeAvg %></p>
-                     <img src="/tonight/img/starGrade<%= Math.round(gradeAvg) %>.png" class="col-xs-3 pull-right" style="margin-top:-10px">
-                  <% } %>
+               <div class="panel-heading">
+                  후기
+                  <%
+                  if (areviewList.size() > 0) {
+               %>
+                  <p class="pull-right">
+                     (<%=areviewList.size()%>)
+                  </p>
+                  <p class="pull-right">
+                     <b><%=gradeAvg%></b>
+                  </p>
+                  <img src="/tonight/img/starGrade<%=Math.round(gradeAvg)%>.png"
+                     class="col-xs-3 pull-right" style="margin-top: -6px">
+                  <%
+                     }
+                  %>
                </div>
                <div class="panel-body box-info">
 
-					<div class="tab-pane active animated fadeInRight" id="comments">
-						<div class="scroll-widget">
-							<ul class="media-list">
-							<% if (areviewList.isEmpty()) {	%>
-								<li class="media">
-									<p>후기가 없습니다.</p>
-								</li>
-							<% } else if(areviewList.size() < 4){ %>
-								<% for (AccomReview areview : areviewList) { %>
-									<li class="media">
-										<a class="pull-left" href="#fakelink">
-												<img class="media-object"
-												src="https://bootdey.com/img/Content/User_for_snippets.png"
-												alt="Avatar">
-										</a>
-										<div class="media-body">
-												<h4 class="media-heading">
-													<a href="#fakelink"><%=areview.getArWriterId() %></a>
-													<small><%=areview.getArGrade() %></small>
-												</h4>
-												<div class="row">
-												<img src="/tonight/img/starGrade<%= Math.round(areview.getArGrade()) %>.png" class="col-xs-3" style="margin-top:-10px">
-												<div class="col-xs-9"></div>
-												</div>
-												<p><%=areview.getArContent() %></p>
-											</div>
-										<p></p>
-									</li>
-								<% } %>
-							<% } else {%>
-								<% for (int i=0; i < 3; i++) { %>
-									<li class="media">
-										<a class="pull-left" href="#fakelink">
-												<img class="media-object"
-												src="https://bootdey.com/img/Content/User_for_snippets.png"
-												alt="Avatar">
-										</a>
-										<div class="media-body">
-											<h4 class="media-heading">
-												<a href="#fakelink"><%= areviewList.get(i).getArWriterId() %></a>
-												<small><%=areviewList.get(i).getArDate() %></small>
-												<small>grade <%=areviewList.get(i).getArGrade() %></small>
-											</h4>
-											<div class="row">
-											<img src="/tonight/img/starGrade<%= Math.round(areviewList.get(i).getArGrade()) %>.png" class="col-xs-3" style="margin-top:-10px">
-											<div class="col-xs-9"></div>
-											</div>
-											
-											<p><%= areviewList.get(i).getArContent() %></p>
-										</div>
-									</li>
-								<% } %>
-								<li class="media"><a data-toggle="modal" data-target="#addReview"><%= areviewList.size()-3 %>개 더보기..</a></li>
-							<% } %>
-							</ul>
-						</div>
-				</div>
-					</div>
-				</div>
-			</div>
+                  <div class="tab-pane active animated fadeInRight" id="comments">
+
+                     <div class="scroll-widget">
+                        <ul class="media-list">
+                           <%
+                              if (member != null) {
+                           %>
+                           <li id="reviewst" class="media"><a class="pull-left"
+                              href="#fakelink"> <img class="media-object"
+                                 src="https://bootdey.com/img/Content/User_for_snippets.png"
+                                 alt="Avatar">
+                           </a>
+                              <div class="media-body">
+                                 <form action="/tonight/arinsert" method="post" id="submit">
+                                    <input type="hidden" name="aid"
+                                       value="<%=accom.getAccId()%>">
+
+
+                                    <div class="row">
+                                       <div class="col-xs-9 form-group">
+                                          <input type="text" name="writerid"
+                                             class="form-control col-xs-3"
+                                             value="<%=member.getMemberId()%>" readonly>
+                                       </div>
+                                       <div class="col-xs-3 form-group pull-right">
+                                          <select class="selectpicker form-control col-xs-3"
+                                             name="grade">
+                                             <option>10</option>
+                                             <option>9</option>
+                                             <option>8</option>
+                                             <option>7</option>
+                                             <option>6</option>
+                                             <option>5</option>
+                                             <option>4</option>
+                                             <option>3</option>
+                                             <option>2</option>
+                                             <option>1</option>
+                                          </select>
+                                       </div>
+                                    </div>
+                                    <textarea class="form-control" id="comments" name="comments"
+                                       placeholder="Comment" rows="5"></textarea>
+                                    <br>
+                                    <div class="row">
+                                       <div class="col-md-12 form-group">
+                                          <input class="btn pull-right" type="submit">
+                                       </div>
+                                    </div>
+                                 </form>
+
+                              </div>
+                              <p></p></li>
+                           <%
+                              }
+                           %>
+                           <%
+                              if (areviewList.isEmpty()) {
+                           %>
+                           <li class="media">
+                              <p>후기가 없습니다.</p>
+                           </li>
+                           <%
+                              } else if (areviewList.size() < 4) {
+                           %>
+                           <%
+                              for (AccomReview areview : areviewList) {
+                           %>
+                           <li class="media"><a class="pull-left" href="#fakelink">
+                                 <img class="media-object"
+                                 src="https://bootdey.com/img/Content/User_for_snippets.png"
+                                 alt="Avatar">
+                           </a>
+                              <div class="media-body">
+                                 <h4 class="media-heading">
+                                    <a href="#fakelink"><%=areview.getArWriterId()%></a> <small><%=areview.getArDate()%></small>
+
+                                 </h4>
+                                 <div class="row">
+                                    <img
+                                       src="/tonight/img/starGrade<%=Math.round(areview.getArGrade())%>.png"
+                                       class="col-xs-3" style="margin-top: -10px">
+                                    <div class="col-xs-9"></div>
+                                 </div>
+                                 <p><%=areview.getArContent()%></p>
+                              </div>
+                              <p></p></li>
+                           <%
+                              }
+                           %>
+                           <%
+                              } else {
+                           %>
+                           <%
+                              for (int i = 0; i < 3; i++) {
+                           %>
+                           <li class="media"><a class="pull-left" href="#fakelink">
+                                 <img class="media-object"
+                                 src="https://bootdey.com/img/Content/User_for_snippets.png"
+                                 alt="Avatar">
+                           </a>
+                              <div class="media-body">
+                                 <h4 class="media-heading">
+                                    <a href="#fakelink"><%=areviewList.get(i).getArWriterId()%></a>
+                                    <small><%=areviewList.get(i).getArDate()%></small>
+                                 </h4>
+                                 <div class="row">
+                              
+                              
+                              
+                              
+                              
+                                    <img
+                                       src="/tonight/img/starGrade<%=Math.round(areviewList.get(i).getArGrade())%>.png"
+                                       class="col-xs-3" style="margin-top: -10px">
+                                    <div class="col-xs-9"></div>
+                                 </div>
+
+                                 <p><%=areviewList.get(i).getArContent()%></p>
+                              </div></li>
+                           <%
+                              }
+                           %>
+                           <li class="media"><a class="pull-right"
+                              data-toggle="modal" data-target="#addReview"><%=areviewList.size() - 3%>개
+                                 더보기..</a></li>
+                           <%
+                              }
+                           %>
+                        </ul>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
          <div class="col-md-4 hidden-sm hidden-xs">
             <div class="panel panel-default panel-affix" id="myScrollspy">
 
+    
+    
+    
+    
                <div class="panel-heading">결제 공간</div>
                <div class="panel-body">
                   <div class="nav nav-pills nav-stacked">
@@ -555,91 +656,98 @@ function delete_event() {
 
       </div>
    </div>
-   
-<div class="modal fade" id="addReview" role="dialog">
-    <div class="modal-dialog">
-    
-     <!-- Modal content-->
-      <div class="modal-content">
-        <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">후기</h4>
-        </div>
-        <div class="modal-body box-info">
-           <div class="tab-pane active animated fadeInRight" id="comments">
-            <div class="scroll-widget">
-               <ul class="media-list">
-                  <% for (AccomReview areview : areviewList) { %>
-                     <li class="media">
-                        <a class="pull-left" href="#fakelink">
+
+   <div class="modal fade" id="addReview" role="dialog">
+      <div class="modal-dialog">
+
+         <!-- Modal content-->
+         <div class="modal-content">
+            <div class="modal-header">
+               <button type="button" class="close" data-dismiss="modal">&times;</button>
+               <h4 class="modal-title">후기</h4>
+            </div>
+            <div class="modal-body box-info">
+               <div class="tab-pane active animated fadeInRight" id="comments">
+                  <div class="scroll-widget">
+                     <ul class="media-list">
+                        <%
+                           for (AccomReview areview : areviewList) {
+                        %>
+                        <li class="media"><a class="pull-left" href="#fakelink">
                               <img class="media-object"
                               src="https://bootdey.com/img/Content/User_for_snippets.png"
                               alt="Avatar">
                         </a>
-                        <div class="media-body">
+                           <div class="media-body">
                               <h4 class="media-heading">
-                                 <a href="#fakelink"><%=areview.getArWriterId() %></a>
-                                 <small><%=areview.getArDate() %></small>
+                                 <a href="#fakelink"><%=areview.getArWriterId()%></a> <small><%=areview.getArDate()%></small>
                               </h4>
                               <div class="row">
-                                 <img src="/tonight/img/starGrade<%= Math.round(areview.getArGrade()) %>.png" class="col-xs-3" style="margin-top:-10px">
+                                 <img
+                                    src="/tonight/img/starGrade<%=Math.round(areview.getArGrade())%>.png"
+                                    class="col-xs-3" style="margin-top: -10px">
                                  <div class="col-xs-9"></div>
                               </div>
-                              <p><%=areview.getArContent() %></p>
+                              <p><%=areview.getArContent()%></p>
                            </div>
-                        <p></p>
-                     </li>
-                  <% } %>
-               </ul>
+                           <p></p></li>
+                        <%
+                           }
+                        %>
+                     </ul>
+                  </div>
+               </div>
+            </div>
+            <div class="modal-footer">
+               <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
             </div>
          </div>
-        </div>
-           <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
-         </div>
+
       </div>
-      
    </div>
-</div> 
-<div id="fake-footer"></div>
-<%@ include file="../includes/footer.jsp"%>
-<script src="/tonight/js/jquery-3.2.1.min.js"></script>
-<script src="/tonight/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="/tonight/js/moment.latest.min.js"></script>
-<script type="text/javascript"
-	src="/tonight/js/pignose.calendar.min.js"></script>
-<script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=1524280cea98188e73c2051d02dc247c&libraries=services"></script>
-<script type="text/javascript">
+   
+   
+   <div id="fake-footer"></div>
+   <%@ include file="../includes/footer.jsp"%>
+   <script src="/tonight/js/jquery-3.2.1.min.js"></script>
+   <script src="/tonight/js/bootstrap.min.js"></script>
+   <script type="text/javascript" src="/tonight/js/moment.latest.min.js"></script>
+   <script type="text/javascript"
+      src="/tonight/js/pignose.calendar.min.js"></script>
+   <script
+      src="//dapi.kakao.com/v2/maps/sdk.js?appkey=1524280cea98188e73c2051d02dc247c&libraries=services"></script>
+   <script type="text/javascript">
 $(function() {
 
-	/* affix 스크롤 */
-	var stickyElement = '.panel-affix', bottomElement = '#fake-footer';
-	if ($(stickyElement).length) {
-		$(stickyElement).each(function() {
-			var fromTop = $(this).offset().top,
-			fromBottom = $(document).height() - ($(this).offset().top + $(this).outerHeight()),
-			stopOn = $(document).height() - ($(bottomElement).offset().top) + ($(this).outerHeight() - $(this).height());
-	
-			if ((fromBottom - stopOn) > 200) {
-				$(this).css('width', $(this).width()).css('top', 0).css('position', '');
-				$(this).affix({
-					offset : {top : fromTop - 80, bottom : stopOn}
-				}).on('affix.bs.affix', function() {
-					$(this).css('top', '80px').css('position', '');
-				});
-			}
-			$(window).trigger('scroll');
-		});
-	}
-	
-	 /* calendar */
-	var dateObj = new Date();
-	var year = dateObj.getFullYear();
-	var month = dateObj.getMonth()+1;
-	var day = dateObj.getDate();
-	var today = year + "-" + month + "-" + day;
-	
-	$('.calendar-schedules').pignoseCalendar({
+   /* affix 스크롤 */
+   var stickyElement = '.panel-affix', bottomElement = '#fake-footer';
+   if ($(stickyElement).length) {
+      $(stickyElement).each(function() {
+         var fromTop = $(this).offset().top,
+         fromBottom = $(document).height() - ($(this).offset().top + $(this).outerHeight()),
+         stopOn = $(document).height() - ($(bottomElement).offset().top) + ($(this).outerHeight() - $(this).height());
+   
+         if ((fromBottom - stopOn) > 200) {
+            $(this).css('width', $(this).width()).css('top', 0).css('position', '');
+            $(this).affix({
+               offset : {top : fromTop - 80, bottom : stopOn}
+            }).on('affix.bs.affix', function() {
+               $(this).css('top', '80px').css('position', '');
+            });
+         }
+         $(window).trigger('scroll');
+      });
+   }
+   
+   
+    /* calendar */
+   var dateObj = new Date();
+   var year = dateObj.getFullYear();
+   var month = dateObj.getMonth()+1;
+   var day = dateObj.getDate();
+   var today = year + "-" + month + "-" + day;
+   
+   $('.calendar-schedules').pignoseCalendar({
         scheduleOptions: {
             colors: {
                 Y: '#2fabb7',
@@ -648,49 +756,49 @@ $(function() {
         },
         
         select: function (date, context) {
-        	var sdate = (date[0] === null ? 'null' :date[0].format('YYYY-MM-DD'));
-        	
-			<%-- <% for (TourConf tconf : tconfList) { %>
-				if(sdate == "<%= tconf.getStartDate() %>") {
-					var dur = <%= (int)((tconf.getArrivalDate().getTime()-tconf.getStartDate().getTime())/(1000 * 60 * 60 * 24)) %>;
-					$('#tconf1').text(dur+"박"+(dur+1)+"일");
-					$('#tconf2').text("<%= tconf.getStartDate() %>");
-					$('#tconf3').text("<%= tconf.getArrivalDate() %>");
-					$('#tconf4').text("<%= tconf.getTourAdultPrice() %> 원");
-					$('#tconf5').text("<%= tconf.getTourChildPrice() %> 원");
-				}
-	        <% } %> --%>
-	        
+           var sdate = (date[0] === null ? 'null' :date[0].format('YYYY-MM-DD'));
+           
+         <%-- <% for (TourConf tconf : tconfList) { %>
+            if(sdate == "<%= tconf.getStartDate() %>") {
+               var dur = <%= (int)((tconf.getArrivalDate().getTime()-tconf.getStartDate().getTime())/(1000 * 60 * 60 * 24)) %>;
+               $('#tconf1').text(dur+"박"+(dur+1)+"일");
+               $('#tconf2').text("<%= tconf.getStartDate() %>");
+               $('#tconf3').text("<%= tconf.getArrivalDate() %>");
+               $('#tconf4').text("<%= tconf.getTourAdultPrice() %> 원");
+               $('#tconf5').text("<%= tconf.getTourChildPrice() %> 원");
+            }
+           <% } %> --%>
+           
         },
         lang: 'ko',
         minDate: today
     });
-	
-	
-	<%-- function moveCalendar() {
-		var months = (parseInt('<%=tconfList.get(0).getStartDate()%>'.substring(0,4))-parseInt(today.substring(0,4)))*12;
-		months += (parseInt('<%=tconfList.get(0).getStartDate()%>'.substring(5,7))-parseInt(today.substring(5,7)));
-		
-		$('.pignose-calendar-unit-active').removeClass('pignose-calendar-unit-active');
-		$('.pignose-calendar-unit-first-active').removeClass('pignose-calendar-unit-first-active');
-		for(var i = 0; i < months; i++) {
-			$('.pignose-calendar-top-next').click();
-		}
-		$('[data-date='+"<%=tconfList.get(0).getStartDate()%>"+']').addClass('pignose-calendar-unit-active');
-		$('[data-date='+"<%=tconfList.get(0).getStartDate()%>"+']').addClass('pignose-calendar-unit-first-active');
-		var dur = <%= (int)((tconfList.get(0).getArrivalDate().getTime()-tconfList.get(0).getStartDate().getTime())/(1000 * 60 * 60 * 24)) %>;
-		$('#tconf1').text(dur+"박"+(dur+1)+"일");
-		$('#tconf2').text("<%= tconfList.get(0).getStartDate() %>");
-		$('#tconf3').text("<%= tconfList.get(0).getArrivalDate() %>");
-		$('#tconf4').text("<%= tconfList.get(0).getTourAdultPrice() %> 원");
-		$('#tconf5').text("<%= tconfList.get(0).getTourChildPrice() %> 원");
-	}
-	
-	moveCalendar();  --%>
+   
+   
+   <%-- function moveCalendar() {
+      var months = (parseInt('<%=tconfList.get(0).getStartDate()%>'.substring(0,4))-parseInt(today.substring(0,4)))*12;
+      months += (parseInt('<%=tconfList.get(0).getStartDate()%>'.substring(5,7))-parseInt(today.substring(5,7)));
+      
+      $('.pignose-calendar-unit-active').removeClass('pignose-calendar-unit-active');
+      $('.pignose-calendar-unit-first-active').removeClass('pignose-calendar-unit-first-active');
+      for(var i = 0; i < months; i++) {
+         $('.pignose-calendar-top-next').click();
+      }
+      $('[data-date='+"<%=tconfList.get(0).getStartDate()%>"+']').addClass('pignose-calendar-unit-active');
+      $('[data-date='+"<%=tconfList.get(0).getStartDate()%>"+']').addClass('pignose-calendar-unit-first-active');
+      var dur = <%= (int)((tconfList.get(0).getArrivalDate().getTime()-tconfList.get(0).getStartDate().getTime())/(1000 * 60 * 60 * 24)) %>;
+      $('#tconf1').text(dur+"박"+(dur+1)+"일");
+      $('#tconf2').text("<%= tconfList.get(0).getStartDate() %>");
+      $('#tconf3').text("<%= tconfList.get(0).getArrivalDate() %>");
+      $('#tconf4').text("<%= tconfList.get(0).getTourAdultPrice() %> 원");
+      $('#tconf5').text("<%= tconfList.get(0).getTourChildPrice() %> 원");
+   }
+   
+   moveCalendar();  --%>
 
 });
 </script>
-<script>
+   <script>
 var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 mapOption = {
     center: new daum.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
@@ -704,7 +812,7 @@ var map = new daum.maps.Map(mapContainer, mapOption);
 var mapTypeControl = new daum.maps.MapTypeControl();
 
 // 지도의 상단 우측에 지도 타입 변경 컨트롤을 추가한다
-map.addControl(mapTypeControl, daum.maps.ControlPosition.TOPRIGHT);	
+map.addControl(mapTypeControl, daum.maps.ControlPosition.TOPRIGHT);   
 
 // 지도에 확대 축소 컨트롤을 생성한다
 var zoomControl = new daum.maps.ZoomControl();
@@ -716,7 +824,7 @@ map.addControl(zoomControl, daum.maps.ControlPosition.RIGHT);
 var geocoder = new daum.maps.services.Geocoder();
 
 //주소로 좌표를 검색합니다
-geocoder.addressSearch('<%=accom.getAccAddress() %>', function(result, status) {
+geocoder.addressSearch('<%=accom.getAccAddress()%>', function(result, status) {
 
 // 정상적으로 검색이 완료됐으면 
  if (status === daum.maps.services.Status.OK) {
@@ -740,5 +848,81 @@ geocoder.addressSearch('<%=accom.getAccAddress() %>', function(result, status) {
 } 
 });    
 </script>
+
+   <script>
+/*  
+ var $target = $('.soomgim'),
+ isClass = null;
+
+$target.on('click', function () {
+ */
+/*  var _$self = $(this),
+ oldClass = _$self.siblings('.' + isClass);
+
+ if(!!oldClass) {
+     oldClass.removeClass(isClass).next().slideUp();
+ }
+
+ if(!_$self.is(isClass)) {
+    _$self.addClass('on').next().slideDown();
+ }
+
+ isClass = _$self.attr('class');
+
+}); */
+$('.soomgim').on('click', function() {
+
+     function slideDown(target) {
+       slideUp();
+       $(target).addClass('on').next().slideDown();
+     }
+
+     function slideUp() {
+       $('.soomgim').removeClass('on').next().slideUp();
+     }
+     $(this).hasClass('on') ? slideUp() : slideDown(this);
+ }); 
+  </script>
+  
+ <script type="text/javascript">
+   $("#submit").submit(function(e) {
+      var postData = $(this).serializeArray();
+       var formURL = $(this).attr("action");
+      $.ajax({
+           url: formURL,
+           data: postData,
+           type: 'POST',
+           success: function(result){
+              var tag =
+                 '<li class="media">' +
+                 '<a class="pull-left" href="#fakelink">' +
+                 '<img class="media-object" src="https://bootdey.com/img/Content/User_for_snippets.png" alt="Avatar"></a>' +
+                 '<div class="media-body">' +
+                 '<h4 class="media-heading">' +
+                 '<a href="#fakelink">' +
+                 result["writerId"]+
+                 '</a> <small>'+
+                 result["today"]+
+                 '</small></h4>' +
+                 '<div class="row">' +
+                 '<img src="/tonight/img/starGrade'+
+                 result["grade"]+
+                 '.png" class="col-xs-3" style="margin-top: -10px">' +
+                 '<div class="col-xs-9"></div></div>' +
+                 '<p>'+
+                 result["comment"]+
+                 '</p>' +
+                 '</div><p></p></li>';
+              $('#reviewst').after(tag);
+           },
+           error: function(result){
+           }
+       });
+      e.preventDefault();
+      //e.unbind();
+   });
+   
+</script>
 </body>
 </html>
+            

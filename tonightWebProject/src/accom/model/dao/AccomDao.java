@@ -4,8 +4,10 @@ import static common.JDBCTemplate.*;
 import java.sql.*;
 import java.util.*;
 
+import accom.model.vo.AccomImage;
 import accom.model.vo.AccomReview;
 import accom.model.vo.Accommodation;
+import tour.model.dao.TourDao;
 import tour.model.vo.TourReview;
 
 public class AccomDao {
@@ -43,7 +45,7 @@ public class AccomDao {
 		String query = "select * from ("
 				+ "select rownum rnum, acc_id, biz_id, acc_name, acc_info, "
 				+ "acc_type, acc_address, acc_contact, acc_rank, "
-				+ "acc_image_path, acc_rules, acc_facilities, acc_refund from "
+				+ "acc_oname, acc_rname, acc_rules, acc_facilities, acc_refund from "
 				+ "(select * from accommodation order by acc_name asc)) "
 				+ "where rnum >= ? and rnum <= ?";
 		
@@ -71,7 +73,8 @@ public class AccomDao {
 					a.setAccAddress(rset.getString("acc_address"));
 					a.setAccContact(rset.getString("acc_contact"));
 					a.setAccRank(rset.getString("acc_rank"));
-					a.setAccImagePath(rset.getString("acc_image_path"));
+					a.setAccOname(rset.getString("acc_oname"));
+					a.setAccRname(rset.getString("acc_rname"));
 					a.setAccRules(rset.getString("acc_rules"));
 					a.setFacilities(rset.getString("acc_facilities"));
 					a.setAccRefund(rset.getString("acc_refund"));
@@ -113,7 +116,8 @@ public class AccomDao {
 				accom.setAccAddress(rset.getString("acc_address"));
 				accom.setAccContact(rset.getString("acc_contact"));
 				accom.setAccRank(rset.getString("acc_rank"));
-				accom.setAccImagePath(rset.getString("acc_image_path"));
+				accom.setAccOname(rset.getString("acc_oname"));
+				accom.setAccRname(rset.getString("acc_rname"));
 				accom.setAccRules(rset.getString("acc_rules"));
 				accom.setFacilities(rset.getString("acc_facilities"));
 				accom.setAccRefund(rset.getString("acc_refund"));
@@ -133,22 +137,23 @@ public class AccomDao {
 		PreparedStatement pstmt = null;
 		
 		String query = "insert into accommodation values ("
-				+ "(select max(acc_id) + 1 from accommodation), "
-				+ "?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+				+ "?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 		
 		try {
 			pstmt = con.prepareStatement(query);
-			pstmt.setString(1, a.getBizId());
-			pstmt.setString(2, a.getAccName());
-			pstmt.setString(3, a.getAccInfo());
-			pstmt.setString(4, a.getAccType());
-			pstmt.setString(5, a.getAccAddress());
-			pstmt.setString(6, a.getAccContact());
-			pstmt.setString(7, a.getAccRank());
-			pstmt.setString(8, a.getAccImagePath());
-			pstmt.setString(9, a.getAccRules());
-			pstmt.setString(10, a.getFacilities());
-			pstmt.setString(11, a.getAccRefund());
+			pstmt.setInt(1, a.getAccId());
+			pstmt.setString(2, a.getBizId());
+			pstmt.setString(3, a.getAccName());
+			pstmt.setString(4, a.getAccInfo());
+			pstmt.setString(5, a.getAccType());
+			pstmt.setString(6, a.getAccAddress());
+			pstmt.setString(7, a.getAccContact());
+			pstmt.setString(8, a.getAccRank());
+			pstmt.setString(9, a.getAccOname());
+			pstmt.setString(10, a.getAccRname());
+			pstmt.setString(11, a.getAccRules());
+			pstmt.setString(12, a.getFacilities());
+			pstmt.setString(13, a.getAccRefund());
 			
 			result = pstmt.executeUpdate();
 			
@@ -161,6 +166,7 @@ public class AccomDao {
 		return result;
 	}
 
+	/*
 	public int updateAccom(Connection con, Accommodation a) {
 		int result = 0;
 		PreparedStatement pstmt = null;
@@ -260,7 +266,7 @@ public class AccomDao {
 		}
 		
 		return list;
-	}
+	}*/
 
 	public ArrayList<AccomReview> getAccomReviewList(Connection con, int accomId) {
 		ArrayList<AccomReview> areviewList = null;
@@ -328,4 +334,54 @@ public class AccomDao {
 		
 		return arGradeAvg;
 	}
+
+	public int insertTourImageList(Connection con, ArrayList<AccomImage> aimageList) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String query = "insert into accommodation_image values(?, ?, ?)";
+		
+		try {
+			for(AccomImage aimage : aimageList) {
+				pstmt = con.prepareStatement(query);
+				pstmt.setString(1, aimage.getImageOname());
+				pstmt.setString(2, aimage.getImageRname());
+				pstmt.setInt(3, aimage.getAccomId());
+				
+				result = pstmt.executeUpdate();
+				if(result <= 0)
+					break;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	
+	public int insertAccomReview(Connection con, AccomReview ar) {
+	      int result = 0;
+	      PreparedStatement pstmt = null;
+	      
+	      String query = "INSERT INTO ACCOM_REVIEW VALUES((SELECT MAX(AR_NO)+1 FROM ACCOM_REVIEW), ?, DEFAULT, ?, ?, ?, ?)";
+	      
+	      try {
+	         pstmt = con.prepareStatement(query);
+	         pstmt.setInt(1, ar.getArAccomId());
+	         pstmt.setString(2, ar.getArWriterId());
+	         pstmt.setString(3, ar.getArContent());
+	         pstmt.setString(4, ar.getArContent());
+	         pstmt.setDouble(5, ar.getArGrade());
+	         
+	         result = pstmt.executeUpdate();
+	         
+	      } catch (Exception e) {
+	         e.printStackTrace();
+	      }finally{
+	         close(pstmt);
+	      }
+	      return result;
+	   }
+	
 }

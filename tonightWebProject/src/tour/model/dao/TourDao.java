@@ -10,6 +10,7 @@ import static common.JDBCTemplate.*;
 import tour.model.vo.Tour;
 import tour.model.vo.TourConf;
 import tour.model.vo.TourDetail;
+import tour.model.vo.TourImage;
 import tour.model.vo.TourReview;
 
 public class TourDao {
@@ -40,7 +41,8 @@ public class TourDao {
 							rset.getInt("TOUR_ID"),
 							rset.getString("TOUR_TITLE"),
 							rset.getString("GUIDE_ID"),
-							rset.getString("TOUR_THUMNAIL_PATH"));
+							rset.getString("TOUR_ONAME"),
+							rset.getString("TOUR_RNAME"));
 					list.add(tour);
 				}
 			}
@@ -68,7 +70,8 @@ public class TourDao {
 				tour = new Tour(tid,
 								rset.getString("TOUR_TITLE"),
 								rset.getString("GUIDE_ID"),
-								rset.getString("TOUR_THUMNAIL_PATH"));
+								rset.getString("TOUR_ONAME"),
+								rset.getString("TOUR_RNAME"));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -92,7 +95,9 @@ public class TourDao {
 			if(rset.next()) {
 				tdetail = new TourDetail(
 							tid,
-							rset.getString("TOUR_INTRO"),
+							rset.getString("TOUR_INFO"),
+							rset.getString("TOUR_GUIDEMENT"),
+							rset.getString("TOUR_MEETINGPLACE"),
 							rset.getString("TOUR_TOURLIST"),
 							rset.getString("TOUR_HISTORY"),
 							rset.getString("TOUR_SCHEDULE"),
@@ -277,7 +282,6 @@ public class TourDao {
 								rset.getDate("ARRIVAL_DATE"),
 								rset.getInt("TOUR_ADULT_PRICE"),
 								rset.getInt("TOUR_CHILD_PRICE"),
-								rset.getDouble("TOUR_DISCOUNT"),
 								rset.getString("TOUR_STATE")
 							);
 					tconfList.add(tconf);
@@ -292,6 +296,148 @@ public class TourDao {
 		}
 		
 		return tconfList;
+	}
+
+	public int insertTour(Connection con, Tour tour) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String query = "INSERT INTO TOUR VALUES(?, ?, ?, ?, ?)";
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, tour.getTourId());
+			pstmt.setString(2, tour.getTourTitle());
+			pstmt.setString(3, tour.getGuideId());
+			pstmt.setString(4, tour.getTourOname());
+			pstmt.setString(5, tour.getTourRname());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally{
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	public int insertTourDetail(Connection con, TourDetail tdetail) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String query = "INSERT INTO TOURDETAIL VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)";
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, tdetail.getTourId());
+			pstmt.setString(2, tdetail.getTourGuideMent());
+			pstmt.setString(3, tdetail.getTourInfo());
+			pstmt.setString(4, tdetail.getTourMeetingPlace());
+			pstmt.setString(5, tdetail.getTourList());
+			pstmt.setString(6, tdetail.getTourHistory());
+			pstmt.setString(7, tdetail.getTourSchedule());
+			pstmt.setString(8, tdetail.getTourOption());
+			pstmt.setString(9, tdetail.getTourPolicy());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally{
+			close(pstmt);
+		}
+		return result;
+	}
+
+	public int insertTourConfList(Connection con, ArrayList<TourConf> tconfList) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String query = "INSERT INTO TOURCONF VALUES(?, ?, ?, ?, ?, ?)";
+		
+		try {
+			for(TourConf tconf : tconfList) {
+				pstmt = con.prepareStatement(query);
+				pstmt.setInt(1, tconf.getTourId());
+				pstmt.setDate(2, tconf.getStartDate());
+				pstmt.setDate(3, tconf.getArrivalDate());
+				pstmt.setInt(4, tconf.getTourAdultPrice());
+				pstmt.setInt(5, tconf.getTourChildPrice());
+				pstmt.setString(6, tconf.getTourState());
+				
+				result = pstmt.executeUpdate();
+				if(result <= 0)
+					break;
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally{
+			close(pstmt);
+		}
+		return result;
+	}
+
+	public int insertTourImageList(Connection con, ArrayList<TourImage> timageList) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String query = "INSERT INTO TOUR_IMAGE VALUES(?, ?, ?)";
+		
+		try {
+			for(TourImage timage : timageList) {
+				pstmt = con.prepareStatement(query);
+				pstmt.setString(1, timage.getImageOname());
+				pstmt.setString(2, timage.getImageRname());
+				pstmt.setInt(3, timage.getTourId());
+				
+				result = pstmt.executeUpdate();
+				if(result <= 0)
+					break;
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally{
+			close(pstmt);
+		}
+		return result;
+	}
+
+	public ArrayList<TourImage> selectTourImageList(Connection con, int tid) {
+		ArrayList<TourImage> timageList = null;
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = "SELECT * FROM TOUR_IMAGE WHERE TOUR_ID = ?";
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, tid);
+			rset = pstmt.executeQuery();
+			if(rset != null) {
+				timageList = new ArrayList<TourImage>();
+				while(rset.next()) {
+					TourImage timage = new TourImage(
+									rset.getString("IMAGE_RNAME"),
+									rset.getString("IMAGE_ONAME"),
+									tid);
+					
+					timageList.add(timage);
+				}
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rset);
+		}
+		
+		return timageList;
 	}
 
 }
