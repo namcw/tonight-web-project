@@ -182,4 +182,32 @@ public class MemberDao {
 	         }
 	         return memberId;
 		}
+
+		public String searchMyPwd(Connection con, String memberId, String memberName, String memberEmail) {
+			 String memberPwd = null;
+			 PreparedStatement pstmt = null;
+	         ResultSet rset = null;
+	         
+	         String query = "SELECT MEMBER_PWD FROM MEMBER WHERE MEMBER_ID = ? AND MEMBER_NAME=? AND MEMBER_EMAIL=?";
+	         
+	         try {
+	            pstmt = con.prepareStatement(query);
+	            pstmt.setString(1,  memberId);
+	            pstmt.setString(2,  memberName);
+	            pstmt.setString(3,  memberEmail);
+	            
+	            rset = pstmt.executeQuery();
+	            
+	            if(rset.next()){
+	            	memberPwd = rset.getString("MEMBER_PWD");
+	            }
+	            
+	         } catch (Exception e) {
+	            e.printStackTrace();
+	         } finally {
+	            close(rset);
+	            close(pstmt);
+	         }
+	         return memberPwd;
+		}
 }

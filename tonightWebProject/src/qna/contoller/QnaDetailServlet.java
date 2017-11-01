@@ -34,7 +34,6 @@ public class QnaDetailServlet extends HttpServlet {
 		response.setContentType("text/html; charset=utf-8");
 		
 		int no = Integer.parseInt(request.getParameter("no"));
-		
 		QnaService nqna = new QnaService();
 
 		nqna.addReadCount(no);
@@ -50,6 +49,7 @@ public class QnaDetailServlet extends HttpServlet {
 			request.setAttribute("message", "상세 조회 실패");
 			view.forward(request, response);
 		}
+		
 	}
 
 	/**

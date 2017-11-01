@@ -1,6 +1,7 @@
 package tour.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 
@@ -46,6 +47,13 @@ public class TourReserveServlet extends HttpServlet {
 		
 		int result = new TourService().insertTourReserve(treserve);
 		
+		if(result > 0) {
+			PrintWriter out = response.getWriter();
+			out.println("<script language='javascript'>");
+			out.println("alert('예약이 완료되었습니다.');");
+			out.println("location.href='/tonight/minfo?memberid="+ memberId + "';");
+			out.println("</script>");
+		}
 	}
 
 	/**

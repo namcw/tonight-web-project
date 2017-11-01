@@ -19,10 +19,18 @@ public class Faq {
 		this.faqAnswer = faqAnswer;
 		this.faqReadCount = faqReadCount;
 	}
+	public Faq(int faqNo, String faqTitle, String faqCategory, String faqAnswer) {
+		this.faqNo = faqNo;
+		this.faqTitle = faqTitle;
+		this.faqCategory = faqCategory;
+		this.faqAnswer = faqAnswer;
+		
+	}
 	public Faq(String faqTitle, String faqCategory, String faqAnswer) {
 		this.faqTitle = faqTitle;
-		this.faqAnswer = faqAnswer;
 		this.faqCategory = faqCategory;
+		this.faqAnswer = faqAnswer;
+		
 	}
 	public void setFaqNo(int faqNo) {
 		this.faqNo = faqNo;

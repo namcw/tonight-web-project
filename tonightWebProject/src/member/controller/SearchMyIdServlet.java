@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.simple.JSONObject;
+
 import member.model.service.MemberService;
 
 /**
@@ -33,18 +35,22 @@ public class SearchMyIdServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
-		response.setContentType("text/html; charset=utf-8");
+		response.setContentType("application/json");
 		
 		String memberId = new MemberService().searchMyId(request.getParameter("membername"),
 				request.getParameter("memberemail"));
 		
+		JSONObject obj = new JSONObject();
 		if (memberId != null) {
-			
-			System.out.println(memberId);
+			obj.put("mid", memberId);
+			response.getWriter().print(obj);
 		} else {
-			System.out.println("등록된정보가없습니다.");
+			obj.put("mid", memberId);
+			response.getWriter().print(obj);
 		}
 
+		
+		
 	}
 
 	/**

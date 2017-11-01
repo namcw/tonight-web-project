@@ -36,7 +36,9 @@ public class FaqUpdateViewServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		response.setContentType("text/html; charset=utf-8"); 
 		
+
 		Faq faq = new FaqService().selectFaq(Integer.parseInt(request.getParameter("no")));
+		
 		
 		RequestDispatcher view = null;
 		if(faq != null){

@@ -34,11 +34,15 @@ public class QnaUpdateViewServlet extends HttpServlet {
 		response.setContentType("text/html; charset=utf-8"); 
 		
 		Qna qna = new QnaService().selectQna(Integer.parseInt(request.getParameter("no")));
-		
+
 		RequestDispatcher view = null;
 		if(qna != null){
 			view = request.getRequestDispatcher("views/qna/qnaUpdateView.jsp");
-			request.setAttribute("message", "QnA 수정페이지 출력 처리 실패!");
+			request.setAttribute("qna", qna);
+			view.forward(request, response);
+		}else{
+			view = request.getRequestDispatcher("views/qna/qnaError.jsp");
+			request.setAttribute("message", "qna 수정페이지 실패");
 			view.forward(request, response);
 		}
 	}

@@ -38,11 +38,35 @@ public class QnaSearchServlet extends HttpServlet {
 		String keyword = request.getParameter("keyword");
 		
 		ArrayList<Qna> list = new QnaService().selectSearch(keyword);
+		
+		int currentPage = 1;
+		int limit = 10;
+		
+		if(request.getParameter("page") != null)
+			currentPage = Integer.parseInt(request.getParameter("page"));
+		QnaService qservice = new QnaService();
+		int listCount = list.size();
+		int maxPage = (int)((double)listCount / limit + 0.9);
+		
+		int startPage = ((int)((double)currentPage / limit + 0.9) - 1) * limit + 1;
+		
+		int endPage = startPage + limit - 1;
+		if(maxPage < endPage)
+			endPage = maxPage;
+		
 		RequestDispatcher view = null;
 		
 		if(list != null){
 			view = request.getRequestDispatcher("views/qna/qnaListView.jsp");
-			request.setAttribute("message", "QnA 제목 검색 실패하였습니다.");
+			request.setAttribute("currentPage", currentPage);
+			request.setAttribute("maxPage", maxPage);
+			request.setAttribute("startPage", startPage);
+			request.setAttribute("endPage", endPage);
+			request.setAttribute("listCount", listCount);
+			view.forward(request, response);
+		}else{
+			view = request.getRequestDispatcher("views/qna/qnaError.jsp");
+			request.setAttribute("message", "오류");
 			view.forward(request, response);
 		}
 	}

@@ -65,6 +65,13 @@ public class MemberService {
 		close(con);
 		return memberId;
 	}
+
+	public String searchMyPwd(String memberId, String memberName, String memberEmail) {
+		Connection con = getConnection();
+		String memberPwd = new MemberDao().searchMyPwd(con, memberId, memberName, memberEmail);
+		close(con);
+		return memberPwd;
+	}
 }
 
 

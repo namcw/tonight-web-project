@@ -35,10 +35,10 @@ public class QnaInsertServlet extends HttpServlet {
 		response.setContentType("text/html; charset=utf-8");
 		
 		String qnaTitle = request.getParameter("qnaTitle");
+		String writerId = request.getParameter("writerId");
 		String question = request.getParameter("question");
-		String answer = request.getParameter("answer");
 		
-		Qna qna = new Qna(qnaTitle, question, answer);
+		Qna qna = new Qna(qnaTitle, writerId, question);
 		
 		RequestDispatcher view = null;
 		

@@ -15,12 +15,13 @@ import faq.model.vo.Faq;
 public class FaqService {
 public FaqService(){}
 	
-	public ArrayList<Faq> selectList(){
+	public ArrayList<Faq> selectList(int currentPage, int limit){
 		Connection con = getConnection();
-		ArrayList<Faq> list = new FaqDao().selectList(con);
+		ArrayList<Faq> list = new FaqDao().selectList(con, currentPage, limit);
 		close(con);
 		return list;
 	}
+
 	public HashMap<Integer, Faq> selectMap(){
 		Connection con = getConnection();
 		HashMap<Integer, Faq> map = new FaqDao().selectMap(con);
@@ -33,15 +34,7 @@ public FaqService(){}
 		close(con);
 		return notice;
 	}
-	public void addReadCount(int no) {
-		Connection con = getConnection();
-		int result = new FaqDao().updateReadCount(con, no);
-		if(result > 0)
-			commit(con);
-		else
-			rollback(con);
-		close(con);		
-	}
+
 	public int insertFaq(Faq faq) {
 		Connection con = getConnection();
 		int result = new FaqDao().insertFaq(con, faq);
@@ -74,8 +67,16 @@ public FaqService(){}
 	}
 	public ArrayList<Faq> selectSearch(String keyword) {
 		Connection con = getConnection();
-		ArrayList<Faq> list = new FaqDao().selectTitleSearch(con, keyword);
+		ArrayList<Faq> list = new FaqDao().selectSearch(con, keyword);
 		close(con);
 		return list;
-	}	
+	}
+
+	public int getListCount() {
+		Connection con = getConnection();
+		int listCount = new FaqDao().getListCount(con);
+		return listCount;
+	}
+
+	
 }

@@ -37,12 +37,37 @@ public class FaqListServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		response.setContentType("text/html; charset=utf-8");
 		
-		ArrayList<Faq> list = new FaqService().selectList();
+		int currentPage = 1;
+		
+		int limit = 5;
+		
+		if(request.getParameter("page") != null)
+			currentPage = Integer.parseInt(request.getParameter("page"));
+		
+		FaqService fservice = new FaqService();
+		
+		int listCount = fservice.getListCount();
+		
+		ArrayList<Faq> list = new FaqService().selectList(currentPage, limit);
+		
+		int maxPage = (int)((double)listCount / limit + 0.9);
+		
+		int startPage = ((int)((double)currentPage / limit + 0.9) - 1) * limit + 1;
+		
+		int endPage = startPage + limit - 1;
+		if(maxPage < endPage)
+			endPage = maxPage;
+		
 		RequestDispatcher view = null;
 		
 		if(list != null){
 			view = request.getRequestDispatcher("views/faq/faqListView.jsp");
 			request.setAttribute("list", list);
+			request.setAttribute("currentPage", currentPage);
+			request.setAttribute("maxPage", maxPage);
+			request.setAttribute("startPage", startPage);
+			request.setAttribute("endPage", endPage);
+			request.setAttribute("listCount", listCount);
 			view.forward(request, response);
 		}else{
 			view = request.getRequestDispatcher("views/faq/faqError.jsp");
