@@ -147,7 +147,7 @@ body, html {
 <body>
 <div class="container">
 	<div class="card card-container">
-		<img id="profile-img" class="profile-img-card" src="/tonight/img/logo.png" />
+		<a href="/tonight/index.jsp"><img id="profile-img" class="profile-img-card" src="/tonight/img/logo.png" /></a>
 	    <p id="profile-name" class="profile-name-card">TONIGHT</p>
 	    
 		<br>
@@ -157,17 +157,22 @@ body, html {
 		</ul>
 		<div class="tab-content">
 		    <div id="mid" class="tab-pane fade in active">
-				<form action="/tonight/msearchmyid" method="post" class="sign-form">
+				<form action="/tonight/msearchmyid" method="post" class="sign-form" id="submit">
 					<input type="text" class="form-control" name="membername" placeholder="이름" required>
 					<input type="email" class="form-control" name="memberemail" placeholder="이메일 주소" required>
 					<button class="btn btn-lg btn-primary btn-block btn-signin" type="submit">아이디 찾기</button>
 				</form>
+				<div id="resultid" style="color:red"></div>
 			</div>
+			
 			<div id="mpwd" class="tab-pane fade">
-				준비중
-				<form action="/tonight/msearchMyPwd" method="post" class="sign-form">
-					
+				<form action="/tonight/msearchMyPwd" method="post" class="sign-form" id="submit2">
+					<input type="text" class="form-control" name="memberid" placeholder="아이디" required>
+					<input type="text" class="form-control" name="membername" placeholder="이름" required>
+					<input type="email" class="form-control" name="memberemail" placeholder="이메일 주소" required>
+					<button class="btn btn-lg btn-primary btn-block btn-signin" type="submit">패스워드 찾기</button>
 				</form>
+				<div id="resultpwd" style="color:red"></div>
 			</div>
 		</div>
 	</div>
@@ -175,5 +180,54 @@ body, html {
 
 <script src="/tonight/js/jquery-3.2.1.min.js"></script>
 <script src="/tonight/js/bootstrap.min.js"></script>
+<script>
+$("#submit").submit(function(e) {
+	var postData = $(this).serializeArray();
+    var formURL = $(this).attr("action");
+	$.ajax({
+        url: formURL,
+        data: postData,
+        type: 'POST',
+        success: function(result){
+        	var str = result["mid"];
+        	if(str == null) {
+        		str = "일치하는 아이디가 없습니다.";
+        	} else {
+        		str = "귀하의 아이디는 " + str + "입니다.";
+        	}
+        	$('#resultid').text(str);
+        },
+        error: function(result){
+        	alert("error");
+        }
+    });
+	e.preventDefault();
+	//e.unbind();
+});
+
+$("#submit2").submit(function(e) {
+	var postData = $(this).serializeArray();
+    var formURL = $(this).attr("action");
+	$.ajax({
+        url: formURL,
+        data: postData,
+        type: 'POST',
+        success: function(result){
+        	var str = result["mpwd"];
+        	if(str == null) {
+        		str = "일치하는 정보가 없습니다.";
+        	} else {
+        		str = "귀하의 패스워드는 " + str + "입니다.";
+        	}
+        	$('#resultpwd').text(str);
+        },
+        error: function(result){
+        	alert("error");
+        }
+    });
+	e.preventDefault();
+	//e.unbind();
+});
+</script>
 </body>
 </html>

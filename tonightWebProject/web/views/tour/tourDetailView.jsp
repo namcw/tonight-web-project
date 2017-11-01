@@ -223,7 +223,7 @@
 			<div class="row">
 
 				<div class="col-xs-4">
-					<a href="#"> <img src="/tonight/uploadfiles/bandmember.jpg"
+					<a href="#"> <img src="https://bootdey.com/img/Content/User_for_snippets.png"
 						class="img-circle person" alt="Random Name"></a>
 
 				</div>
@@ -299,8 +299,12 @@
 				</div>
 			</div>
 			<div class="panel panel-default hidden-md hidden-lg">
-				<div class="panel-heading">예약</div>
+				<div class="panel-heading">예약/결제</div>
+
 				<div class="panel-body">
+				
+				
+				
 				</div>
 			</div>
 			<div class="panel panel-default">
@@ -481,7 +485,7 @@
 				<div class="panel panel-default">
 					<div class="panel-heading">예약/결제</div>
 					<div class="panel-body">
-					<form action="/tonight/treserve" method="post" id="reserveform">
+					<form action="/tonight/treserve" method="post" onsubmit="return check()">
 						<input type="hidden" name="tourid" value="<%= tour.getTourId() %>">
 						<% if(member != null) { %>
 							<input type="hidden" name="registerid" value="<%= member.getMemberId() %>">
@@ -535,12 +539,12 @@
 		                    </div>
 		                </div>
 		                <div>
-		                	<button id="reserveBtn" type="button" class="btn btn-info col-sm-12" style="height:50px !important">예약</button>
+		                	<input type="submit" class="btn btn-info col-sm-12" style="height:50px !important" value="예약">
 		                </div>
 		            </form>
 					</div>
 					<hr>
-					<a href="#toTop">위로 가기 </a>
+					<a href="#toTop"><span class="glyphicon glyphicon-menu-up"></span> </a>
 				</div>
 			</div>
 		</div>
@@ -634,13 +638,15 @@
 	src="/tonight/js/pignose.calendar.min.js"></script>
 <script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=1524280cea98188e73c2051d02dc247c&libraries=services"></script>
 <script>
-$('#reserveBtn').click(function() {
+function check() {
 	<% if(member != null) { %>
-		$('#reserveform').submit();
+		$("#reserveform").submit();
+		return true;
 	<% } else { %>
 		alert("로그인해야됩니다!");
+		return false;
 	<% } %>
-});
+}
 </script>
 <script>
 $(document).on('click', '.number-spinner a', function () {

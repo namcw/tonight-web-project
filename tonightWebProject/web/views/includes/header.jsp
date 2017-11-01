@@ -40,7 +40,7 @@
 	  }
 	  
 	}
-
+	
 </style>
 </head>
 <body>
@@ -61,7 +61,15 @@
         <li><a href="/tonight/tlist">여행&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
         <li><a id="logo" class="navbar-brand" href="/tonight/index.jsp"><img width="65" src="/tonight/img/logo.png"></a>
         <li><a href="/tonight/alist">숙소</a></li>
-        <li><a href="/tonight/views/customerservice/serviceListView.jsp">고객센터</a></li>
+        <li class="dropdown">
+        	<a class="dropdown-toggle" data-toggle="dropdown">고객센터
+        	</a>
+        	<ul class="dropdown-menu" style="background-color:black">
+      		<li><a href="/tonight/flist">FAQ</a></li>
+      		<li><a href="/tonight/qlist">Q&A</a></li>
+      		</ul>
+        	
+        </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
       	<% if(member == null) { %>
@@ -79,6 +87,9 @@
 <script src="/tonight/js/jquery-3.2.1.min.js"></script>
 <script src="/tonight/js/bootstrap.min.js"></script>
 <script>
+	
+</script>
+<script>
 	$(function(){
 		var scroll_start = 0;
 		var startchange = $('#startchange');
@@ -95,6 +106,7 @@
 				}
 			});
 		}
+		$('.dropdown-toggle').dropdown();
 	});
 </script>
 <script src="/tonight/js/jquery-3.2.1.min.js"></script>

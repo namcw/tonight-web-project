@@ -89,12 +89,12 @@ body, html {
     height: 44px;
     font-size: 16px;
 }
-.form-inline,
+
 .sign-form input,
 .sign-form button {
     width: 100%;
     display: block;
-    margin-bottom: 3px;
+    margin-bottom: 10px;
     z-index: 1;
     position: relative;
     -moz-box-sizing: border-box;
@@ -142,30 +142,35 @@ body, html {
 .forgot-password:focus{
     color: rgb(12, 97, 33);
 }
-	
+.form-group {
+	padding:1px;
+}
 </style>
 </head>
 <body>
 <div class="container">
 	<div class="card card-container">
-		<img id="profile-img" class="profile-img-card" src="/tonight/img/logo.png" />
+		<a href="/tonight/index.jsp"><img id="profile-img" class="profile-img-card" src="/tonight/img/logo.png" /></a>
 	    <p id="profile-name" class="profile-name-card">TONIGHT</p>
-	    
 		<br>
-		<ul class="nav nav-tabs">
-			<li class="active"><a data-toggle="tab" href="#user">일반회원</a></li>
-			<li><a data-toggle="tab" href="#guide">가이드</a></li>
-			<li><a data-toggle="tab" href="#biz">사업자</a></li>
-		</ul>
 		<div class="tab-content">
-		    <div id="user" class="tab-pane fade in active">
 			    <form action="/tonight/menroll" method="post" class="sign-form">
-			    	<input type="hidden" name="membertype" value="U">
+			    	<div class="form-group">
+					    <label class="col-xs-4">
+					      <input type="radio" name="membertype" value="U">일반회원
+					    </label>
+					    <label class="col-xs-4">
+					      <input type="radio" name="membertype" value="G">가이드
+					    </label>
+					    <label class="col-xs-4">
+					      <input type="radio" name="membertype" value="B">사업자
+					    </label>
+					</div>
 					<input type="text" class="form-control" name="memberid" placeholder="아이디" required autofocus>
 				    <input type="password" class="form-control" id="pwd" name="memberpwd" placeholder="패스워드" required>
 					<input type="password" class="form-control" id="pwd2" placeholder="패스워드 확인" required>
 					<input type="text" class="form-control" name="membername" placeholder="이름" required>
-					<div class="form-group form-inline">
+					<div class="form-group">
 						<div class="form-group col-xs-4">
 							<select class="form-control select-day" id="year" name="year" required>
 		                  		<option>년</option>
@@ -188,12 +193,10 @@ body, html {
 					
 					<button class="btn btn-lg btn-primary btn-block btn-signin" type="submit">회원가입</button>
 				</form>
-			</div>
-			<div id="guide" class="tab-pane fade">
-				준비중
-			</div>
-			<div id="biz" class="tab-pane fade">
-				준비중
+			
+			
+			<div class="pull-right">
+				<a href="javascript:history.back()">뒤로가기</a>
 			</div>
 		</div>
 	</div>

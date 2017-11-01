@@ -42,6 +42,17 @@
 	.col-md-4 > #gid {
 		text-align: right;
 	} 
+	
+	@media ( min-width : 767px) {
+	.thumb { display: block; overflow: hidden; height: 250px; width: 340px; } 
+	
+	.thumb a img { display: block; /* Otherwise it keeps some space around baseline */ min-width: 100%; /* Scale up to fill container width */ min-height: 100%; /* Scale up to fill container height */ -ms-interpolation-mode: bicubic; /* Scaled images look a bit better in IE now */ }
+	}
+	@media ( min-width : 1200px) {
+	.thumb { display: block; overflow: hidden; height: 300px; width: 400px; } 
+	
+	.thumb a img { display: block; /* Otherwise it keeps some space around baseline */ min-width: 100%; /* Scale up to fill container width */ min-height: 100%; /* Scale up to fill container height */ -ms-interpolation-mode: bicubic; /* Scaled images look a bit better in IE now */ }
+	}
 </style>
 </head>
 <body>
@@ -57,9 +68,11 @@
 	<% int cnt = 0; %>
 	<% for(Tour tour : list) { %>
 		<div class="col-sm-6 col-md-4">
+			<div class="thumb">
 			<a href="/tonight/tdetail?tid=<%= tour.getTourId() %>">
-				<img src="/tonight/tuploadfiles/<%= tour.getTourRname() %>" class="img-responsive" style="width:100%" alt="Image">
+				<img src="/tonight/tuploadfiles/<%= tour.getTourRname() %>" class="img-responsive">
 			</a>
+			</div>
 			<p id="title"><%= tour.getTourTitle() %></p>
 			
 			<div class="row">
@@ -87,26 +100,27 @@
 <div class="container" align="center">
 <button type="button" id="register" class="btn btn-default pull-right">등록하기</button>
 <%-- 이전 페이지 있을 경우에 대한 처리 --%>
+<ul class="pagination pagination-lg">
 <% if(currentPage <= 1){ %>
-	[이전] &nbsp;
+	
 <% }else{ %>
-	<a href="/tonight/tlist?page=<%= currentPage - 1 %>">[이전]</a>
+	<li><a href="/tonight/tlist?page=<%= currentPage - 1 %>"><span class="glyphicon glyphicon-menu-left"></span></a></li>
 <% } %>
 <%-- 현재 페이지 숫자 보여주기 --%>
 <% for(int p = startPage; p <= endPage; p++){ 
 	if(p == currentPage){
 %>
-	<b><font size="4" color="blue">[<%= p %>]</font></b>
+	<li><a style="background-color:lightgray"><%= p %></a></li>
 <%     }else{ %>
-	<a href="/tonight/tlist?page=<%= p %>"><%= p %></a>
+	<li><a href="/tonight/tlist?page=<%= p %>"><%= p %></a></li>
 <% }} %>
 <%-- 현재 페이지 다음 페이지에 대한 처리 --%>
 <% if(currentPage >= maxPage){ %>
-	[다음]
-<% }else{ %>
-	<a href="/tonight/tlist?page=<%= currentPage + 1 %>">[다음]</a>
-<% } %>
 	
+<% }else{ %>
+	<li><a href="/tonight/tlist?page=<%= currentPage + 1 %>"><span class="glyphicon glyphicon-menu-right"></span></a></li>
+<% } %>
+</ul>
 </div>
 <%@ include file="../includes/footer.jsp" %>
 <script type="text/javascript">

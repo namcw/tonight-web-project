@@ -1,8 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="member.model.vo.Member" %>
+    pageEncoding="UTF-8" import="java.util.ArrayList, member.model.vo.Member, tour.model.vo.TourReserve, tour.model.vo.Tour" %>
 <%
-	
+   
 	Member member = (Member)request.getAttribute("member");
+	String mtype = member.getMemberType();
+	ArrayList<TourReserve> treserveList = (ArrayList<TourReserve>)request.getAttribute("treserveList");
+   	ArrayList<Tour> tList = (ArrayList<Tour>)request.getAttribute("tList");
 %>    
 <!DOCTYPE html >
 <html lang="ko">
@@ -21,7 +24,7 @@ body, html {
 
 .card-container.card {
     max-width: 350px;
-    padding: 40px 40px;
+    padding: 5px 40px;
 }
 
 .btn {
@@ -39,7 +42,7 @@ body, html {
 .card {
     background-color: #F7F7F7;
     /* just in case there no content*/
-    padding: 20px 25px 30px;
+    padding: 0px;
     margin: 0 auto 25px;
     margin-top: 50px;
     /* shadows and rounded borders */
@@ -146,89 +149,136 @@ body, html {
 .forgot-password:focus{
     color: rgb(12, 97, 33);
 }
-	
+.ttitle {
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
 </style>
 </head>
 <body>
 <div class="container">
-	<div class="card card-container">
-		<img id="profile-img" class="profile-img-card" src="/tonight/img/user.png" />
-	    <p id="profile-name" class="profile-name-card"><%= member.getMemberName() %></p>
-	    
+   <div class="card card-container"  style="height:600px !important">
+   		<ul class="nav nav-tabs text-center">
+			<li class="active" style="width:50%"><a data-toggle="tab" href="#res">예약내역</a></li>
+			<li style="width:50%"><a data-toggle="tab" href="#info">정보수정</a></li>
+		</ul>
 		<br>
+		<div class="tab-content">
+		 <div id="res" class="tab-pane fade in active" >
+		 <div class="pre-scrollable" style="height:500px; max-height:500px">
+		 <% if(mtype.equals("U")) { %>
+		 	<% if(treserveList.size() == 0) { %>
+		 		투어 예약 내역이 없습니다.
+		 	<% } else { %>
+		 		<% for(TourReserve treserve : treserveList) { %>
+		 			<% for(Tour tour : tList) { %>
+		 				<% if(treserve.getTourId() == tour.getTourId()) {%>
+					 		<div class="media">
+							    <div class="media-left media-middle">
+							      <a href="/tonight/tdetail?tid=<%= tour.getTourId() %>">
+							      <img src="/tonight/tuploadfiles/<%= tour.getTourRname() %>" class="media-object" style="width:80px">
+							      </a>
+							    </div>
+							    <div class="media-body">
+							      <h4 class="media-heading ttitle"><%= tour.getTourTitle() %></h4>
+							      <p><%= treserve.getTrSdate() %> ~ <%= treserve.getTrAdate() %></p>
+							      <p><%= treserve.getTrTprice() %>원</p>
+							    </div>
+					 		</div>
+				 		<% } %>
+			 		<% } %>
+		 		<% } %>
+		 	<% } %>
+		 <% } %>
+		 
+		 
+		  <hr>
+		 <div>
+         </div>
+      </div>
+		 <a href="/tonight/index.jsp">뒤로가기</a>
+		 
+		 </div>
 		
-	    <form action="/tonight/mupdate" method="post" class="sign-form">
-	    	<label class="col-xs-6">회원타입:</label>
-	    	<div class="col-xs-6">
-	    	<% if(member.getMemberType().equals("U")) { %>
-	    		<p>일반회원</p>
-	    	<% } else if(member.getMemberType().equals("G")) { %>
-	    		<p>가이드</p>
-	    	<% } else { %>
-	    		<p>사업자</p>
-	    	<% } %>
-	    	</div>
-	    	<input type="hidden" name="memberid" value="<%= member.getMemberId() %>">
-	    	<label class="col-xs-6">아이디:</label>
-	    	<div class="col-xs-6">
-	    		<p><%= member.getMemberId() %></p>
-	    	</div>
+		 <div id="info" class="tab-pane fade">
+				
+		
+		
+      <img id="profile-img" class="profile-img-card" src="/tonight/img/user.png" />
+       <p id="profile-name" class="profile-name-card"><%= member.getMemberName() %></p>
+       
+      <br>
+      
+       <form action="/tonight/mupdate" method="post" class="sign-form">
+          <label class="col-xs-6">회원타입:</label>
+          <div class="col-xs-6">
+          <% if(member.getMemberType().equals("U")) { %>
+             <p>일반회원</p>
+          <% } else if(member.getMemberType().equals("G")) { %>
+             <p>가이드</p>
+          <% } else { %>
+             <p>사업자</p>
+          <% } %>
+          </div>
+          <input type="hidden" name="memberid" value="<%= member.getMemberId() %>">
+          <label class="col-xs-6">아이디:</label>
+          <div class="col-xs-6">
+             <p><%= member.getMemberId() %></p>
+          </div>
 
-		    <input type="password" class="form-control" id="pwd" name="memberpwd" placeholder="패스워드" required>
-			<input type="password" class="form-control" id="pwd2" placeholder="패스워드 확인" required>
-			
-			<label class="col-xs-6">생년월일:</label>
-	    	<div class="col-xs-6">
-	    		<p><%= member.getBirthDate().substring(0,4) %>.<%= member.getBirthDate().substring(4,6) %>.<%= member.getBirthDate().substring(6) %></p>
-	    	</div>
-			
-			
-			<input type="tel" class="form-control" name="memberphone" value="<%= member.getPhone() %>" required>
-			<input type="email" class="form-control" name="memberemail" value="<%= member.getEmail() %>" required>
-			<input type="text" class="form-control" name="memberaddress" value="<%= member.getAddress() %>" required>
-			
-			<label class="col-xs-6">회원등급:</label>
-	    	<div class="col-xs-6">
-	    		<p><%= member.getRank() %></p>
-	    	</div>
-			<button class="btn btn-lg btn-primary btn-block btn-signin" type="submit">회원 수정</button>
-		</form>
-		
-		<div>
-			<a href="/tonight/index.jsp">뒤로가기</a>
-			<a id="delcheck" class="pull-right">회원탈퇴</a>
+          <input type="password" class="form-control" id="pwd" name="memberpwd" placeholder="패스워드" required>
+         <input type="password" class="form-control" id="pwd2" placeholder="패스워드 확인" required>
+         
+         <label class="col-xs-6">생년월일:</label>
+          <div class="col-xs-6">
+             <p><%= member.getBirthDate().substring(0,4) %>.<%= member.getBirthDate().substring(4,6) %>.<%= member.getBirthDate().substring(6) %></p>
+          </div>
+         
+         
+         <input type="tel" class="form-control" name="memberphone" value="<%= member.getPhone() %>" required>
+         <input type="email" class="form-control" name="memberemail" value="<%= member.getEmail() %>" required>
+         <input type="text" class="form-control" name="memberaddress" value="<%= member.getAddress() %>" required>
+         
+         <label class="col-xs-6">회원등급:</label>
+          <div class="col-xs-6">
+             <p><%= member.getRank() %></p>
+          </div>
+         <button class="btn btn-lg btn-primary btn-block btn-signin" type="submit">회원 수정</button>
+      </form>
+      <div>
+         <a href="/tonight/index.jsp">뒤로가기</a>
+         <a id="delcheck" class="pull-right">회원탈퇴</a>
+      </div>
+      </div>
 		</div>
-	</div>
+   </div>
 </div>
 
 <script src="/tonight/js/jquery-3.2.1.min.js"></script>
 <script src="/tonight/js/bootstrap.min.js"></script>
 <script type="text/javascript">
-	$('#delcheck').click(function() {
-		if(confirm("정말 탈퇴하시겠습니까?") == true) {
-			mdel();
-		}
-		
-	});
-	
-	function mdel(){
-		location.href = "/tonight/mdelete?userid=<%= member.getMemberId() %>";
-		return false;
-	}
-	
-	$('#pwd2').change(function() {
-		if($(this).val() != $('#pwd').val()) {
-			alert("패스워드 확인이 동일하지 않습니다.");
-			$('#pwd2').val("");
-		}
-	});
+   $('#delcheck').click(function() {
+      if(confirm("정말 탈퇴하시겠습니까?") == true) {
+         mdel();
+      }
+      
+   });
+   
+   function mdel(){
+      location.href = "/tonight/mdelete?userid=<%= member.getMemberId() %>";
+      return false;
+   }
+   
+   $('#pwd2').change(function() {
+      if($(this).val() != $('#pwd').val()) {
+         alert("패스워드 확인이 동일하지 않습니다.");
+         $('#pwd2').val("");
+      }
+   });
 </script>
 
 
 </body>
 </html>
-
-
-
-
-

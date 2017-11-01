@@ -9,12 +9,13 @@
 <style type="text/css">
 	.jumbotron {
 		margin-bottom: 0px;
-	    background-image: url(img/jumbotronbackground.jpg);
+	   /*  background-image: url(img/jumbotronbackground.jpg); */
+	    background-color: black !important;
 	    background-position: 0% 25%;
 	    background-size: cover;
 	    background-repeat: no-repeat;
 	    color: white !important;
-	    min-height: 500px;
+	    min-height: 300px;
 	}
 	.jumbotron > div {
 		margin-top: 50px;
@@ -26,10 +27,8 @@
 <div class="jumbotron">
   <div class="container text-center">
     <h1>Tonight</h1>      
-    <p>가나다라마바사아자차카타파하</p>
-    <p>가나다라마바사아자차카타파하</p>
-    <p>가나다라마바사아자차카타파하</p>
-    <p>가나다라마바사아자차카타파하</p>
+    <p>독특한 숙소를 예약하고, 현지인처럼 살아보세요.</p>
+
   </div>
 </div>
   
