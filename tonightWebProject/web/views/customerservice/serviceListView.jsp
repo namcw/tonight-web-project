@@ -13,7 +13,7 @@
   </div>
 </div>
 <ul>
-	<li><a href="/tonight/qlist">QnA</a></li>
+	<li><a href="/tonight/blist">QnA</a></li>
 	<li><a href="/tonight/flist">FAQ</a></li>
 </ul>
 
