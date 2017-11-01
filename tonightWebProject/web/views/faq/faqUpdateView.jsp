@@ -10,16 +10,19 @@
 <title>faqUpdateView</title>
 <link href="bootstrap-3.3.7/css/bootstrap.min.css" rel="stylesheet">
   <style>
+  resize:none;
     #contentForm {
       width: 40%;
       margin: 0 auto;
       padding-top: 12%;
     }
  
-    .table > thead > tr > th, .table > tbody > tr > th {
+    .table > div > tr > th, .table > tbody > tr > th {
       background-color: #e6ecff;
       text-align: center;
     }
+    #textarea{height="300"}
+
   </style>
 </head>
 <body>
@@ -44,22 +47,26 @@
 
 	<tr><th width="100" bgcolor="gray">내용</th>
 		<td align="left">
-				<textarea style="resize:none;" name="faqAnswer" class="form-control" value="<%= faq.getFaqAnswer() %>"><%= faq.getFaqAnswer() %></textarea>
+				<textarea cols="40" rows="10" style="resize:none;" name="faqAnswer" class="form-control"><%= faq.getFaqAnswer() %></textarea>
 		</td>
 	</tr>
 
 	<tr><th width="150" bgcolor="gray" colspan="2">
 		<input type="submit" class="btn btn-default" value="수정하기"> &nbsp;
-		<input type="reset" class="btn btn-default" value="취소하기">
+		<input type="reset" class="btn btn-default" value="취소하기"><Br><Br>
+			<span style="vertical-align: middle">
+	<button type="button" onclick="location.href='/tonight/flist' " class="btn btn-info">목록으로 이동</button>
+	</span>
 	</th></tr>
 	</table>
 	</form>
 	<br>
-	<a href="/tonight/flist">목록으로 이동</a>
+
 </div>
 
 <br>
 <hr>
 <%@ include file="../includes/footer.jsp" %>
+
 </body>
 </html>

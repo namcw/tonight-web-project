@@ -57,9 +57,9 @@
     
     <div class="collapse navbar-collapse">
       <ul class="nav navbar-nav navbar-center">
-        <li><a href="#">인기</a></li>
+        <li><a href="/tonight/tpopul">인기</a></li>
         <li><a href="/tonight/tlist">여행&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
-        <li><a id="logo" class="navbar-brand" href="/tonight/index.jsp"><img width="65" src="/tonight/img/logo.png"></a>
+        <li><a id="logo" class="navbar-brand" href="/tonight/tpopul"><img width="65" src="/tonight/img/logo.png"></a>
         <li><a href="/tonight/alist">숙소</a></li>
         <li class="dropdown">
         	<a class="dropdown-toggle" data-toggle="dropdown">고객센터

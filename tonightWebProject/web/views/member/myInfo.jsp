@@ -178,13 +178,13 @@ body, html {
 					 		<div class="media">
 							    <div class="media-left media-middle">
 							      <a href="/tonight/tdetail?tid=<%= tour.getTourId() %>">
-							      <img src="/tonight/tuploadfiles/<%= tour.getTourRname() %>" class="media-object" style="width:80px">
+							      <img src="/tonight/tuploadfiles/<%= tour.getTourRname() %>" class="media-object" style="width:100px">
 							      </a>
 							    </div>
 							    <div class="media-body">
 							      <h4 class="media-heading ttitle"><%= tour.getTourTitle() %></h4>
 							      <p><%= treserve.getTrSdate() %> ~ <%= treserve.getTrAdate() %></p>
-							      <p><%= treserve.getTrTprice() %>원</p>
+							      <p><%= treserve.getTrTprice() %>원<span style="color:red" class="pull-right"><%= treserve.getTrState() %></span></p>
 							    </div>
 					 		</div>
 				 		<% } %>

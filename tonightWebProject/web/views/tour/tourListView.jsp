@@ -19,7 +19,7 @@
 <style type="text/css">
 	.jumbotron {
 		margin-bottom: 0px;
-	    background-image: url(img/jumbotronbackground.jpg);
+	    background-image: url(img/tour.png);
 	    background-position: 0% 25%;
 	    background-size: cover;
 	    background-repeat: no-repeat;
@@ -53,6 +53,96 @@
 	
 	.thumb a img { display: block; /* Otherwise it keeps some space around baseline */ min-width: 100%; /* Scale up to fill container width */ min-height: 100%; /* Scale up to fill container height */ -ms-interpolation-mode: bicubic; /* Scaled images look a bit better in IE now */ }
 	}
+	
+		.ih-item.square {
+  position: relative;
+  width: 316px;
+  height: 240px;
+  border: 8px solid #fff;
+  box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+}
+.ih-item.square .info {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  text-align: center;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+.ih-item.square.effect3 {
+  overflow: hidden;
+}
+.ih-item.square.effect3.colored .info {
+  background: #1a4a72;
+}
+.ih-item.square.effect3 .img {
+  -webkit-transform: translateY(0);
+  -moz-transform: translateY(0);
+  -ms-transform: translateY(0);
+  -o-transform: translateY(0);
+  transform: translateY(0);
+  -webkit-transition: all 0.35s ease-in-out;
+  -moz-transition: all 0.35s ease-in-out;
+  transition: all 0.35s ease-in-out;
+}
+.ih-item.square.effect3 .info {
+  height: 65px;
+  background: #333333;
+  opacity: 0;
+  -webkit-transition: all 0.35s ease-in-out;
+  -moz-transition: all 0.35s ease-in-out;
+  transition: all 0.35s ease-in-out;
+}
+.ih-item.square.effect3 .info h3 {
+  text-transform: uppercase;
+  color: #fff;
+  text-align: center;
+  font-size: 17px;
+  padding: 10px 10px 0 4px;
+  margin: 4px 0 0 0;
+}
+.ih-item.square.effect3 .info p {
+  font-style: italic;
+  font-size: 12px;
+  position: relative;
+  color: #bbb;
+  padding: 5px;
+  text-align: center;
+}
+.ih-item.square.effect3 a:hover .info {
+  visibility: visible;
+  opacity: 1;
+}
+
+.ih-item.square.effect3.bottom_to_top .info {
+  top: auto;
+  -webkit-transform: translateY(100%);
+  -moz-transform: translateY(100%);
+  -ms-transform: translateY(100%);
+  -o-transform: translateY(100%);
+  transform: translateY(100%);
+}
+.ih-item.square.effect3.bottom_to_top a:hover .img {
+  -webkit-transform: translateY(0px);
+  -moz-transform: translateY(0px);
+  -ms-transform: translateY(0px);
+  -o-transform: translateY(0px);
+  transform: translateY(0px);
+  
+   -webkit-filter: grayscale(30%);
+      filter: grayscale(30%);
+}
+.ih-item.square.effect3.bottom_to_top a:hover .info {
+  -webkit-transform: translateY(0);
+  -moz-transform: translateY(0);
+  -ms-transform: translateY(0);
+  -o-transform: translateY(0);
+  transform: translateY(0);
+}
+	
 </style>
 </head>
 <body>
@@ -68,25 +158,29 @@
 	<% int cnt = 0; %>
 	<% for(Tour tour : list) { %>
 		<div class="col-sm-6 col-md-4">
-			<div class="thumb">
-			<a href="/tonight/tdetail?tid=<%= tour.getTourId() %>">
-				<img src="/tonight/tuploadfiles/<%= tour.getTourRname() %>" class="img-responsive">
-			</a>
-			</div>
-			<p id="title"><%= tour.getTourTitle() %></p>
-			
-			<div class="row">
+		<!-- normal -->
+    <div class="ih-item square effect3 bottom_to_top"><a href="/tonight/tdetail?tid=<%= tour.getTourId() %>&page=<%= currentPage %>">
+        <div class="img"><img src="/tonight/tuploadfiles/<%= tour.getTourRname() %>" class="img-responsive" style="width:100%" alt="Image"></div>
+        <div class="info">
+          <p id="title"><%= tour.getTourTitle() %></p>
+        </div>
+        
+				<div class="row">
 				
 				<img src="/tonight/img/starGrade<%= Math.round(trAvgList.get(tour.getTourId()-1)) %>.png" class="col-xs-4">
-				
 				<p class="col-xs-1">
+			
 				(<%= trCntList.get(tour.getTourId()-1) %>)
-				
 				</p>
 			</div>
-			<%-- <p id="gid"><%= tour.getTourId() %></p> --%>
-			<br>
-	    </div>
+        </a>
+       
+        
+        </div>
+        <br>
+    <!-- end normal -->
+ 
+  </div>
 	    <% 
 	    	cnt++;
 	    	if(cnt % 3 == 0) { 

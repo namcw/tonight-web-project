@@ -35,7 +35,8 @@
 	</table>
 	</form>
 	<br>
-	<a href="/tonight/qlist">목록으로 이동</a>
+	<button type="button" >
+	<a href="/tonight/qlist">목록으로 이동</a></button>
 </section>
 
 <br>

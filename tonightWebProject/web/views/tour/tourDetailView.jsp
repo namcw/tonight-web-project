@@ -298,15 +298,6 @@
 					</div>
 				</div>
 			</div>
-			<div class="panel panel-default hidden-md hidden-lg">
-				<div class="panel-heading">예약/결제</div>
-
-				<div class="panel-body">
-				
-				
-				
-				</div>
-			</div>
 			<div class="panel panel-default">
 				<div class="panel-heading">상세일정</div>
 				<div class="panel-body">
@@ -640,7 +631,11 @@
 <script>
 function check() {
 	<% if(member != null) { %>
-		$("#reserveform").submit();
+		<% if(member.getMemberType().equals('U')) { %>
+			$("#reserveform").submit();
+		<% } else { %>
+			alert("예약은 일반 회원만 가능합니다.")
+		<% } %>
 		return true;
 	<% } else { %>
 		alert("로그인해야됩니다!");
