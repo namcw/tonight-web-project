@@ -3,7 +3,6 @@
 <%@ page import="accom.model.vo.Accommodation, java.util.*" %>
 <%
 	Accommodation accom = (Accommodation)request.getAttribute("accom");
-	int currentPage = ((Integer)request.getAttribute("currentPage")).intValue();
 %>
 <!DOCTYPE html>
 <html>

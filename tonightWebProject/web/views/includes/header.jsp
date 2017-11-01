@@ -40,6 +40,14 @@
 	  }
 	  
 	}
+.dropdown:hover .dropdown-menu{
+display:block;
+margin-top:0;
+
+
+}
+
+
 
 </style>
 </head>
@@ -54,15 +62,22 @@
       </button>
       <a class="navbar-brand" id="mobile-logo"href="/tonight/index.jsp"><img width="30" src="/tonight/img/logo.png"></a>
     </div>
-    
     <div class="collapse navbar-collapse">
       <ul class="nav navbar-nav navbar-center">
-        <li><a href="#">인기</a></li>
+        <li><a href="/tonight/tpopul">인기</a></li>
         <li><a href="/tonight/tlist">여행&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
         <li><a id="logo" class="navbar-brand" href="/tonight/index.jsp"><img width="65" src="/tonight/img/logo.png"></a>
         <li><a href="/tonight/alist">숙소</a></li>
-        <li><a href="/tonight/views/customerservice/serviceListView.jsp">고객센터</a></li>
-      </ul>
+       
+        <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">고객센터 <span class="caret"></span></a>
+            <ul class="dropdown-menu" style="background-color:black">
+              <li><a href="/tonight/qlist">qna</a></li>
+              <li><a href="/tonight/flist">faq</a></li>
+            </ul>
+          </li>
+        <!-- <li class="dropdown"><a href="/tonight/views/customerservice/serviceListView.jsp">고객센터</a></li> -->
+    </ul>
       <ul class="nav navbar-nav navbar-right">
       	<% if(member == null) { %>
         	<li><a href="/tonight/views/member/loginForm.jsp">로그인&nbsp;&nbsp;</a></li>
@@ -72,6 +87,7 @@
         <% } %>
         </ul>
     </div>
+  
   </div>
 </nav>
 <div id="startchange"></div>

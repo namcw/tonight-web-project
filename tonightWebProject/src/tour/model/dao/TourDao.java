@@ -10,6 +10,7 @@ import static common.JDBCTemplate.*;
 import tour.model.vo.Tour;
 import tour.model.vo.TourConf;
 import tour.model.vo.TourDetail;
+import tour.model.vo.TourPopularity;
 import tour.model.vo.TourReview;
 
 public class TourDao {
@@ -292,6 +293,48 @@ public class TourDao {
 		}
 		
 		return tconfList;
+	}
+
+	public ArrayList<Tour> getTourPopularity(Connection con) {
+		ArrayList<Tour> tpopul=null;
+		
+		Statement stmt = null;
+		ResultSet rset = null;
+		
+		String sql="SELECT * "
+				+ "FROM TOUR JOIN (SELECT TOUR_ID, RANK() OVER(ORDER BY COUNT(TOUR_ID)DESC) RANKING "
+				+ "FROM RESERVE_TOUR "
+				+ "WHERE REV_TOUR_DATE BETWEEN ADD_MONTHS(SYSDATE,-1) AND SYSDATE GROUP BY TOUR_ID) USING (TOUR_ID) "
+				+ "ORDER BY RANKING ASC";
+		
+		try {
+			
+			stmt=con.createStatement();
+			rset=stmt.executeQuery(sql);
+			
+			
+			if(rset != null) {
+					tpopul = new ArrayList<Tour>();
+				while(rset.next()) {
+					Tour tour=new Tour();
+					tour.setTourId(rset.getInt("TOUR_ID"));
+					tour.setTourTitle(rset.getString("TOUR_TITLE"));
+					tour.setGuideId(rset.getString("GUIDE_ID"));
+					tour.setTourThumnailPath(rset.getString("TOUR_THUMNAIL_PATH"));
+					tpopul.add(tour);
+				}
+				
+			}
+						
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(stmt);
+			close(rset);
+		}
+		
+		return tpopul;
 	}
 
 }

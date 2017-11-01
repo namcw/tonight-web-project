@@ -46,6 +46,7 @@ public class MemberUpdateServlet extends HttpServlet {
 		String memberId = request.getParameter("memberid");
 		String memberPwd = request.getParameter("memberpwd");
 		String memberName = request.getParameter("membername");
+		String memberType=request.getParameter("membertype");
 		String birthDate=request.getParameter("birthdate");
 		String email = request.getParameter("email");
 		String phone = request.getParameter("phone");
@@ -54,8 +55,9 @@ public class MemberUpdateServlet extends HttpServlet {
 		/*System.out.println(memberId+","+memberPwd+","+memberName+","+birthDate+","+email+","+phone+","+address+","+rank);*/
 		
 		
-		Member member = new Member(memberId,memberPwd,memberName,birthDate,phone,email,address,rank);
+		Member member = new Member(memberId,memberPwd,memberName,memberType,birthDate,phone,email,address,rank);
 
+		
 		int result = new MemberService().updateMember(member);
 		
 		RequestDispatcher rd = null;
@@ -68,7 +70,7 @@ public class MemberUpdateServlet extends HttpServlet {
 			response.sendRedirect("/tonight/index.jsp");
 		} else {
 			rd=request.getRequestDispatcher("/views/member/memberError.jsp");
-			request.setAttribute("message", "회원정보 수정 실패");
+			request.setAttribute("message", "�쉶�썝�젙蹂� �닔�젙 �떎�뙣");
 			rd.forward(request, response);
 		}
 		

@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" %>
+    pageEncoding="UTF-8" import="java.util.ArrayList, tour.model.vo.Tour" %>
 
 <!DOCTYPE html>
 <html>
@@ -15,7 +15,7 @@
 	    background-size: cover;
 	    background-repeat: no-repeat;
 	    color: white !important;
-	    min-height: 500px;
+	   height: 250px;
 	}
 	.jumbotron > div {
 		margin-top: 50px;
@@ -27,8 +27,23 @@
 	font-family: 'Nanum Pen Script';
 	font-size: 100px;
 	}
-	
-	
+
+#tour{
+
+border : 1px solid gray;
+padding: 5px;
+}	
+
+#house{
+
+border : 1px solid gray;
+padding: 5px;
+}	
+
+#house.clearfix {
+    overflow: auto;
+}
+
 </style>
 </head>
 <body>
@@ -36,20 +51,19 @@
 <div class="jumbotron">
   <div class="container text-center">
     <h1>Tonight</h1>      
-    <p>가나다라마바사아자차카타파하</p>
-    <p>가나다라마바사아자차카타파하</p>
-    <p>가나다라마바사아자차카타파하</p>
-    <p>가나다라마바사아자차카타파하</p>
+    
   </div>
 </div>
   
-<div class="container-fluid bg-3 text-center">    
+<div class="container-fluid bg-3 text-center" id="tour">    
   <h3>인기 여행 상품</h3><br>
   <div class="row">
-    <div class="col-sm-3">
+  	   <div class="col-sm-3"> 
       <p>Some text..</p>
       <img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image">
     </div>
+  
+    
     <div class="col-sm-3"> 
       <p>Some text..</p>
       <img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image">
@@ -62,9 +76,14 @@
       <p>Some text..</p>
       <img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image">
     </div>
+   
   </div>
+ 
 </div><br>
-<div class="container-fluid bg-3 text-center">    
+
+
+<div class="container-fluid bg-3 text-center" id="house">    
+ <div class="clearfix">
   <h3>인기 숙소 상품</h3><br>
   <div class="row">
     <div class="col-sm-3">
@@ -104,7 +123,7 @@
       <img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image">
     </div>
   </div>
-</div><br><br>
+</div></div><br><br>
 <%@ include file="views/includes/footer.jsp" %>
 
 </body>

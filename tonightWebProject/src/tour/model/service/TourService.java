@@ -3,10 +3,13 @@ package tour.model.service;
 import java.sql.Connection;
 import java.util.ArrayList;
 
+import accom.model.vo.Accommodation;
+
 import static common.JDBCTemplate.*;
 
 import tour.model.dao.TourDao;
 import tour.model.vo.TourDetail;
+import tour.model.vo.TourPopularity;
 import tour.model.vo.TourReview;
 import tour.model.vo.Tour;
 import tour.model.vo.TourConf;
@@ -72,4 +75,15 @@ public class TourService {
 		ArrayList<TourConf> tconfList = new TourDao().getTourConfList(con, tid);
 		return tconfList;
 	}
+
+	public ArrayList<Tour> tourPopularity() {
+		Connection con=getConnection();
+		ArrayList<Tour> tpopul=new TourDao().getTourPopularity(con);
+		return tpopul;
+	}
+
+	
+	
+
+		
 }

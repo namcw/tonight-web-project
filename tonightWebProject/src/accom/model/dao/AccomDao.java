@@ -3,10 +3,12 @@ package accom.model.dao;
 import static common.JDBCTemplate.*;
 import java.sql.*;
 import java.util.*;
+
+
 import accom.model.vo.Accommodation;
 
 public class AccomDao {
-	//총 숙소 리스트 갯수 조회용
+	//珥� �닕�냼 由ъ뒪�듃 媛��닔 議고쉶�슜
 	public int getListCount(Connection con) {
 		int result = 0;
 		Statement stmt = null;
@@ -30,13 +32,13 @@ public class AccomDao {
 		return result;
 	}
 
-	//한 페이지에 출력할 게시글 목록 조회용
+	//�븳 �럹�씠吏��뿉 異쒕젰�븷 寃뚯떆湲� 紐⑸줉 議고쉶�슜
 	public ArrayList<Accommodation> selectList(Connection con, int currentPage, int limit) {
 		ArrayList<Accommodation> list = null;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		
-		//currentPage 에 해당되는 목록만 조회
+		//currentPage �뿉 �빐�떦�릺�뒗 紐⑸줉留� 議고쉶
 		String query = "select * from ("
 				+ "select rownum rnum, acc_id, biz_id, acc_name, "
 				+ "acc_type, acc_address, acc_contact, acc_rank, "
@@ -101,6 +103,7 @@ public class AccomDao {
 			rset = pstmt.executeQuery();
 			
 			if(rset.next()) {
+				
 				accom = new Accommodation();
 				
 				accom.setAccId(rset.getInt("acc_id"));
@@ -194,5 +197,55 @@ public class AccomDao {
 		}
 		
 		return list;
+	}
+
+	public ArrayList<Accommodation> getAccomPopularity(Connection con) {
+		ArrayList<Accommodation>apopul=null;
+		
+		Statement stmt=null;
+		ResultSet rset=null;
+		
+		String sql="SELECT * "
+				+ "FROM ACCOMMODATION RIGHT JOIN( SELECT ACC_ID, RANK() OVER(ORDER BY COUNT(ACC_ID)DESC) RANKING "
+				+ "FROM RESERVE_ROOM "
+				+ "WHERE REV_ROOM_DATE BETWEEN ADD_MONTHS(SYSDATE,-1) AND SYSDATE "
+				+ "GROUP BY ACC_ID) USING(ACC_ID) "
+				+ "ORDER BY RANKING";
+		
+		try {
+			stmt=con.createStatement();
+			rset=stmt.executeQuery(sql);
+					System.out.println("rset 전");
+			if(rset!=null){
+				apopul=new ArrayList<Accommodation>();
+				System.out.println("rset 후");
+				while(rset.next()){
+					Accommodation accom=new Accommodation();
+					accom.setAccId(rset.getInt("ACC_ID"));
+					accom.setBizId(rset.getString("BIZ_ID"));
+					accom.setAccName(rset.getString("ACC_NAME"));
+					accom.setAccType(rset.getString("ACC_TYPE"));
+					accom.setAccAddress(rset.getString("ACC_ADDRESS"));
+					accom.setAccContact(rset.getString("ACC_CONTACT"));
+					accom.setAccRank(rset.getString("ACC_RANK"));
+					accom.setAccImagePath(rset.getString("ACC_IMAGE_PATH"));
+					accom.setAccRules(rset.getString("ACC_RULES"));
+					accom.setAccLocationInfo(rset.getString("ACC_LOCATIONINFO"));
+					accom.setFacilities(rset.getString("ACC_FACILITIES"));
+					accom.setAccRefund(rset.getString("ACC_REFUND"));
+					
+					apopul.add(accom);
+				
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(stmt);
+			close(rset);
+			
+		}
+		
+		return apopul;
 	}
 }

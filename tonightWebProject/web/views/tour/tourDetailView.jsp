@@ -20,12 +20,12 @@
 
 .jumbotron {
 		margin-bottom: 0px;
-	    background-image: url(img/loginbackground.jpg);
+	    background-image: url(img/jumbotronbackground.jpg);
 	    background-position: 0% 25%;
 	    background-size: cover;
 	    background-repeat: no-repeat;
 	    color: white !important;
-	    height: 20px;
+	    height: 200px;
 	}
 
 .container {
