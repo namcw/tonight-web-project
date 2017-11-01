@@ -133,5 +133,12 @@ public class AccomService {
 		ArrayList<Double> arAvgList = new AccomDao().getTourReviewAvgList(con);
 		return arAvgList;
 	}
+	
+	public ArrayList<Accommodation> accomPopularity() {
+		Connection con=getConnection();
+		ArrayList<Accommodation> apopul=new AccomDao().getAccomPopularity(con);
+		close(con);
+		return apopul;
+	}
 }
 

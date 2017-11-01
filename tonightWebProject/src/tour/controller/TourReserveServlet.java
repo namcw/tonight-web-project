@@ -43,7 +43,7 @@ public class TourReserveServlet extends HttpServlet {
 		String memberId = request.getParameter("registerid");
 		
 		
-		TourReserve treserve = new TourReserve(0, memberId, tourId, sdate, adate, acnt, ccnt, totalPrice);
+		TourReserve treserve = new TourReserve(0, memberId, tourId, null, "예약완료",sdate, adate, acnt, ccnt, totalPrice);
 		
 		int result = new TourService().insertTourReserve(treserve);
 		

@@ -490,17 +490,18 @@ public class TourDao {
 		int result = 0;
 		PreparedStatement pstmt = null;
 		
-		String query = "INSERT INTO TOUR_RESERVE VALUES((SELECT COUNT(*)+1 FROM TOUR_RESERVE), ?, ?, ?, ?, ?, ?, ?)";
+		String query = "INSERT INTO TOUR_RESERVE VALUES((SELECT COUNT(*)+1 FROM TOUR_RESERVE), ?, ?, SYSDATE, ?, ?, ?, ?, ?, ?)";
 		
 		try {
 			pstmt = con.prepareStatement(query);
 			pstmt.setString(1, treserve.getMemberId());
 			pstmt.setInt(2, treserve.getTourId());
-			pstmt.setDate(3, treserve.getTrSdate());
-			pstmt.setDate(4, treserve.getTrAdate());
-			pstmt.setInt(5, treserve.getTrAdult());
-			pstmt.setInt(6, treserve.getTrChild());
-			pstmt.setInt(7, treserve.getTrTprice());
+			pstmt.setString(3, treserve.getTrState());
+			pstmt.setDate(4, treserve.getTrSdate());
+			pstmt.setDate(5, treserve.getTrAdate());
+			pstmt.setInt(6, treserve.getTrAdult());
+			pstmt.setInt(7, treserve.getTrChild());
+			pstmt.setInt(8, treserve.getTrTprice());
 			
 			result = pstmt.executeUpdate();
 			
@@ -531,6 +532,8 @@ public class TourDao {
 									rset.getInt("TR_ID"),
 									memberId,
 									rset.getInt("TOUR_ID"),
+									rset.getDate("TR_DATE"),
+									rset.getString("TR_STATE"),
 									rset.getDate("TR_SDATE"),
 									rset.getDate("TR_ADATE"),
 									rset.getInt("TR_ADULT"),
@@ -549,6 +552,51 @@ public class TourDao {
 		}
 		
 		return treserveList;
+	}
+	
+	public ArrayList<Tour> getTourPopularity(Connection con) {
+		ArrayList<Tour> tpopul=null;
+		
+		Statement stmt = null;
+		ResultSet rset = null;
+		
+		String sql="SELECT * "
+				+ "FROM (SELECT TOUR_ID, TOUR_TITLE, GUIDE_ID, TOUR_ONAME, TOUR_RNAME, TR_TOUR_ID, NVL(CNT, 0) CCNT "
+				+ "FROM TOUR "
+				+ "LEFT JOIN (SELECT TR_TOUR_ID, COUNT(*) CNT FROM TOUR_REVIEW GROUP BY TR_TOUR_ID) "
+				+ "ON (TOUR_ID = TR_TOUR_ID) "
+				+ "ORDER BY CCNT DESC) "
+				+ "WHERE ROWNUM < 4";
+		
+		try {
+			
+			stmt=con.createStatement();
+			rset=stmt.executeQuery(sql);
+			
+			
+			if(rset != null) {
+					tpopul = new ArrayList<Tour>();
+				while(rset.next()) {
+					Tour tour=new Tour();
+					tour.setTourId(rset.getInt("TOUR_ID"));
+					tour.setTourTitle(rset.getString("TOUR_TITLE"));
+					tour.setGuideId(rset.getString("GUIDE_ID"));
+					tour.setTourOname(rset.getString("TOUR_ONAME"));
+					tour.setTourRname(rset.getString("TOUR_RNAME"));
+					tpopul.add(tour);
+				}
+				
+			}
+						
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(stmt);
+			close(rset);
+		}
+		
+		return tpopul;
 	}
 
 }

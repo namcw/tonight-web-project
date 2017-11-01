@@ -40,7 +40,6 @@ public class AccomDetailServlet extends HttpServlet {
 		response.setContentType("text/html; charset=utf-8");
 		
 		int accomId = Integer.parseInt(request.getParameter("accomId"));
-		int currentPage = Integer.parseInt(request.getParameter("page"));
 		
 		AccomService aservice = new AccomService();
 		RoomService rservice = new RoomService();
@@ -59,7 +58,6 @@ public class AccomDetailServlet extends HttpServlet {
 			request.setAttribute("list", list);
 			request.setAttribute("areviewList", areviewList);
 			request.setAttribute("gradeAvg", gradeAvg);
-			request.setAttribute("currentPage", currentPage);
 			request.setAttribute("aimageList", aimageList);
 			view.forward(request, response);
 		}else{

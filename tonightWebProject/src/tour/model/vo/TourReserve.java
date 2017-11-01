@@ -10,6 +10,8 @@ public class TourReserve implements Serializable {
 	private int trId;
 	private String memberId;
 	private int tourId;
+	private Date trDate;
+	private String trState;
 	private Date trSdate;
 	private Date trAdate;
 	private int trAdult;
@@ -18,12 +20,14 @@ public class TourReserve implements Serializable {
 	
 	public TourReserve() {}
 
-	public TourReserve(int trId, String memberId, int tourId, Date trSdate, 
-			Date trAdate, int trAdult, int trChild, int trTprice) {
+	public TourReserve(int trId, String memberId, int tourId, Date trDate, String trState, Date trSdate, Date trAdate,
+			int trAdult, int trChild, int trTprice) {
 		super();
 		this.trId = trId;
 		this.memberId = memberId;
 		this.tourId = tourId;
+		this.trDate = trDate;
+		this.trState = trState;
 		this.trSdate = trSdate;
 		this.trAdate = trAdate;
 		this.trAdult = trAdult;
@@ -53,6 +57,22 @@ public class TourReserve implements Serializable {
 
 	public void setTourId(int tourId) {
 		this.tourId = tourId;
+	}
+
+	public Date getTrDate() {
+		return trDate;
+	}
+
+	public void setTrDate(Date trDate) {
+		this.trDate = trDate;
+	}
+
+	public String getTrState() {
+		return trState;
+	}
+
+	public void setTrState(String trState) {
+		this.trState = trState;
 	}
 
 	public Date getTrSdate() {
@@ -94,6 +114,7 @@ public class TourReserve implements Serializable {
 	public void setTrTprice(int trTprice) {
 		this.trTprice = trTprice;
 	}
+
 	
 	
 	

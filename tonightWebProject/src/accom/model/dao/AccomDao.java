@@ -528,4 +528,52 @@ public class AccomDao {
 		return arAvgList;
 	}
 	
+	public ArrayList<Accommodation> getAccomPopularity(Connection con) {
+		ArrayList<Accommodation>apopul=null;
+		
+		Statement stmt=null;
+		ResultSet rset=null;
+		
+		String sql="SELECT * "
+				+ "FROM (SELECT ACC_ID, BIZ_ID, ACC_NAME, ACC_INFO, ACC_TYPE, ACC_ADDRESS, ACC_CONTACT, ACC_RANK, ACC_ONAME, ACC_RNAME, ACC_RULES, ACC_FACILITIES, ACC_REFUND, NVL(CNT, 0) CCNT "
+				+ "FROM ACCOMMODATION "
+				+ "LEFT JOIN (SELECT AR_ACCOM_ID, COUNT(*) CNT FROM ACCOM_REVIEW GROUP BY AR_ACCOM_ID) "
+				+ "ON (ACC_ID = AR_ACCOM_ID) "
+				+ "ORDER BY CCNT DESC) "
+				+ "WHERE ROWNUM < 4";
+		
+		try {
+			stmt=con.createStatement();
+			rset=stmt.executeQuery(sql);
+			if(rset!=null){
+				apopul=new ArrayList<Accommodation>();
+				while(rset.next()){
+					Accommodation accom=new Accommodation();
+					accom.setAccId(rset.getInt("ACC_ID"));
+					accom.setBizId(rset.getString("BIZ_ID"));
+					accom.setAccName(rset.getString("ACC_NAME"));
+					accom.setAccType(rset.getString("ACC_TYPE"));
+					accom.setAccAddress(rset.getString("ACC_ADDRESS"));
+					accom.setAccContact(rset.getString("ACC_CONTACT"));
+					accom.setAccRank(rset.getString("ACC_RANK"));
+					accom.setAccOname(rset.getString("ACC_ONAME"));
+					accom.setAccRname(rset.getString("ACC_RNAME"));
+					accom.setAccRules(rset.getString("ACC_RULES"));
+					accom.setFacilities(rset.getString("ACC_FACILITIES"));
+					accom.setAccRefund(rset.getString("ACC_REFUND"));
+					
+					apopul.add(accom);
+				
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(stmt);
+			close(rset);
+			
+		}
+		
+		return apopul;
+	}
 }
