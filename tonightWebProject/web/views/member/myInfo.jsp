@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="java.util.ArrayList, member.model.vo.Member, tour.model.vo.TourReserve, tour.model.vo.Tour" %>
+    pageEncoding="UTF-8" import="java.util.ArrayList, member.model.vo.Member, accom.model.vo.Accommodation, tour.model.vo.TourReserve, tour.model.vo.Tour" %>
 <%
    
 	Member member = (Member)request.getAttribute("member");
@@ -160,7 +160,7 @@ body, html {
 <div class="container">
    <div class="card card-container"  style="height:600px !important">
    		<ul class="nav nav-tabs text-center">
-			<li class="active" style="width:50%"><a data-toggle="tab" href="#res">예약내역</a></li>
+			<li class="active" style="width:50%"><a data-toggle="tab" href="#res">예약/등록 내역</a></li>
 			<li style="width:50%"><a data-toggle="tab" href="#info">정보수정</a></li>
 		</ul>
 		<br>
@@ -196,7 +196,7 @@ body, html {
 			 		<% } %>
 			 	<% } %>
 			 <% } else if(mtype.equals("G")) { %>
-			 	<% if(tList != null && tList.size() > 0 ) { %>
+			 	<% if(tList != null) { %>
 			 		<% for(Tour tour : tList) { %>
 			 			<div class="media">
 								    <div class="media-left media-middle">
@@ -205,13 +205,27 @@ body, html {
 								      </a>
 								    </div>
 								    <div class="media-body">
-								      <h4 class="media-heading ttitle"><%= tour.getTourTitle() %></h4>
+								      <p class="media-heading ttitle"><%= tour.getTourTitle() %></p>
 								    </div>
 						 		</div>
 			 		<% } %>
 			 	<% } %>
 			 <% } else if(mtype.equals("B")) { %>
-			 	
+			 	<% ArrayList<Accommodation> aList = (ArrayList<Accommodation>)request.getAttribute("aList"); %>
+			 	<% if(aList != null) { %>
+			 		<% for(Accommodation a : aList) { %>
+			 			<div class="media">
+								    <div class="media-left media-middle">
+								      <a href="/tonight/adetail?accomId=<%= a.getAccId() %>">
+								      <img src="/tonight/auploadfiles/<%= a.getAccRname() %>" class="media-object" style="width:100px">
+								      </a>
+								    </div>
+								    <div class="media-body">
+								      <p class="media-heading ttitle"><%= a.getAccName() %></p>
+								    </div>
+						 		</div>
+			 		<% } %>
+			 	<% } %>
 			 <% } %>
 			 
 			 

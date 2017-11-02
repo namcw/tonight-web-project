@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import accom.model.service.AccomService;
+import accom.model.vo.Accommodation;
 import member.model.service.MemberService;
 import member.model.vo.Member;
 import tour.model.service.TourService;
@@ -60,15 +62,12 @@ public class MemberSelectServlet extends HttpServlet {
 				request.setAttribute("tList", tList);
 				
 			} else if(mtype.equals("G")) {
-				
-				ArrayList<Tour> tourList = new TourService().selectGuideTourList(member.getMemberId());
-				
-				request.setAttribute("tourList", tourList);
+				ArrayList<Tour> tList = new TourService().selectGuideTourList(member.getMemberId());
+				request.setAttribute("tList", tList);
 				
 			} else if(mtype.equals("B")) {
-				
-				
-				
+				ArrayList<Accommodation> aList = new AccomService().selectBizAccomList(member.getMemberId());
+				request.setAttribute("aList", aList);
 			}
 			view = request.getRequestDispatcher("views/member/myInfo.jsp");
 			request.setAttribute("member", member);

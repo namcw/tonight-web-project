@@ -8,6 +8,7 @@ import accom.model.vo.AccomImage;
 import accom.model.vo.AccomReview;
 import accom.model.vo.Accommodation;
 import tour.model.dao.TourDao;
+import tour.model.vo.Tour;
 import tour.model.vo.TourReview;
 
 public class AccomDao {
@@ -575,5 +576,49 @@ public class AccomDao {
 		}
 		
 		return apopul;
+	}
+
+	public ArrayList<Accommodation> selectBizAccomList(Connection con, String memberId) {
+		ArrayList<Accommodation> aList = null;
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = "SELECT * FROM ACCOMMODATION WHERE BIZ_ID = ?";
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, memberId);
+			rset = pstmt.executeQuery();
+			if(rset != null) {
+				aList = new ArrayList<Accommodation>();
+				while(rset.next()) {
+					Accommodation a = new Accommodation(
+									rset.getInt("ACC_ID"),
+									memberId,
+									rset.getString("ACC_NAME"),
+									rset.getString("ACC_INFO"),
+									rset.getString("ACC_TYPE"),
+									rset.getString("ACC_ADDRESS"),
+									rset.getString("ACC_CONTACT"),
+									rset.getString("ACC_RANK"),
+									rset.getString("ACC_ONAME"),
+									rset.getString("ACC_RNAME"),
+									rset.getString("ACC_RULES"),
+									rset.getString("ACC_FACILITIES"),
+									rset.getString("ACC_REFUND"));
+					
+					aList.add(a);
+				}
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rset);
+		}
+		
+		return aList;
 	}
 }

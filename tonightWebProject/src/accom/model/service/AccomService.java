@@ -8,6 +8,7 @@ import accom.model.vo.AccomImage;
 import accom.model.vo.AccomReview;
 import accom.model.vo.Accommodation;
 import tour.model.dao.TourDao;
+import tour.model.vo.Tour;
 import tour.model.vo.TourReview;
 import accom.model.dao.AccomDao;
 
@@ -139,6 +140,12 @@ public class AccomService {
 		ArrayList<Accommodation> apopul=new AccomDao().getAccomPopularity(con);
 		close(con);
 		return apopul;
+	}
+
+	public ArrayList<Accommodation> selectBizAccomList(String memberId) {
+		Connection con = getConnection();
+		ArrayList<Accommodation> aList = new AccomDao().selectBizAccomList(con, memberId);
+		return aList;
 	}
 }
 
