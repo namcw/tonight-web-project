@@ -157,7 +157,7 @@ body, html {
 			    <form action="/tonight/menroll" method="post" class="sign-form">
 			    	<div class="form-group">
 					    <label class="col-xs-4">
-					      <input type="radio" name="membertype" value="U">일반회원
+					      <input type="radio" name="membertype" value="U" checked>일반회원
 					    </label>
 					    <label class="col-xs-4">
 					      <input type="radio" name="membertype" value="G">가이드
@@ -203,6 +203,16 @@ body, html {
 </div>
 <script src="/tonight/js/jquery-3.2.1.min.js"></script>
 <script src="/tonight/js/bootstrap.min.js"></script>
+<script>
+	$('#pwd2').change(function() {
+
+		if($('#pwd').val() != $('#pwd2').val()) {
+			alert("비밀번호를 확인해주세요!");
+			$('#pwd2').val("");
+		}
+
+	});
+</script>
 <script type="text/javascript">
 
 window.onload = function(){

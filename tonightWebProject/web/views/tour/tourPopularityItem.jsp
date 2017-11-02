@@ -11,7 +11,6 @@
 <html>
 <head>
 
-<link href="styles/ihover.css" rel="stylesheet">
 <meta charset=UTF-8>
 <style type="text/css">
 @import url(//fonts.googleapis.com/earlyaccess/nanumpenscript.css);

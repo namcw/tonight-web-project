@@ -30,6 +30,9 @@
 	    background-repeat: no-repeat;
 	    color: white !important;
 	    min-height: 100px;
+	    -webkit-filter: grayscale(40%);
+      	filter: grayscale(40%);
+	    
 	}
 	.jumbotron > div {
 		margin-top: 30px;
@@ -51,12 +54,18 @@
 		text-align: left !important;
 	}
 	
+	.img-responsive {
+	width: 310px !important;
+	
+	height: 200px !important;
+}
 	
 .ih-item.square {
   position: relative;
   width: 316px;
-  height: 216px;
+  height: 240px;
   border: 8px solid #fff;
+  border-right: 0px !important;
   box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
 }
 .ih-item.square .info {
@@ -87,7 +96,7 @@
   transition: all 0.35s ease-in-out;
 }
 .ih-item.square.effect3 .info {
-  height: 65px;
+  height: 95px;
   background: #333333;
   opacity: 0;
   -webkit-transition: all 0.35s ease-in-out;
@@ -104,34 +113,36 @@
 }
 .ih-item.square.effect3 .info p {
   font-style: italic;
-  font-size: 12px; 	
+  font-size: 12px;
   position: relative;
   color: #bbb;
   padding: 5px;
   text-align: center;
 }
-.ih-item.square.effect3 a:hover .info {
+.ih-item.square.effect3 #atag:hover .info {
   visibility: visible;
   opacity: 1;
 }
 
 .ih-item.square.effect3.bottom_to_top .info {
   top: auto;
-  
   -webkit-transform: translateY(100%);
   -moz-transform: translateY(100%);
   -ms-transform: translateY(100%);
   -o-transform: translateY(100%);
   transform: translateY(100%);
 }
-.ih-item.square.effect3.bottom_to_top a:hover .img {
-  -webkit-transform: translateY(-50px);
-  -moz-transform: translateY(-50px);
-  -ms-transform: translateY(-50px);
-  -o-transform: translateY(-50px);
-  transform: translateY(-50px);
+.ih-item.square.effect3.bottom_to_top #atag:hover .img {
+  -webkit-transform: translateY(0px);
+  -moz-transform: translateY(0px);
+  -ms-transform: translateY(0px);
+  -o-transform: translateY(0px);
+  transform: translateY(0px);
+  
+   -webkit-filter: grayscale(40%);
+      filter: grayscale(40%);
 }
-.ih-item.square.effect3.bottom_to_top a:hover .info {
+.ih-item.square.effect3.bottom_to_top #atag:hover .info {
   -webkit-transform: translateY(0);
   -moz-transform: translateY(0);
   -ms-transform: translateY(0);
@@ -139,40 +150,6 @@
   transform: translateY(0);
 }
 
-.ih-item.square.effect3.top_to_bottom .info {
-  bottom: auto;
-  -webkit-transform: translateY(-100%);
-  -moz-transform: translateY(-100%);
-  -ms-transform: translateY(-100%);
-  -o-transform: translateY(-100%);
-  transform: translateY(-100%);
-}
-.ih-item.square.effect3.top_to_bottom a:hover .img {
-  -webkit-transform: translateY(50px);
-  -moz-transform: translateY(50px);
-  -ms-transform: translateY(50px);
-  -o-transform: translateY(50px);
-  transform: translateY(50px);
-}
-.ih-item.square.effect3.top_to_bottom a:hover .info {
-  -webkit-transform: translateY(0);
-  -moz-transform: translateY(0);
-  -ms-transform: translateY(0);
-  -o-transform: translateY(0);
-  transform: translateY(0);
-}
-	
-	
-	@media ( min-width : 767px) {
-	.thumb { display: block; overflow: hidden; height: 250px; width: 340px; } 
-	
-	.thumb a img { display: block; /* Otherwise it keeps some space around baseline */ min-width: 100%; /* Scale up to fill container width */ min-height: 100%; /* Scale up to fill container height */ -ms-interpolation-mode: bicubic; /* Scaled images look a bit better in IE now */ }
-	}
-	@media ( min-width : 1200px) {
-	.thumb { display: block; overflow: hidden; height: 300px; width: 400px; } 
-	
-	.thumb a img { display: block; /* Otherwise it keeps some space around baseline */ min-width: 100%; /* Scale up to fill container width */ min-height: 100%; /* Scale up to fill container height */ -ms-interpolation-mode: bicubic; /* Scaled images look a bit better in IE now */ }
-	}
 </style>
 
 </head>
@@ -181,7 +158,6 @@
 <div class="jumbotron">
   <div class="container text-center">
     <h3>강원도 숙소</h3>      
-    <p>가나다라마바사아자차카타파하</p>
   </div>
 </div>
 <form action="/tonight/asearch" method="post">
@@ -210,21 +186,28 @@
 	<% int cnt = 0; %>
 	<% for(Accommodation a : list){ %>
 		<div class="col-sm-6 col-md-4">
-				<!-- normal -->
-    <div class="ih-item square effect3 bottom_to_top"><a href="/tonight/adetail?accomId=<%= a.getAccId() %> ">
-        <div class="img"><img src="/tonight/auploadfiles/<%= a.getAccRname() %>" class="img-responsive" style="width:100%" alt="Image"></div>
-        <div class="info">
-          <p id="title"><%= a.getAccName() %></p>
-				<p class="else"><%= a.getAccAddress() %></p>
-				<p class="else"><%= a.getAccRank() %></p>
-        </div></a></div>
-    <!-- end normal -->
- <br>
+		<!-- normal -->
+    		<div class="ih-item square effect3 bottom_to_top" onclick="location.href='/tonight/adetail?accomId=<%= a.getAccId() %>'">
+        		<div id="atag" style="cursor:pointer;">
+	        		<div class="img">
+	        			<img src="/tonight/auploadfiles/<%= a.getAccRname() %>" class="img-responsive"  alt="Image">
+	        		</div>
+	        		<div class="info">
+	          			<p id="title"><%= a.getAccName() %></p>
+	          			<p class="else"><%= a.getAccAddress() %></p>
+						<p class="else"><%= a.getAccRank() %></p>
+	          		</div>
+          			<div class="row" style="padding-top:4px">
+						<img src="/tonight/img/starGrade<%= Math.round(arAvgList.get(a.getAccId()-1)) %>.png" class="col-xs-4">
+						<p class="col-xs-4 col-xs-offset-4">review <span class="badge"><%= arCntList.get(a.getAccId()-1) %></span></p>
+					</div>
+					<p style="position:absolute; bottom:-12px; left:90px; color:white"><%= arAvgList.get(a.getAccId()-1) %></p>
+				</div>
+		 	</div>
+    	<!-- end normal -->
+		 <br>
 		</div>
-	    <% 
-	    	cnt++;
-	    	if(cnt % 3 == 0) { 
-	    %>
+	    <% if(++cnt % 3 == 0) { %>
 	    	<br><br>
 	    <% } %>
     <% } %>
@@ -235,9 +218,9 @@
 <%-- 페이지 번호 처리 --%>
 <div align="center">
 <%-- 이전 페이지 있을 경우에 대한 처리 --%>
-<ul class="pagination pagination-lg">
+<ul class="pagination pagination-sm">
 <% if(currentPage <= 1){ %>
-	
+	<li class="disabled"><span class="glyphicon glyphicon-menu-left"></span></li>
 <% }else{ %>
 	<li><a href="/tonight/alist?page=<%= currentPage - 1 %>"><span class="glyphicon glyphicon-menu-left"></span></a></li>
 <% } %>
@@ -251,7 +234,7 @@
 <% }} %>
 <%-- 현재 페이지 다음 페이지에 대한 처리 --%>
 <% if(currentPage >= maxPage){ %>
-	
+	<li class="disabled"><span class="glyphicon glyphicon-menu-right"></span></li>
 <% }else{ %>
 	<li><a href="/tonight/alist?page=<%= currentPage + 1 %>"><span class="glyphicon glyphicon-menu-right"></span></a></li>
 <% } %>

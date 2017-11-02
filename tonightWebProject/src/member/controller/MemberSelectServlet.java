@@ -61,7 +61,13 @@ public class MemberSelectServlet extends HttpServlet {
 				
 			} else if(mtype.equals("G")) {
 				
+				ArrayList<Tour> tourList = new TourService().selectGuideTourList(member.getMemberId());
+				
+				request.setAttribute("tourList", tourList);
+				
 			} else if(mtype.equals("B")) {
+				
+				
 				
 			}
 			view = request.getRequestDispatcher("views/member/myInfo.jsp");

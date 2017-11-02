@@ -273,7 +273,7 @@ container {
 
                   <hr>
 
-                  <div id="conftag" class="col-xs-8">
+                  <div id="conftag" class="col-xs-10">
                      <button type="button" id="addconf" class="btn btn-default">
                         <span class="glyphicon glyphicon-plus"></span>추가
                      </button>
@@ -456,12 +456,16 @@ container {
                   function() {
                      $('#conftag')
                            .prepend(
-                                 '<div class="row"><br><div class="col-xs-3"><p>객실 이름</p></div><div class="col-xs-8"><input type="text" name="rname' + i + '" class="form-control" placeholder="객실 이름을 입력하세요" /></div></div>'
-                                       + '<br><div class="row"><div class="col-xs-3"><p>객실 상세정보</p></div><div class="col-xs-8"><input type="text" name="rdetail' + i + '" class="form-control" placeholder="객실 상세정보를 입력하세요" /></div></div>'
-                                       + '<br><div class="row"><div class="col-xs-3"><p>주중 성인</p></div><div class="col-xs-4"><input type="text" name="wdadult' + i + '" class="form-control" placeholder="성인 요금을 입력하세요" /></div>'
-                                       + '<div class="col-xs-3"><p>주중 어린이</p></div><div class="col-xs-4"><input type="text" name="wdchild' + i + '" class="form-control" placeholder="어린이 요금을 입력하세요" /></div><div>'
-                                       + '<div class="row"><div class="col-xs-3"><p>주말 성인</p></div><div class="col-xs-4"><input type="text" name="wkadult' + i + '" class="form-control" placeholder="성인 요금을 입력하세요" /></div>'
-                                       + '<div class="col-xs-3"><p>주말 어린이</p></div><div class="col-xs-4"><input type="text" name="wkchild' + i + '" class="form-control" placeholder="어린이 요금을 입력하세요" /></div></div>');
+                                 '<br><div class="col-xs-4"><p>객실 이름</p></div><div class="col-xs-8"><input type="text" name="rname' + i + '" class="form-control" placeholder="객실 이름을 입력하세요" /></div></div></div>'
+                                       + '<br><br><br><div class="row"><div class="col-xs-4"><p>객실 상세정보</p></div><div class="col-xs-8"><input type="text" name="rdetail' + i + '" class="form-control" placeholder="객실 상세정보를 입력하세요" /></div>'
+                                       
+                                       
+                                       + '<br><br><br><div class="col-xs-4"><p>주중 성인</p></div><div class="col-xs-8"><input type="text" name="wdadult' + i + '" class="form-control" placeholder="성인 요금을 입력하세요" /></div>'
+                                       + '<br><br><br><div class="col-xs-4"><p>주중 어린이</p></div><div class="col-xs-8"><input type="text" name="wdchild' + i + '" class="form-control" placeholder="어린이 요금을 입력하세요" /></div>'
+                                       
+                                       
+                                       + '<br><br><br><div class="col-xs-4"><p>주말 성인</p></div><div class="col-xs-8"><input type="text" name="wkadult' + i + '" class="form-control" placeholder="성인 요금을 입력하세요" /></div>'
+                                       + '<br><br><br><div class="col-xs-4"><p>주말 어린이</p></div><div class="col-xs-8"><input type="text" name="wkchild' + i + '" class="form-control" placeholder="어린이 요금을 입력하세요" /></div>');
                      $('#confcnt').val(i++);
 
                   });

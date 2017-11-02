@@ -3,7 +3,6 @@
 <%
    
 	Member member = (Member)request.getAttribute("member");
-	String mtype = member.getMemberType();
 	ArrayList<TourReserve> treserveList = (ArrayList<TourReserve>)request.getAttribute("treserveList");
    	ArrayList<Tour> tList = (ArrayList<Tour>)request.getAttribute("tList");
 %>    
@@ -168,31 +167,57 @@ body, html {
 		<div class="tab-content">
 		 <div id="res" class="tab-pane fade in active" >
 		 <div class="pre-scrollable" style="height:500px; max-height:500px">
-		 <% if(mtype.equals("U")) { %>
-		 	<% if(treserveList.size() == 0) { %>
-		 		투어 예약 내역이 없습니다.
-		 	<% } else { %>
-		 		<% for(TourReserve treserve : treserveList) { %>
-		 			<% for(Tour tour : tList) { %>
-		 				<% if(treserve.getTourId() == tour.getTourId()) {%>
-					 		<div class="media">
-							    <div class="media-left media-middle">
-							      <a href="/tonight/tdetail?tid=<%= tour.getTourId() %>">
-							      <img src="/tonight/tuploadfiles/<%= tour.getTourRname() %>" class="media-object" style="width:100px">
-							      </a>
-							    </div>
-							    <div class="media-body">
-							      <h4 class="media-heading ttitle"><%= tour.getTourTitle() %></h4>
-							      <p><%= treserve.getTrSdate() %> ~ <%= treserve.getTrAdate() %></p>
-							      <p><%= treserve.getTrTprice() %>원<span style="color:red" class="pull-right"><%= treserve.getTrState() %></span></p>
-							    </div>
-					 		</div>
+		 <% if(member != null) { %>
+		 	<% String mtype = member.getMemberType(); %>
+		 	
+		 	
+		 	<% if(mtype.equals("U")) { %>
+			 	<% if(treserveList.size() == 0) { %>
+			 		<br><br>
+			 		예약 내역이 없습니다.
+			 	<% } else { %>
+			 		<% for(TourReserve treserve : treserveList) { %>
+			 			<% for(Tour tour : tList) { %>
+			 				<% if(treserve.getTourId() == tour.getTourId()) {%>
+						 		<div class="media">
+								    <div class="media-left media-middle">
+								      <a href="/tonight/tdetail?tid=<%= tour.getTourId() %>">
+								      <img src="/tonight/tuploadfiles/<%= tour.getTourRname() %>" class="media-object" style="width:100px">
+								      </a>
+								    </div>
+								    <div class="media-body">
+								      <h4 class="media-heading ttitle"><%= tour.getTourTitle() %></h4>
+								      <p><%= treserve.getTrSdate() %> ~ <%= treserve.getTrAdate() %></p>
+								      <p><%= treserve.getTrTprice() %>원<span style="color:red" class="pull-right"><%= treserve.getTrState() %></span></p>
+								    </div>
+						 		</div>
+					 		<% } %>
 				 		<% } %>
 			 		<% } %>
-		 		<% } %>
-		 	<% } %>
+			 	<% } %>
+			 <% } else if(mtype.equals("G")) { %>
+			 	<% if(tList != null && tList.size() > 0 ) { %>
+			 		<% for(Tour tour : tList) { %>
+			 			<div class="media">
+								    <div class="media-left media-middle">
+								      <a href="/tonight/tdetail?tid=<%= tour.getTourId() %>">
+								      <img src="/tonight/tuploadfiles/<%= tour.getTourRname() %>" class="media-object" style="width:100px">
+								      </a>
+								    </div>
+								    <div class="media-body">
+								      <h4 class="media-heading ttitle"><%= tour.getTourTitle() %></h4>
+								    </div>
+						 		</div>
+			 		<% } %>
+			 	<% } %>
+			 <% } else if(mtype.equals("B")) { %>
+			 	
+			 <% } %>
+			 
+			 
+			 
+			 
 		 <% } %>
-		 
 		 
 		  <hr>
 		 <div>

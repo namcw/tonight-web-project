@@ -599,4 +599,40 @@ public class TourDao {
 		return tpopul;
 	}
 
+	public ArrayList<Tour> selectGuideTourList(Connection con, String memberId) {
+		ArrayList<Tour> tourList = null;
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = "SELECT * FROM TOUR WHERE GUIDE_ID = ?";
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, memberId);
+			rset = pstmt.executeQuery();
+			if(rset != null) {
+				tourList = new ArrayList<Tour>();
+				while(rset.next()) {
+					Tour tour = new Tour(
+									rset.getInt("TOUR_ID"),
+									rset.getString("TOUR_TITLE"),
+									memberId,
+									rset.getString("TOUR_ONAME"),
+									rset.getString("TOUR_RNAME"));
+					
+					tourList.add(tour);
+				}
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rset);
+		}
+		
+		return tourList;
+	}
+
 }

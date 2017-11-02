@@ -1,4 +1,4 @@
-ï»¿--drop table ACCOM_REVIEW;
+--drop table ACCOM_REVIEW;
 --drop table ACCOMMODATION cascade CONSTRAINT;;
 --drop table ACCOMMODATION_IMAGE;
 --drop table MEMBER cascade CONSTRAINT;
@@ -13,7 +13,7 @@
 --drop table faq;
 --drop table tour_review;
 
-/*ì‚¬ìš©ìž í…Œì´ë¸”*/
+/*»ç¿ëÀÚ Å×ÀÌºí*/
 CREATE TABLE MEMBER
 (
   MEMBER_ID VARCHAR2(15),
@@ -27,312 +27,312 @@ CREATE TABLE MEMBER
   MEMBER_RANK VARCHAR2(8) DEFAULT 'SILVER',
   
   CONSTRAINT PK_MID PRIMARY KEY(MEMBER_ID),
-  CONSTRAINT CHK_MTYPE CHECK(MEMBER_TYPE IN ('U', 'B', 'G', 'M')),  /*ì‚¬ìš©ìž, ì‚¬ì—…ìž, ê°€ì´ë“œ, ê´€ë¦¬ìž*/
+  CONSTRAINT CHK_MTYPE CHECK(MEMBER_TYPE IN ('U', 'B', 'G', 'M')),  /*»ç¿ëÀÚ, »ç¾÷ÀÚ, °¡ÀÌµå, °ü¸®ÀÚ*/
   CONSTRAINT CHK_MRANK CHECK (MEMBER_RANK IN ('SILVER', 'GOLD', 'PLATINUM', 'DIAMOND'))
 );
-COMMENT ON TABLE MEMBER IS 'ì‚¬ìš©ìž';
-COMMENT ON COLUMN MEMBER.MEMBER_ID IS 'íšŒì› ì•„ì´ë””';
-COMMENT ON COLUMN MEMBER.MEMBER_PWD IS 'íšŒì› ë¹„ë°€ë²ˆí˜¸';
-COMMENT ON COLUMN MEMBER.MEMBER_NAME IS 'íšŒì› ì´ë¦„';
-COMMENT ON COLUMN MEMBER.MEMBER_TYPE IS 'íšŒì› íƒ€ìž…';
-COMMENT ON COLUMN MEMBER.MEMBER_BIRTHDATE IS 'ìƒë…„ì›”ì¼';
-COMMENT ON COLUMN MEMBER.MEMBER_PHONE IS 'ì „í™”ë²ˆí˜¸';
-COMMENT ON COLUMN MEMBER.MEMBER_EMAIL IS 'ì´ë©”ì¼';
-COMMENT ON COLUMN MEMBER.MEMBER_ADDRESS IS 'ì£¼ì†Œ';
-COMMENT ON COLUMN MEMBER.MEMBER_RANK IS 'íšŒì› ë“±ê¸‰';
+COMMENT ON TABLE MEMBER IS '»ç¿ëÀÚ';
+COMMENT ON COLUMN MEMBER.MEMBER_ID IS 'È¸¿ø ¾ÆÀÌµð';
+COMMENT ON COLUMN MEMBER.MEMBER_PWD IS 'È¸¿ø ºñ¹Ð¹øÈ£';
+COMMENT ON COLUMN MEMBER.MEMBER_NAME IS 'È¸¿ø ÀÌ¸§';
+COMMENT ON COLUMN MEMBER.MEMBER_TYPE IS 'È¸¿ø Å¸ÀÔ';
+COMMENT ON COLUMN MEMBER.MEMBER_BIRTHDATE IS '»ý³â¿ùÀÏ';
+COMMENT ON COLUMN MEMBER.MEMBER_PHONE IS 'ÀüÈ­¹øÈ£';
+COMMENT ON COLUMN MEMBER.MEMBER_EMAIL IS 'ÀÌ¸ÞÀÏ';
+COMMENT ON COLUMN MEMBER.MEMBER_ADDRESS IS 'ÁÖ¼Ò';
+COMMENT ON COLUMN MEMBER.MEMBER_RANK IS 'È¸¿ø µî±Þ';
 
 /*********************INSERT*********************/
 
--- ê´€ë¦¬ìž
+-- °ü¸®ÀÚ
 INSERT INTO MEMBER
-VALUES('admin', 'admin', 'ê´€ë¦¬ìž', 'M', '19930209', '010-9030-2469', 'admin@iei.or.kr', 'ì„œìš¸ ê°•ë‚¨êµ¬ í…Œí—¤ëž€ë¡œ 14', 'DIAMOND');
+VALUES('admin', 'admin', '°ü¸®ÀÚ', 'M', '19930209', '010-9030-2469', 'admin@iei.or.kr', '¼­¿ï °­³²±¸ Å×Çì¶õ·Î 14', 'DIAMOND');
 
--- ì‚¬ìš©ìž
-INSERT INTO MEMBER VALUES('ib1500','asd123','ê¹€ì—¬ì§„','U','19920313','010-6427-4492','ib1500@naver.com','ê²½ê¸°ë„ ìˆ˜ì›ì‹œ ìž¥ì•ˆêµ¬','SILVER');
-INSERT INTO MEMBER VALUES('ksm1225','zxcv456','ê¹€ì†Œë¯¸','U','19931225','010-1235-7848','exsm1225@naver.com','ê²½ê¸°ë„ ì•ˆì‚°ì‹œ ì‚¬ë™','GOLD');
-INSERT INTO MEMBER VALUES('jnh0930','jnh789','ì¡°ë‚¨í›ˆ','U','19940930','010-7643-1247','jnh789@nate.com','ê²½ê¸°ë„ ì‹œí¥ì‹œ ì •ì™•ë™','PLATINUM');
-INSERT INTO MEMBER VALUES('kdy0820','dydy012','ê¹€ë„ì˜','U','19950820','010-9274-4982','ib1200@google.com','ê²½ê¸°ë„ ì•ˆì–‘ì‹œ ë§Œì›êµ¬',default);
-INSERT INTO MEMBER VALUES('usb0119','sbusi45','ìœ ì‹ ê´‘','U','19960119','010-9577-0183','usb0119@hanmail.net','ê²½ê¸°ë„ ì„±ë‚¨ì‹œ íƒœí‰ë™',default);
-INSERT INTO MEMBER VALUES('iss0426','sis678','ì „ì¸ì„±','U','19970426','010-0027-4891','sis0426@nate.com','ê²½ê¸°ë„ ê³ ì–‘ì‹œ ê³ ìƒ‰ë™','PLATINUM');
+-- »ç¿ëÀÚ
+INSERT INTO MEMBER VALUES('ib1500','asd123','±è¿©Áø','U','19920313','010-6427-4492','ib1500@naver.com','°æ±âµµ ¼ö¿ø½Ã Àå¾È±¸','SILVER');
+INSERT INTO MEMBER VALUES('ksm1225','zxcv456','±è¼Ò¹Ì','U','19931225','010-1235-7848','exsm1225@naver.com','°æ±âµµ ¾È»ê½Ã »çµ¿','GOLD');
+INSERT INTO MEMBER VALUES('jnh0930','jnh789','Á¶³²ÈÆ','U','19940930','010-7643-1247','jnh789@nate.com','°æ±âµµ ½ÃÈï½Ã Á¤¿Õµ¿','PLATINUM');
+INSERT INTO MEMBER VALUES('kdy0820','dydy012','±èµµ¿µ','U','19950820','010-9274-4982','ib1200@google.com','°æ±âµµ ¾È¾ç½Ã ¸¸¿ø±¸',default);
+INSERT INTO MEMBER VALUES('usb0119','sbusi45','À¯½Å±¤','U','19960119','010-9577-0183','usb0119@hanmail.net','°æ±âµµ ¼º³²½Ã ÅÂÆòµ¿',default);
+INSERT INTO MEMBER VALUES('iss0426','sis678','ÀüÀÎ¼º','U','19970426','010-0027-4891','sis0426@nate.com','°æ±âµµ °í¾ç½Ã °í»öµ¿','PLATINUM');
 
--- ê°€ì´ë“œ
+-- °¡ÀÌµå
 INSERT INTO MEMBER
-VALUES ('gyeontae12', 'zxcv5885', 'ê¹€ê²½íƒœ', 'G', '19900509', '010-2332-4234', 'gyeontae12@naver.com', 'ê°•ì›ë„ ì¶˜ì²œì‹œ ê·¼í™”ë™ 8', DEFAULT);
+VALUES ('gyeontae12', 'zxcv5885', '±è°æÅÂ', 'G', '19900509', '010-2332-4234', 'gyeontae12@naver.com', '°­¿øµµ ÃáÃµ½Ã ±ÙÈ­µ¿ 8', DEFAULT);
 INSERT INTO MEMBER
-VALUES ('gg7811', 'gg8944', 'ë°•ê°•í™”', 'G', '19830209', '010-8944-5266', 'ganghwa83@google.com', 'ê°•ì›ë„ ì›ì£¼ì‹œ ì¤‘ì•™ë™ 2-1', DEFAULT);
+VALUES ('gg7811', 'gg8944', '¹Ú°­È­', 'G', '19830209', '010-8944-5266', 'ganghwa83@google.com', '°­¿øµµ ¿øÁÖ½Ã Áß¾Óµ¿ 2-1', DEFAULT);
 INSERT INTO MEMBER
-VALUES ('haeyeon', 'hyeon0816', 'ê¹€í•´ì—°', 'G', '19890816', '010-5648-5231', 'haeyeon89@nate.com', 'ê°•ì›ë„ ì›ì£¼ì‹œ ì¸ë™ 2', DEFAULT);
+VALUES ('haeyeon', 'hyeon0816', '±èÇØ¿¬', 'G', '19890816', '010-5648-5231', 'haeyeon89@nate.com', '°­¿øµµ ¿øÁÖ½Ã ÀÎµ¿ 2', DEFAULT);
 INSERT INTO MEMBER
-VALUES ('is8899', 'is8899', 'ì •ì¸ìˆ˜', 'G', '19880909', '010-2885-4621', 'is8899@naver.com', 'ê°•ì›ë„ ì›ì£¼ì‹œ ì¸ë™ 2', DEFAULT);
+VALUES ('is8899', 'is8899', 'Á¤ÀÎ¼ö', 'G', '19880909', '010-2885-4621', 'is8899@naver.com', '°­¿øµµ ¿øÁÖ½Ã ÀÎµ¿ 2', DEFAULT);
 INSERT INTO MEMBER
-VALUES ('skwang93', 'sk9393', 'ìœ ì‹ ê´‘', 'G', '19930425', '010-3654-8526', 'skwang93@hanmail.net', 'ê°•ì›ë„ ë™í•´ì‹œ í‰ë¦‰ë™ 2-1', DEFAULT);
+VALUES ('skwang93', 'sk9393', 'À¯½Å±¤', 'G', '19930425', '010-3654-8526', 'skwang93@hanmail.net', '°­¿øµµ µ¿ÇØ½Ã Æò¸ªµ¿ 2-1', DEFAULT);
 INSERT INTO MEMBER
-VALUES ('kangnam95', 'kangnam95', 'ì´ê°•ë‚¨', 'G', '19950821', '010-3253-2786', 'kangnam95@naver.com', 'ê°•ì›ë„ ê³ ì„±êµ° í˜„ë‚´ë©´ ëŒ€ì§„ë¦¬ 183-4', DEFAULT);
+VALUES ('kangnam95', 'kangnam95', 'ÀÌ°­³²', 'G', '19950821', '010-3253-2786', 'kangnam95@naver.com', '°­¿øµµ °í¼º±º Çö³»¸é ´ëÁø¸® 183-4', DEFAULT);
 
--- ì‚¬ì—…ìž
-insert into MEMBER VALUES('BIZ01', 'PASS11','ê¹€í˜œì •', 'B', '19901212', '010-2226-7716', 'moMEMBER@nate.com', 'ì¸ì²œì‹œ ë‚¨ë™êµ¬ êµ¬ì›”ë™ 293-2', default); 
-insert into MEMBER VALUES('NAMU01', 'nam0327','ë‚¨ì°¬ìš°', 'B', '19930931', '010-0327-6781', 'namu@naver.com', 'ì„œìš¸ì‹œ ì†¡íŒŒêµ¬ ë¬¸ì •ë™ ê°€ì•¼ì•„íŒŒíŠ¸ 302ë™ 1301í˜¸', default); 
-insert into MEMBER VALUES('INSUNG', 'sis5523','ì „ì¸ì„±', 'B', '19950206', '010-5523-7812', 'bestfriend@daum.net', 'ì¸ì²œì‹œ ì—°ìˆ˜êµ¬ ì—°ìˆ˜ë™ 108-2', default); 
-insert into MEMBER VALUES('SONEJH12', 'son12','ì†ì •í•œ', 'B', '19870723', '010-4492-8123', 'sonejh12@nate.com', 'ì¸ì²œì‹œ ì„œêµ¬ ì‹¬ê³¡ë™ 293-2', default); 
-insert into MEMBER VALUES('MBMGOOD', 'sh0301','ê¹€ìƒí˜', 'B', '19920313', '010-5015-6289', 'mbm@nate.com', 'ê²½ê¸°ë„ ìˆ˜ì›ì‹œ ìž¥ì•ˆêµ¬ ì¸ê³„ë™ 136-2', default); 
-insert into MEMBER VALUES('SINKWANNG', 'sk202','ìœ ì‹ ê´‘', 'B', '19930411', '010-4332-0917', 'bf5000@naver.com', 'ì„œìš¸ì‹œ êµ¬ë¡œêµ¬ êµ¬ë¡œë™ ë‚¨ì–‘ì•„íŒŒíŠ¸ 202ë™ 1907í˜¸', default); 
+-- »ç¾÷ÀÚ
+insert into MEMBER VALUES('BIZ01', 'PASS11','±èÇýÁ¤', 'B', '19901212', '010-2226-7716', 'moMEMBER@nate.com', 'ÀÎÃµ½Ã ³²µ¿±¸ ±¸¿ùµ¿ 293-2', default); 
+insert into MEMBER VALUES('NAMU01', 'nam0327','³²Âù¿ì', 'B', '19930931', '010-0327-6781', 'namu@naver.com', '¼­¿ï½Ã ¼ÛÆÄ±¸ ¹®Á¤µ¿ °¡¾ß¾ÆÆÄÆ® 302µ¿ 1301È£', default); 
+insert into MEMBER VALUES('INSUNG', 'sis5523','ÀüÀÎ¼º', 'B', '19950206', '010-5523-7812', 'bestfriend@daum.net', 'ÀÎÃµ½Ã ¿¬¼ö±¸ ¿¬¼öµ¿ 108-2', default); 
+insert into MEMBER VALUES('SONEJH12', 'son12','¼ÕÁ¤ÇÑ', 'B', '19870723', '010-4492-8123', 'sonejh12@nate.com', 'ÀÎÃµ½Ã ¼­±¸ ½É°îµ¿ 293-2', default); 
+insert into MEMBER VALUES('MBMGOOD', 'sh0301','±è»óÇõ', 'B', '19920313', '010-5015-6289', 'mbm@nate.com', '°æ±âµµ ¼ö¿ø½Ã Àå¾È±¸ ÀÎ°èµ¿ 136-2', default); 
+insert into MEMBER VALUES('SINKWANNG', 'sk202','À¯½Å±¤', 'B', '19930411', '010-4332-0917', 'bf5000@naver.com', '¼­¿ï½Ã ±¸·Î±¸ ±¸·Îµ¿ ³²¾ç¾ÆÆÄÆ® 202µ¿ 1907È£', default); 
 commit;
 
 
 
-/*ìˆ™ì†Œ í…Œì´ë¸”*/
+/*¼÷¼Ò Å×ÀÌºí*/
 CREATE TABLE ACCOMMODATION
 (
-  ACC_ID NUMBER,                                                          /*ìˆ™ì†Œ ì•„ì´ë””*/
-  BIZ_ID VARCHAR2(20) CONSTRAINT NN_BIZ_ID NOT NULL,                      /*ì‚¬ì—…ìž ì•„ì´ë””*/ 
-  ACC_NAME VARCHAR2(50),                                                  /*ìˆ™ì†Œ ì´ë¦„*/
-  ACC_INFO VARCHAR2(4000),                                                /*ìˆ™ì†Œ ì •ë³´*/
-  ACC_TYPE CHAR(1) CONSTRAINT NN_ACC_TYPE NOT NULL,                       /*ìˆ™ì†Œ íƒ€ìž…*/
-  ACC_ADDRESS VARCHAR2(50) CONSTRAINT NN_ACC_ADDRESS NOT NULL,            /*ìˆ™ì†Œ ì£¼ì†Œ*/
-  ACC_CONTACT VARCHAR2(50),                                               /*ìˆ™ì†Œ ì—°ë½ì²˜*/
-  ACC_RANK VARCHAR2(8) DEFAULT 'SILVER',                                  /*ìˆ™ì†Œ ë“±ê¸‰*/
+  ACC_ID NUMBER,                                                          /*¼÷¼Ò ¾ÆÀÌµð*/
+  BIZ_ID VARCHAR2(20) CONSTRAINT NN_BIZ_ID NOT NULL,                      /*»ç¾÷ÀÚ ¾ÆÀÌµð*/ 
+  ACC_NAME VARCHAR2(50),                                                  /*¼÷¼Ò ÀÌ¸§*/
+  ACC_INFO VARCHAR2(4000),                                                /*¼÷¼Ò Á¤º¸*/
+  ACC_TYPE CHAR(1) CONSTRAINT NN_ACC_TYPE NOT NULL,                       /*¼÷¼Ò Å¸ÀÔ*/
+  ACC_ADDRESS VARCHAR2(50) CONSTRAINT NN_ACC_ADDRESS NOT NULL,            /*¼÷¼Ò ÁÖ¼Ò*/
+  ACC_CONTACT VARCHAR2(50),                                               /*¼÷¼Ò ¿¬¶ôÃ³*/
+  ACC_RANK VARCHAR2(8) DEFAULT 'SILVER',                                  /*¼÷¼Ò µî±Þ*/
   ACC_ONAME VARCHAR2(100),
   ACC_RNAME VARCHAR2(500),
-  ACC_RULES VARCHAR2(4000),                                               /*ìˆ™ì†Œ ì´ìš© ê·œì¹™*/
-  ACC_FACILITIES VARCHAR2(4000),                                          /*íŽ¸ì˜ ì‹œì„¤*/
-  ACC_REFUND VARCHAR2(4000),                                              /*í™˜ë¶ˆ ê·œì •*/
+  ACC_RULES VARCHAR2(4000),                                               /*¼÷¼Ò ÀÌ¿ë ±ÔÄ¢*/
+  ACC_FACILITIES VARCHAR2(4000),                                          /*ÆíÀÇ ½Ã¼³*/
+  ACC_REFUND VARCHAR2(4000),                                              /*È¯ºÒ ±ÔÁ¤*/
   
   CONSTRAINT PK_ACC_ID PRIMARY KEY(ACC_ID),
   CONSTRAINT FK_BIZ_ID FOREIGN KEY(BIZ_ID) REFERENCES MEMBER,
-  CONSTRAINT CHK_ACC_TYPE CHECK (ACC_TYPE IN ('H', 'M', 'G', 'P')),  /*í˜¸í…”, ëª¨í…”, ê²ŒìŠ¤íŠ¸í•˜ìš°ìŠ¤, íŽœì…˜*/
+  CONSTRAINT CHK_ACC_TYPE CHECK (ACC_TYPE IN ('H', 'M', 'G', 'P')),  /*È£ÅÚ, ¸ðÅÚ, °Ô½ºÆ®ÇÏ¿ì½º, Ææ¼Ç*/
   CONSTRAINT CHK_ACC_RANK CHECK (ACC_RANK IN ('SILVER', 'GOLD', 'PLATINUM', 'DIAMOND'))
 );
 
-/*ìƒ˜í”Œë°ì´í„°*/
+/*»ùÇÃµ¥ÀÌÅÍ*/
 -- ACCOMMODATION 
-INSERT INTO ACCOMMODATION VALUES(1, 'BIZ01', 'ë¼ë§ˆë‹¤í˜¸í…”', 
-'ì˜ì›”ì˜ ìŠ¤í…Œì´í•˜ìš°ìŠ¤ëŠ” ì»¤í”Œì´ ì¡°ìš©ížˆ ì‰¬ê¸°ì— ì¢‹ì€ ê°ì‹¤ìž…ë‹ˆë‹¤. 
-ì°½ë°–ìœ¼ë¡œ ë“¤ë¦¬ëŠ” ê³„ê³¡ë¬¼ì†Œë¦¬ì™€ ì§€ì €ê·€ëŠ” ìƒˆì†Œë¦¬ ê·¸ë¦¬ê³  ë§‘ì€ ê³µê¸°ëŠ” ë„ì‹œì—ì„œ ì§€ì¹œ ë§ˆìŒì— íœ´ì‹ì„ ì£¼ë©° 
-ë§¤ì¼ ì²­ê²°í•˜ê²Œ ê´€ë¦¬í•˜ëŠ” ì¹¨êµ¬ëŠ” íŽ¸ì•ˆí•œ ìž ìžë¦¬ë¥¼ ì œê³µí•©ë‹ˆë‹¤. 
-ê¹€ì‚¿ê°“ê³„ê³¡ì˜ ì™¸ì”¨ë²„ì„ ê¸¸ê³¼ ê°€ê¹ê³  ìˆ™ì†Œ ë°”ë¡œ ì•žì—ëŠ” ì•„ë¦„ë‹¤ìš´ ê³„ê³¡ì´ íë¥´ê³  ìžˆìŠµë‹ˆë‹¤.
-ê°ì‹¤ì—ì„œëŠ” Marshall ìŠ¤í”¼ì»¤ë¡œ ê°ë¯¸ë¡œìš´ ìŒì•…ê³¼ í•¨ê»˜ ë¹” í”„ë¡œì í„°ë¡œ ë³´ë‹¤ ì‹¤ê°ë‚˜ê³  íŽ¸í•˜ê²Œ ì˜í™”ë¥¼ ê°ìƒí•˜ì‹¤ ìˆ˜ ìžˆìœ¼ë©°, 
-í•´ì§ˆë…˜ì—ëŠ” ì•„ë¦„ë‹¤ìš´ ì •ì›ì˜ í•´ë¨¹ì— ëˆ„ì›Œ ìžì—°ì†ì—ì„œ ìž¬ì¶©ì „ì˜ ì‹œê°„ì„ ê°€ì ¸ë³´ì„¸ìš”~',
-'H', 'ê°•ì›ë„ ì¶˜ì²œì‹œ ê°€í‰êµ° 16-2', '010-8754-7651', 'SILVER',
+INSERT INTO ACCOMMODATION VALUES(1, 'BIZ01', '¶ó¸¶´ÙÈ£ÅÚ', 
+'¿µ¿ùÀÇ ½ºÅ×ÀÌÇÏ¿ì½º´Â Ä¿ÇÃÀÌ Á¶¿ëÈ÷ ½¬±â¿¡ ÁÁÀº °´½ÇÀÔ´Ï´Ù. 
+Ã¢¹ÛÀ¸·Î µé¸®´Â °è°î¹°¼Ò¸®¿Í ÁöÀú±Í´Â »õ¼Ò¸® ±×¸®°í ¸¼Àº °ø±â´Â µµ½Ã¿¡¼­ ÁöÄ£ ¸¶À½¿¡ ÈÞ½ÄÀ» ÁÖ¸ç 
+¸ÅÀÏ Ã»°áÇÏ°Ô °ü¸®ÇÏ´Â Ä§±¸´Â Æí¾ÈÇÑ ÀáÀÚ¸®¸¦ Á¦°øÇÕ´Ï´Ù. 
+±è»ñ°«°è°îÀÇ ¿Ü¾¾¹ö¼±±æ°ú °¡±õ°í ¼÷¼Ò ¹Ù·Î ¾Õ¿¡´Â ¾Æ¸§´Ù¿î °è°îÀÌ Èå¸£°í ÀÖ½À´Ï´Ù.
+°´½Ç¿¡¼­´Â Marshall ½ºÇÇÄ¿·Î °¨¹Ì·Î¿î À½¾Ç°ú ÇÔ²² ºö ÇÁ·ÎÁ§ÅÍ·Î º¸´Ù ½Ç°¨³ª°í ÆíÇÏ°Ô ¿µÈ­¸¦ °¨»óÇÏ½Ç ¼ö ÀÖÀ¸¸ç, 
+ÇØÁú³è¿¡´Â ¾Æ¸§´Ù¿î Á¤¿øÀÇ ÇØ¸Ô¿¡ ´©¿ö ÀÚ¿¬¼Ó¿¡¼­ ÀçÃæÀüÀÇ ½Ã°£À» °¡Á®º¸¼¼¿ä~',
+'H', '°­¿øµµ ÃáÃµ½Ã °¡Æò±º 16-2', '010-8754-7651', 'SILVER',
 '201711012.jpg', '201711012.jpg',
-'í¡ì—° ê¸ˆì§€
-ë°˜ë ¤ë™ë¬¼ ë™ë°˜ì— ì í•©í•˜ì§€ ì•ŠìŒ
-íŒŒí‹°ë‚˜ ì´ë²¤íŠ¸ ê¸ˆì§€
-ì–´ë¦°ì´(ë§Œ 0-12ì„¸)ì—ê²Œ ì•ˆì „í•˜ê±°ë‚˜ ì í•©í•˜ì§€ ì•ŠìŒ
-ì²´í¬ì¸ì€ 15:00 ì´í›„ìž…ë‹ˆë‹¤
-11:00ê¹Œì§€ ì²´í¬ì•„ì›ƒ í•˜ì…”ì•¼ í•©ë‹ˆë‹¤',
-'ìˆ˜ì˜ìž¥',
-'ì¼ë°˜ ì²´í¬ì¸ 5ì¼ ì „ê¹Œì§€ ì·¨ì†Œí•˜ë©´ ì „ì•¡ì´ í™˜ë¶ˆë©ë‹ˆë‹¤. 
-ì²´í¬ì¸ ì „ 5ì¼ ì´ë‚´ì— ì·¨ì†Œí•˜ë©´ ì²« 1ë°• ìš”ê¸ˆì€ í™˜ë¶ˆë˜ì§€ ì•Šìœ¼ë‚˜, ìž”ì—¬ ìˆ™ë°• ìš”ê¸ˆì˜ 50%ê°€ í™˜ë¶ˆë©ë‹ˆë‹¤.');
+'Èí¿¬ ±ÝÁö
+¹Ý·Áµ¿¹° µ¿¹Ý¿¡ ÀûÇÕÇÏÁö ¾ÊÀ½
+ÆÄÆ¼³ª ÀÌº¥Æ® ±ÝÁö
+¾î¸°ÀÌ(¸¸ 0-12¼¼)¿¡°Ô ¾ÈÀüÇÏ°Å³ª ÀûÇÕÇÏÁö ¾ÊÀ½
+Ã¼Å©ÀÎÀº 15:00 ÀÌÈÄÀÔ´Ï´Ù
+11:00±îÁö Ã¼Å©¾Æ¿ô ÇÏ¼Å¾ß ÇÕ´Ï´Ù',
+'¼ö¿µÀå',
+'ÀÏ¹Ý Ã¼Å©ÀÎ 5ÀÏ Àü±îÁö Ãë¼ÒÇÏ¸é Àü¾×ÀÌ È¯ºÒµË´Ï´Ù. 
+Ã¼Å©ÀÎ Àü 5ÀÏ ÀÌ³»¿¡ Ãë¼ÒÇÏ¸é Ã¹ 1¹Ú ¿ä±ÝÀº È¯ºÒµÇÁö ¾ÊÀ¸³ª, ÀÜ¿© ¼÷¹Ú ¿ä±ÝÀÇ 50%°¡ È¯ºÒµË´Ï´Ù.');
 
-INSERT INTO ACCOMMODATION VALUES(2, 'NAMU01', 'ê°•ì›ê²ŒìŠ¤íŠ¸í•˜ìš°ìŠ¤', 
-'ì˜ì›”ì˜ ìŠ¤í…Œì´í•˜ìš°ìŠ¤ëŠ” ì»¤í”Œì´ ì¡°ìš©ížˆ ì‰¬ê¸°ì— ì¢‹ì€ ê°ì‹¤ìž…ë‹ˆë‹¤. 
-ì°½ë°–ìœ¼ë¡œ ë“¤ë¦¬ëŠ” ê³„ê³¡ë¬¼ì†Œë¦¬ì™€ ì§€ì €ê·€ëŠ” ìƒˆì†Œë¦¬ ê·¸ë¦¬ê³  ë§‘ì€ ê³µê¸°ëŠ” ë„ì‹œì—ì„œ ì§€ì¹œ ë§ˆìŒì— íœ´ì‹ì„ ì£¼ë©° 
-ë§¤ì¼ ì²­ê²°í•˜ê²Œ ê´€ë¦¬í•˜ëŠ” ì¹¨êµ¬ëŠ” íŽ¸ì•ˆí•œ ìž ìžë¦¬ë¥¼ ì œê³µí•©ë‹ˆë‹¤. 
-ê¹€ì‚¿ê°“ê³„ê³¡ì˜ ì™¸ì”¨ë²„ì„ ê¸¸ê³¼ ê°€ê¹ê³  ìˆ™ì†Œ ë°”ë¡œ ì•žì—ëŠ” ì•„ë¦„ë‹¤ìš´ ê³„ê³¡ì´ íë¥´ê³  ìžˆìŠµë‹ˆë‹¤.
-ê°ì‹¤ì—ì„œëŠ” Marshall ìŠ¤í”¼ì»¤ë¡œ ê°ë¯¸ë¡œìš´ ìŒì•…ê³¼ í•¨ê»˜ ë¹” í”„ë¡œì í„°ë¡œ ë³´ë‹¤ ì‹¤ê°ë‚˜ê³  íŽ¸í•˜ê²Œ ì˜í™”ë¥¼ ê°ìƒí•˜ì‹¤ ìˆ˜ ìžˆìœ¼ë©°, 
-í•´ì§ˆë…˜ì—ëŠ” ì•„ë¦„ë‹¤ìš´ ì •ì›ì˜ í•´ë¨¹ì— ëˆ„ì›Œ ìžì—°ì†ì—ì„œ ìž¬ì¶©ì „ì˜ ì‹œê°„ì„ ê°€ì ¸ë³´ì„¸ìš”~',
-'G', 'ê°•ì›ë„ ì¶˜ì²œì‹œ ê°€í‰êµ° 32-2', '010-1244-5678', 'SILVER',
+INSERT INTO ACCOMMODATION VALUES(2, 'NAMU01', '°­¿ø°Ô½ºÆ®ÇÏ¿ì½º', 
+'¿µ¿ùÀÇ ½ºÅ×ÀÌÇÏ¿ì½º´Â Ä¿ÇÃÀÌ Á¶¿ëÈ÷ ½¬±â¿¡ ÁÁÀº °´½ÇÀÔ´Ï´Ù. 
+Ã¢¹ÛÀ¸·Î µé¸®´Â °è°î¹°¼Ò¸®¿Í ÁöÀú±Í´Â »õ¼Ò¸® ±×¸®°í ¸¼Àº °ø±â´Â µµ½Ã¿¡¼­ ÁöÄ£ ¸¶À½¿¡ ÈÞ½ÄÀ» ÁÖ¸ç 
+¸ÅÀÏ Ã»°áÇÏ°Ô °ü¸®ÇÏ´Â Ä§±¸´Â Æí¾ÈÇÑ ÀáÀÚ¸®¸¦ Á¦°øÇÕ´Ï´Ù. 
+±è»ñ°«°è°îÀÇ ¿Ü¾¾¹ö¼±±æ°ú °¡±õ°í ¼÷¼Ò ¹Ù·Î ¾Õ¿¡´Â ¾Æ¸§´Ù¿î °è°îÀÌ Èå¸£°í ÀÖ½À´Ï´Ù.
+°´½Ç¿¡¼­´Â Marshall ½ºÇÇÄ¿·Î °¨¹Ì·Î¿î À½¾Ç°ú ÇÔ²² ºö ÇÁ·ÎÁ§ÅÍ·Î º¸´Ù ½Ç°¨³ª°í ÆíÇÏ°Ô ¿µÈ­¸¦ °¨»óÇÏ½Ç ¼ö ÀÖÀ¸¸ç, 
+ÇØÁú³è¿¡´Â ¾Æ¸§´Ù¿î Á¤¿øÀÇ ÇØ¸Ô¿¡ ´©¿ö ÀÚ¿¬¼Ó¿¡¼­ ÀçÃæÀüÀÇ ½Ã°£À» °¡Á®º¸¼¼¿ä~',
+'G', '°­¿øµµ ÃáÃµ½Ã °¡Æò±º 32-2', '010-1244-5678', 'SILVER',
 '201705468.jpg', '201705468.jpg',
-'í¡ì—° ê¸ˆì§€
-ë°˜ë ¤ë™ë¬¼ ë™ë°˜ì— ì í•©í•˜ì§€ ì•ŠìŒ
-íŒŒí‹°ë‚˜ ì´ë²¤íŠ¸ ê¸ˆì§€
-ì–´ë¦°ì´(ë§Œ 0-12ì„¸)ì—ê²Œ ì•ˆì „í•˜ê±°ë‚˜ ì í•©í•˜ì§€ ì•ŠìŒ
-ì²´í¬ì¸ì€ 15:00 ì´í›„ìž…ë‹ˆë‹¤
-11:00ê¹Œì§€ ì²´í¬ì•„ì›ƒ í•˜ì…”ì•¼ í•©ë‹ˆë‹¤',
-'ìˆ˜ì˜ìž¥,ë¬´ì„ ì¸í„°ë„·',
-'ì¼ë°˜ ì²´í¬ì¸ 5ì¼ ì „ê¹Œì§€ ì·¨ì†Œí•˜ë©´ ì „ì•¡ì´ í™˜ë¶ˆë©ë‹ˆë‹¤. 
-ì²´í¬ì¸ ì „ 5ì¼ ì´ë‚´ì— ì·¨ì†Œí•˜ë©´ ì²« 1ë°• ìš”ê¸ˆì€ í™˜ë¶ˆë˜ì§€ ì•Šìœ¼ë‚˜, ìž”ì—¬ ìˆ™ë°• ìš”ê¸ˆì˜ 50%ê°€ í™˜ë¶ˆë©ë‹ˆë‹¤.');
+'Èí¿¬ ±ÝÁö
+¹Ý·Áµ¿¹° µ¿¹Ý¿¡ ÀûÇÕÇÏÁö ¾ÊÀ½
+ÆÄÆ¼³ª ÀÌº¥Æ® ±ÝÁö
+¾î¸°ÀÌ(¸¸ 0-12¼¼)¿¡°Ô ¾ÈÀüÇÏ°Å³ª ÀûÇÕÇÏÁö ¾ÊÀ½
+Ã¼Å©ÀÎÀº 15:00 ÀÌÈÄÀÔ´Ï´Ù
+11:00±îÁö Ã¼Å©¾Æ¿ô ÇÏ¼Å¾ß ÇÕ´Ï´Ù',
+'¼ö¿µÀå,¹«¼±ÀÎÅÍ³Ý',
+'ÀÏ¹Ý Ã¼Å©ÀÎ 5ÀÏ Àü±îÁö Ãë¼ÒÇÏ¸é Àü¾×ÀÌ È¯ºÒµË´Ï´Ù. 
+Ã¼Å©ÀÎ Àü 5ÀÏ ÀÌ³»¿¡ Ãë¼ÒÇÏ¸é Ã¹ 1¹Ú ¿ä±ÝÀº È¯ºÒµÇÁö ¾ÊÀ¸³ª, ÀÜ¿© ¼÷¹Ú ¿ä±ÝÀÇ 50%°¡ È¯ºÒµË´Ï´Ù.');
 
 
-INSERT INTO ACCOMMODATION VALUES(3, 'INSUNG', 'ì†ì •ë°”ë‹¤íŽœì…˜',
-'ì˜ì›”ì˜ ìŠ¤í…Œì´í•˜ìš°ìŠ¤ëŠ” ì»¤í”Œì´ ì¡°ìš©ížˆ ì‰¬ê¸°ì— ì¢‹ì€ ê°ì‹¤ìž…ë‹ˆë‹¤. 
-ì°½ë°–ìœ¼ë¡œ ë“¤ë¦¬ëŠ” ê³„ê³¡ë¬¼ì†Œë¦¬ì™€ ì§€ì €ê·€ëŠ” ìƒˆì†Œë¦¬ ê·¸ë¦¬ê³  ë§‘ì€ ê³µê¸°ëŠ” ë„ì‹œì—ì„œ ì§€ì¹œ ë§ˆìŒì— íœ´ì‹ì„ ì£¼ë©° 
-ë§¤ì¼ ì²­ê²°í•˜ê²Œ ê´€ë¦¬í•˜ëŠ” ì¹¨êµ¬ëŠ” íŽ¸ì•ˆí•œ ìž ìžë¦¬ë¥¼ ì œê³µí•©ë‹ˆë‹¤. 
-ê¹€ì‚¿ê°“ê³„ê³¡ì˜ ì™¸ì”¨ë²„ì„ ê¸¸ê³¼ ê°€ê¹ê³  ìˆ™ì†Œ ë°”ë¡œ ì•žì—ëŠ” ì•„ë¦„ë‹¤ìš´ ê³„ê³¡ì´ íë¥´ê³  ìžˆìŠµë‹ˆë‹¤.
-ê°ì‹¤ì—ì„œëŠ” Marshall ìŠ¤í”¼ì»¤ë¡œ ê°ë¯¸ë¡œìš´ ìŒì•…ê³¼ í•¨ê»˜ ë¹” í”„ë¡œì í„°ë¡œ ë³´ë‹¤ ì‹¤ê°ë‚˜ê³  íŽ¸í•˜ê²Œ ì˜í™”ë¥¼ ê°ìƒí•˜ì‹¤ ìˆ˜ ìžˆìœ¼ë©°, 
-í•´ì§ˆë…˜ì—ëŠ” ì•„ë¦„ë‹¤ìš´ ì •ì›ì˜ í•´ë¨¹ì— ëˆ„ì›Œ ìžì—°ì†ì—ì„œ ìž¬ì¶©ì „ì˜ ì‹œê°„ì„ ê°€ì ¸ë³´ì„¸ìš”~',
-'P', 'ê°•ì›ë„ ì¶˜ì²œì‹œ ê°€í‰êµ° 32-2', '010-1244-5678', 'SILVER',
+INSERT INTO ACCOMMODATION VALUES(3, 'INSUNG', '¼ÕÁ¤¹Ù´ÙÆæ¼Ç',
+'¿µ¿ùÀÇ ½ºÅ×ÀÌÇÏ¿ì½º´Â Ä¿ÇÃÀÌ Á¶¿ëÈ÷ ½¬±â¿¡ ÁÁÀº °´½ÇÀÔ´Ï´Ù. 
+Ã¢¹ÛÀ¸·Î µé¸®´Â °è°î¹°¼Ò¸®¿Í ÁöÀú±Í´Â »õ¼Ò¸® ±×¸®°í ¸¼Àº °ø±â´Â µµ½Ã¿¡¼­ ÁöÄ£ ¸¶À½¿¡ ÈÞ½ÄÀ» ÁÖ¸ç 
+¸ÅÀÏ Ã»°áÇÏ°Ô °ü¸®ÇÏ´Â Ä§±¸´Â Æí¾ÈÇÑ ÀáÀÚ¸®¸¦ Á¦°øÇÕ´Ï´Ù. 
+±è»ñ°«°è°îÀÇ ¿Ü¾¾¹ö¼±±æ°ú °¡±õ°í ¼÷¼Ò ¹Ù·Î ¾Õ¿¡´Â ¾Æ¸§´Ù¿î °è°îÀÌ Èå¸£°í ÀÖ½À´Ï´Ù.
+°´½Ç¿¡¼­´Â Marshall ½ºÇÇÄ¿·Î °¨¹Ì·Î¿î À½¾Ç°ú ÇÔ²² ºö ÇÁ·ÎÁ§ÅÍ·Î º¸´Ù ½Ç°¨³ª°í ÆíÇÏ°Ô ¿µÈ­¸¦ °¨»óÇÏ½Ç ¼ö ÀÖÀ¸¸ç, 
+ÇØÁú³è¿¡´Â ¾Æ¸§´Ù¿î Á¤¿øÀÇ ÇØ¸Ô¿¡ ´©¿ö ÀÚ¿¬¼Ó¿¡¼­ ÀçÃæÀüÀÇ ½Ã°£À» °¡Á®º¸¼¼¿ä~',
+'P', '°­¿øµµ ÃáÃµ½Ã °¡Æò±º 32-2', '010-1244-5678', 'SILVER',
 '201704657.jpg', '201704657.jpg',
-'í¡ì—° ê¸ˆì§€
-ë°˜ë ¤ë™ë¬¼ ë™ë°˜ì— ì í•©í•˜ì§€ ì•ŠìŒ
-íŒŒí‹°ë‚˜ ì´ë²¤íŠ¸ ê¸ˆì§€
-ì–´ë¦°ì´(ë§Œ 0-12ì„¸)ì—ê²Œ ì•ˆì „í•˜ê±°ë‚˜ ì í•©í•˜ì§€ ì•ŠìŒ
-ì²´í¬ì¸ì€ 15:00 ì´í›„ìž…ë‹ˆë‹¤
-11:00ê¹Œì§€ ì²´í¬ì•„ì›ƒ í•˜ì…”ì•¼ í•©ë‹ˆë‹¤',
-'ìˆ˜ì˜ìž¥,ë¬´ì„ ì¸í„°ë„·,ì£¼ì°¨ìž¥',
-'ì¼ë°˜ ì²´í¬ì¸ 5ì¼ ì „ê¹Œì§€ ì·¨ì†Œí•˜ë©´ ì „ì•¡ì´ í™˜ë¶ˆë©ë‹ˆë‹¤. 
-ì²´í¬ì¸ ì „ 5ì¼ ì´ë‚´ì— ì·¨ì†Œí•˜ë©´ ì²« 1ë°• ìš”ê¸ˆì€ í™˜ë¶ˆë˜ì§€ ì•Šìœ¼ë‚˜, ìž”ì—¬ ìˆ™ë°• ìš”ê¸ˆì˜ 50%ê°€ í™˜ë¶ˆë©ë‹ˆë‹¤.');
+'Èí¿¬ ±ÝÁö
+¹Ý·Áµ¿¹° µ¿¹Ý¿¡ ÀûÇÕÇÏÁö ¾ÊÀ½
+ÆÄÆ¼³ª ÀÌº¥Æ® ±ÝÁö
+¾î¸°ÀÌ(¸¸ 0-12¼¼)¿¡°Ô ¾ÈÀüÇÏ°Å³ª ÀûÇÕÇÏÁö ¾ÊÀ½
+Ã¼Å©ÀÎÀº 15:00 ÀÌÈÄÀÔ´Ï´Ù
+11:00±îÁö Ã¼Å©¾Æ¿ô ÇÏ¼Å¾ß ÇÕ´Ï´Ù',
+'¼ö¿µÀå,¹«¼±ÀÎÅÍ³Ý,ÁÖÂ÷Àå',
+'ÀÏ¹Ý Ã¼Å©ÀÎ 5ÀÏ Àü±îÁö Ãë¼ÒÇÏ¸é Àü¾×ÀÌ È¯ºÒµË´Ï´Ù. 
+Ã¼Å©ÀÎ Àü 5ÀÏ ÀÌ³»¿¡ Ãë¼ÒÇÏ¸é Ã¹ 1¹Ú ¿ä±ÝÀº È¯ºÒµÇÁö ¾ÊÀ¸³ª, ÀÜ¿© ¼÷¹Ú ¿ä±ÝÀÇ 50%°¡ È¯ºÒµË´Ï´Ù.');
 
 
-INSERT INTO ACCOMMODATION VALUES(4, 'SONEJH12', 'ë‚¨ì²­í˜¸ëª¨í…”',
-'ì˜ì›”ì˜ ìŠ¤í…Œì´í•˜ìš°ìŠ¤ëŠ” ì»¤í”Œì´ ì¡°ìš©ížˆ ì‰¬ê¸°ì— ì¢‹ì€ ê°ì‹¤ìž…ë‹ˆë‹¤. 
-ì°½ë°–ìœ¼ë¡œ ë“¤ë¦¬ëŠ” ê³„ê³¡ë¬¼ì†Œë¦¬ì™€ ì§€ì €ê·€ëŠ” ìƒˆì†Œë¦¬ ê·¸ë¦¬ê³  ë§‘ì€ ê³µê¸°ëŠ” ë„ì‹œì—ì„œ ì§€ì¹œ ë§ˆìŒì— íœ´ì‹ì„ ì£¼ë©° 
-ë§¤ì¼ ì²­ê²°í•˜ê²Œ ê´€ë¦¬í•˜ëŠ” ì¹¨êµ¬ëŠ” íŽ¸ì•ˆí•œ ìž ìžë¦¬ë¥¼ ì œê³µí•©ë‹ˆë‹¤. 
-ê¹€ì‚¿ê°“ê³„ê³¡ì˜ ì™¸ì”¨ë²„ì„ ê¸¸ê³¼ ê°€ê¹ê³  ìˆ™ì†Œ ë°”ë¡œ ì•žì—ëŠ” ì•„ë¦„ë‹¤ìš´ ê³„ê³¡ì´ íë¥´ê³  ìžˆìŠµë‹ˆë‹¤.
-ê°ì‹¤ì—ì„œëŠ” Marshall ìŠ¤í”¼ì»¤ë¡œ ê°ë¯¸ë¡œìš´ ìŒì•…ê³¼ í•¨ê»˜ ë¹” í”„ë¡œì í„°ë¡œ ë³´ë‹¤ ì‹¤ê°ë‚˜ê³  íŽ¸í•˜ê²Œ ì˜í™”ë¥¼ ê°ìƒí•˜ì‹¤ ìˆ˜ ìžˆìœ¼ë©°, 
-í•´ì§ˆë…˜ì—ëŠ” ì•„ë¦„ë‹¤ìš´ ì •ì›ì˜ í•´ë¨¹ì— ëˆ„ì›Œ ìžì—°ì†ì—ì„œ ìž¬ì¶©ì „ì˜ ì‹œê°„ì„ ê°€ì ¸ë³´ì„¸ìš”~',
-'M', 'ê°•ì›ë„ ì¶˜ì²œì‹œ ê°€í‰êµ° 32-2', '010-1244-5678', 'SILVER',
+INSERT INTO ACCOMMODATION VALUES(4, 'SONEJH12', '³²Ã»È£¸ðÅÚ',
+'¿µ¿ùÀÇ ½ºÅ×ÀÌÇÏ¿ì½º´Â Ä¿ÇÃÀÌ Á¶¿ëÈ÷ ½¬±â¿¡ ÁÁÀº °´½ÇÀÔ´Ï´Ù. 
+Ã¢¹ÛÀ¸·Î µé¸®´Â °è°î¹°¼Ò¸®¿Í ÁöÀú±Í´Â »õ¼Ò¸® ±×¸®°í ¸¼Àº °ø±â´Â µµ½Ã¿¡¼­ ÁöÄ£ ¸¶À½¿¡ ÈÞ½ÄÀ» ÁÖ¸ç 
+¸ÅÀÏ Ã»°áÇÏ°Ô °ü¸®ÇÏ´Â Ä§±¸´Â Æí¾ÈÇÑ ÀáÀÚ¸®¸¦ Á¦°øÇÕ´Ï´Ù. 
+±è»ñ°«°è°îÀÇ ¿Ü¾¾¹ö¼±±æ°ú °¡±õ°í ¼÷¼Ò ¹Ù·Î ¾Õ¿¡´Â ¾Æ¸§´Ù¿î °è°îÀÌ Èå¸£°í ÀÖ½À´Ï´Ù.
+°´½Ç¿¡¼­´Â Marshall ½ºÇÇÄ¿·Î °¨¹Ì·Î¿î À½¾Ç°ú ÇÔ²² ºö ÇÁ·ÎÁ§ÅÍ·Î º¸´Ù ½Ç°¨³ª°í ÆíÇÏ°Ô ¿µÈ­¸¦ °¨»óÇÏ½Ç ¼ö ÀÖÀ¸¸ç, 
+ÇØÁú³è¿¡´Â ¾Æ¸§´Ù¿î Á¤¿øÀÇ ÇØ¸Ô¿¡ ´©¿ö ÀÚ¿¬¼Ó¿¡¼­ ÀçÃæÀüÀÇ ½Ã°£À» °¡Á®º¸¼¼¿ä~',
+'M', '°­¿øµµ ÃáÃµ½Ã °¡Æò±º 32-2', '010-1244-5678', 'SILVER',
 '201703547.jpg', '201703547.jpg',
-'í¡ì—° ê¸ˆì§€
-ë°˜ë ¤ë™ë¬¼ ë™ë°˜ì— ì í•©í•˜ì§€ ì•ŠìŒ
-íŒŒí‹°ë‚˜ ì´ë²¤íŠ¸ ê¸ˆì§€
-ì–´ë¦°ì´(ë§Œ 0-12ì„¸)ì—ê²Œ ì•ˆì „í•˜ê±°ë‚˜ ì í•©í•˜ì§€ ì•ŠìŒ
-ì²´í¬ì¸ì€ 15:00 ì´í›„ìž…ë‹ˆë‹¤
-11:00ê¹Œì§€ ì²´í¬ì•„ì›ƒ í•˜ì…”ì•¼ í•©ë‹ˆë‹¤',
-'ìˆ˜ì˜ìž¥,ë¬´ì„ ì¸í„°ë„·,ì£¼ì°¨ìž¥,ë¶€ì—Œ',
-'ì¼ë°˜ ì²´í¬ì¸ 5ì¼ ì „ê¹Œì§€ ì·¨ì†Œí•˜ë©´ ì „ì•¡ì´ í™˜ë¶ˆë©ë‹ˆë‹¤. 
-ì²´í¬ì¸ ì „ 5ì¼ ì´ë‚´ì— ì·¨ì†Œí•˜ë©´ ì²« 1ë°• ìš”ê¸ˆì€ í™˜ë¶ˆë˜ì§€ ì•Šìœ¼ë‚˜, ìž”ì—¬ ìˆ™ë°• ìš”ê¸ˆì˜ 50%ê°€ í™˜ë¶ˆë©ë‹ˆë‹¤.');
+'Èí¿¬ ±ÝÁö
+¹Ý·Áµ¿¹° µ¿¹Ý¿¡ ÀûÇÕÇÏÁö ¾ÊÀ½
+ÆÄÆ¼³ª ÀÌº¥Æ® ±ÝÁö
+¾î¸°ÀÌ(¸¸ 0-12¼¼)¿¡°Ô ¾ÈÀüÇÏ°Å³ª ÀûÇÕÇÏÁö ¾ÊÀ½
+Ã¼Å©ÀÎÀº 15:00 ÀÌÈÄÀÔ´Ï´Ù
+11:00±îÁö Ã¼Å©¾Æ¿ô ÇÏ¼Å¾ß ÇÕ´Ï´Ù',
+'¼ö¿µÀå,¹«¼±ÀÎÅÍ³Ý,ÁÖÂ÷Àå,ºÎ¾ý',
+'ÀÏ¹Ý Ã¼Å©ÀÎ 5ÀÏ Àü±îÁö Ãë¼ÒÇÏ¸é Àü¾×ÀÌ È¯ºÒµË´Ï´Ù. 
+Ã¼Å©ÀÎ Àü 5ÀÏ ÀÌ³»¿¡ Ãë¼ÒÇÏ¸é Ã¹ 1¹Ú ¿ä±ÝÀº È¯ºÒµÇÁö ¾ÊÀ¸³ª, ÀÜ¿© ¼÷¹Ú ¿ä±ÝÀÇ 50%°¡ È¯ºÒµË´Ï´Ù.');
 
 
-INSERT INTO ACCOMMODATION VALUES(5, 'MBMGOOD', 'ë¹„ì¦ˆì •ë™ì§„íŽœì…˜',
-'ì˜ì›”ì˜ ìŠ¤í…Œì´í•˜ìš°ìŠ¤ëŠ” ì»¤í”Œì´ ì¡°ìš©ížˆ ì‰¬ê¸°ì— ì¢‹ì€ ê°ì‹¤ìž…ë‹ˆë‹¤. 
-ì°½ë°–ìœ¼ë¡œ ë“¤ë¦¬ëŠ” ê³„ê³¡ë¬¼ì†Œë¦¬ì™€ ì§€ì €ê·€ëŠ” ìƒˆì†Œë¦¬ ê·¸ë¦¬ê³  ë§‘ì€ ê³µê¸°ëŠ” ë„ì‹œì—ì„œ ì§€ì¹œ ë§ˆìŒì— íœ´ì‹ì„ ì£¼ë©° 
-ë§¤ì¼ ì²­ê²°í•˜ê²Œ ê´€ë¦¬í•˜ëŠ” ì¹¨êµ¬ëŠ” íŽ¸ì•ˆí•œ ìž ìžë¦¬ë¥¼ ì œê³µí•©ë‹ˆë‹¤. 
-ê¹€ì‚¿ê°“ê³„ê³¡ì˜ ì™¸ì”¨ë²„ì„ ê¸¸ê³¼ ê°€ê¹ê³  ìˆ™ì†Œ ë°”ë¡œ ì•žì—ëŠ” ì•„ë¦„ë‹¤ìš´ ê³„ê³¡ì´ íë¥´ê³  ìžˆìŠµë‹ˆë‹¤.
-ê°ì‹¤ì—ì„œëŠ” Marshall ìŠ¤í”¼ì»¤ë¡œ ê°ë¯¸ë¡œìš´ ìŒì•…ê³¼ í•¨ê»˜ ë¹” í”„ë¡œì í„°ë¡œ ë³´ë‹¤ ì‹¤ê°ë‚˜ê³  íŽ¸í•˜ê²Œ ì˜í™”ë¥¼ ê°ìƒí•˜ì‹¤ ìˆ˜ ìžˆìœ¼ë©°, 
-í•´ì§ˆë…˜ì—ëŠ” ì•„ë¦„ë‹¤ìš´ ì •ì›ì˜ í•´ë¨¹ì— ëˆ„ì›Œ ìžì—°ì†ì—ì„œ ìž¬ì¶©ì „ì˜ ì‹œê°„ì„ ê°€ì ¸ë³´ì„¸ìš”~',
-'P', 'ê°•ì›ë„ ì¶˜ì²œì‹œ ê°€í‰êµ° 32-2', '010-1244-5678', 'SILVER',
+INSERT INTO ACCOMMODATION VALUES(5, 'MBMGOOD', 'ºñÁîÁ¤µ¿ÁøÆæ¼Ç',
+'¿µ¿ùÀÇ ½ºÅ×ÀÌÇÏ¿ì½º´Â Ä¿ÇÃÀÌ Á¶¿ëÈ÷ ½¬±â¿¡ ÁÁÀº °´½ÇÀÔ´Ï´Ù. 
+Ã¢¹ÛÀ¸·Î µé¸®´Â °è°î¹°¼Ò¸®¿Í ÁöÀú±Í´Â »õ¼Ò¸® ±×¸®°í ¸¼Àº °ø±â´Â µµ½Ã¿¡¼­ ÁöÄ£ ¸¶À½¿¡ ÈÞ½ÄÀ» ÁÖ¸ç 
+¸ÅÀÏ Ã»°áÇÏ°Ô °ü¸®ÇÏ´Â Ä§±¸´Â Æí¾ÈÇÑ ÀáÀÚ¸®¸¦ Á¦°øÇÕ´Ï´Ù. 
+±è»ñ°«°è°îÀÇ ¿Ü¾¾¹ö¼±±æ°ú °¡±õ°í ¼÷¼Ò ¹Ù·Î ¾Õ¿¡´Â ¾Æ¸§´Ù¿î °è°îÀÌ Èå¸£°í ÀÖ½À´Ï´Ù.
+°´½Ç¿¡¼­´Â Marshall ½ºÇÇÄ¿·Î °¨¹Ì·Î¿î À½¾Ç°ú ÇÔ²² ºö ÇÁ·ÎÁ§ÅÍ·Î º¸´Ù ½Ç°¨³ª°í ÆíÇÏ°Ô ¿µÈ­¸¦ °¨»óÇÏ½Ç ¼ö ÀÖÀ¸¸ç, 
+ÇØÁú³è¿¡´Â ¾Æ¸§´Ù¿î Á¤¿øÀÇ ÇØ¸Ô¿¡ ´©¿ö ÀÚ¿¬¼Ó¿¡¼­ ÀçÃæÀüÀÇ ½Ã°£À» °¡Á®º¸¼¼¿ä~',
+'P', '°­¿øµµ ÃáÃµ½Ã °¡Æò±º 32-2', '010-1244-5678', 'SILVER',
 '201749875.jpg', '201749875.jpg',
-'í¡ì—° ê¸ˆì§€
-ë°˜ë ¤ë™ë¬¼ ë™ë°˜ì— ì í•©í•˜ì§€ ì•ŠìŒ
-íŒŒí‹°ë‚˜ ì´ë²¤íŠ¸ ê¸ˆì§€
-ì–´ë¦°ì´(ë§Œ 0-12ì„¸)ì—ê²Œ ì•ˆì „í•˜ê±°ë‚˜ ì í•©í•˜ì§€ ì•ŠìŒ
-ì²´í¬ì¸ì€ 15:00 ì´í›„ìž…ë‹ˆë‹¤
-11:00ê¹Œì§€ ì²´í¬ì•„ì›ƒ í•˜ì…”ì•¼ í•©ë‹ˆë‹¤',
-'ìˆ˜ì˜ìž¥,ë¬´ì„ ì¸í„°ë„·,ì£¼ì°¨ìž¥',
-'ì¼ë°˜ ì²´í¬ì¸ 5ì¼ ì „ê¹Œì§€ ì·¨ì†Œí•˜ë©´ ì „ì•¡ì´ í™˜ë¶ˆë©ë‹ˆë‹¤. 
-ì²´í¬ì¸ ì „ 5ì¼ ì´ë‚´ì— ì·¨ì†Œí•˜ë©´ ì²« 1ë°• ìš”ê¸ˆì€ í™˜ë¶ˆë˜ì§€ ì•Šìœ¼ë‚˜, ìž”ì—¬ ìˆ™ë°• ìš”ê¸ˆì˜ 50%ê°€ í™˜ë¶ˆë©ë‹ˆë‹¤.');
+'Èí¿¬ ±ÝÁö
+¹Ý·Áµ¿¹° µ¿¹Ý¿¡ ÀûÇÕÇÏÁö ¾ÊÀ½
+ÆÄÆ¼³ª ÀÌº¥Æ® ±ÝÁö
+¾î¸°ÀÌ(¸¸ 0-12¼¼)¿¡°Ô ¾ÈÀüÇÏ°Å³ª ÀûÇÕÇÏÁö ¾ÊÀ½
+Ã¼Å©ÀÎÀº 15:00 ÀÌÈÄÀÔ´Ï´Ù
+11:00±îÁö Ã¼Å©¾Æ¿ô ÇÏ¼Å¾ß ÇÕ´Ï´Ù',
+'¼ö¿µÀå,¹«¼±ÀÎÅÍ³Ý,ÁÖÂ÷Àå',
+'ÀÏ¹Ý Ã¼Å©ÀÎ 5ÀÏ Àü±îÁö Ãë¼ÒÇÏ¸é Àü¾×ÀÌ È¯ºÒµË´Ï´Ù. 
+Ã¼Å©ÀÎ Àü 5ÀÏ ÀÌ³»¿¡ Ãë¼ÒÇÏ¸é Ã¹ 1¹Ú ¿ä±ÝÀº È¯ºÒµÇÁö ¾ÊÀ¸³ª, ÀÜ¿© ¼÷¹Ú ¿ä±ÝÀÇ 50%°¡ È¯ºÒµË´Ï´Ù.');
 
-INSERT INTO ACCOMMODATION VALUES(6, 'SINKWANNG', 'ì»¬ë¦¬ë„Œí˜¸í…”', 
-'ì˜ì›”ì˜ ìŠ¤í…Œì´í•˜ìš°ìŠ¤ëŠ” ì»¤í”Œì´ ì¡°ìš©ížˆ ì‰¬ê¸°ì— ì¢‹ì€ ê°ì‹¤ìž…ë‹ˆë‹¤. 
-ì°½ë°–ìœ¼ë¡œ ë“¤ë¦¬ëŠ” ê³„ê³¡ë¬¼ì†Œë¦¬ì™€ ì§€ì €ê·€ëŠ” ìƒˆì†Œë¦¬ ê·¸ë¦¬ê³  ë§‘ì€ ê³µê¸°ëŠ” ë„ì‹œì—ì„œ ì§€ì¹œ ë§ˆìŒì— íœ´ì‹ì„ ì£¼ë©° 
-ë§¤ì¼ ì²­ê²°í•˜ê²Œ ê´€ë¦¬í•˜ëŠ” ì¹¨êµ¬ëŠ” íŽ¸ì•ˆí•œ ìž ìžë¦¬ë¥¼ ì œê³µí•©ë‹ˆë‹¤. 
-ê¹€ì‚¿ê°“ê³„ê³¡ì˜ ì™¸ì”¨ë²„ì„ ê¸¸ê³¼ ê°€ê¹ê³  ìˆ™ì†Œ ë°”ë¡œ ì•žì—ëŠ” ì•„ë¦„ë‹¤ìš´ ê³„ê³¡ì´ íë¥´ê³  ìžˆìŠµë‹ˆë‹¤.
-ê°ì‹¤ì—ì„œëŠ” Marshall ìŠ¤í”¼ì»¤ë¡œ ê°ë¯¸ë¡œìš´ ìŒì•…ê³¼ í•¨ê»˜ ë¹” í”„ë¡œì í„°ë¡œ ë³´ë‹¤ ì‹¤ê°ë‚˜ê³  íŽ¸í•˜ê²Œ ì˜í™”ë¥¼ ê°ìƒí•˜ì‹¤ ìˆ˜ ìžˆìœ¼ë©°, 
-í•´ì§ˆë…˜ì—ëŠ” ì•„ë¦„ë‹¤ìš´ ì •ì›ì˜ í•´ë¨¹ì— ëˆ„ì›Œ ìžì—°ì†ì—ì„œ ìž¬ì¶©ì „ì˜ ì‹œê°„ì„ ê°€ì ¸ë³´ì„¸ìš”~',
-'H', 'ê°•ì›ë„ ì¶˜ì²œì‹œ ê°€í‰êµ° 16-2', '010-1234-5678', 'SILVER',
+INSERT INTO ACCOMMODATION VALUES(6, 'SINKWANNG', 'ÄÃ¸®³ÍÈ£ÅÚ', 
+'¿µ¿ùÀÇ ½ºÅ×ÀÌÇÏ¿ì½º´Â Ä¿ÇÃÀÌ Á¶¿ëÈ÷ ½¬±â¿¡ ÁÁÀº °´½ÇÀÔ´Ï´Ù. 
+Ã¢¹ÛÀ¸·Î µé¸®´Â °è°î¹°¼Ò¸®¿Í ÁöÀú±Í´Â »õ¼Ò¸® ±×¸®°í ¸¼Àº °ø±â´Â µµ½Ã¿¡¼­ ÁöÄ£ ¸¶À½¿¡ ÈÞ½ÄÀ» ÁÖ¸ç 
+¸ÅÀÏ Ã»°áÇÏ°Ô °ü¸®ÇÏ´Â Ä§±¸´Â Æí¾ÈÇÑ ÀáÀÚ¸®¸¦ Á¦°øÇÕ´Ï´Ù. 
+±è»ñ°«°è°îÀÇ ¿Ü¾¾¹ö¼±±æ°ú °¡±õ°í ¼÷¼Ò ¹Ù·Î ¾Õ¿¡´Â ¾Æ¸§´Ù¿î °è°îÀÌ Èå¸£°í ÀÖ½À´Ï´Ù.
+°´½Ç¿¡¼­´Â Marshall ½ºÇÇÄ¿·Î °¨¹Ì·Î¿î À½¾Ç°ú ÇÔ²² ºö ÇÁ·ÎÁ§ÅÍ·Î º¸´Ù ½Ç°¨³ª°í ÆíÇÏ°Ô ¿µÈ­¸¦ °¨»óÇÏ½Ç ¼ö ÀÖÀ¸¸ç, 
+ÇØÁú³è¿¡´Â ¾Æ¸§´Ù¿î Á¤¿øÀÇ ÇØ¸Ô¿¡ ´©¿ö ÀÚ¿¬¼Ó¿¡¼­ ÀçÃæÀüÀÇ ½Ã°£À» °¡Á®º¸¼¼¿ä~',
+'H', '°­¿øµµ ÃáÃµ½Ã °¡Æò±º 16-2', '010-1234-5678', 'SILVER',
 '201724138.jpg', '201724138.jpg',
-'í¡ì—° ê¸ˆì§€
-ë°˜ë ¤ë™ë¬¼ ë™ë°˜ì— ì í•©í•˜ì§€ ì•ŠìŒ
-íŒŒí‹°ë‚˜ ì´ë²¤íŠ¸ ê¸ˆì§€
-ì–´ë¦°ì´(ë§Œ 0-12ì„¸)ì—ê²Œ ì•ˆì „í•˜ê±°ë‚˜ ì í•©í•˜ì§€ ì•ŠìŒ
-ì²´í¬ì¸ì€ 15:00 ì´í›„ìž…ë‹ˆë‹¤
-11:00ê¹Œì§€ ì²´í¬ì•„ì›ƒ í•˜ì…”ì•¼ í•©ë‹ˆë‹¤',
-'ìˆ˜ì˜ìž¥,ë¬´ì„ ì¸í„°ë„·,ì£¼ì°¨ìž¥,ì„¸íƒê¸°',
-'ì¼ë°˜ ì²´í¬ì¸ 5ì¼ ì „ê¹Œì§€ ì·¨ì†Œí•˜ë©´ ì „ì•¡ì´ í™˜ë¶ˆë©ë‹ˆë‹¤. 
-ì²´í¬ì¸ ì „ 5ì¼ ì´ë‚´ì— ì·¨ì†Œí•˜ë©´ ì²« 1ë°• ìš”ê¸ˆì€ í™˜ë¶ˆë˜ì§€ ì•Šìœ¼ë‚˜, ìž”ì—¬ ìˆ™ë°• ìš”ê¸ˆì˜ 50%ê°€ í™˜ë¶ˆë©ë‹ˆë‹¤.');
+'Èí¿¬ ±ÝÁö
+¹Ý·Áµ¿¹° µ¿¹Ý¿¡ ÀûÇÕÇÏÁö ¾ÊÀ½
+ÆÄÆ¼³ª ÀÌº¥Æ® ±ÝÁö
+¾î¸°ÀÌ(¸¸ 0-12¼¼)¿¡°Ô ¾ÈÀüÇÏ°Å³ª ÀûÇÕÇÏÁö ¾ÊÀ½
+Ã¼Å©ÀÎÀº 15:00 ÀÌÈÄÀÔ´Ï´Ù
+11:00±îÁö Ã¼Å©¾Æ¿ô ÇÏ¼Å¾ß ÇÕ´Ï´Ù',
+'¼ö¿µÀå,¹«¼±ÀÎÅÍ³Ý,ÁÖÂ÷Àå,¼¼Å¹±â',
+'ÀÏ¹Ý Ã¼Å©ÀÎ 5ÀÏ Àü±îÁö Ãë¼ÒÇÏ¸é Àü¾×ÀÌ È¯ºÒµË´Ï´Ù. 
+Ã¼Å©ÀÎ Àü 5ÀÏ ÀÌ³»¿¡ Ãë¼ÒÇÏ¸é Ã¹ 1¹Ú ¿ä±ÝÀº È¯ºÒµÇÁö ¾ÊÀ¸³ª, ÀÜ¿© ¼÷¹Ú ¿ä±ÝÀÇ 50%°¡ È¯ºÒµË´Ï´Ù.');
 
-INSERT INTO ACCOMMODATION VALUES(7, 'INSUNG', 'ëª¨ë‘ì˜ê²ŒìŠ¤íŠ¸í•˜ìš°ìŠ¤', 
-'ì˜ì›”ì˜ ìŠ¤í…Œì´í•˜ìš°ìŠ¤ëŠ” ì»¤í”Œì´ ì¡°ìš©ížˆ ì‰¬ê¸°ì— ì¢‹ì€ ê°ì‹¤ìž…ë‹ˆë‹¤. 
-ì°½ë°–ìœ¼ë¡œ ë“¤ë¦¬ëŠ” ê³„ê³¡ë¬¼ì†Œë¦¬ì™€ ì§€ì €ê·€ëŠ” ìƒˆì†Œë¦¬ ê·¸ë¦¬ê³  ë§‘ì€ ê³µê¸°ëŠ” ë„ì‹œì—ì„œ ì§€ì¹œ ë§ˆìŒì— íœ´ì‹ì„ ì£¼ë©° 
-ë§¤ì¼ ì²­ê²°í•˜ê²Œ ê´€ë¦¬í•˜ëŠ” ì¹¨êµ¬ëŠ” íŽ¸ì•ˆí•œ ìž ìžë¦¬ë¥¼ ì œê³µí•©ë‹ˆë‹¤. 
-ê¹€ì‚¿ê°“ê³„ê³¡ì˜ ì™¸ì”¨ë²„ì„ ê¸¸ê³¼ ê°€ê¹ê³  ìˆ™ì†Œ ë°”ë¡œ ì•žì—ëŠ” ì•„ë¦„ë‹¤ìš´ ê³„ê³¡ì´ íë¥´ê³  ìžˆìŠµë‹ˆë‹¤.
-ê°ì‹¤ì—ì„œëŠ” Marshall ìŠ¤í”¼ì»¤ë¡œ ê°ë¯¸ë¡œìš´ ìŒì•…ê³¼ í•¨ê»˜ ë¹” í”„ë¡œì í„°ë¡œ ë³´ë‹¤ ì‹¤ê°ë‚˜ê³  íŽ¸í•˜ê²Œ ì˜í™”ë¥¼ ê°ìƒí•˜ì‹¤ ìˆ˜ ìžˆìœ¼ë©°, 
-í•´ì§ˆë…˜ì—ëŠ” ì•„ë¦„ë‹¤ìš´ ì •ì›ì˜ í•´ë¨¹ì— ëˆ„ì›Œ ìžì—°ì†ì—ì„œ ìž¬ì¶©ì „ì˜ ì‹œê°„ì„ ê°€ì ¸ë³´ì„¸ìš”~',
-'G', 'ê°•ì›ë„ ì¶˜ì²œì‹œ ê°€í‰êµ° 32-2', '010-1244-5678', 'SILVER',
+INSERT INTO ACCOMMODATION VALUES(7, 'INSUNG', '¸ðµÎÀÇ°Ô½ºÆ®ÇÏ¿ì½º', 
+'¿µ¿ùÀÇ ½ºÅ×ÀÌÇÏ¿ì½º´Â Ä¿ÇÃÀÌ Á¶¿ëÈ÷ ½¬±â¿¡ ÁÁÀº °´½ÇÀÔ´Ï´Ù. 
+Ã¢¹ÛÀ¸·Î µé¸®´Â °è°î¹°¼Ò¸®¿Í ÁöÀú±Í´Â »õ¼Ò¸® ±×¸®°í ¸¼Àº °ø±â´Â µµ½Ã¿¡¼­ ÁöÄ£ ¸¶À½¿¡ ÈÞ½ÄÀ» ÁÖ¸ç 
+¸ÅÀÏ Ã»°áÇÏ°Ô °ü¸®ÇÏ´Â Ä§±¸´Â Æí¾ÈÇÑ ÀáÀÚ¸®¸¦ Á¦°øÇÕ´Ï´Ù. 
+±è»ñ°«°è°îÀÇ ¿Ü¾¾¹ö¼±±æ°ú °¡±õ°í ¼÷¼Ò ¹Ù·Î ¾Õ¿¡´Â ¾Æ¸§´Ù¿î °è°îÀÌ Èå¸£°í ÀÖ½À´Ï´Ù.
+°´½Ç¿¡¼­´Â Marshall ½ºÇÇÄ¿·Î °¨¹Ì·Î¿î À½¾Ç°ú ÇÔ²² ºö ÇÁ·ÎÁ§ÅÍ·Î º¸´Ù ½Ç°¨³ª°í ÆíÇÏ°Ô ¿µÈ­¸¦ °¨»óÇÏ½Ç ¼ö ÀÖÀ¸¸ç, 
+ÇØÁú³è¿¡´Â ¾Æ¸§´Ù¿î Á¤¿øÀÇ ÇØ¸Ô¿¡ ´©¿ö ÀÚ¿¬¼Ó¿¡¼­ ÀçÃæÀüÀÇ ½Ã°£À» °¡Á®º¸¼¼¿ä~',
+'G', '°­¿øµµ ÃáÃµ½Ã °¡Æò±º 32-2', '010-1244-5678', 'SILVER',
 '201731458.jpg', '201731458.jpg',
-'í¡ì—° ê¸ˆì§€
-ë°˜ë ¤ë™ë¬¼ ë™ë°˜ì— ì í•©í•˜ì§€ ì•ŠìŒ
-íŒŒí‹°ë‚˜ ì´ë²¤íŠ¸ ê¸ˆì§€
-ì–´ë¦°ì´(ë§Œ 0-12ì„¸)ì—ê²Œ ì•ˆì „í•˜ê±°ë‚˜ ì í•©í•˜ì§€ ì•ŠìŒ
-ì²´í¬ì¸ì€ 15:00 ì´í›„ìž…ë‹ˆë‹¤
-11:00ê¹Œì§€ ì²´í¬ì•„ì›ƒ í•˜ì…”ì•¼ í•©ë‹ˆë‹¤',
-'ìˆ˜ì˜ìž¥,ë¬´ì„ ì¸í„°ë„·,ì£¼ì°¨ìž¥',
-'ì¼ë°˜ ì²´í¬ì¸ 5ì¼ ì „ê¹Œì§€ ì·¨ì†Œí•˜ë©´ ì „ì•¡ì´ í™˜ë¶ˆë©ë‹ˆë‹¤. 
-ì²´í¬ì¸ ì „ 5ì¼ ì´ë‚´ì— ì·¨ì†Œí•˜ë©´ ì²« 1ë°• ìš”ê¸ˆì€ í™˜ë¶ˆë˜ì§€ ì•Šìœ¼ë‚˜, ìž”ì—¬ ìˆ™ë°• ìš”ê¸ˆì˜ 50%ê°€ í™˜ë¶ˆë©ë‹ˆë‹¤.');
+'Èí¿¬ ±ÝÁö
+¹Ý·Áµ¿¹° µ¿¹Ý¿¡ ÀûÇÕÇÏÁö ¾ÊÀ½
+ÆÄÆ¼³ª ÀÌº¥Æ® ±ÝÁö
+¾î¸°ÀÌ(¸¸ 0-12¼¼)¿¡°Ô ¾ÈÀüÇÏ°Å³ª ÀûÇÕÇÏÁö ¾ÊÀ½
+Ã¼Å©ÀÎÀº 15:00 ÀÌÈÄÀÔ´Ï´Ù
+11:00±îÁö Ã¼Å©¾Æ¿ô ÇÏ¼Å¾ß ÇÕ´Ï´Ù',
+'¼ö¿µÀå,¹«¼±ÀÎÅÍ³Ý,ÁÖÂ÷Àå',
+'ÀÏ¹Ý Ã¼Å©ÀÎ 5ÀÏ Àü±îÁö Ãë¼ÒÇÏ¸é Àü¾×ÀÌ È¯ºÒµË´Ï´Ù. 
+Ã¼Å©ÀÎ Àü 5ÀÏ ÀÌ³»¿¡ Ãë¼ÒÇÏ¸é Ã¹ 1¹Ú ¿ä±ÝÀº È¯ºÒµÇÁö ¾ÊÀ¸³ª, ÀÜ¿© ¼÷¹Ú ¿ä±ÝÀÇ 50%°¡ È¯ºÒµË´Ï´Ù.');
 
 
-INSERT INTO ACCOMMODATION VALUES(8, 'SONEJH12', 'ì†¡ì „ë°”ë‹¤íŽœì…˜',
-'ì˜ì›”ì˜ ìŠ¤í…Œì´í•˜ìš°ìŠ¤ëŠ” ì»¤í”Œì´ ì¡°ìš©ížˆ ì‰¬ê¸°ì— ì¢‹ì€ ê°ì‹¤ìž…ë‹ˆë‹¤. 
-ì°½ë°–ìœ¼ë¡œ ë“¤ë¦¬ëŠ” ê³„ê³¡ë¬¼ì†Œë¦¬ì™€ ì§€ì €ê·€ëŠ” ìƒˆì†Œë¦¬ ê·¸ë¦¬ê³  ë§‘ì€ ê³µê¸°ëŠ” ë„ì‹œì—ì„œ ì§€ì¹œ ë§ˆìŒì— íœ´ì‹ì„ ì£¼ë©° 
-ë§¤ì¼ ì²­ê²°í•˜ê²Œ ê´€ë¦¬í•˜ëŠ” ì¹¨êµ¬ëŠ” íŽ¸ì•ˆí•œ ìž ìžë¦¬ë¥¼ ì œê³µí•©ë‹ˆë‹¤. 
-ê¹€ì‚¿ê°“ê³„ê³¡ì˜ ì™¸ì”¨ë²„ì„ ê¸¸ê³¼ ê°€ê¹ê³  ìˆ™ì†Œ ë°”ë¡œ ì•žì—ëŠ” ì•„ë¦„ë‹¤ìš´ ê³„ê³¡ì´ íë¥´ê³  ìžˆìŠµë‹ˆë‹¤.
-ê°ì‹¤ì—ì„œëŠ” Marshall ìŠ¤í”¼ì»¤ë¡œ ê°ë¯¸ë¡œìš´ ìŒì•…ê³¼ í•¨ê»˜ ë¹” í”„ë¡œì í„°ë¡œ ë³´ë‹¤ ì‹¤ê°ë‚˜ê³  íŽ¸í•˜ê²Œ ì˜í™”ë¥¼ ê°ìƒí•˜ì‹¤ ìˆ˜ ìžˆìœ¼ë©°, 
-í•´ì§ˆë…˜ì—ëŠ” ì•„ë¦„ë‹¤ìš´ ì •ì›ì˜ í•´ë¨¹ì— ëˆ„ì›Œ ìžì—°ì†ì—ì„œ ìž¬ì¶©ì „ì˜ ì‹œê°„ì„ ê°€ì ¸ë³´ì„¸ìš”~',
-'P', 'ê°•ì›ë„ ì¶˜ì²œì‹œ ê°€í‰êµ° 32-2', '010-1244-5678', 'SILVER',
+INSERT INTO ACCOMMODATION VALUES(8, 'SONEJH12', '¼ÛÀü¹Ù´ÙÆæ¼Ç',
+'¿µ¿ùÀÇ ½ºÅ×ÀÌÇÏ¿ì½º´Â Ä¿ÇÃÀÌ Á¶¿ëÈ÷ ½¬±â¿¡ ÁÁÀº °´½ÇÀÔ´Ï´Ù. 
+Ã¢¹ÛÀ¸·Î µé¸®´Â °è°î¹°¼Ò¸®¿Í ÁöÀú±Í´Â »õ¼Ò¸® ±×¸®°í ¸¼Àº °ø±â´Â µµ½Ã¿¡¼­ ÁöÄ£ ¸¶À½¿¡ ÈÞ½ÄÀ» ÁÖ¸ç 
+¸ÅÀÏ Ã»°áÇÏ°Ô °ü¸®ÇÏ´Â Ä§±¸´Â Æí¾ÈÇÑ ÀáÀÚ¸®¸¦ Á¦°øÇÕ´Ï´Ù. 
+±è»ñ°«°è°îÀÇ ¿Ü¾¾¹ö¼±±æ°ú °¡±õ°í ¼÷¼Ò ¹Ù·Î ¾Õ¿¡´Â ¾Æ¸§´Ù¿î °è°îÀÌ Èå¸£°í ÀÖ½À´Ï´Ù.
+°´½Ç¿¡¼­´Â Marshall ½ºÇÇÄ¿·Î °¨¹Ì·Î¿î À½¾Ç°ú ÇÔ²² ºö ÇÁ·ÎÁ§ÅÍ·Î º¸´Ù ½Ç°¨³ª°í ÆíÇÏ°Ô ¿µÈ­¸¦ °¨»óÇÏ½Ç ¼ö ÀÖÀ¸¸ç, 
+ÇØÁú³è¿¡´Â ¾Æ¸§´Ù¿î Á¤¿øÀÇ ÇØ¸Ô¿¡ ´©¿ö ÀÚ¿¬¼Ó¿¡¼­ ÀçÃæÀüÀÇ ½Ã°£À» °¡Á®º¸¼¼¿ä~',
+'P', '°­¿øµµ ÃáÃµ½Ã °¡Æò±º 32-2', '010-1244-5678', 'SILVER',
 '201784675.jpg', '201784675.jpg',
-'í¡ì—° ê¸ˆì§€
-ë°˜ë ¤ë™ë¬¼ ë™ë°˜ì— ì í•©í•˜ì§€ ì•ŠìŒ
-íŒŒí‹°ë‚˜ ì´ë²¤íŠ¸ ê¸ˆì§€
-ì–´ë¦°ì´(ë§Œ 0-12ì„¸)ì—ê²Œ ì•ˆì „í•˜ê±°ë‚˜ ì í•©í•˜ì§€ ì•ŠìŒ
-ì²´í¬ì¸ì€ 15:00 ì´í›„ìž…ë‹ˆë‹¤
-11:00ê¹Œì§€ ì²´í¬ì•„ì›ƒ í•˜ì…”ì•¼ í•©ë‹ˆë‹¤',
-'ìˆ˜ì˜ìž¥,ë¬´ì„ ì¸í„°ë„·,ì£¼ì°¨ìž¥',
-'ì¼ë°˜ ì²´í¬ì¸ 5ì¼ ì „ê¹Œì§€ ì·¨ì†Œí•˜ë©´ ì „ì•¡ì´ í™˜ë¶ˆë©ë‹ˆë‹¤. 
-ì²´í¬ì¸ ì „ 5ì¼ ì´ë‚´ì— ì·¨ì†Œí•˜ë©´ ì²« 1ë°• ìš”ê¸ˆì€ í™˜ë¶ˆë˜ì§€ ì•Šìœ¼ë‚˜, ìž”ì—¬ ìˆ™ë°• ìš”ê¸ˆì˜ 50%ê°€ í™˜ë¶ˆë©ë‹ˆë‹¤.');
+'Èí¿¬ ±ÝÁö
+¹Ý·Áµ¿¹° µ¿¹Ý¿¡ ÀûÇÕÇÏÁö ¾ÊÀ½
+ÆÄÆ¼³ª ÀÌº¥Æ® ±ÝÁö
+¾î¸°ÀÌ(¸¸ 0-12¼¼)¿¡°Ô ¾ÈÀüÇÏ°Å³ª ÀûÇÕÇÏÁö ¾ÊÀ½
+Ã¼Å©ÀÎÀº 15:00 ÀÌÈÄÀÔ´Ï´Ù
+11:00±îÁö Ã¼Å©¾Æ¿ô ÇÏ¼Å¾ß ÇÕ´Ï´Ù',
+'¼ö¿µÀå,¹«¼±ÀÎÅÍ³Ý,ÁÖÂ÷Àå',
+'ÀÏ¹Ý Ã¼Å©ÀÎ 5ÀÏ Àü±îÁö Ãë¼ÒÇÏ¸é Àü¾×ÀÌ È¯ºÒµË´Ï´Ù. 
+Ã¼Å©ÀÎ Àü 5ÀÏ ÀÌ³»¿¡ Ãë¼ÒÇÏ¸é Ã¹ 1¹Ú ¿ä±ÝÀº È¯ºÒµÇÁö ¾ÊÀ¸³ª, ÀÜ¿© ¼÷¹Ú ¿ä±ÝÀÇ 50%°¡ È¯ºÒµË´Ï´Ù.');
 
 
-INSERT INTO ACCOMMODATION VALUES(9, 'NAMU01', 'ë‚¨ì²­í˜¸ëª¨í…”',
-'ì˜ì›”ì˜ ìŠ¤í…Œì´í•˜ìš°ìŠ¤ëŠ” ì»¤í”Œì´ ì¡°ìš©ížˆ ì‰¬ê¸°ì— ì¢‹ì€ ê°ì‹¤ìž…ë‹ˆë‹¤. 
-ì°½ë°–ìœ¼ë¡œ ë“¤ë¦¬ëŠ” ê³„ê³¡ë¬¼ì†Œë¦¬ì™€ ì§€ì €ê·€ëŠ” ìƒˆì†Œë¦¬ ê·¸ë¦¬ê³  ë§‘ì€ ê³µê¸°ëŠ” ë„ì‹œì—ì„œ ì§€ì¹œ ë§ˆìŒì— íœ´ì‹ì„ ì£¼ë©° 
-ë§¤ì¼ ì²­ê²°í•˜ê²Œ ê´€ë¦¬í•˜ëŠ” ì¹¨êµ¬ëŠ” íŽ¸ì•ˆí•œ ìž ìžë¦¬ë¥¼ ì œê³µí•©ë‹ˆë‹¤. 
-ê¹€ì‚¿ê°“ê³„ê³¡ì˜ ì™¸ì”¨ë²„ì„ ê¸¸ê³¼ ê°€ê¹ê³  ìˆ™ì†Œ ë°”ë¡œ ì•žì—ëŠ” ì•„ë¦„ë‹¤ìš´ ê³„ê³¡ì´ íë¥´ê³  ìžˆìŠµë‹ˆë‹¤.
-ê°ì‹¤ì—ì„œëŠ” Marshall ìŠ¤í”¼ì»¤ë¡œ ê°ë¯¸ë¡œìš´ ìŒì•…ê³¼ í•¨ê»˜ ë¹” í”„ë¡œì í„°ë¡œ ë³´ë‹¤ ì‹¤ê°ë‚˜ê³  íŽ¸í•˜ê²Œ ì˜í™”ë¥¼ ê°ìƒí•˜ì‹¤ ìˆ˜ ìžˆìœ¼ë©°, 
-í•´ì§ˆë…˜ì—ëŠ” ì•„ë¦„ë‹¤ìš´ ì •ì›ì˜ í•´ë¨¹ì— ëˆ„ì›Œ ìžì—°ì†ì—ì„œ ìž¬ì¶©ì „ì˜ ì‹œê°„ì„ ê°€ì ¸ë³´ì„¸ìš”~',
-'M', 'ê°•ì›ë„ ì¶˜ì²œì‹œ ê°€í‰êµ° 32-2', '010-1244-5678', 'SILVER',
+INSERT INTO ACCOMMODATION VALUES(9, 'NAMU01', '³²Ã»È£¸ðÅÚ',
+'¿µ¿ùÀÇ ½ºÅ×ÀÌÇÏ¿ì½º´Â Ä¿ÇÃÀÌ Á¶¿ëÈ÷ ½¬±â¿¡ ÁÁÀº °´½ÇÀÔ´Ï´Ù. 
+Ã¢¹ÛÀ¸·Î µé¸®´Â °è°î¹°¼Ò¸®¿Í ÁöÀú±Í´Â »õ¼Ò¸® ±×¸®°í ¸¼Àº °ø±â´Â µµ½Ã¿¡¼­ ÁöÄ£ ¸¶À½¿¡ ÈÞ½ÄÀ» ÁÖ¸ç 
+¸ÅÀÏ Ã»°áÇÏ°Ô °ü¸®ÇÏ´Â Ä§±¸´Â Æí¾ÈÇÑ ÀáÀÚ¸®¸¦ Á¦°øÇÕ´Ï´Ù. 
+±è»ñ°«°è°îÀÇ ¿Ü¾¾¹ö¼±±æ°ú °¡±õ°í ¼÷¼Ò ¹Ù·Î ¾Õ¿¡´Â ¾Æ¸§´Ù¿î °è°îÀÌ Èå¸£°í ÀÖ½À´Ï´Ù.
+°´½Ç¿¡¼­´Â Marshall ½ºÇÇÄ¿·Î °¨¹Ì·Î¿î À½¾Ç°ú ÇÔ²² ºö ÇÁ·ÎÁ§ÅÍ·Î º¸´Ù ½Ç°¨³ª°í ÆíÇÏ°Ô ¿µÈ­¸¦ °¨»óÇÏ½Ç ¼ö ÀÖÀ¸¸ç, 
+ÇØÁú³è¿¡´Â ¾Æ¸§´Ù¿î Á¤¿øÀÇ ÇØ¸Ô¿¡ ´©¿ö ÀÚ¿¬¼Ó¿¡¼­ ÀçÃæÀüÀÇ ½Ã°£À» °¡Á®º¸¼¼¿ä~',
+'M', '°­¿øµµ ÃáÃµ½Ã °¡Æò±º 32-2', '010-1244-5678', 'SILVER',
 '201797841.jpg', '201797841.jpg',
-'í¡ì—° ê¸ˆì§€
-ë°˜ë ¤ë™ë¬¼ ë™ë°˜ì— ì í•©í•˜ì§€ ì•ŠìŒ
-íŒŒí‹°ë‚˜ ì´ë²¤íŠ¸ ê¸ˆì§€
-ì–´ë¦°ì´(ë§Œ 0-12ì„¸)ì—ê²Œ ì•ˆì „í•˜ê±°ë‚˜ ì í•©í•˜ì§€ ì•ŠìŒ
-ì²´í¬ì¸ì€ 15:00 ì´í›„ìž…ë‹ˆë‹¤
-11:00ê¹Œì§€ ì²´í¬ì•„ì›ƒ í•˜ì…”ì•¼ í•©ë‹ˆë‹¤',
-'ìˆ˜ì˜ìž¥,ë¬´ì„ ì¸í„°ë„·,ì£¼ì°¨ìž¥',
-'ì¼ë°˜ ì²´í¬ì¸ 5ì¼ ì „ê¹Œì§€ ì·¨ì†Œí•˜ë©´ ì „ì•¡ì´ í™˜ë¶ˆë©ë‹ˆë‹¤. 
-ì²´í¬ì¸ ì „ 5ì¼ ì´ë‚´ì— ì·¨ì†Œí•˜ë©´ ì²« 1ë°• ìš”ê¸ˆì€ í™˜ë¶ˆë˜ì§€ ì•Šìœ¼ë‚˜, ìž”ì—¬ ìˆ™ë°• ìš”ê¸ˆì˜ 50%ê°€ í™˜ë¶ˆë©ë‹ˆë‹¤.');
+'Èí¿¬ ±ÝÁö
+¹Ý·Áµ¿¹° µ¿¹Ý¿¡ ÀûÇÕÇÏÁö ¾ÊÀ½
+ÆÄÆ¼³ª ÀÌº¥Æ® ±ÝÁö
+¾î¸°ÀÌ(¸¸ 0-12¼¼)¿¡°Ô ¾ÈÀüÇÏ°Å³ª ÀûÇÕÇÏÁö ¾ÊÀ½
+Ã¼Å©ÀÎÀº 15:00 ÀÌÈÄÀÔ´Ï´Ù
+11:00±îÁö Ã¼Å©¾Æ¿ô ÇÏ¼Å¾ß ÇÕ´Ï´Ù',
+'¼ö¿µÀå,¹«¼±ÀÎÅÍ³Ý,ÁÖÂ÷Àå',
+'ÀÏ¹Ý Ã¼Å©ÀÎ 5ÀÏ Àü±îÁö Ãë¼ÒÇÏ¸é Àü¾×ÀÌ È¯ºÒµË´Ï´Ù. 
+Ã¼Å©ÀÎ Àü 5ÀÏ ÀÌ³»¿¡ Ãë¼ÒÇÏ¸é Ã¹ 1¹Ú ¿ä±ÝÀº È¯ºÒµÇÁö ¾ÊÀ¸³ª, ÀÜ¿© ¼÷¹Ú ¿ä±ÝÀÇ 50%°¡ È¯ºÒµË´Ï´Ù.');
 
 
-INSERT INTO ACCOMMODATION VALUES(10, 'INSUNG', 'ìŠ¤ì¦ˆëž€ì •ë™ì§„íŽœì…˜',
-'ì˜ì›”ì˜ ìŠ¤í…Œì´í•˜ìš°ìŠ¤ëŠ” ì»¤í”Œì´ ì¡°ìš©ížˆ ì‰¬ê¸°ì— ì¢‹ì€ ê°ì‹¤ìž…ë‹ˆë‹¤. 
-ì°½ë°–ìœ¼ë¡œ ë“¤ë¦¬ëŠ” ê³„ê³¡ë¬¼ì†Œë¦¬ì™€ ì§€ì €ê·€ëŠ” ìƒˆì†Œë¦¬ ê·¸ë¦¬ê³  ë§‘ì€ ê³µê¸°ëŠ” ë„ì‹œì—ì„œ ì§€ì¹œ ë§ˆìŒì— íœ´ì‹ì„ ì£¼ë©° 
-ë§¤ì¼ ì²­ê²°í•˜ê²Œ ê´€ë¦¬í•˜ëŠ” ì¹¨êµ¬ëŠ” íŽ¸ì•ˆí•œ ìž ìžë¦¬ë¥¼ ì œê³µí•©ë‹ˆë‹¤. 
-ê¹€ì‚¿ê°“ê³„ê³¡ì˜ ì™¸ì”¨ë²„ì„ ê¸¸ê³¼ ê°€ê¹ê³  ìˆ™ì†Œ ë°”ë¡œ ì•žì—ëŠ” ì•„ë¦„ë‹¤ìš´ ê³„ê³¡ì´ íë¥´ê³  ìžˆìŠµë‹ˆë‹¤.
-ê°ì‹¤ì—ì„œëŠ” Marshall ìŠ¤í”¼ì»¤ë¡œ ê°ë¯¸ë¡œìš´ ìŒì•…ê³¼ í•¨ê»˜ ë¹” í”„ë¡œì í„°ë¡œ ë³´ë‹¤ ì‹¤ê°ë‚˜ê³  íŽ¸í•˜ê²Œ ì˜í™”ë¥¼ ê°ìƒí•˜ì‹¤ ìˆ˜ ìžˆìœ¼ë©°, 
-í•´ì§ˆë…˜ì—ëŠ” ì•„ë¦„ë‹¤ìš´ ì •ì›ì˜ í•´ë¨¹ì— ëˆ„ì›Œ ìžì—°ì†ì—ì„œ ìž¬ì¶©ì „ì˜ ì‹œê°„ì„ ê°€ì ¸ë³´ì„¸ìš”~',
-'P', 'ê°•ì›ë„ ì¶˜ì²œì‹œ ê°€í‰êµ° 32-2', '010-1244-5678', 'SILVER',
+INSERT INTO ACCOMMODATION VALUES(10, 'INSUNG', '½ºÁî¶õÁ¤µ¿ÁøÆæ¼Ç',
+'¿µ¿ùÀÇ ½ºÅ×ÀÌÇÏ¿ì½º´Â Ä¿ÇÃÀÌ Á¶¿ëÈ÷ ½¬±â¿¡ ÁÁÀº °´½ÇÀÔ´Ï´Ù. 
+Ã¢¹ÛÀ¸·Î µé¸®´Â °è°î¹°¼Ò¸®¿Í ÁöÀú±Í´Â »õ¼Ò¸® ±×¸®°í ¸¼Àº °ø±â´Â µµ½Ã¿¡¼­ ÁöÄ£ ¸¶À½¿¡ ÈÞ½ÄÀ» ÁÖ¸ç 
+¸ÅÀÏ Ã»°áÇÏ°Ô °ü¸®ÇÏ´Â Ä§±¸´Â Æí¾ÈÇÑ ÀáÀÚ¸®¸¦ Á¦°øÇÕ´Ï´Ù. 
+±è»ñ°«°è°îÀÇ ¿Ü¾¾¹ö¼±±æ°ú °¡±õ°í ¼÷¼Ò ¹Ù·Î ¾Õ¿¡´Â ¾Æ¸§´Ù¿î °è°îÀÌ Èå¸£°í ÀÖ½À´Ï´Ù.
+°´½Ç¿¡¼­´Â Marshall ½ºÇÇÄ¿·Î °¨¹Ì·Î¿î À½¾Ç°ú ÇÔ²² ºö ÇÁ·ÎÁ§ÅÍ·Î º¸´Ù ½Ç°¨³ª°í ÆíÇÏ°Ô ¿µÈ­¸¦ °¨»óÇÏ½Ç ¼ö ÀÖÀ¸¸ç, 
+ÇØÁú³è¿¡´Â ¾Æ¸§´Ù¿î Á¤¿øÀÇ ÇØ¸Ô¿¡ ´©¿ö ÀÚ¿¬¼Ó¿¡¼­ ÀçÃæÀüÀÇ ½Ã°£À» °¡Á®º¸¼¼¿ä~',
+'P', '°­¿øµµ ÃáÃµ½Ã °¡Æò±º 32-2', '010-1244-5678', 'SILVER',
 '20177946.jpg', '20177946.jpg',
-'í¡ì—° ê¸ˆì§€
-ë°˜ë ¤ë™ë¬¼ ë™ë°˜ì— ì í•©í•˜ì§€ ì•ŠìŒ
-íŒŒí‹°ë‚˜ ì´ë²¤íŠ¸ ê¸ˆì§€
-ì–´ë¦°ì´(ë§Œ 0-12ì„¸)ì—ê²Œ ì•ˆì „í•˜ê±°ë‚˜ ì í•©í•˜ì§€ ì•ŠìŒ
-ì²´í¬ì¸ì€ 15:00 ì´í›„ìž…ë‹ˆë‹¤
-11:00ê¹Œì§€ ì²´í¬ì•„ì›ƒ í•˜ì…”ì•¼ í•©ë‹ˆë‹¤',
-'ìˆ˜ì˜ìž¥,ë¬´ì„ ì¸í„°ë„·,ì£¼ì°¨ìž¥',
-'ì¼ë°˜ ì²´í¬ì¸ 5ì¼ ì „ê¹Œì§€ ì·¨ì†Œí•˜ë©´ ì „ì•¡ì´ í™˜ë¶ˆë©ë‹ˆë‹¤. 
-ì²´í¬ì¸ ì „ 5ì¼ ì´ë‚´ì— ì·¨ì†Œí•˜ë©´ ì²« 1ë°• ìš”ê¸ˆì€ í™˜ë¶ˆë˜ì§€ ì•Šìœ¼ë‚˜, ìž”ì—¬ ìˆ™ë°• ìš”ê¸ˆì˜ 50%ê°€ í™˜ë¶ˆë©ë‹ˆë‹¤.');
+'Èí¿¬ ±ÝÁö
+¹Ý·Áµ¿¹° µ¿¹Ý¿¡ ÀûÇÕÇÏÁö ¾ÊÀ½
+ÆÄÆ¼³ª ÀÌº¥Æ® ±ÝÁö
+¾î¸°ÀÌ(¸¸ 0-12¼¼)¿¡°Ô ¾ÈÀüÇÏ°Å³ª ÀûÇÕÇÏÁö ¾ÊÀ½
+Ã¼Å©ÀÎÀº 15:00 ÀÌÈÄÀÔ´Ï´Ù
+11:00±îÁö Ã¼Å©¾Æ¿ô ÇÏ¼Å¾ß ÇÕ´Ï´Ù',
+'¼ö¿µÀå,¹«¼±ÀÎÅÍ³Ý,ÁÖÂ÷Àå',
+'ÀÏ¹Ý Ã¼Å©ÀÎ 5ÀÏ Àü±îÁö Ãë¼ÒÇÏ¸é Àü¾×ÀÌ È¯ºÒµË´Ï´Ù. 
+Ã¼Å©ÀÎ Àü 5ÀÏ ÀÌ³»¿¡ Ãë¼ÒÇÏ¸é Ã¹ 1¹Ú ¿ä±ÝÀº È¯ºÒµÇÁö ¾ÊÀ¸³ª, ÀÜ¿© ¼÷¹Ú ¿ä±ÝÀÇ 50%°¡ È¯ºÒµË´Ï´Ù.');
 
-INSERT INTO ACCOMMODATION VALUES(11, 'SINKWANNG', 'í•˜ëŠ˜í•˜ëŠ˜íŽœì…˜',
-'ì˜ì›”ì˜ ìŠ¤í…Œì´í•˜ìš°ìŠ¤ëŠ” ì»¤í”Œì´ ì¡°ìš©ížˆ ì‰¬ê¸°ì— ì¢‹ì€ ê°ì‹¤ìž…ë‹ˆë‹¤. 
-ì°½ë°–ìœ¼ë¡œ ë“¤ë¦¬ëŠ” ê³„ê³¡ë¬¼ì†Œë¦¬ì™€ ì§€ì €ê·€ëŠ” ìƒˆì†Œë¦¬ ê·¸ë¦¬ê³  ë§‘ì€ ê³µê¸°ëŠ” ë„ì‹œì—ì„œ ì§€ì¹œ ë§ˆìŒì— íœ´ì‹ì„ ì£¼ë©° 
-ë§¤ì¼ ì²­ê²°í•˜ê²Œ ê´€ë¦¬í•˜ëŠ” ì¹¨êµ¬ëŠ” íŽ¸ì•ˆí•œ ìž ìžë¦¬ë¥¼ ì œê³µí•©ë‹ˆë‹¤. 
-ê¹€ì‚¿ê°“ê³„ê³¡ì˜ ì™¸ì”¨ë²„ì„ ê¸¸ê³¼ ê°€ê¹ê³  ìˆ™ì†Œ ë°”ë¡œ ì•žì—ëŠ” ì•„ë¦„ë‹¤ìš´ ê³„ê³¡ì´ íë¥´ê³  ìžˆìŠµë‹ˆë‹¤.
-ê°ì‹¤ì—ì„œëŠ” Marshall ìŠ¤í”¼ì»¤ë¡œ ê°ë¯¸ë¡œìš´ ìŒì•…ê³¼ í•¨ê»˜ ë¹” í”„ë¡œì í„°ë¡œ ë³´ë‹¤ ì‹¤ê°ë‚˜ê³  íŽ¸í•˜ê²Œ ì˜í™”ë¥¼ ê°ìƒí•˜ì‹¤ ìˆ˜ ìžˆìœ¼ë©°, 
-í•´ì§ˆë…˜ì—ëŠ” ì•„ë¦„ë‹¤ìš´ ì •ì›ì˜ í•´ë¨¹ì— ëˆ„ì›Œ ìžì—°ì†ì—ì„œ ìž¬ì¶©ì „ì˜ ì‹œê°„ì„ ê°€ì ¸ë³´ì„¸ìš”~',
-'P', 'ê°•ì›ë„ ì¶˜ì²œì‹œ ë‚¨ì‚°ë©´ ë‚¨ì´ì„¬ê¸¸ 1', '010-1244-5678', 'SILVER',
+INSERT INTO ACCOMMODATION VALUES(11, 'SINKWANNG', 'ÇÏ´ÃÇÏ´ÃÆæ¼Ç',
+'¿µ¿ùÀÇ ½ºÅ×ÀÌÇÏ¿ì½º´Â Ä¿ÇÃÀÌ Á¶¿ëÈ÷ ½¬±â¿¡ ÁÁÀº °´½ÇÀÔ´Ï´Ù. 
+Ã¢¹ÛÀ¸·Î µé¸®´Â °è°î¹°¼Ò¸®¿Í ÁöÀú±Í´Â »õ¼Ò¸® ±×¸®°í ¸¼Àº °ø±â´Â µµ½Ã¿¡¼­ ÁöÄ£ ¸¶À½¿¡ ÈÞ½ÄÀ» ÁÖ¸ç 
+¸ÅÀÏ Ã»°áÇÏ°Ô °ü¸®ÇÏ´Â Ä§±¸´Â Æí¾ÈÇÑ ÀáÀÚ¸®¸¦ Á¦°øÇÕ´Ï´Ù. 
+±è»ñ°«°è°îÀÇ ¿Ü¾¾¹ö¼±±æ°ú °¡±õ°í ¼÷¼Ò ¹Ù·Î ¾Õ¿¡´Â ¾Æ¸§´Ù¿î °è°îÀÌ Èå¸£°í ÀÖ½À´Ï´Ù.
+°´½Ç¿¡¼­´Â Marshall ½ºÇÇÄ¿·Î °¨¹Ì·Î¿î À½¾Ç°ú ÇÔ²² ºö ÇÁ·ÎÁ§ÅÍ·Î º¸´Ù ½Ç°¨³ª°í ÆíÇÏ°Ô ¿µÈ­¸¦ °¨»óÇÏ½Ç ¼ö ÀÖÀ¸¸ç, 
+ÇØÁú³è¿¡´Â ¾Æ¸§´Ù¿î Á¤¿øÀÇ ÇØ¸Ô¿¡ ´©¿ö ÀÚ¿¬¼Ó¿¡¼­ ÀçÃæÀüÀÇ ½Ã°£À» °¡Á®º¸¼¼¿ä~',
+'P', '°­¿øµµ ÃáÃµ½Ã ³²»ê¸é ³²ÀÌ¼¶±æ 1', '010-1244-5678', 'SILVER',
 '201796325.jpg', '201796325.jpg',
-'í¡ì—° ê¸ˆì§€
-ë°˜ë ¤ë™ë¬¼ ë™ë°˜ì— ì í•©í•˜ì§€ ì•ŠìŒ
-íŒŒí‹°ë‚˜ ì´ë²¤íŠ¸ ê¸ˆì§€
-ì–´ë¦°ì´(ë§Œ 0-12ì„¸)ì—ê²Œ ì•ˆì „í•˜ê±°ë‚˜ ì í•©í•˜ì§€ ì•ŠìŒ
-ì²´í¬ì¸ì€ 15:00 ì´í›„ìž…ë‹ˆë‹¤
-11:00ê¹Œì§€ ì²´í¬ì•„ì›ƒ í•˜ì…”ì•¼ í•©ë‹ˆë‹¤',
-'ìˆ˜ì˜ìž¥,ë¬´ì„ ì¸í„°ë„·,ì£¼ì°¨ìž¥',
-'ì¼ë°˜ ì²´í¬ì¸ 5ì¼ ì „ê¹Œì§€ ì·¨ì†Œí•˜ë©´ ì „ì•¡ì´ í™˜ë¶ˆë©ë‹ˆë‹¤. 
-ì²´í¬ì¸ ì „ 5ì¼ ì´ë‚´ì— ì·¨ì†Œí•˜ë©´ ì²« 1ë°• ìš”ê¸ˆì€ í™˜ë¶ˆë˜ì§€ ì•Šìœ¼ë‚˜, ìž”ì—¬ ìˆ™ë°• ìš”ê¸ˆì˜ 50%ê°€ í™˜ë¶ˆë©ë‹ˆë‹¤.');
+'Èí¿¬ ±ÝÁö
+¹Ý·Áµ¿¹° µ¿¹Ý¿¡ ÀûÇÕÇÏÁö ¾ÊÀ½
+ÆÄÆ¼³ª ÀÌº¥Æ® ±ÝÁö
+¾î¸°ÀÌ(¸¸ 0-12¼¼)¿¡°Ô ¾ÈÀüÇÏ°Å³ª ÀûÇÕÇÏÁö ¾ÊÀ½
+Ã¼Å©ÀÎÀº 15:00 ÀÌÈÄÀÔ´Ï´Ù
+11:00±îÁö Ã¼Å©¾Æ¿ô ÇÏ¼Å¾ß ÇÕ´Ï´Ù',
+'¼ö¿µÀå,¹«¼±ÀÎÅÍ³Ý,ÁÖÂ÷Àå',
+'ÀÏ¹Ý Ã¼Å©ÀÎ 5ÀÏ Àü±îÁö Ãë¼ÒÇÏ¸é Àü¾×ÀÌ È¯ºÒµË´Ï´Ù. 
+Ã¼Å©ÀÎ Àü 5ÀÏ ÀÌ³»¿¡ Ãë¼ÒÇÏ¸é Ã¹ 1¹Ú ¿ä±ÝÀº È¯ºÒµÇÁö ¾ÊÀ¸³ª, ÀÜ¿© ¼÷¹Ú ¿ä±ÝÀÇ 50%°¡ È¯ºÒµË´Ï´Ù.');
 
 
-/*ìˆ™ì†Œ ì´ë¯¸ì§€ í…Œì´ë¸”*/ 
+/*¼÷¼Ò ÀÌ¹ÌÁö Å×ÀÌºí*/ 
 CREATE TABLE ACCOMMODATION_IMAGE
 (
   IMAGE_RNAME VARCHAR2(100),
   IMAGE_ONAME VARCHAR2(100),
-  ACC_ID NUMBER,           /*ìˆ™ì†Œ ì•„ì´ë””*/
+  ACC_ID NUMBER,           /*¼÷¼Ò ¾ÆÀÌµð*/
   
   CONSTRAINT PK_ARNAME PRIMARY KEY(IMAGE_RNAME),
   CONSTRAINT FK_IMG_AID FOREIGN KEY (ACC_ID) REFERENCES ACCOMMODATION
 );
 select acc_rname from ACCOMMODATION;
-/*ìƒ˜í”Œë°ì´í„°*/
+/*»ùÇÃµ¥ÀÌÅÍ*/
 -- ACCOMMODATION_IMAGE
 INSERT INTO ACCOMMODATION_IMAGE VALUES('201784675.jpg', 'image1.jpg', 1);
 INSERT INTO ACCOMMODATION_IMAGE VALUES('201746357.jpg', 'image2.jpg', 1);
@@ -358,7 +358,7 @@ INSERT INTO ACCOMMODATION_IMAGE VALUES('201784521.jpg', 'image21.jpg', 11);
 
 
 
-/*íŒ¨í‚¤ì§€ì—¬í–‰ í›„ê¸° í…Œì´ë¸”*/
+/*ÆÐÅ°Áö¿©Çà ÈÄ±â Å×ÀÌºí*/
 CREATE TABLE ACCOM_REVIEW
 (  
   AR_NO NUMBER,
@@ -374,142 +374,142 @@ CREATE TABLE ACCOM_REVIEW
   CONSTRAINT FK_AR_WID FOREIGN KEY(AR_WRITER_ID) REFERENCES MEMBER,
   CONSTRAINT CHK_AR_GRADE CHECK (AR_GRADE BETWEEN 1.0 AND 10.0)
 );
-COMMENT ON TABLE ACCOM_REVIEW IS 'ìˆ™ì†Œ í›„ê¸° ê²Œì‹œíŒ';
-COMMENT ON COLUMN ACCOM_REVIEW.AR_NO IS 'ê²Œì‹œê¸€ ë²ˆí˜¸';
-COMMENT ON COLUMN ACCOM_REVIEW.AR_ACCOM_ID IS 'ìˆ™ì†Œ ID';
-COMMENT ON COLUMN ACCOM_REVIEW.AR_DATE IS 'ê²Œì‹œ ë‚ ì§œ';
-COMMENT ON COLUMN ACCOM_REVIEW.AR_WRITER_ID IS 'ìž‘ì„±ìž ì•„ì´ë””';
-COMMENT ON COLUMN ACCOM_REVIEW.AR_TITLE IS 'ì œëª©';
-COMMENT ON COLUMN ACCOM_REVIEW.AR_CONTENT IS 'ë‚´ìš©';
-COMMENT ON COLUMN ACCOM_REVIEW.AR_GRADE IS 'í‰ì ';
+COMMENT ON TABLE ACCOM_REVIEW IS '¼÷¼Ò ÈÄ±â °Ô½ÃÆÇ';
+COMMENT ON COLUMN ACCOM_REVIEW.AR_NO IS '°Ô½Ã±Û ¹øÈ£';
+COMMENT ON COLUMN ACCOM_REVIEW.AR_ACCOM_ID IS '¼÷¼Ò ID';
+COMMENT ON COLUMN ACCOM_REVIEW.AR_DATE IS '°Ô½Ã ³¯Â¥';
+COMMENT ON COLUMN ACCOM_REVIEW.AR_WRITER_ID IS 'ÀÛ¼ºÀÚ ¾ÆÀÌµð';
+COMMENT ON COLUMN ACCOM_REVIEW.AR_TITLE IS 'Á¦¸ñ';
+COMMENT ON COLUMN ACCOM_REVIEW.AR_CONTENT IS '³»¿ë';
+COMMENT ON COLUMN ACCOM_REVIEW.AR_GRADE IS 'ÆòÁ¡';
 
 -- ACCOM_REVIEW
 INSERT INTO ACCOM_REVIEW
-VALUES(1, 1, DEFAULT, 'ib1500', 'ì¢‹ì€ ì—¬í–‰ì´ì˜€ì–´ìš”!!!', 'ê°€ì´ë“œë¶„ë„ ì¹œì ˆí•˜ì‹œê³  ì—¬í–‰ ì¼ì •ë„ ë§ˆìŒì— ë“¤ì—ˆìŠµë‹ˆë‹¤.', 10);
+VALUES(1, 1, DEFAULT, 'ib1500', 'ÁÁÀº ¿©ÇàÀÌ¿´¾î¿ä!!!', '°¡ÀÌµåºÐµµ Ä£ÀýÇÏ½Ã°í ¿©Çà ÀÏÁ¤µµ ¸¶À½¿¡ µé¾ú½À´Ï´Ù.', 10);
 INSERT INTO ACCOM_REVIEW
-VALUES(2, 1, DEFAULT, 'ksm1225', 'ê·¸ëŸ­ì €ëŸ­ ê´œì°®ì€ ì—¬í–‰ì´ì˜€ìŠµë‹ˆë‹¤.', 'ë‹¤ìŒì— ë˜ ì°¾ì„ ê²ƒ ê°™ë„¤ìš”', 8);
+VALUES(2, 1, DEFAULT, 'ksm1225', '±×·°Àú·° ±¦ÂúÀº ¿©ÇàÀÌ¿´½À´Ï´Ù.', '´ÙÀ½¿¡ ¶Ç Ã£À» °Í °°³×¿ä', 8);
 INSERT INTO ACCOM_REVIEW
-VALUES(3, 2, DEFAULT, 'jnh0930', 'ì¢‹ì€ ì—¬í–‰ì´ì˜€ì–´ìš”!!!', 'ìœ„ì¹˜ê°€ ë§¤ìš° ì¢‹ê³  ê¸°ë¶„ì´ ì¢‹ì€ í˜¸í…”ìž„. ì‹ì‚¬ë„ í˜¸í…” ì¹˜ê³ ëŠ” ë§¤ìš° ì €ë ´í•¨. ë‹¤ë§Œ ë¶€ëŒ€ì‹œì„¤ì´ ì¢€ ë¶€ì¡±í•¨.', 10);
+VALUES(3, 2, DEFAULT, 'jnh0930', 'ÁÁÀº ¿©ÇàÀÌ¿´¾î¿ä!!!', 'À§Ä¡°¡ ¸Å¿ì ÁÁ°í ±âºÐÀÌ ÁÁÀº È£ÅÚÀÓ. ½Ä»çµµ È£ÅÚ Ä¡°í´Â ¸Å¿ì Àú·ÅÇÔ. ´Ù¸¸ ºÎ´ë½Ã¼³ÀÌ Á» ºÎÁ·ÇÔ.', 10);
 INSERT INTO ACCOM_REVIEW
-VALUES(4, 2, DEFAULT, 'kdy0820', 'ì—¬í–‰ í›„ê¸°ìš”!!!', 'ê²½í¬ëŒ€ì—ì„œ ì•½ê°„ ê±°ë¦¬ê°€ ìžˆê¸´ í•˜ì§€ë§Œ ë‚´ë¶€ë„ ê¹¨ë—í•˜ê³  ì¡°ìš©í•˜ê³  ë§˜ì— ë“­ë‹ˆë‹¤~ì§ì›ë¶„ë„ ì¹œì ˆí•˜ì‹œë„¤ìš”~', 8);
+VALUES(4, 2, DEFAULT, 'kdy0820', '¿©Çà ÈÄ±â¿ä!!!', '°æÆ÷´ë¿¡¼­ ¾à°£ °Å¸®°¡ ÀÖ±ä ÇÏÁö¸¸ ³»ºÎµµ ±ú²ýÇÏ°í Á¶¿ëÇÏ°í ¸¾¿¡ µì´Ï´Ù~Á÷¿øºÐµµ Ä£ÀýÇÏ½Ã³×¿ä~', 8);
 INSERT INTO ACCOM_REVIEW
-VALUES(5, 3, DEFAULT, 'usb0119', 'ë§Žì´ ì•„ì‰¬ì›Œìš”.', 'í™”ìž¥ì‹¤ ë¹„ë°ì„¤ì¹˜ê°€ ë˜ì–´ìžˆì§€ ì•Šì•„ ë‹¤ì†Œ ì•„ì‰¬ì›€', 10);
+VALUES(5, 3, DEFAULT, 'usb0119', '¸¹ÀÌ ¾Æ½¬¿ö¿ä.', 'È­Àå½Ç ºñµ¥¼³Ä¡°¡ µÇ¾îÀÖÁö ¾Ê¾Æ ´Ù¼Ò ¾Æ½¬¿ò', 10);
 INSERT INTO ACCOM_REVIEW
-VALUES(6, 3, DEFAULT, 'iss0426', 'ê°•ì›ë„ ì—¬í–‰ ìµì˜¤!', 'ê¸°ë³¸ì ìœ¼ë¡œ ê±´ë¬¼ ìžì²´ì™€ ê°ì‹¤ì´ ë„ˆë¬´ ê¹”ë”í•´ì„œ ì¢‹ì•˜ìŠµë‹ˆë‹¤. ê°ì‹¤ì´ ë„“ì€ ë¶€ë¶„ë„ íŽ¸í•˜ê³  ì¢‹ì•˜ìŠµë‹ˆë‹¤', 8);
+VALUES(6, 3, DEFAULT, 'iss0426', '°­¿øµµ ¿©Çà ¬ž¿À!', '±âº»ÀûÀ¸·Î °Ç¹° ÀÚÃ¼¿Í °´½ÇÀÌ ³Ê¹« ±ò²ûÇØ¼­ ÁÁ¾Ò½À´Ï´Ù. °´½ÇÀÌ ³ÐÀº ºÎºÐµµ ÆíÇÏ°í ÁÁ¾Ò½À´Ï´Ù', 8);
 
 INSERT INTO ACCOM_REVIEW
-VALUES(7, 4, DEFAULT, 'ib1500', 'ê¹¨ë—í•´ì„œ ì¢‹ì•„ì¨ì—¬!!', 'ìƒê°ë³´ë‹¤ ë„ˆë¬´ ê¹¨ë—í•˜ê³ , ë„“ì–´ì„œ ì¢‹ì•˜ì–´ìš” ì¹œêµ¬ë“¤ì´ëž‘ ë‹¤ê°™ì´ 5ëª…ì´ ê°”ëŠ”ë° ì¢‹ì€ ì¶”ì–µ ë§Œë“¤ê³  ì™”ë„¤ìš© ìœ„ì¹˜ë„ ì¢‹ê³ , ê¹¨ë—í•˜ê³ , ë„“ê³  ìµœê³ ì—ìš”', 9);
+VALUES(7, 4, DEFAULT, 'ib1500', '±ú²ýÇØ¼­ ÁÁ¾Æ½á¿©!!', '»ý°¢º¸´Ù ³Ê¹« ±ú²ýÇÏ°í, ³Ð¾î¼­ ÁÁ¾Ò¾î¿ä Ä£±¸µéÀÌ¶û ´Ù°°ÀÌ 5¸íÀÌ °¬´Âµ¥ ÁÁÀº Ãß¾ï ¸¸µé°í ¿Ô³×¿ë À§Ä¡µµ ÁÁ°í, ±ú²ýÇÏ°í, ³Ð°í ÃÖ°í¿¡¿ä', 9);
 INSERT INTO ACCOM_REVIEW
-VALUES(8, 4, DEFAULT, 'kdy0820', 'ì£¼ì¸ìž¥ ì§±ì§±ë§¨!!', 'ìˆ™ì†Œ ì£¼ì¸ìž¥ë‹˜ ì¹œì ˆí•˜ì‹œê³  ì—¬í–‰ ì¼ì •ë„ ë§ˆìŒì— ë“¤ì—ˆìŠµë‹ˆë‹¤.', 10);
+VALUES(8, 4, DEFAULT, 'kdy0820', 'ÁÖÀÎÀå Â¯Â¯¸Ç!!', '¼÷¼Ò ÁÖÀÎÀå´Ô Ä£ÀýÇÏ½Ã°í ¿©Çà ÀÏÁ¤µµ ¸¶À½¿¡ µé¾ú½À´Ï´Ù.', 10);
 INSERT INTO ACCOM_REVIEW
-VALUES(9, 5, DEFAULT, 'usb0119', '5ì¼ì—¬í–‰!!', '5ì¼ë™ì•ˆ ì¡°ì‹ì´ ê±°ì˜ ë³€í•˜ì§€ì•Šì•˜ìŒ ì´ì™¸ì—” ì¢‹ì•˜ìŒ', 9);
+VALUES(9, 5, DEFAULT, 'usb0119', '5ÀÏ¿©Çà!!', '5ÀÏµ¿¾È Á¶½ÄÀÌ °ÅÀÇ º¯ÇÏÁö¾Ê¾ÒÀ½ ÀÌ¿Ü¿£ ÁÁ¾ÒÀ½', 9);
 INSERT INTO ACCOM_REVIEW
-VALUES(10, 5, DEFAULT, 'iss0426', 'ê±´ë¬¼ì´ ì¢€...', 'ê±´ë¬¼ì´ ì˜¤ëž˜ë˜ì„œ ì¢€...ë°©ë„ ì•½ê°„ ë³„ë¡œì˜€êµ¬ìš”.', 10);
+VALUES(10, 5, DEFAULT, 'iss0426', '°Ç¹°ÀÌ Á»...', '°Ç¹°ÀÌ ¿À·¡µÇ¼­ Á»...¹æµµ ¾à°£ º°·Î¿´±¸¿ä.', 10);
 
 INSERT INTO ACCOM_REVIEW
-VALUES(12, 5, DEFAULT, 'usb0119', 'ë¹„ëŒ€ ì„¤ì¹˜ì¢€ã…¡ã…¡', 'í™”ìž¥ì‹¤ ë¹„ë°ì„¤ì¹˜ê°€ ë˜ì–´ìžˆì§€ ì•Šì•„ ë‹¤ì†Œ ì•„ì‰¬ì›€', 7);
+VALUES(12, 5, DEFAULT, 'usb0119', 'ºñ´ë ¼³Ä¡Á»¤Ñ¤Ñ', 'È­Àå½Ç ºñµ¥¼³Ä¡°¡ µÇ¾îÀÖÁö ¾Ê¾Æ ´Ù¼Ò ¾Æ½¬¿ò', 7);
 INSERT INTO ACCOM_REVIEW
-VALUES(13, 5, DEFAULT, 'usb0119', 'ì•„ì‰¬ì›Œ ì•„ì‰¬ì›Œ ã…œã…œ', 'ëŠ¦ê²Œ ë„ì°©í•´ì„œ ìˆ˜ì˜ìž¥ ì´ìš©ì„ ëª»í–ˆëŠ”ë° ë‹¤ìŒì— ë“œë¥´ê²Œ ë˜ë©´ ì•¼ì™¸ ìˆ˜ì˜ìž¥ ì´ìš©í•˜ê³  ì‹¶ì–´ìš”~', 6);
+VALUES(13, 5, DEFAULT, 'usb0119', '¾Æ½¬¿ö ¾Æ½¬¿ö ¤Ì¤Ì', '´Ê°Ô µµÂøÇØ¼­ ¼ö¿µÀå ÀÌ¿ëÀ» ¸øÇß´Âµ¥ ´ÙÀ½¿¡ µå¸£°Ô µÇ¸é ¾ß¿Ü ¼ö¿µÀå ÀÌ¿ëÇÏ°í ½Í¾î¿ä~', 6);
 INSERT INTO ACCOM_REVIEW
-VALUES(14, 7, DEFAULT, 'iss0426', 'ì²­ì†Œì¢€ìš”...', 'í™˜í’ê¸°ë¡œ ë‹´ë°° ëƒ„ìƒˆê°€ ë“¤ì–´ì˜¤ëŠ” ê±° ë¹¼ê³¤ ë­ ë¬¸ì œë¥¼ ëª» ëŠë‚Œ.', 8);
+VALUES(14, 7, DEFAULT, 'iss0426', 'Ã»¼ÒÁ»¿ä...', 'È¯Ç³±â·Î ´ã¹è ³¿»õ°¡ µé¾î¿À´Â °Å »©°ï ¹¹ ¹®Á¦¸¦ ¸ø ´À³¦.', 8);
 INSERT INTO ACCOM_REVIEW
-VALUES(15, 10, DEFAULT, 'usb0119', 'ìš”ê¸ˆì´ì¢€...', 'í‰ì¼ ì‹¼ ê°€ê²©ìœ¼ë¡œ ì˜¤ë©´ ë§Œì¡±.ì£¼ë§ì´ë‚˜ ì—°íœ´ë•Œ ì„±ìˆ˜ê¸° ìš”ê¸ˆë‚´ê³ ì˜¤ë©´ í›„íšŒ', 6);
+VALUES(15, 10, DEFAULT, 'usb0119', '¿ä±ÝÀÌÁ»...', 'ÆòÀÏ ½Ñ °¡°ÝÀ¸·Î ¿À¸é ¸¸Á·.ÁÖ¸»ÀÌ³ª ¿¬ÈÞ¶§ ¼º¼ö±â ¿ä±Ý³»°í¿À¸é ÈÄÈ¸', 6);
 INSERT INTO ACCOM_REVIEW
-VALUES(16, 9, DEFAULT, 'usb0119', 'ì¢‹ì€ ì—¬í–‰ì´ì˜€ìŠµë‹ˆë‹¤.', 'ë‹¤ìŒì— ë˜ ì°¾ì„ ê²ƒ ê°™ë„¤ìš”', 7);
+VALUES(16, 9, DEFAULT, 'usb0119', 'ÁÁÀº ¿©ÇàÀÌ¿´½À´Ï´Ù.', '´ÙÀ½¿¡ ¶Ç Ã£À» °Í °°³×¿ä', 7);
 
 
-/*ê°ì‹¤ í…Œì´ë¸”*/
+/*°´½Ç Å×ÀÌºí*/
 CREATE TABLE ROOM
 (   
-  ROOM_ID NUMBER,                                 /*ê°ì‹¤ ì•„ì´ë””*/
-  ACC_ID NUMBER CONSTRAINT NN_ACC_ID NOT NULL,    /*ìˆ™ì†Œ ë²ˆí˜¸*/
-  ROOM_NAME VARCHAR2(50),                         /*ê°ì‹¤ëª…*/
-  ROOM_DETAILS  VARCHAR2(4000),                   /*ìƒì„¸ì •ë³´*/
-  ROOM_WEEKEND_ADULT_PRICE NUMBER,                /*ì£¼ë§ì„±ì¸ê°€ê²©*/
-  ROOM_WEEKEND_CHILD_PRICE NUMBER,                /*ì£¼ë§ì†Œì¸ê°€ê²©*/
-  ROOM_WEEKDAYS_ADULT_PRICE   NUMBER,               /*ì£¼ì¤‘ì„±ì¸ê°€ê²©*/
-  ROOM_WEEKDAYS_CHILD_PRICE NUMBER,               /*ì£¼ì¤‘ì†Œì¸ê°€ê²©*/
+  ROOM_ID NUMBER,                                 /*°´½Ç ¾ÆÀÌµð*/
+  ACC_ID NUMBER CONSTRAINT NN_ACC_ID NOT NULL,    /*¼÷¼Ò ¹øÈ£*/
+  ROOM_NAME VARCHAR2(50),                         /*°´½Ç¸í*/
+  ROOM_DETAILS  VARCHAR2(4000),                   /*»ó¼¼Á¤º¸*/
+  ROOM_WEEKEND_ADULT_PRICE NUMBER,                /*ÁÖ¸»¼ºÀÎ°¡°Ý*/
+  ROOM_WEEKEND_CHILD_PRICE NUMBER,                /*ÁÖ¸»¼ÒÀÎ°¡°Ý*/
+  ROOM_WEEKDAYS_ADULT_PRICE   NUMBER,               /*ÁÖÁß¼ºÀÎ°¡°Ý*/
+  ROOM_WEEKDAYS_CHILD_PRICE NUMBER,               /*ÁÖÁß¼ÒÀÎ°¡°Ý*/
   
   CONSTRAINT PK_ROOM_ID PRIMARY KEY(ROOM_ID),
   CONSTRAINT FK_ACC_ID FOREIGN KEY(ACC_ID) REFERENCES ACCOMMODATION
 );
 
-INSERT INTO ROOM VALUES('1', '1', 'ìŠˆíŽ˜ë¦¬ì–¼', 'ë”ë¸”ì¹¨ëŒ€ 1ê°œ, ìµœëŒ€2ì¸', '45000', '30000',
+INSERT INTO ROOM VALUES('1', '1', '½´Æä¸®¾ó', '´õºíÄ§´ë 1°³, ÃÖ´ë2ÀÎ', '45000', '30000',
 '40000', '25000');
 
-INSERT INTO ROOM VALUES('2', '1', 'ìŠ¤íƒ ë‹¤ë“œ', 'ë”ë¸”ì¹¨ëŒ€ 1ê°œ, ìµœëŒ€ 3ì¸', '50000', '35000',
+INSERT INTO ROOM VALUES('2', '1', '½ºÅÄ´Ùµå', '´õºíÄ§´ë 1°³, ÃÖ´ë 3ÀÎ', '50000', '35000',
 '40000', '30000');
 
-INSERT INTO ROOM VALUES('3', '2', 'ë””ëŸ­ìŠ¤', 'ë”ë¸” 1ê°œ ì‹±ê¸€ 1ê°œ, ìµœëŒ€ 4ì¸', '60000', '40000',
+INSERT INTO ROOM VALUES('3', '2', 'µð·°½º', '´õºí 1°³ ½Ì±Û 1°³, ÃÖ´ë 4ÀÎ', '60000', '40000',
 '40000', '25000');
 
-INSERT INTO ROOM VALUES('4', '2', 'ìŠ¤ìœ„íŠ¸', 'ë”ë¸”ì¹¨ëŒ€ 1ê°œ, ìµœëŒ€ 3ì¸', '60000', '40000',
+INSERT INTO ROOM VALUES('4', '2', '½ºÀ§Æ®', '´õºíÄ§´ë 1°³, ÃÖ´ë 3ÀÎ', '60000', '40000',
 '50000', '30000');
 
-INSERT INTO ROOM VALUES('5', '2', 'ë¡œì–„ìŠ¤ìœ„íŠ¸', 'ë”ë¸”ì¹¨ëŒ€ 2ê°œ, ìµœëŒ€ 4ì¸', '70000', '55000',
+INSERT INTO ROOM VALUES('5', '2', '·Î¾â½ºÀ§Æ®', '´õºíÄ§´ë 2°³, ÃÖ´ë 4ÀÎ', '70000', '55000',
 '55000', '40000');
 
-INSERT INTO ROOM VALUES('6', '3', 'í”„ë¦¬ì—„', 'ì‹±ê¸€ì¹¨ëŒ€ 2ê°œ, ìµœëŒ€ 3ì¸', '70000', '40000',
+INSERT INTO ROOM VALUES('6', '3', 'ÇÁ¸®¾ö', '½Ì±ÛÄ§´ë 2°³, ÃÖ´ë 3ÀÎ', '70000', '40000',
 '60000', '35000');
 
-INSERT INTO ROOM VALUES('7', '4', 'Premium', 'ë”ë¸” 1ê°œ ì‹±ê¸€1ê°œ, ìµœëŒ€ 4ì¸', '50000', '40000',
+INSERT INTO ROOM VALUES('7', '4', 'Premium', '´õºí 1°³ ½Ì±Û1°³, ÃÖ´ë 4ÀÎ', '50000', '40000',
 '40000', '30000');
 
-INSERT INTO ROOM VALUES('8', '4', 'Suite', 'ì‹±ê¸€ì¹¨ëŒ€ 2ê°œ, ìµœëŒ€ 3ì¸', '50000', '40000',
+INSERT INTO ROOM VALUES('8', '4', 'Suite', '½Ì±ÛÄ§´ë 2°³, ÃÖ´ë 3ÀÎ', '50000', '40000',
 '40000', '30000');
 
-INSERT INTO ROOM VALUES('9', '4', 'Royal Suite', 'í€¸ 1ê°œ ë”ë¸” 1ê°œ, ìµœëŒ€ 3ì¸', '90000', '65000',
+INSERT INTO ROOM VALUES('9', '4', 'Royal Suite', 'Äý 1°³ ´õºí 1°³, ÃÖ´ë 3ÀÎ', '90000', '65000',
 '80000', '50000');
 
-INSERT INTO ROOM VALUES('10', '5', 'Standard', 'ë”ë¸”ì¹¨ëŒ€ 1ê°œ, ìµœëŒ€ 3ì¸', '70000', '40000',
+INSERT INTO ROOM VALUES('10', '5', 'Standard', '´õºíÄ§´ë 1°³, ÃÖ´ë 3ÀÎ', '70000', '40000',
 '60000', '35000');
 
-INSERT INTO ROOM VALUES('11', '5', 'Premium', 'ë”ë¸” 1ê°œ ì‹±ê¸€ 1ê°œ, ìµœëŒ€ 3ì¸', '90000', '75000',
+INSERT INTO ROOM VALUES('11', '5', 'Premium', '´õºí 1°³ ½Ì±Û 1°³, ÃÖ´ë 3ÀÎ', '90000', '75000',
 '80000', '65000');
 
-INSERT INTO ROOM VALUES('12', '6', 'Pool Party', 'superì¹¨ëŒ€ 1ê°œ, ìµœëŒ€ 4ì¸', '105000', '90000',
+INSERT INTO ROOM VALUES('12', '6', 'Pool Party', 'superÄ§´ë 1°³, ÃÖ´ë 4ÀÎ', '105000', '90000',
 '90000', '75000');
 
-INSERT INTO ROOM VALUES('13', '6', 'Glamping', 'ë”ë¸” 2ê°œ ì‹±ê¸€1, ìµœëŒ€ 6ì¸', '120000', '100000',
+INSERT INTO ROOM VALUES('13', '6', 'Glamping', '´õºí 2°³ ½Ì±Û1, ÃÖ´ë 6ÀÎ', '120000', '100000',
 '100000', '80000');
 
-INSERT INTO ROOM VALUES('14', '7', 'Standard', 'ë”ë¸”ì¹¨ëŒ€ 1ê°œ, ìµœëŒ€ 3ì¸', '50000', '40000',
+INSERT INTO ROOM VALUES('14', '7', 'Standard', '´õºíÄ§´ë 1°³, ÃÖ´ë 3ÀÎ', '50000', '40000',
 '40000', '30000');
 
-INSERT INTO ROOM VALUES('15', '8', 'ì•„ë“œë¦¬ê²Œ Suite (ë…¸ì²œíƒ•)', 'ë”ë¸”ì¹¨ëŒ€ 1ê°œ, ìµœëŒ€ 3ì¸', '80000', '60000',
+INSERT INTO ROOM VALUES('15', '8', '¾Æµå¸®°Ô Suite (³ëÃµÅÁ)', '´õºíÄ§´ë 1°³, ÃÖ´ë 3ÀÎ', '80000', '60000',
 '70000', '45000');
 
-INSERT INTO ROOM VALUES('16', '8', 'VIP (íŒŒí‹°ë£¸)', 'ë”ë¸”ì¹¨ëŒ€ 1ê°œ, ìµœëŒ€ 3ì¸', '80000', '60000',
+INSERT INTO ROOM VALUES('16', '8', 'VIP (ÆÄÆ¼·ë)', '´õºíÄ§´ë 1°³, ÃÖ´ë 3ÀÎ', '80000', '60000',
 '70000', '40000');
 
 INSERT INTO ROOM VALUES('17', '8', 'Twin', 'Double + Single', '90000', '50000',
 '70000', '45000');
 
-INSERT INTO ROOM VALUES('18', '9', 'ì¼ë°˜ì‹¤', 'ë”ë¸”ì¹¨ëŒ€ 1ê°œ, ìµœëŒ€ 3ì¸', '50000', '35000',
+INSERT INTO ROOM VALUES('18', '9', 'ÀÏ¹Ý½Ç', '´õºíÄ§´ë 1°³, ÃÖ´ë 3ÀÎ', '50000', '35000',
 '35000', '25000');
 
-INSERT INTO ROOM VALUES('19', '9', 'íŠ¹ì‹¤', 'ë”ë¸”ì¹¨ëŒ€ 1ê°œ, ìµœëŒ€ 3ì¸', '80000', '60000',
+INSERT INTO ROOM VALUES('19', '9', 'Æ¯½Ç', '´õºíÄ§´ë 1°³, ÃÖ´ë 3ÀÎ', '80000', '60000',
 '75000', '50000');
 
-INSERT INTO ROOM VALUES('20', '9', 'VIP', 'ë”ë¸”ì¹¨ëŒ€ 1ê°œ, ìµœëŒ€ 3ì¸', '90000', '60000',
+INSERT INTO ROOM VALUES('20', '9', 'VIP', '´õºíÄ§´ë 1°³, ÃÖ´ë 3ÀÎ', '90000', '60000',
 '80000', '50000');
 
-INSERT INTO ROOM VALUES('21', '10', 'MINI', 'ë”ë¸”ì¹¨ëŒ€ 1ê°œ, ìµœëŒ€ 3ì¸', '45000', '35000',
+INSERT INTO ROOM VALUES('21', '10', 'MINI', '´õºíÄ§´ë 1°³, ÃÖ´ë 3ÀÎ', '45000', '35000',
 '40000', '30000');
 
-INSERT INTO ROOM VALUES('22', '10', 'Standard Twin', 'ë”ë¸”ì¹¨ëŒ€ 1ê°œ, ìµœëŒ€ 3ì¸', '50000', '40000',
+INSERT INTO ROOM VALUES('22', '10', 'Standard Twin', '´õºíÄ§´ë 1°³, ÃÖ´ë 3ÀÎ', '50000', '40000',
 '40000', '30000');
 
-INSERT INTO ROOM VALUES('23', '10', 'Standard Double', 'ë”ë¸”ì¹¨ëŒ€ 1ê°œ, ìµœëŒ€ 3ì¸', '60000', '35000',
+INSERT INTO ROOM VALUES('23', '10', 'Standard Double', '´õºíÄ§´ë 1°³, ÃÖ´ë 3ÀÎ', '60000', '35000',
 '40000', '30000');
 
-INSERT INTO ROOM VALUES('24', '10', 'Family room', 'í€¸ 1ê°œ  ìµœëŒ€ 3ì¸', '90000', '40000',
+INSERT INTO ROOM VALUES('24', '10', 'Family room', 'Äý 1°³  ÃÖ´ë 3ÀÎ', '90000', '40000',
 '80000', '40000');
 
-INSERT INTO ROOM VALUES('25', '11', 'ë””ëŸ­ìŠ¤ ë”ë¸”ë£¸', 'ë”ë¸” 1ê°œ ì‹±ê¸€ 1ê°œ ìµœëŒ€ 3ì¸', '80000', '40000',
+INSERT INTO ROOM VALUES('25', '11', 'µð·°½º ´õºí·ë', '´õºí 1°³ ½Ì±Û 1°³ ÃÖ´ë 3ÀÎ', '80000', '40000',
 '65000', '30000');
 
-INSERT INTO ROOM VALUES('26', '11', 'íŒ¨ë°€ë¦¬ ìŠ¤ìœ„íŠ¸', 'íŠ¸ìœˆ 1ê°œ ë”ë¸” 1ê°œ ìµœëŒ€ 6ì¸', '100000', '50000',
+INSERT INTO ROOM VALUES('26', '11', 'ÆÐ¹Ð¸® ½ºÀ§Æ®', 'Æ®À© 1°³ ´õºí 1°³ ÃÖ´ë 6ÀÎ', '100000', '50000',
 '80000', '35000');
 
 
@@ -518,45 +518,45 @@ INSERT INTO ROOM VALUES('26', '11', 'íŒ¨ë°€ë¦¬ ìŠ¤ìœ„íŠ¸', 'íŠ¸ìœˆ 1ê°œ ë”ë¸” 1
 
 
 
-/* FAQ ê²Œì‹œíŒ í…Œì´ë¸”*/
+/* FAQ °Ô½ÃÆÇ Å×ÀÌºí*/
 CREATE TABLE FAQ (
-  FAQ_NO  NUMBER, /*FAQ ê¸€ ë²ˆí˜¸*/
-  FAQ_CATEGORY VARCHAR2(30) DEFAULT 'ê¸°íƒ€', /*ì§ˆë¬¸ ì¹´í…Œê³ ë¦¬*/
-  FAQ_TITLE VARCHAR2(50) CONSTRAINT NN_FAQ_TITLE NOT NULL, /*ì œëª©(ì§ˆë¬¸)*/
-  FAQ_ANSWER VARCHAR2(4000) CONSTRAINT NN_FAQ_ANSWER NOT NULL,/*ë‚´ìš©(ë‹µë³€)*/
+  FAQ_NO  NUMBER, /*FAQ ±Û ¹øÈ£*/
+  FAQ_CATEGORY VARCHAR2(30) DEFAULT '±âÅ¸', /*Áú¹® Ä«Å×°í¸®*/
+  FAQ_TITLE VARCHAR2(50) CONSTRAINT NN_FAQ_TITLE NOT NULL, /*Á¦¸ñ(Áú¹®)*/
+  FAQ_ANSWER VARCHAR2(4000) CONSTRAINT NN_FAQ_ANSWER NOT NULL,/*³»¿ë(´äº¯)*/
   FAQ_READ_COUNT NUMBER DEFAULT 0,
   CONSTRAINT PK_FAQ_NO PRIMARY KEY(FAQ_NO),
-  CONSTRAINT CHK_FAQ_CATEGORY CHECK(FAQ_CATEGORY IN ('ìˆ™ì†Œ', 'íŒ¨í‚¤ì§€ìƒí’ˆ', 'ê°€ì´ë“œ', 'ì˜ˆì•½/ê²°ì œ', 'í™˜ë¶ˆ/ë³€ê²½', 'ì´ë²¤íŠ¸', 'íšŒì›ê´€ë¦¬', 'ê¸°íƒ€'))
+  CONSTRAINT CHK_FAQ_CATEGORY CHECK(FAQ_CATEGORY IN ('¼÷¼Ò', 'ÆÐÅ°Áö»óÇ°', '°¡ÀÌµå', '¿¹¾à/°áÁ¦', 'È¯ºÒ/º¯°æ', 'ÀÌº¥Æ®', 'È¸¿ø°ü¸®', '±âÅ¸'))
 );
-COMMENT ON TABLE FAQ IS 'ìžì£¼ë¬»ëŠ”ì§ˆë¬¸';
-COMMENT ON COLUMN FAQ.FAQ_NO IS 'FAQ ê¸€ ë²ˆí˜¸';
-COMMENT ON COLUMN FAQ.FAQ_CATEGORY IS 'ì§ˆë¬¸ ì¹´í…Œê³ ë¦¬';
-COMMENT ON COLUMN FAQ.FAQ_TITLE IS 'ì œëª©(ì§ˆë¬¸)';
-COMMENT ON COLUMN FAQ.FAQ_ANSWER IS 'ë‚´ìš©(ë‹µë³€)';
+COMMENT ON TABLE FAQ IS 'ÀÚÁÖ¹¯´ÂÁú¹®';
+COMMENT ON COLUMN FAQ.FAQ_NO IS 'FAQ ±Û ¹øÈ£';
+COMMENT ON COLUMN FAQ.FAQ_CATEGORY IS 'Áú¹® Ä«Å×°í¸®';
+COMMENT ON COLUMN FAQ.FAQ_TITLE IS 'Á¦¸ñ(Áú¹®)';
+COMMENT ON COLUMN FAQ.FAQ_ANSWER IS '³»¿ë(´äº¯)';
 
 --faq
-INSERT INTO FAQ VALUES(1,'ì˜ˆì•½/ê²°ì œ','ì˜ˆì•½ì€ ì–´ë–»ê²Œ í•˜ë©´ ë˜ë‚˜ìš”?','ì›í•˜ì‹œëŠ” ìˆ™ì†Œë¥¼ ì„ íƒí•˜ì‹ í›„ ì›í•˜ì‹œëŠ” ë‚ ì§œë¥¼ ì„ íƒí•˜ì‹œë©´ ë©ë‹ˆë‹¤.',0);
-INSERT INTO FAQ VALUES(2,'ì´ë²¤íŠ¸','ì´ë²¤íŠ¸ ì°¸ì—¬ëŠ” ì–´ë–»ê²Œí•´ìš”?','ê²Œì‹œíŒì—ì„œ í™•ì¸í•˜ì‹œë©´ ë©ë‹ˆë‹¤.',0);
-INSERT INTO FAQ VALUES(3,'ê¸°íƒ€','ë ŒíŠ¸ì¹´ë¥¼ ëŒ€ì—¬í•  ìˆ˜ ìžˆë‚˜ìš”?','ë ŒíŠ¸ì¹´ëŠ” ì•ˆë©ë‹ˆë‹¤',0);
+INSERT INTO FAQ VALUES(1,'¿¹¾à/°áÁ¦','¿¹¾àÀº ¾î¶»°Ô ÇÏ¸é µÇ³ª¿ä?','¿øÇÏ½Ã´Â ¼÷¼Ò¸¦ ¼±ÅÃÇÏ½ÅÈÄ ¿øÇÏ½Ã´Â ³¯Â¥¸¦ ¼±ÅÃÇÏ½Ã¸é µË´Ï´Ù.',0);
+INSERT INTO FAQ VALUES(2,'ÀÌº¥Æ®','ÀÌº¥Æ® Âü¿©´Â ¾î¶»°ÔÇØ¿ä?','°Ô½ÃÆÇ¿¡¼­ È®ÀÎÇÏ½Ã¸é µË´Ï´Ù.',0);
+INSERT INTO FAQ VALUES(3,'±âÅ¸','·»Æ®Ä«¸¦ ´ë¿©ÇÒ ¼ö ÀÖ³ª¿ä?','·»Æ®Ä«´Â ¾ÈµË´Ï´Ù',0);
 
 
-/* QNA ê²Œì‹œíŒ í…Œì´ë¸”*/
+/* QNA °Ô½ÃÆÇ Å×ÀÌºí*/
 CREATE TABLE QNA (
-  QNA_NO NUMBER, /*QNA ê¸€ ë²ˆí˜¸*/
-  QNA_TITLE VARCHAR2(50) CONSTRAINT NN_QNA_TITLE NOT NULL,  /*ì œëª©*/
-  WRITER_ID VARCHAR2(15) CONSTRAINT NN_WRITER_ID NOT NULL,   /*ìž‘ì„±ìž ì•„ì´ë””*/
-  QUESTION VARCHAR2(4000) CONSTRAINT NN_QUESTION NOT NULL, /*ì§ˆë¬¸ ë‚´ìš©*/
-  ANSWER VARCHAR2(4000),  /*ë‹µë³€ ë‚´ìš©*/
+  QNA_NO NUMBER, /*QNA ±Û ¹øÈ£*/
+  QNA_TITLE VARCHAR2(50) CONSTRAINT NN_QNA_TITLE NOT NULL,  /*Á¦¸ñ*/
+  WRITER_ID VARCHAR2(15) CONSTRAINT NN_WRITER_ID NOT NULL,   /*ÀÛ¼ºÀÚ ¾ÆÀÌµð*/
+  QUESTION VARCHAR2(4000) CONSTRAINT NN_QUESTION NOT NULL, /*Áú¹® ³»¿ë*/
+  ANSWER VARCHAR2(4000),  /*´äº¯ ³»¿ë*/
   
   CONSTRAINT PK_QNA_NO PRIMARY KEY(QNA_NO),
   CONSTRAINT FK_WRITER_ID FOREIGN KEY(WRITER_ID) REFERENCES MEMBER
 );
-COMMENT ON TABLE QNA IS 'ì§ˆì˜ì‘ë‹µ';
-COMMENT ON COLUMN QNA.QNA_NO IS 'QNA ê¸€ ë²ˆí˜¸';
-COMMENT ON COLUMN QNA.QNA_TITLE IS 'ì œëª©';
-COMMENT ON COLUMN QNA.WRITER_ID IS 'ìž‘ì„±ìž ì•„ì´ë””';
-COMMENT ON COLUMN QNA.QUESTION IS 'ì§ˆë¬¸ ë‚´ìš©';
-COMMENT ON COLUMN QNA.ANSWER IS 'ë‹µë³€ ë‚´ìš©';
+COMMENT ON TABLE QNA IS 'ÁúÀÇÀÀ´ä';
+COMMENT ON COLUMN QNA.QNA_NO IS 'QNA ±Û ¹øÈ£';
+COMMENT ON COLUMN QNA.QNA_TITLE IS 'Á¦¸ñ';
+COMMENT ON COLUMN QNA.WRITER_ID IS 'ÀÛ¼ºÀÚ ¾ÆÀÌµð';
+COMMENT ON COLUMN QNA.QUESTION IS 'Áú¹® ³»¿ë';
+COMMENT ON COLUMN QNA.ANSWER IS '´äº¯ ³»¿ë';
 
 ALTER TABLE QNA ADD(QNA_READ_COUNT NUMBER(13) DEFAULT 0);
 ALTER TABLE QNA ADD(QNA_REF NUMBER(13));
@@ -565,9 +565,9 @@ ALTER TABLE QNA ADD(QNA_REPLY_REF NUMBER(10));
 ALTER TABLE QNA ADD(QNA_REPLY_SEQ NUMBER(10) DEFAULT 0);
 
 -- QNA
-INSERT INTO QNA VALUES(1,'ì˜ˆì•½ì„ ì–´ë–»ê²Œ í•˜ëŠ”ì§€ ëª¨ë¥´ê² ìŠµë‹ˆë‹¤','ib1500','ì‚¬ì´íŠ¸ì— ë“¤ì–´ê°”ëŠ”ë° ì–´ë–»ê²Œ ì˜ˆì•½ì„ í•˜ëŠ”ì§€ ëª¨ë¥´ê² ìŠµë‹ˆë‹¤ ìžì„¸í•˜ê²Œ ê°€ë¥´ì³ì£¼ì„¸ìš”','ê³ ê°ì„¼í„°ì— ë¬¸ì˜í•´ë³´ì„¸ìš”',default,0,default,0,default);
-INSERT INTO QNA VALUES(2,'ì—¬í–‰ ìž¥ì†Œ ì–´ë””ê°€ ì¢‹ì„ê¹Œ??','kdy0820','ê°•ë¦‰ìœ¼ë¡œ ë†€ëŸ¬ê°€ëŠ”ë° ì–´ë””ê°€ ì¢‹ì„ê¹Œìš” ì¶”ì²œì¢€ í•´ì£¼ì„¸ìš”','ì •ë™ì§„ ê°€ë³´ì„¸ìš”',default,0,default,0,default);
-INSERT INTO QNA VALUES(3,'ì†ì´ˆ ê°€ëŠ”ë° íŽœì…˜ ì–´ë””ê°€ ìžˆì„ê¹Œìš”?','usb0119','íŽœì…˜ ê¹”ë”í•œê³³ì¢€ ì¶”ì²œí•´ì£¼ì„¸ìš”','namooí˜¸í…” ì¢‹ìŠµë‹ˆë‹¤ ê¹”ë”í•˜ê³  ì¢‹ì•„ìš”',default,0,default,0,default);
+INSERT INTO QNA VALUES(1,'¿¹¾àÀ» ¾î¶»°Ô ÇÏ´ÂÁö ¸ð¸£°Ú½À´Ï´Ù','ib1500','»çÀÌÆ®¿¡ µé¾î°¬´Âµ¥ ¾î¶»°Ô ¿¹¾àÀ» ÇÏ´ÂÁö ¸ð¸£°Ú½À´Ï´Ù ÀÚ¼¼ÇÏ°Ô °¡¸£ÃÄÁÖ¼¼¿ä','°í°´¼¾ÅÍ¿¡ ¹®ÀÇÇØº¸¼¼¿ä',default,0,default,0,default);
+INSERT INTO QNA VALUES(2,'¿©Çà Àå¼Ò ¾îµð°¡ ÁÁÀ»±î??','kdy0820','°­¸ªÀ¸·Î ³î·¯°¡´Âµ¥ ¾îµð°¡ ÁÁÀ»±î¿ä ÃßÃµÁ» ÇØÁÖ¼¼¿ä','Á¤µ¿Áø °¡º¸¼¼¿ä',default,0,default,0,default);
+INSERT INTO QNA VALUES(3,'¼ÓÃÊ °¡´Âµ¥ Ææ¼Ç ¾îµð°¡ ÀÖÀ»±î¿ä?','usb0119','Ææ¼Ç ±ò²ûÇÑ°÷Á» ÃßÃµÇØÁÖ¼¼¿ä','namooÈ£ÅÚ ÁÁ½À´Ï´Ù ±ò²ûÇÏ°í ÁÁ¾Æ¿ä',default,0,default,0,default);
  
  
  
@@ -586,27 +586,27 @@ CREATE TABLE TOUR
 );
 
 INSERT INTO TOUR
-VALUES(1, 'ITX - ì™¸ì„¤ì•… ì†ì´ˆã†ë™í•´ë°”ë‹¤ ê¸°ì°¨ì—¬í–‰', 'gyeontae12', '201729916.jpg', '201729916.jpg');
+VALUES(1, 'ITX - ¿Ü¼³¾Ç ¼ÓÃÊ¤ýµ¿ÇØ¹Ù´Ù ±âÂ÷¿©Çà', 'gyeontae12', '201729916.jpg', '201729916.jpg');
 INSERT INTO TOUR
-VALUES(2, 'K-ì •ì„  ì˜¥ì‚°ìž¥ã†ë ˆì¼ë°”ì´í¬ã†ë°”ë‹¤ì—´ì°¨ ê¸°ì°¨ì—¬í–‰(1ë°•2ì¼)', 'haeyeon', '201712808.jpg', '201712808.jpg');
+VALUES(2, 'K-Á¤¼± ¿Á»êÀå¤ý·¹ÀÏ¹ÙÀÌÅ©¤ý¹Ù´Ù¿­Â÷ ±âÂ÷¿©Çà(1¹Ú2ÀÏ)', 'haeyeon', '201712808.jpg', '201712808.jpg');
 INSERT INTO TOUR
-VALUES(3, 'ì •ë™ì§„ ë°”ë‹¤ì—´ì°¨ã†ë™êµ´ì‹ ë¹„ê´€ ê¸°ì°¨ì—¬í–‰', 'is8899', '201783301.jpg', '201783301.jpg');
+VALUES(3, 'Á¤µ¿Áø ¹Ù´Ù¿­Â÷¤ýµ¿±¼½Åºñ°ü ±âÂ÷¿©Çà', 'is8899', '201783301.jpg', '201783301.jpg');
 INSERT INTO TOUR
-VALUES(4, 'S-ì²œìƒì˜ í™”ì› ê³°ë°°ë ¹ ë²„ìŠ¤ì—¬í–‰', 'kangnam95', '201738588.jpg', '201738588.jpg');
+VALUES(4, 'S-Ãµ»óÀÇ È­¿ø °õ¹è·É ¹ö½º¿©Çà', 'kangnam95', '201738588.jpg', '201738588.jpg');
 INSERT INTO TOUR
-VALUES(5, 'ì²­ì¶˜ ì–‘êµ¬ 3ìƒ‰ ë†ì´Œ, ë¬¸í™”, ìƒíƒœ ì²´í—˜ ê¸°ì°¨ì—¬í–‰', 'gg7811', '201733245.jpg', '201733245.jpg');
+VALUES(5, 'Ã»Ãá ¾ç±¸ 3»ö ³óÃÌ, ¹®È­, »ýÅÂ Ã¼Çè ±âÂ÷¿©Çà', 'gg7811', '201733245.jpg', '201733245.jpg');
 INSERT INTO TOUR
-VALUES(6, 'ë‚˜ë¹„ ì´ì•¼ê¸° ì´í™”ì›  ì¶˜ì²œ êµ¬ì„êµ¬ì„ ê¸°ì°¨ì—¬í–‰', 'skwang93', '201737174.jpg', '201737174.jpg');
+VALUES(6, '³ªºñ ÀÌ¾ß±â ÀÌÈ­¿ø  ÃáÃµ ±¸¼®±¸¼® ±âÂ÷¿©Çà', 'skwang93', '201737174.jpg', '201737174.jpg');
 INSERT INTO TOUR
-VALUES(7, 'ëŒ€ê´€ë ¹ í•˜ëŠ˜ëª©ìž¥ ì •ë™ì§„ ë¶€ì±„ê¸¸ã†ê°•ì›ë„ êµ¬ì„êµ¬ì„ ì—¬í–‰', 'gyeontae12', '201734752.jpg', '201734752.jpg');
+VALUES(7, '´ë°ü·É ÇÏ´Ã¸ñÀå Á¤µ¿Áø ºÎÃ¤±æ¤ý°­¿øµµ ±¸¼®±¸¼® ¿©Çà', 'gyeontae12', '201734752.jpg', '201734752.jpg');
 INSERT INTO TOUR
-VALUES(8, 'ì •ë™ì§„ í•´ë‹ì´  ë¬µí˜¸í•­ ì‚¼ì²™ã†í™˜ì„ êµ´ ê¸°ì°¨ì—¬í–‰', 'gyeontae12', '201780441.jpg', '201780441.jpg');
+VALUES(8, 'Á¤µ¿Áø ÇØµ¸ÀÌ  ¹¬È£Ç× »ïÃ´¤ýÈ¯¼±±¼ ±âÂ÷¿©Çà', 'gyeontae12', '201780441.jpg', '201780441.jpg');
 INSERT INTO TOUR
-VALUES(9, 'K-ì •ì„ ë ˆì¼ë°”ì´í¬ã†ì•„ë¼ë¦¬ì´Œ  ì •ì„ ìž¥í„° ê¸°ì°¨ì—¬í–‰ ', 'haeyeon', '2017182211.jpg', '201718221.jpg');
+VALUES(9, 'K-Á¤¼±·¹ÀÏ¹ÙÀÌÅ©¤ý¾Æ¶ó¸®ÃÌ  Á¤¼±ÀåÅÍ ±âÂ÷¿©Çà ', 'haeyeon', '2017182211.jpg', '201718221.jpg');
 INSERT INTO TOUR
-VALUES(10, '[Cì½”ìŠ¤]ì •ë™ì§„ã†ë°”ë‹¤ì—´ì°¨  ëŒ€ê´€ë ¹ í•˜ëŠ˜ëª©ìž¥ ê¸°ì°¨ì—¬í–‰', 'is8899', '20171975111.jpg', '201719751.jpg');
+VALUES(10, '[CÄÚ½º]Á¤µ¿Áø¤ý¹Ù´Ù¿­Â÷  ´ë°ü·É ÇÏ´Ã¸ñÀå ±âÂ÷¿©Çà', 'is8899', '20171975111.jpg', '201719751.jpg');
 INSERT INTO TOUR
-VALUES(11, 'ê°•ì´Œ ë ˆì¼ë°”ì´í¬  ë‚¨ì´ì„¬ ê¸°ì°¨ì—¬í–‰', 'kangnam95', '201754761.jpg', '201754761.jpg');
+VALUES(11, '°­ÃÌ ·¹ÀÏ¹ÙÀÌÅ©  ³²ÀÌ¼¶ ±âÂ÷¿©Çà', 'kangnam95', '201754761.jpg', '201754761.jpg');
 
 
 CREATE TABLE TOURCONF (
@@ -699,232 +699,232 @@ CREATE TABLE TOURDETAIL (
   TOUR_ID NUMBER,
   TOUR_INFO VARCHAR2(500),
   TOUR_GUIDEMENT VARCHAR2(500),
-  TOUR_MEETINGPLACE VARCHAR2(200),--ì£¼ì†Œ
+  TOUR_MEETINGPLACE VARCHAR2(200),--ÁÖ¼Ò
   TOUR_TOURLIST VARCHAR2(500),
-  TOUR_HISTORY VARCHAR2(4000),--í¬í•¨ë‚´ì—­
+  TOUR_HISTORY VARCHAR2(4000),--Æ÷ÇÔ³»¿ª
   TOUR_SCHEDULE VARCHAR2(4000),
   TOUR_OPTION VARCHAR2(4000),
-  TOUR_POLICY VARCHAR2(4000),--í™˜ë¶ˆì·¨ì†Œì •ì±…
+  TOUR_POLICY VARCHAR2(4000),--È¯ºÒÃë¼ÒÁ¤Ã¥
   
   CONSTRAINT PK_TDID PRIMARY KEY (TOUR_ID),
   CONSTRAINT FK_TDID FOREIGN KEY (TOUR_ID) REFERENCES TOUR ON DELETE CASCADE
 );
 INSERT INTO TOURDETAIL
-VALUES(1, 'íŒ¨í‚¤ì§€ 1ë²ˆ ì—¬í–‰ ê°„ë‹¨ ì†Œê°œ', 'ê°€ì´ë“œì˜ í•œë§ˆë””~', 'ê°•ì› ì¶˜ì²œì‹œ ë‚¨ì‚°ë©´ ë‚¨ì´ì„¬ê¸¸ 1', 'ê°•ì›ë„,ì§€ì—­1,ì§€ì—­2,ì§€ì—­3', '2014ë…„ 8ì›” 7ì¼ë¶€í„° ì¶œë°œí•˜ëŠ” ëª¨ë“  êµ­ë‚´ì—¬í–‰ìƒí’ˆì€ ê°œì¸ì •ë³´ ë³´í˜¸ë²•(ì£¼ë¯¼ë“±ë¡ë²ˆí˜¸ ì²˜ë¦¬ì˜ ì œí•œ)ì— ì˜ê±°í•˜ì—¬ 
-ê°œì¸ì •ë³´(ì£¼ë¯¼ë²ˆí˜¸)ìˆ˜ì§‘ì´ ë¶ˆê°€í•¨ì— ë”°ë¼ ì—¬í–‰ìžë³´í—˜ê°€ìž…ì´ ë¶ˆí¬í•¨ìœ¼ë¡œ ë³€ê²½ë˜ì—ˆìŠµë‹ˆë‹¤. 
-ë‹¨, ì—¬í–‰ì¼ì •ì¤‘ì— ì´ìš©ë˜ëŠ” êµí†µìˆ˜ë‹¨(í•­ê³µ,ì² ë„,ì„ ë°•,ë²„ìŠ¤ ì „ìš©ì°¨ëŸ‰ë“±)ì€ ê°ê° ë³„ë„ì˜ ë³´í—˜ì´ ê°€ìž…ë˜ì–´ ìžˆìŒì„ ì•Œë ¤ë“œë¦½ë‹ˆë‹¤. 
-ì—¬í–‰ìžë³´í—˜ê°€ìž…ì„ ì›í•˜ì‹¤ ê²½ìš°ì—ëŠ” ê°œë³„ê°€ìž…ì„ ê¶Œìž¥í•©ë‹ˆë‹¤. 
+VALUES(1, 'ÆÐÅ°Áö 1¹ø ¿©Çà °£´Ü ¼Ò°³', '°¡ÀÌµåÀÇ ÇÑ¸¶µð~', '°­¿ø ÃáÃµ½Ã ³²»ê¸é ³²ÀÌ¼¶±æ 1', '°­¿øµµ,Áö¿ª1,Áö¿ª2,Áö¿ª3', '2014³â 8¿ù 7ÀÏºÎÅÍ Ãâ¹ßÇÏ´Â ¸ðµç ±¹³»¿©Çà»óÇ°Àº °³ÀÎÁ¤º¸ º¸È£¹ý(ÁÖ¹Îµî·Ï¹øÈ£ Ã³¸®ÀÇ Á¦ÇÑ)¿¡ ÀÇ°ÅÇÏ¿© 
+°³ÀÎÁ¤º¸(ÁÖ¹Î¹øÈ£)¼öÁýÀÌ ºÒ°¡ÇÔ¿¡ µû¶ó ¿©ÇàÀÚº¸Çè°¡ÀÔÀÌ ºÒÆ÷ÇÔÀ¸·Î º¯°æµÇ¾ú½À´Ï´Ù. 
+´Ü, ¿©ÇàÀÏÁ¤Áß¿¡ ÀÌ¿ëµÇ´Â ±³Åë¼ö´Ü(Ç×°ø,Ã¶µµ,¼±¹Ú,¹ö½º Àü¿ëÂ÷·®µî)Àº °¢°¢ º°µµÀÇ º¸ÇèÀÌ °¡ÀÔµÇ¾î ÀÖÀ½À» ¾Ë·Áµå¸³´Ï´Ù. 
+¿©ÇàÀÚº¸Çè°¡ÀÔÀ» ¿øÇÏ½Ç °æ¿ì¿¡´Â °³º°°¡ÀÔÀ» ±ÇÀåÇÕ´Ï´Ù. 
 
-(ë³´í—˜ë¬¸ì˜ : TOURSAFE íˆ¬ì–´ì„¸ì´í”„ 1800-9010 / 010-5458-8679)', 'â—ˆìœ ì˜ì‚¬í•­ ê¼­! ì½ì–´ë³´ì„¸ìš”â—ˆ
+(º¸Çè¹®ÀÇ : TOURSAFE Åõ¾î¼¼ÀÌÇÁ 1800-9010 / 010-5458-8679)', '¢ÂÀ¯ÀÇ»çÇ× ²À! ÀÐ¾îº¸¼¼¿ä¢Â
 
-ì—¬í–‰ì¼ì • ë° ìžìœ ì‹œê°„ ì¤‘ ê³ ê°ë‹˜ì˜ ì•ˆì „ì„ ìœ„í•˜ì—¬ ê°€ì´ë“œ(ë“œë¼ì´ë¹™ ê°€ì´ë“œ í¬í•¨)ì˜ ì•ˆë‚´ì‚¬í•­ ë° ì•ˆì „ ìˆ˜ì¹™ì„ ì¤€ìˆ˜í•˜ì—¬ ëª¨ë“  ì•ˆì „ì‚¬ê³ ì— ìœ ì˜í•˜ì‹œê¸° ë°”ëžë‹ˆë‹¤.
+¿©ÇàÀÏÁ¤ ¹× ÀÚÀ¯½Ã°£ Áß °í°´´ÔÀÇ ¾ÈÀüÀ» À§ÇÏ¿© °¡ÀÌµå(µå¶óÀÌºù °¡ÀÌµå Æ÷ÇÔ)ÀÇ ¾È³»»çÇ× ¹× ¾ÈÀü ¼öÄ¢À» ÁØ¼öÇÏ¿© ¸ðµç ¾ÈÀü»ç°í¿¡ À¯ÀÇÇÏ½Ã±â ¹Ù¶ø´Ï´Ù.
 
-íŠ¹ížˆ í˜„ì§€ ì„ íƒ ê´€ê´‘ ë˜ëŠ” ìžìœ ì¼ì •ì€ ê°€ì´ë“œì˜ ì£¼ì˜ì‚¬í•­ ë° ì‚¬ì „ ì•ˆë‚´ë¬¸êµ¬ë¥¼ ìˆ™ì§€ í›„ ì°¸ì—¬ì™€ ê´€ê´‘ì„ ê²°ì •í•˜ì—¬ ì£¼ì‹œê¸° ë°”ë¼ë©°, ì´ìš©ìž ë³¸ì¸ì˜ ê³¼ì‹¤ ë° ë³¸ì¸ ê±´ê°•ìƒíƒœë¡œ ì¸í•˜ì—¬ ë°œìƒí•œ ì•ˆì „ì‚¬ê³ ì— ëŒ€í•´ì„œëŠ” ì´ìš©ìž ë³¸ì¸ì˜ ì±…ìž„ìž„ì„ ì•Œë ¤ë“œë¦½ë‹ˆë‹¤.', 'ì¸ì†”ìžì •ë³´
-â€»ë³¸ ìƒí’ˆì€ ì¸ì†”ìž ë° ê°€ì´ë“œê°€ ë³„ë„ë¡œ ì—†ìœ¼ë©°, ê¸°ì‚¬ë‹˜ì´ ì§„í–‰ í•˜ëŠ” ìƒí’ˆìž…ë‹ˆë‹¤.', 'ì†Œë¹„ìží”¼í•´ê·œì •
-[íŠ¹ë³„ì•½ê´€ ì·¨ì†Œë£Œ ê·œì •]
-ì´ ìƒí’ˆì€ ê¸°ì°¨, í•­ê³µ(ë˜ëŠ” ì„ ë°•)ì¢Œì„ ë˜ëŠ” í˜¸í…”ê°ì‹¤ì— ëŒ€í•œ ë¹„ìš©ì„ ì„ ë‚©í•´ ë†“ì€ ìƒí’ˆìœ¼ë¡œ, ì·¨ì†Œ ë˜ëŠ” ì˜ˆì•½ë³€ê²½ì‹œ í•˜ë‹¨ì˜ ì·¨ì†Œë£Œê°€ ì ìš©ë©ë‹ˆë‹¤.
+Æ¯È÷ ÇöÁö ¼±ÅÃ °ü±¤ ¶Ç´Â ÀÚÀ¯ÀÏÁ¤Àº °¡ÀÌµåÀÇ ÁÖÀÇ»çÇ× ¹× »çÀü ¾È³»¹®±¸¸¦ ¼÷Áö ÈÄ Âü¿©¿Í °ü±¤À» °áÁ¤ÇÏ¿© ÁÖ½Ã±â ¹Ù¶ó¸ç, ÀÌ¿ëÀÚ º»ÀÎÀÇ °ú½Ç ¹× º»ÀÎ °Ç°­»óÅÂ·Î ÀÎÇÏ¿© ¹ß»ýÇÑ ¾ÈÀü»ç°í¿¡ ´ëÇØ¼­´Â ÀÌ¿ëÀÚ º»ÀÎÀÇ Ã¥ÀÓÀÓÀ» ¾Ë·Áµå¸³´Ï´Ù.', 'ÀÎ¼ÖÀÚÁ¤º¸
+¡Øº» »óÇ°Àº ÀÎ¼ÖÀÚ ¹× °¡ÀÌµå°¡ º°µµ·Î ¾øÀ¸¸ç, ±â»ç´ÔÀÌ ÁøÇà ÇÏ´Â »óÇ°ÀÔ´Ï´Ù.', '¼ÒºñÀÚÇÇÇØ±ÔÁ¤
+[Æ¯º°¾à°ü Ãë¼Ò·á ±ÔÁ¤]
+ÀÌ »óÇ°Àº ±âÂ÷, Ç×°ø(¶Ç´Â ¼±¹Ú)ÁÂ¼® ¶Ç´Â È£ÅÚ°´½Ç¿¡ ´ëÇÑ ºñ¿ëÀ» ¼±³³ÇØ ³õÀº »óÇ°À¸·Î, Ãë¼Ò ¶Ç´Â ¿¹¾àº¯°æ½Ã ÇÏ´ÜÀÇ Ãë¼Ò·á°¡ Àû¿ëµË´Ï´Ù.
 
-- ì—¬í–‰ê°œì‹œ 4ì¼ì „ê¹Œì§€(~4) í†µë³´ì‹œ : ê³„ì•½ê¸ˆ í™˜ê¸‰
-- ì—¬í–‰ê°œì‹œ 3ì¼ì „ê¹Œì§€(3~3) í†µë³´ì‹œ: ì—¬í–‰ìš”ê¸ˆì¤‘ 20%ë°°ìƒ
-- ì—¬í–‰ê°œì‹œ 2ì¼ì „ê¹Œì§€(2~2) í†µë³´ì‹œ: ì—¬í–‰ìš”ê¸ˆì¤‘ 50%ë°°ìƒ
-- ì—¬í–‰ê°œì‹œ 1ì¼ì „ê¹Œì§€(1~1) í†µë³´ì‹œ: ì—¬í–‰ìš”ê¸ˆì¤‘ 100%ë°°ìƒ, í™˜ë¶ˆì—†ìŒ');
+- ¿©Çà°³½Ã 4ÀÏÀü±îÁö(~4) Åëº¸½Ã : °è¾à±Ý È¯±Þ
+- ¿©Çà°³½Ã 3ÀÏÀü±îÁö(3~3) Åëº¸½Ã: ¿©Çà¿ä±ÝÁß 20%¹è»ó
+- ¿©Çà°³½Ã 2ÀÏÀü±îÁö(2~2) Åëº¸½Ã: ¿©Çà¿ä±ÝÁß 50%¹è»ó
+- ¿©Çà°³½Ã 1ÀÏÀü±îÁö(1~1) Åëº¸½Ã: ¿©Çà¿ä±ÝÁß 100%¹è»ó, È¯ºÒ¾øÀ½');
 INSERT INTO TOURDETAIL
-VALUES(2, 'íŒ¨í‚¤ì§€ 2ë²ˆ ì—¬í–‰ ê°„ë‹¨ ì†Œê°œ', 'ê°€ì´ë“œì˜ í•œë§ˆë””~', 'ê°•ì› ì¶˜ì²œì‹œ ë‚¨ì‚°ë©´ ë‚¨ì´ì„¬ê¸¸ 1', 'ê°•ì›ë„,ì§€ì—­1,ì§€ì—­2,ì§€ì—­3', '2014ë…„ 8ì›” 7ì¼ë¶€í„° ì¶œë°œí•˜ëŠ” ëª¨ë“  êµ­ë‚´ì—¬í–‰ìƒí’ˆì€ ê°œì¸ì •ë³´ ë³´í˜¸ë²•(ì£¼ë¯¼ë“±ë¡ë²ˆí˜¸ ì²˜ë¦¬ì˜ ì œí•œ)ì— ì˜ê±°í•˜ì—¬ 
-ê°œì¸ì •ë³´(ì£¼ë¯¼ë²ˆí˜¸)ìˆ˜ì§‘ì´ ë¶ˆê°€í•¨ì— ë”°ë¼ ì—¬í–‰ìžë³´í—˜ê°€ìž…ì´ ë¶ˆí¬í•¨ìœ¼ë¡œ ë³€ê²½ë˜ì—ˆìŠµë‹ˆë‹¤. 
-ë‹¨, ì—¬í–‰ì¼ì •ì¤‘ì— ì´ìš©ë˜ëŠ” êµí†µìˆ˜ë‹¨(í•­ê³µ,ì² ë„,ì„ ë°•,ë²„ìŠ¤ ì „ìš©ì°¨ëŸ‰ë“±)ì€ ê°ê° ë³„ë„ì˜ ë³´í—˜ì´ ê°€ìž…ë˜ì–´ ìžˆìŒì„ ì•Œë ¤ë“œë¦½ë‹ˆë‹¤. 
-ì—¬í–‰ìžë³´í—˜ê°€ìž…ì„ ì›í•˜ì‹¤ ê²½ìš°ì—ëŠ” ê°œë³„ê°€ìž…ì„ ê¶Œìž¥í•©ë‹ˆë‹¤. 
+VALUES(2, 'ÆÐÅ°Áö 2¹ø ¿©Çà °£´Ü ¼Ò°³', '°¡ÀÌµåÀÇ ÇÑ¸¶µð~', '°­¿ø ÃáÃµ½Ã ³²»ê¸é ³²ÀÌ¼¶±æ 1', '°­¿øµµ,Áö¿ª1,Áö¿ª2,Áö¿ª3', '2014³â 8¿ù 7ÀÏºÎÅÍ Ãâ¹ßÇÏ´Â ¸ðµç ±¹³»¿©Çà»óÇ°Àº °³ÀÎÁ¤º¸ º¸È£¹ý(ÁÖ¹Îµî·Ï¹øÈ£ Ã³¸®ÀÇ Á¦ÇÑ)¿¡ ÀÇ°ÅÇÏ¿© 
+°³ÀÎÁ¤º¸(ÁÖ¹Î¹øÈ£)¼öÁýÀÌ ºÒ°¡ÇÔ¿¡ µû¶ó ¿©ÇàÀÚº¸Çè°¡ÀÔÀÌ ºÒÆ÷ÇÔÀ¸·Î º¯°æµÇ¾ú½À´Ï´Ù. 
+´Ü, ¿©ÇàÀÏÁ¤Áß¿¡ ÀÌ¿ëµÇ´Â ±³Åë¼ö´Ü(Ç×°ø,Ã¶µµ,¼±¹Ú,¹ö½º Àü¿ëÂ÷·®µî)Àº °¢°¢ º°µµÀÇ º¸ÇèÀÌ °¡ÀÔµÇ¾î ÀÖÀ½À» ¾Ë·Áµå¸³´Ï´Ù. 
+¿©ÇàÀÚº¸Çè°¡ÀÔÀ» ¿øÇÏ½Ç °æ¿ì¿¡´Â °³º°°¡ÀÔÀ» ±ÇÀåÇÕ´Ï´Ù. 
 
-(ë³´í—˜ë¬¸ì˜ : TOURSAFE íˆ¬ì–´ì„¸ì´í”„ 1800-9010 / 010-5458-8679)', 'â—ˆìœ ì˜ì‚¬í•­ ê¼­! ì½ì–´ë³´ì„¸ìš”â—ˆ
+(º¸Çè¹®ÀÇ : TOURSAFE Åõ¾î¼¼ÀÌÇÁ 1800-9010 / 010-5458-8679)', '¢ÂÀ¯ÀÇ»çÇ× ²À! ÀÐ¾îº¸¼¼¿ä¢Â
 
-ì—¬í–‰ì¼ì • ë° ìžìœ ì‹œê°„ ì¤‘ ê³ ê°ë‹˜ì˜ ì•ˆì „ì„ ìœ„í•˜ì—¬ ê°€ì´ë“œ(ë“œë¼ì´ë¹™ ê°€ì´ë“œ í¬í•¨)ì˜ ì•ˆë‚´ì‚¬í•­ ë° ì•ˆì „ ìˆ˜ì¹™ì„ ì¤€ìˆ˜í•˜ì—¬ ëª¨ë“  ì•ˆì „ì‚¬ê³ ì— ìœ ì˜í•˜ì‹œê¸° ë°”ëžë‹ˆë‹¤.
+¿©ÇàÀÏÁ¤ ¹× ÀÚÀ¯½Ã°£ Áß °í°´´ÔÀÇ ¾ÈÀüÀ» À§ÇÏ¿© °¡ÀÌµå(µå¶óÀÌºù °¡ÀÌµå Æ÷ÇÔ)ÀÇ ¾È³»»çÇ× ¹× ¾ÈÀü ¼öÄ¢À» ÁØ¼öÇÏ¿© ¸ðµç ¾ÈÀü»ç°í¿¡ À¯ÀÇÇÏ½Ã±â ¹Ù¶ø´Ï´Ù.
 
-íŠ¹ížˆ í˜„ì§€ ì„ íƒ ê´€ê´‘ ë˜ëŠ” ìžìœ ì¼ì •ì€ ê°€ì´ë“œì˜ ì£¼ì˜ì‚¬í•­ ë° ì‚¬ì „ ì•ˆë‚´ë¬¸êµ¬ë¥¼ ìˆ™ì§€ í›„ ì°¸ì—¬ì™€ ê´€ê´‘ì„ ê²°ì •í•˜ì—¬ ì£¼ì‹œê¸° ë°”ë¼ë©°, ì´ìš©ìž ë³¸ì¸ì˜ ê³¼ì‹¤ ë° ë³¸ì¸ ê±´ê°•ìƒíƒœë¡œ ì¸í•˜ì—¬ ë°œìƒí•œ ì•ˆì „ì‚¬ê³ ì— ëŒ€í•´ì„œëŠ” ì´ìš©ìž ë³¸ì¸ì˜ ì±…ìž„ìž„ì„ ì•Œë ¤ë“œë¦½ë‹ˆë‹¤.', 'ì¸ì†”ìžì •ë³´
-â€»ë³¸ ìƒí’ˆì€ ì¸ì†”ìž ë° ê°€ì´ë“œê°€ ë³„ë„ë¡œ ì—†ìœ¼ë©°, ê¸°ì‚¬ë‹˜ì´ ì§„í–‰ í•˜ëŠ” ìƒí’ˆìž…ë‹ˆë‹¤.', 'ì†Œë¹„ìží”¼í•´ê·œì •
-[íŠ¹ë³„ì•½ê´€ ì·¨ì†Œë£Œ ê·œì •]
-ì´ ìƒí’ˆì€ ê¸°ì°¨, í•­ê³µ(ë˜ëŠ” ì„ ë°•)ì¢Œì„ ë˜ëŠ” í˜¸í…”ê°ì‹¤ì— ëŒ€í•œ ë¹„ìš©ì„ ì„ ë‚©í•´ ë†“ì€ ìƒí’ˆìœ¼ë¡œ, ì·¨ì†Œ ë˜ëŠ” ì˜ˆì•½ë³€ê²½ì‹œ í•˜ë‹¨ì˜ ì·¨ì†Œë£Œê°€ ì ìš©ë©ë‹ˆë‹¤.
+Æ¯È÷ ÇöÁö ¼±ÅÃ °ü±¤ ¶Ç´Â ÀÚÀ¯ÀÏÁ¤Àº °¡ÀÌµåÀÇ ÁÖÀÇ»çÇ× ¹× »çÀü ¾È³»¹®±¸¸¦ ¼÷Áö ÈÄ Âü¿©¿Í °ü±¤À» °áÁ¤ÇÏ¿© ÁÖ½Ã±â ¹Ù¶ó¸ç, ÀÌ¿ëÀÚ º»ÀÎÀÇ °ú½Ç ¹× º»ÀÎ °Ç°­»óÅÂ·Î ÀÎÇÏ¿© ¹ß»ýÇÑ ¾ÈÀü»ç°í¿¡ ´ëÇØ¼­´Â ÀÌ¿ëÀÚ º»ÀÎÀÇ Ã¥ÀÓÀÓÀ» ¾Ë·Áµå¸³´Ï´Ù.', 'ÀÎ¼ÖÀÚÁ¤º¸
+¡Øº» »óÇ°Àº ÀÎ¼ÖÀÚ ¹× °¡ÀÌµå°¡ º°µµ·Î ¾øÀ¸¸ç, ±â»ç´ÔÀÌ ÁøÇà ÇÏ´Â »óÇ°ÀÔ´Ï´Ù.', '¼ÒºñÀÚÇÇÇØ±ÔÁ¤
+[Æ¯º°¾à°ü Ãë¼Ò·á ±ÔÁ¤]
+ÀÌ »óÇ°Àº ±âÂ÷, Ç×°ø(¶Ç´Â ¼±¹Ú)ÁÂ¼® ¶Ç´Â È£ÅÚ°´½Ç¿¡ ´ëÇÑ ºñ¿ëÀ» ¼±³³ÇØ ³õÀº »óÇ°À¸·Î, Ãë¼Ò ¶Ç´Â ¿¹¾àº¯°æ½Ã ÇÏ´ÜÀÇ Ãë¼Ò·á°¡ Àû¿ëµË´Ï´Ù.
 
-- ì—¬í–‰ê°œì‹œ 4ì¼ì „ê¹Œì§€(~4) í†µë³´ì‹œ : ê³„ì•½ê¸ˆ í™˜ê¸‰
-- ì—¬í–‰ê°œì‹œ 3ì¼ì „ê¹Œì§€(3~3) í†µë³´ì‹œ: ì—¬í–‰ìš”ê¸ˆì¤‘ 20%ë°°ìƒ
-- ì—¬í–‰ê°œì‹œ 2ì¼ì „ê¹Œì§€(2~2) í†µë³´ì‹œ: ì—¬í–‰ìš”ê¸ˆì¤‘ 50%ë°°ìƒ
-- ì—¬í–‰ê°œì‹œ 1ì¼ì „ê¹Œì§€(1~1) í†µë³´ì‹œ: ì—¬í–‰ìš”ê¸ˆì¤‘ 100%ë°°ìƒ, í™˜ë¶ˆì—†ìŒ');
+- ¿©Çà°³½Ã 4ÀÏÀü±îÁö(~4) Åëº¸½Ã : °è¾à±Ý È¯±Þ
+- ¿©Çà°³½Ã 3ÀÏÀü±îÁö(3~3) Åëº¸½Ã: ¿©Çà¿ä±ÝÁß 20%¹è»ó
+- ¿©Çà°³½Ã 2ÀÏÀü±îÁö(2~2) Åëº¸½Ã: ¿©Çà¿ä±ÝÁß 50%¹è»ó
+- ¿©Çà°³½Ã 1ÀÏÀü±îÁö(1~1) Åëº¸½Ã: ¿©Çà¿ä±ÝÁß 100%¹è»ó, È¯ºÒ¾øÀ½');
 INSERT INTO TOURDETAIL
-VALUES(3, 'íŒ¨í‚¤ì§€ 3ë²ˆ ì—¬í–‰ ê°„ë‹¨ ì†Œê°œ', 'ê°€ì´ë“œì˜ í•œë§ˆë””~', 'ê°•ì› ì¶˜ì²œì‹œ ë‚¨ì‚°ë©´ ë‚¨ì´ì„¬ê¸¸ 1', 'ê°•ì›ë„,ì§€ì—­1,ì§€ì—­2,ì§€ì—­3', '2014ë…„ 8ì›” 7ì¼ë¶€í„° ì¶œë°œí•˜ëŠ” ëª¨ë“  êµ­ë‚´ì—¬í–‰ìƒí’ˆì€ ê°œì¸ì •ë³´ ë³´í˜¸ë²•(ì£¼ë¯¼ë“±ë¡ë²ˆí˜¸ ì²˜ë¦¬ì˜ ì œí•œ)ì— ì˜ê±°í•˜ì—¬ 
-ê°œì¸ì •ë³´(ì£¼ë¯¼ë²ˆí˜¸)ìˆ˜ì§‘ì´ ë¶ˆê°€í•¨ì— ë”°ë¼ ì—¬í–‰ìžë³´í—˜ê°€ìž…ì´ ë¶ˆí¬í•¨ìœ¼ë¡œ ë³€ê²½ë˜ì—ˆìŠµë‹ˆë‹¤. 
-ë‹¨, ì—¬í–‰ì¼ì •ì¤‘ì— ì´ìš©ë˜ëŠ” êµí†µìˆ˜ë‹¨(í•­ê³µ,ì² ë„,ì„ ë°•,ë²„ìŠ¤ ì „ìš©ì°¨ëŸ‰ë“±)ì€ ê°ê° ë³„ë„ì˜ ë³´í—˜ì´ ê°€ìž…ë˜ì–´ ìžˆìŒì„ ì•Œë ¤ë“œë¦½ë‹ˆë‹¤. 
-ì—¬í–‰ìžë³´í—˜ê°€ìž…ì„ ì›í•˜ì‹¤ ê²½ìš°ì—ëŠ” ê°œë³„ê°€ìž…ì„ ê¶Œìž¥í•©ë‹ˆë‹¤. 
+VALUES(3, 'ÆÐÅ°Áö 3¹ø ¿©Çà °£´Ü ¼Ò°³', '°¡ÀÌµåÀÇ ÇÑ¸¶µð~', '°­¿ø ÃáÃµ½Ã ³²»ê¸é ³²ÀÌ¼¶±æ 1', '°­¿øµµ,Áö¿ª1,Áö¿ª2,Áö¿ª3', '2014³â 8¿ù 7ÀÏºÎÅÍ Ãâ¹ßÇÏ´Â ¸ðµç ±¹³»¿©Çà»óÇ°Àº °³ÀÎÁ¤º¸ º¸È£¹ý(ÁÖ¹Îµî·Ï¹øÈ£ Ã³¸®ÀÇ Á¦ÇÑ)¿¡ ÀÇ°ÅÇÏ¿© 
+°³ÀÎÁ¤º¸(ÁÖ¹Î¹øÈ£)¼öÁýÀÌ ºÒ°¡ÇÔ¿¡ µû¶ó ¿©ÇàÀÚº¸Çè°¡ÀÔÀÌ ºÒÆ÷ÇÔÀ¸·Î º¯°æµÇ¾ú½À´Ï´Ù. 
+´Ü, ¿©ÇàÀÏÁ¤Áß¿¡ ÀÌ¿ëµÇ´Â ±³Åë¼ö´Ü(Ç×°ø,Ã¶µµ,¼±¹Ú,¹ö½º Àü¿ëÂ÷·®µî)Àº °¢°¢ º°µµÀÇ º¸ÇèÀÌ °¡ÀÔµÇ¾î ÀÖÀ½À» ¾Ë·Áµå¸³´Ï´Ù. 
+¿©ÇàÀÚº¸Çè°¡ÀÔÀ» ¿øÇÏ½Ç °æ¿ì¿¡´Â °³º°°¡ÀÔÀ» ±ÇÀåÇÕ´Ï´Ù. 
 
-(ë³´í—˜ë¬¸ì˜ : TOURSAFE íˆ¬ì–´ì„¸ì´í”„ 1800-9010 / 010-5458-8679)', 'â—ˆìœ ì˜ì‚¬í•­ ê¼­! ì½ì–´ë³´ì„¸ìš”â—ˆ
+(º¸Çè¹®ÀÇ : TOURSAFE Åõ¾î¼¼ÀÌÇÁ 1800-9010 / 010-5458-8679)', '¢ÂÀ¯ÀÇ»çÇ× ²À! ÀÐ¾îº¸¼¼¿ä¢Â
 
-ì—¬í–‰ì¼ì • ë° ìžìœ ì‹œê°„ ì¤‘ ê³ ê°ë‹˜ì˜ ì•ˆì „ì„ ìœ„í•˜ì—¬ ê°€ì´ë“œ(ë“œë¼ì´ë¹™ ê°€ì´ë“œ í¬í•¨)ì˜ ì•ˆë‚´ì‚¬í•­ ë° ì•ˆì „ ìˆ˜ì¹™ì„ ì¤€ìˆ˜í•˜ì—¬ ëª¨ë“  ì•ˆì „ì‚¬ê³ ì— ìœ ì˜í•˜ì‹œê¸° ë°”ëžë‹ˆë‹¤.
+¿©ÇàÀÏÁ¤ ¹× ÀÚÀ¯½Ã°£ Áß °í°´´ÔÀÇ ¾ÈÀüÀ» À§ÇÏ¿© °¡ÀÌµå(µå¶óÀÌºù °¡ÀÌµå Æ÷ÇÔ)ÀÇ ¾È³»»çÇ× ¹× ¾ÈÀü ¼öÄ¢À» ÁØ¼öÇÏ¿© ¸ðµç ¾ÈÀü»ç°í¿¡ À¯ÀÇÇÏ½Ã±â ¹Ù¶ø´Ï´Ù.
 
-íŠ¹ížˆ í˜„ì§€ ì„ íƒ ê´€ê´‘ ë˜ëŠ” ìžìœ ì¼ì •ì€ ê°€ì´ë“œì˜ ì£¼ì˜ì‚¬í•­ ë° ì‚¬ì „ ì•ˆë‚´ë¬¸êµ¬ë¥¼ ìˆ™ì§€ í›„ ì°¸ì—¬ì™€ ê´€ê´‘ì„ ê²°ì •í•˜ì—¬ ì£¼ì‹œê¸° ë°”ë¼ë©°, ì´ìš©ìž ë³¸ì¸ì˜ ê³¼ì‹¤ ë° ë³¸ì¸ ê±´ê°•ìƒíƒœë¡œ ì¸í•˜ì—¬ ë°œìƒí•œ ì•ˆì „ì‚¬ê³ ì— ëŒ€í•´ì„œëŠ” ì´ìš©ìž ë³¸ì¸ì˜ ì±…ìž„ìž„ì„ ì•Œë ¤ë“œë¦½ë‹ˆë‹¤.', 'ì¸ì†”ìžì •ë³´
-â€»ë³¸ ìƒí’ˆì€ ì¸ì†”ìž ë° ê°€ì´ë“œê°€ ë³„ë„ë¡œ ì—†ìœ¼ë©°, ê¸°ì‚¬ë‹˜ì´ ì§„í–‰ í•˜ëŠ” ìƒí’ˆìž…ë‹ˆë‹¤.', 'ì†Œë¹„ìží”¼í•´ê·œì •
-[íŠ¹ë³„ì•½ê´€ ì·¨ì†Œë£Œ ê·œì •]
-ì´ ìƒí’ˆì€ ê¸°ì°¨, í•­ê³µ(ë˜ëŠ” ì„ ë°•)ì¢Œì„ ë˜ëŠ” í˜¸í…”ê°ì‹¤ì— ëŒ€í•œ ë¹„ìš©ì„ ì„ ë‚©í•´ ë†“ì€ ìƒí’ˆìœ¼ë¡œ, ì·¨ì†Œ ë˜ëŠ” ì˜ˆì•½ë³€ê²½ì‹œ í•˜ë‹¨ì˜ ì·¨ì†Œë£Œê°€ ì ìš©ë©ë‹ˆë‹¤.
+Æ¯È÷ ÇöÁö ¼±ÅÃ °ü±¤ ¶Ç´Â ÀÚÀ¯ÀÏÁ¤Àº °¡ÀÌµåÀÇ ÁÖÀÇ»çÇ× ¹× »çÀü ¾È³»¹®±¸¸¦ ¼÷Áö ÈÄ Âü¿©¿Í °ü±¤À» °áÁ¤ÇÏ¿© ÁÖ½Ã±â ¹Ù¶ó¸ç, ÀÌ¿ëÀÚ º»ÀÎÀÇ °ú½Ç ¹× º»ÀÎ °Ç°­»óÅÂ·Î ÀÎÇÏ¿© ¹ß»ýÇÑ ¾ÈÀü»ç°í¿¡ ´ëÇØ¼­´Â ÀÌ¿ëÀÚ º»ÀÎÀÇ Ã¥ÀÓÀÓÀ» ¾Ë·Áµå¸³´Ï´Ù.', 'ÀÎ¼ÖÀÚÁ¤º¸
+¡Øº» »óÇ°Àº ÀÎ¼ÖÀÚ ¹× °¡ÀÌµå°¡ º°µµ·Î ¾øÀ¸¸ç, ±â»ç´ÔÀÌ ÁøÇà ÇÏ´Â »óÇ°ÀÔ´Ï´Ù.', '¼ÒºñÀÚÇÇÇØ±ÔÁ¤
+[Æ¯º°¾à°ü Ãë¼Ò·á ±ÔÁ¤]
+ÀÌ »óÇ°Àº ±âÂ÷, Ç×°ø(¶Ç´Â ¼±¹Ú)ÁÂ¼® ¶Ç´Â È£ÅÚ°´½Ç¿¡ ´ëÇÑ ºñ¿ëÀ» ¼±³³ÇØ ³õÀº »óÇ°À¸·Î, Ãë¼Ò ¶Ç´Â ¿¹¾àº¯°æ½Ã ÇÏ´ÜÀÇ Ãë¼Ò·á°¡ Àû¿ëµË´Ï´Ù.
 
-- ì—¬í–‰ê°œì‹œ 4ì¼ì „ê¹Œì§€(~4) í†µë³´ì‹œ : ê³„ì•½ê¸ˆ í™˜ê¸‰
-- ì—¬í–‰ê°œì‹œ 3ì¼ì „ê¹Œì§€(3~3) í†µë³´ì‹œ: ì—¬í–‰ìš”ê¸ˆì¤‘ 20%ë°°ìƒ
-- ì—¬í–‰ê°œì‹œ 2ì¼ì „ê¹Œì§€(2~2) í†µë³´ì‹œ: ì—¬í–‰ìš”ê¸ˆì¤‘ 50%ë°°ìƒ
-- ì—¬í–‰ê°œì‹œ 1ì¼ì „ê¹Œì§€(1~1) í†µë³´ì‹œ: ì—¬í–‰ìš”ê¸ˆì¤‘ 100%ë°°ìƒ, í™˜ë¶ˆì—†ìŒ');
+- ¿©Çà°³½Ã 4ÀÏÀü±îÁö(~4) Åëº¸½Ã : °è¾à±Ý È¯±Þ
+- ¿©Çà°³½Ã 3ÀÏÀü±îÁö(3~3) Åëº¸½Ã: ¿©Çà¿ä±ÝÁß 20%¹è»ó
+- ¿©Çà°³½Ã 2ÀÏÀü±îÁö(2~2) Åëº¸½Ã: ¿©Çà¿ä±ÝÁß 50%¹è»ó
+- ¿©Çà°³½Ã 1ÀÏÀü±îÁö(1~1) Åëº¸½Ã: ¿©Çà¿ä±ÝÁß 100%¹è»ó, È¯ºÒ¾øÀ½');
 INSERT INTO TOURDETAIL
-VALUES(4, 'íŒ¨í‚¤ì§€ 4ë²ˆ ì—¬í–‰ ê°„ë‹¨ ì†Œê°œ', 'ê°€ì´ë“œì˜ í•œë§ˆë””~', 'ê°•ì› ì¶˜ì²œì‹œ ë‚¨ì‚°ë©´ ë‚¨ì´ì„¬ê¸¸ 1', 'ê°•ì›ë„,ì§€ì—­1,ì§€ì—­2,ì§€ì—­3', '2014ë…„ 8ì›” 7ì¼ë¶€í„° ì¶œë°œí•˜ëŠ” ëª¨ë“  êµ­ë‚´ì—¬í–‰ìƒí’ˆì€ ê°œì¸ì •ë³´ ë³´í˜¸ë²•(ì£¼ë¯¼ë“±ë¡ë²ˆí˜¸ ì²˜ë¦¬ì˜ ì œí•œ)ì— ì˜ê±°í•˜ì—¬ 
-ê°œì¸ì •ë³´(ì£¼ë¯¼ë²ˆí˜¸)ìˆ˜ì§‘ì´ ë¶ˆê°€í•¨ì— ë”°ë¼ ì—¬í–‰ìžë³´í—˜ê°€ìž…ì´ ë¶ˆí¬í•¨ìœ¼ë¡œ ë³€ê²½ë˜ì—ˆìŠµë‹ˆë‹¤. 
-ë‹¨, ì—¬í–‰ì¼ì •ì¤‘ì— ì´ìš©ë˜ëŠ” êµí†µìˆ˜ë‹¨(í•­ê³µ,ì² ë„,ì„ ë°•,ë²„ìŠ¤ ì „ìš©ì°¨ëŸ‰ë“±)ì€ ê°ê° ë³„ë„ì˜ ë³´í—˜ì´ ê°€ìž…ë˜ì–´ ìžˆìŒì„ ì•Œë ¤ë“œë¦½ë‹ˆë‹¤. 
-ì—¬í–‰ìžë³´í—˜ê°€ìž…ì„ ì›í•˜ì‹¤ ê²½ìš°ì—ëŠ” ê°œë³„ê°€ìž…ì„ ê¶Œìž¥í•©ë‹ˆë‹¤. 
+VALUES(4, 'ÆÐÅ°Áö 4¹ø ¿©Çà °£´Ü ¼Ò°³', '°¡ÀÌµåÀÇ ÇÑ¸¶µð~', '°­¿ø ÃáÃµ½Ã ³²»ê¸é ³²ÀÌ¼¶±æ 1', '°­¿øµµ,Áö¿ª1,Áö¿ª2,Áö¿ª3', '2014³â 8¿ù 7ÀÏºÎÅÍ Ãâ¹ßÇÏ´Â ¸ðµç ±¹³»¿©Çà»óÇ°Àº °³ÀÎÁ¤º¸ º¸È£¹ý(ÁÖ¹Îµî·Ï¹øÈ£ Ã³¸®ÀÇ Á¦ÇÑ)¿¡ ÀÇ°ÅÇÏ¿© 
+°³ÀÎÁ¤º¸(ÁÖ¹Î¹øÈ£)¼öÁýÀÌ ºÒ°¡ÇÔ¿¡ µû¶ó ¿©ÇàÀÚº¸Çè°¡ÀÔÀÌ ºÒÆ÷ÇÔÀ¸·Î º¯°æµÇ¾ú½À´Ï´Ù. 
+´Ü, ¿©ÇàÀÏÁ¤Áß¿¡ ÀÌ¿ëµÇ´Â ±³Åë¼ö´Ü(Ç×°ø,Ã¶µµ,¼±¹Ú,¹ö½º Àü¿ëÂ÷·®µî)Àº °¢°¢ º°µµÀÇ º¸ÇèÀÌ °¡ÀÔµÇ¾î ÀÖÀ½À» ¾Ë·Áµå¸³´Ï´Ù. 
+¿©ÇàÀÚº¸Çè°¡ÀÔÀ» ¿øÇÏ½Ç °æ¿ì¿¡´Â °³º°°¡ÀÔÀ» ±ÇÀåÇÕ´Ï´Ù. 
 
-(ë³´í—˜ë¬¸ì˜ : TOURSAFE íˆ¬ì–´ì„¸ì´í”„ 1800-9010 / 010-5458-8679)', 'â—ˆìœ ì˜ì‚¬í•­ ê¼­! ì½ì–´ë³´ì„¸ìš”â—ˆ
+(º¸Çè¹®ÀÇ : TOURSAFE Åõ¾î¼¼ÀÌÇÁ 1800-9010 / 010-5458-8679)', '¢ÂÀ¯ÀÇ»çÇ× ²À! ÀÐ¾îº¸¼¼¿ä¢Â
 
-ì—¬í–‰ì¼ì • ë° ìžìœ ì‹œê°„ ì¤‘ ê³ ê°ë‹˜ì˜ ì•ˆì „ì„ ìœ„í•˜ì—¬ ê°€ì´ë“œ(ë“œë¼ì´ë¹™ ê°€ì´ë“œ í¬í•¨)ì˜ ì•ˆë‚´ì‚¬í•­ ë° ì•ˆì „ ìˆ˜ì¹™ì„ ì¤€ìˆ˜í•˜ì—¬ ëª¨ë“  ì•ˆì „ì‚¬ê³ ì— ìœ ì˜í•˜ì‹œê¸° ë°”ëžë‹ˆë‹¤.
+¿©ÇàÀÏÁ¤ ¹× ÀÚÀ¯½Ã°£ Áß °í°´´ÔÀÇ ¾ÈÀüÀ» À§ÇÏ¿© °¡ÀÌµå(µå¶óÀÌºù °¡ÀÌµå Æ÷ÇÔ)ÀÇ ¾È³»»çÇ× ¹× ¾ÈÀü ¼öÄ¢À» ÁØ¼öÇÏ¿© ¸ðµç ¾ÈÀü»ç°í¿¡ À¯ÀÇÇÏ½Ã±â ¹Ù¶ø´Ï´Ù.
 
-íŠ¹ížˆ í˜„ì§€ ì„ íƒ ê´€ê´‘ ë˜ëŠ” ìžìœ ì¼ì •ì€ ê°€ì´ë“œì˜ ì£¼ì˜ì‚¬í•­ ë° ì‚¬ì „ ì•ˆë‚´ë¬¸êµ¬ë¥¼ ìˆ™ì§€ í›„ ì°¸ì—¬ì™€ ê´€ê´‘ì„ ê²°ì •í•˜ì—¬ ì£¼ì‹œê¸° ë°”ë¼ë©°, ì´ìš©ìž ë³¸ì¸ì˜ ê³¼ì‹¤ ë° ë³¸ì¸ ê±´ê°•ìƒíƒœë¡œ ì¸í•˜ì—¬ ë°œìƒí•œ ì•ˆì „ì‚¬ê³ ì— ëŒ€í•´ì„œëŠ” ì´ìš©ìž ë³¸ì¸ì˜ ì±…ìž„ìž„ì„ ì•Œë ¤ë“œë¦½ë‹ˆë‹¤.', 'ì¸ì†”ìžì •ë³´
-â€»ë³¸ ìƒí’ˆì€ ì¸ì†”ìž ë° ê°€ì´ë“œê°€ ë³„ë„ë¡œ ì—†ìœ¼ë©°, ê¸°ì‚¬ë‹˜ì´ ì§„í–‰ í•˜ëŠ” ìƒí’ˆìž…ë‹ˆë‹¤.', 'ì†Œë¹„ìží”¼í•´ê·œì •
-[íŠ¹ë³„ì•½ê´€ ì·¨ì†Œë£Œ ê·œì •]
-ì´ ìƒí’ˆì€ ê¸°ì°¨, í•­ê³µ(ë˜ëŠ” ì„ ë°•)ì¢Œì„ ë˜ëŠ” í˜¸í…”ê°ì‹¤ì— ëŒ€í•œ ë¹„ìš©ì„ ì„ ë‚©í•´ ë†“ì€ ìƒí’ˆìœ¼ë¡œ, ì·¨ì†Œ ë˜ëŠ” ì˜ˆì•½ë³€ê²½ì‹œ í•˜ë‹¨ì˜ ì·¨ì†Œë£Œê°€ ì ìš©ë©ë‹ˆë‹¤.
+Æ¯È÷ ÇöÁö ¼±ÅÃ °ü±¤ ¶Ç´Â ÀÚÀ¯ÀÏÁ¤Àº °¡ÀÌµåÀÇ ÁÖÀÇ»çÇ× ¹× »çÀü ¾È³»¹®±¸¸¦ ¼÷Áö ÈÄ Âü¿©¿Í °ü±¤À» °áÁ¤ÇÏ¿© ÁÖ½Ã±â ¹Ù¶ó¸ç, ÀÌ¿ëÀÚ º»ÀÎÀÇ °ú½Ç ¹× º»ÀÎ °Ç°­»óÅÂ·Î ÀÎÇÏ¿© ¹ß»ýÇÑ ¾ÈÀü»ç°í¿¡ ´ëÇØ¼­´Â ÀÌ¿ëÀÚ º»ÀÎÀÇ Ã¥ÀÓÀÓÀ» ¾Ë·Áµå¸³´Ï´Ù.', 'ÀÎ¼ÖÀÚÁ¤º¸
+¡Øº» »óÇ°Àº ÀÎ¼ÖÀÚ ¹× °¡ÀÌµå°¡ º°µµ·Î ¾øÀ¸¸ç, ±â»ç´ÔÀÌ ÁøÇà ÇÏ´Â »óÇ°ÀÔ´Ï´Ù.', '¼ÒºñÀÚÇÇÇØ±ÔÁ¤
+[Æ¯º°¾à°ü Ãë¼Ò·á ±ÔÁ¤]
+ÀÌ »óÇ°Àº ±âÂ÷, Ç×°ø(¶Ç´Â ¼±¹Ú)ÁÂ¼® ¶Ç´Â È£ÅÚ°´½Ç¿¡ ´ëÇÑ ºñ¿ëÀ» ¼±³³ÇØ ³õÀº »óÇ°À¸·Î, Ãë¼Ò ¶Ç´Â ¿¹¾àº¯°æ½Ã ÇÏ´ÜÀÇ Ãë¼Ò·á°¡ Àû¿ëµË´Ï´Ù.
 
-- ì—¬í–‰ê°œì‹œ 4ì¼ì „ê¹Œì§€(~4) í†µë³´ì‹œ : ê³„ì•½ê¸ˆ í™˜ê¸‰
-- ì—¬í–‰ê°œì‹œ 3ì¼ì „ê¹Œì§€(3~3) í†µë³´ì‹œ: ì—¬í–‰ìš”ê¸ˆì¤‘ 20%ë°°ìƒ
-- ì—¬í–‰ê°œì‹œ 2ì¼ì „ê¹Œì§€(2~2) í†µë³´ì‹œ: ì—¬í–‰ìš”ê¸ˆì¤‘ 50%ë°°ìƒ
-- ì—¬í–‰ê°œì‹œ 1ì¼ì „ê¹Œì§€(1~1) í†µë³´ì‹œ: ì—¬í–‰ìš”ê¸ˆì¤‘ 100%ë°°ìƒ, í™˜ë¶ˆì—†ìŒ');
+- ¿©Çà°³½Ã 4ÀÏÀü±îÁö(~4) Åëº¸½Ã : °è¾à±Ý È¯±Þ
+- ¿©Çà°³½Ã 3ÀÏÀü±îÁö(3~3) Åëº¸½Ã: ¿©Çà¿ä±ÝÁß 20%¹è»ó
+- ¿©Çà°³½Ã 2ÀÏÀü±îÁö(2~2) Åëº¸½Ã: ¿©Çà¿ä±ÝÁß 50%¹è»ó
+- ¿©Çà°³½Ã 1ÀÏÀü±îÁö(1~1) Åëº¸½Ã: ¿©Çà¿ä±ÝÁß 100%¹è»ó, È¯ºÒ¾øÀ½');
 INSERT INTO TOURDETAIL
-VALUES(5, 'íŒ¨í‚¤ì§€ 5ë²ˆ ì—¬í–‰ ê°„ë‹¨ ì†Œê°œ', 'ê°€ì´ë“œì˜ í•œë§ˆë””~', 'ê°•ì› ì¶˜ì²œì‹œ ë‚¨ì‚°ë©´ ë‚¨ì´ì„¬ê¸¸ 1', 'ê°•ì›ë„,ì§€ì—­1,ì§€ì—­2,ì§€ì—­3', '2014ë…„ 8ì›” 7ì¼ë¶€í„° ì¶œë°œí•˜ëŠ” ëª¨ë“  êµ­ë‚´ì—¬í–‰ìƒí’ˆì€ ê°œì¸ì •ë³´ ë³´í˜¸ë²•(ì£¼ë¯¼ë“±ë¡ë²ˆí˜¸ ì²˜ë¦¬ì˜ ì œí•œ)ì— ì˜ê±°í•˜ì—¬ 
-ê°œì¸ì •ë³´(ì£¼ë¯¼ë²ˆí˜¸)ìˆ˜ì§‘ì´ ë¶ˆê°€í•¨ì— ë”°ë¼ ì—¬í–‰ìžë³´í—˜ê°€ìž…ì´ ë¶ˆí¬í•¨ìœ¼ë¡œ ë³€ê²½ë˜ì—ˆìŠµë‹ˆë‹¤. 
-ë‹¨, ì—¬í–‰ì¼ì •ì¤‘ì— ì´ìš©ë˜ëŠ” êµí†µìˆ˜ë‹¨(í•­ê³µ,ì² ë„,ì„ ë°•,ë²„ìŠ¤ ì „ìš©ì°¨ëŸ‰ë“±)ì€ ê°ê° ë³„ë„ì˜ ë³´í—˜ì´ ê°€ìž…ë˜ì–´ ìžˆìŒì„ ì•Œë ¤ë“œë¦½ë‹ˆë‹¤. 
-ì—¬í–‰ìžë³´í—˜ê°€ìž…ì„ ì›í•˜ì‹¤ ê²½ìš°ì—ëŠ” ê°œë³„ê°€ìž…ì„ ê¶Œìž¥í•©ë‹ˆë‹¤. 
+VALUES(5, 'ÆÐÅ°Áö 5¹ø ¿©Çà °£´Ü ¼Ò°³', '°¡ÀÌµåÀÇ ÇÑ¸¶µð~', '°­¿ø ÃáÃµ½Ã ³²»ê¸é ³²ÀÌ¼¶±æ 1', '°­¿øµµ,Áö¿ª1,Áö¿ª2,Áö¿ª3', '2014³â 8¿ù 7ÀÏºÎÅÍ Ãâ¹ßÇÏ´Â ¸ðµç ±¹³»¿©Çà»óÇ°Àº °³ÀÎÁ¤º¸ º¸È£¹ý(ÁÖ¹Îµî·Ï¹øÈ£ Ã³¸®ÀÇ Á¦ÇÑ)¿¡ ÀÇ°ÅÇÏ¿© 
+°³ÀÎÁ¤º¸(ÁÖ¹Î¹øÈ£)¼öÁýÀÌ ºÒ°¡ÇÔ¿¡ µû¶ó ¿©ÇàÀÚº¸Çè°¡ÀÔÀÌ ºÒÆ÷ÇÔÀ¸·Î º¯°æµÇ¾ú½À´Ï´Ù. 
+´Ü, ¿©ÇàÀÏÁ¤Áß¿¡ ÀÌ¿ëµÇ´Â ±³Åë¼ö´Ü(Ç×°ø,Ã¶µµ,¼±¹Ú,¹ö½º Àü¿ëÂ÷·®µî)Àº °¢°¢ º°µµÀÇ º¸ÇèÀÌ °¡ÀÔµÇ¾î ÀÖÀ½À» ¾Ë·Áµå¸³´Ï´Ù. 
+¿©ÇàÀÚº¸Çè°¡ÀÔÀ» ¿øÇÏ½Ç °æ¿ì¿¡´Â °³º°°¡ÀÔÀ» ±ÇÀåÇÕ´Ï´Ù. 
 
-(ë³´í—˜ë¬¸ì˜ : TOURSAFE íˆ¬ì–´ì„¸ì´í”„ 1800-9010 / 010-5458-8679)', 'â—ˆìœ ì˜ì‚¬í•­ ê¼­! ì½ì–´ë³´ì„¸ìš”â—ˆ
+(º¸Çè¹®ÀÇ : TOURSAFE Åõ¾î¼¼ÀÌÇÁ 1800-9010 / 010-5458-8679)', '¢ÂÀ¯ÀÇ»çÇ× ²À! ÀÐ¾îº¸¼¼¿ä¢Â
 
-ì—¬í–‰ì¼ì • ë° ìžìœ ì‹œê°„ ì¤‘ ê³ ê°ë‹˜ì˜ ì•ˆì „ì„ ìœ„í•˜ì—¬ ê°€ì´ë“œ(ë“œë¼ì´ë¹™ ê°€ì´ë“œ í¬í•¨)ì˜ ì•ˆë‚´ì‚¬í•­ ë° ì•ˆì „ ìˆ˜ì¹™ì„ ì¤€ìˆ˜í•˜ì—¬ ëª¨ë“  ì•ˆì „ì‚¬ê³ ì— ìœ ì˜í•˜ì‹œê¸° ë°”ëžë‹ˆë‹¤.
+¿©ÇàÀÏÁ¤ ¹× ÀÚÀ¯½Ã°£ Áß °í°´´ÔÀÇ ¾ÈÀüÀ» À§ÇÏ¿© °¡ÀÌµå(µå¶óÀÌºù °¡ÀÌµå Æ÷ÇÔ)ÀÇ ¾È³»»çÇ× ¹× ¾ÈÀü ¼öÄ¢À» ÁØ¼öÇÏ¿© ¸ðµç ¾ÈÀü»ç°í¿¡ À¯ÀÇÇÏ½Ã±â ¹Ù¶ø´Ï´Ù.
 
-íŠ¹ížˆ í˜„ì§€ ì„ íƒ ê´€ê´‘ ë˜ëŠ” ìžìœ ì¼ì •ì€ ê°€ì´ë“œì˜ ì£¼ì˜ì‚¬í•­ ë° ì‚¬ì „ ì•ˆë‚´ë¬¸êµ¬ë¥¼ ìˆ™ì§€ í›„ ì°¸ì—¬ì™€ ê´€ê´‘ì„ ê²°ì •í•˜ì—¬ ì£¼ì‹œê¸° ë°”ë¼ë©°, ì´ìš©ìž ë³¸ì¸ì˜ ê³¼ì‹¤ ë° ë³¸ì¸ ê±´ê°•ìƒíƒœë¡œ ì¸í•˜ì—¬ ë°œìƒí•œ ì•ˆì „ì‚¬ê³ ì— ëŒ€í•´ì„œëŠ” ì´ìš©ìž ë³¸ì¸ì˜ ì±…ìž„ìž„ì„ ì•Œë ¤ë“œë¦½ë‹ˆë‹¤.', 'ì¸ì†”ìžì •ë³´
-â€»ë³¸ ìƒí’ˆì€ ì¸ì†”ìž ë° ê°€ì´ë“œê°€ ë³„ë„ë¡œ ì—†ìœ¼ë©°, ê¸°ì‚¬ë‹˜ì´ ì§„í–‰ í•˜ëŠ” ìƒí’ˆìž…ë‹ˆë‹¤.', 'ì†Œë¹„ìží”¼í•´ê·œì •
-[íŠ¹ë³„ì•½ê´€ ì·¨ì†Œë£Œ ê·œì •]
-ì´ ìƒí’ˆì€ ê¸°ì°¨, í•­ê³µ(ë˜ëŠ” ì„ ë°•)ì¢Œì„ ë˜ëŠ” í˜¸í…”ê°ì‹¤ì— ëŒ€í•œ ë¹„ìš©ì„ ì„ ë‚©í•´ ë†“ì€ ìƒí’ˆìœ¼ë¡œ, ì·¨ì†Œ ë˜ëŠ” ì˜ˆì•½ë³€ê²½ì‹œ í•˜ë‹¨ì˜ ì·¨ì†Œë£Œê°€ ì ìš©ë©ë‹ˆë‹¤.
+Æ¯È÷ ÇöÁö ¼±ÅÃ °ü±¤ ¶Ç´Â ÀÚÀ¯ÀÏÁ¤Àº °¡ÀÌµåÀÇ ÁÖÀÇ»çÇ× ¹× »çÀü ¾È³»¹®±¸¸¦ ¼÷Áö ÈÄ Âü¿©¿Í °ü±¤À» °áÁ¤ÇÏ¿© ÁÖ½Ã±â ¹Ù¶ó¸ç, ÀÌ¿ëÀÚ º»ÀÎÀÇ °ú½Ç ¹× º»ÀÎ °Ç°­»óÅÂ·Î ÀÎÇÏ¿© ¹ß»ýÇÑ ¾ÈÀü»ç°í¿¡ ´ëÇØ¼­´Â ÀÌ¿ëÀÚ º»ÀÎÀÇ Ã¥ÀÓÀÓÀ» ¾Ë·Áµå¸³´Ï´Ù.', 'ÀÎ¼ÖÀÚÁ¤º¸
+¡Øº» »óÇ°Àº ÀÎ¼ÖÀÚ ¹× °¡ÀÌµå°¡ º°µµ·Î ¾øÀ¸¸ç, ±â»ç´ÔÀÌ ÁøÇà ÇÏ´Â »óÇ°ÀÔ´Ï´Ù.', '¼ÒºñÀÚÇÇÇØ±ÔÁ¤
+[Æ¯º°¾à°ü Ãë¼Ò·á ±ÔÁ¤]
+ÀÌ »óÇ°Àº ±âÂ÷, Ç×°ø(¶Ç´Â ¼±¹Ú)ÁÂ¼® ¶Ç´Â È£ÅÚ°´½Ç¿¡ ´ëÇÑ ºñ¿ëÀ» ¼±³³ÇØ ³õÀº »óÇ°À¸·Î, Ãë¼Ò ¶Ç´Â ¿¹¾àº¯°æ½Ã ÇÏ´ÜÀÇ Ãë¼Ò·á°¡ Àû¿ëµË´Ï´Ù.
 
-- ì—¬í–‰ê°œì‹œ 4ì¼ì „ê¹Œì§€(~4) í†µë³´ì‹œ : ê³„ì•½ê¸ˆ í™˜ê¸‰
-- ì—¬í–‰ê°œì‹œ 3ì¼ì „ê¹Œì§€(3~3) í†µë³´ì‹œ: ì—¬í–‰ìš”ê¸ˆì¤‘ 20%ë°°ìƒ
-- ì—¬í–‰ê°œì‹œ 2ì¼ì „ê¹Œì§€(2~2) í†µë³´ì‹œ: ì—¬í–‰ìš”ê¸ˆì¤‘ 50%ë°°ìƒ
-- ì—¬í–‰ê°œì‹œ 1ì¼ì „ê¹Œì§€(1~1) í†µë³´ì‹œ: ì—¬í–‰ìš”ê¸ˆì¤‘ 100%ë°°ìƒ, í™˜ë¶ˆì—†ìŒ');
+- ¿©Çà°³½Ã 4ÀÏÀü±îÁö(~4) Åëº¸½Ã : °è¾à±Ý È¯±Þ
+- ¿©Çà°³½Ã 3ÀÏÀü±îÁö(3~3) Åëº¸½Ã: ¿©Çà¿ä±ÝÁß 20%¹è»ó
+- ¿©Çà°³½Ã 2ÀÏÀü±îÁö(2~2) Åëº¸½Ã: ¿©Çà¿ä±ÝÁß 50%¹è»ó
+- ¿©Çà°³½Ã 1ÀÏÀü±îÁö(1~1) Åëº¸½Ã: ¿©Çà¿ä±ÝÁß 100%¹è»ó, È¯ºÒ¾øÀ½');
 INSERT INTO TOURDETAIL
-VALUES(6, 'íŒ¨í‚¤ì§€ 6ë²ˆ ì—¬í–‰ ê°„ë‹¨ ì†Œê°œ', 'ê°€ì´ë“œì˜ í•œë§ˆë””~', 'ê°•ì› ì¶˜ì²œì‹œ ë‚¨ì‚°ë©´ ë‚¨ì´ì„¬ê¸¸ 1', 'ê°•ì›ë„,ì§€ì—­1,ì§€ì—­2,ì§€ì—­3', '2014ë…„ 8ì›” 7ì¼ë¶€í„° ì¶œë°œí•˜ëŠ” ëª¨ë“  êµ­ë‚´ì—¬í–‰ìƒí’ˆì€ ê°œì¸ì •ë³´ ë³´í˜¸ë²•(ì£¼ë¯¼ë“±ë¡ë²ˆí˜¸ ì²˜ë¦¬ì˜ ì œí•œ)ì— ì˜ê±°í•˜ì—¬ 
-ê°œì¸ì •ë³´(ì£¼ë¯¼ë²ˆí˜¸)ìˆ˜ì§‘ì´ ë¶ˆê°€í•¨ì— ë”°ë¼ ì—¬í–‰ìžë³´í—˜ê°€ìž…ì´ ë¶ˆí¬í•¨ìœ¼ë¡œ ë³€ê²½ë˜ì—ˆìŠµë‹ˆë‹¤. 
-ë‹¨, ì—¬í–‰ì¼ì •ì¤‘ì— ì´ìš©ë˜ëŠ” êµí†µìˆ˜ë‹¨(í•­ê³µ,ì² ë„,ì„ ë°•,ë²„ìŠ¤ ì „ìš©ì°¨ëŸ‰ë“±)ì€ ê°ê° ë³„ë„ì˜ ë³´í—˜ì´ ê°€ìž…ë˜ì–´ ìžˆìŒì„ ì•Œë ¤ë“œë¦½ë‹ˆë‹¤. 
-ì—¬í–‰ìžë³´í—˜ê°€ìž…ì„ ì›í•˜ì‹¤ ê²½ìš°ì—ëŠ” ê°œë³„ê°€ìž…ì„ ê¶Œìž¥í•©ë‹ˆë‹¤. 
+VALUES(6, 'ÆÐÅ°Áö 6¹ø ¿©Çà °£´Ü ¼Ò°³', '°¡ÀÌµåÀÇ ÇÑ¸¶µð~', '°­¿ø ÃáÃµ½Ã ³²»ê¸é ³²ÀÌ¼¶±æ 1', '°­¿øµµ,Áö¿ª1,Áö¿ª2,Áö¿ª3', '2014³â 8¿ù 7ÀÏºÎÅÍ Ãâ¹ßÇÏ´Â ¸ðµç ±¹³»¿©Çà»óÇ°Àº °³ÀÎÁ¤º¸ º¸È£¹ý(ÁÖ¹Îµî·Ï¹øÈ£ Ã³¸®ÀÇ Á¦ÇÑ)¿¡ ÀÇ°ÅÇÏ¿© 
+°³ÀÎÁ¤º¸(ÁÖ¹Î¹øÈ£)¼öÁýÀÌ ºÒ°¡ÇÔ¿¡ µû¶ó ¿©ÇàÀÚº¸Çè°¡ÀÔÀÌ ºÒÆ÷ÇÔÀ¸·Î º¯°æµÇ¾ú½À´Ï´Ù. 
+´Ü, ¿©ÇàÀÏÁ¤Áß¿¡ ÀÌ¿ëµÇ´Â ±³Åë¼ö´Ü(Ç×°ø,Ã¶µµ,¼±¹Ú,¹ö½º Àü¿ëÂ÷·®µî)Àº °¢°¢ º°µµÀÇ º¸ÇèÀÌ °¡ÀÔµÇ¾î ÀÖÀ½À» ¾Ë·Áµå¸³´Ï´Ù. 
+¿©ÇàÀÚº¸Çè°¡ÀÔÀ» ¿øÇÏ½Ç °æ¿ì¿¡´Â °³º°°¡ÀÔÀ» ±ÇÀåÇÕ´Ï´Ù. 
 
-(ë³´í—˜ë¬¸ì˜ : TOURSAFE íˆ¬ì–´ì„¸ì´í”„ 1800-9010 / 010-5458-8679)', 'â—ˆìœ ì˜ì‚¬í•­ ê¼­! ì½ì–´ë³´ì„¸ìš”â—ˆ
+(º¸Çè¹®ÀÇ : TOURSAFE Åõ¾î¼¼ÀÌÇÁ 1800-9010 / 010-5458-8679)', '¢ÂÀ¯ÀÇ»çÇ× ²À! ÀÐ¾îº¸¼¼¿ä¢Â
 
-ì—¬í–‰ì¼ì • ë° ìžìœ ì‹œê°„ ì¤‘ ê³ ê°ë‹˜ì˜ ì•ˆì „ì„ ìœ„í•˜ì—¬ ê°€ì´ë“œ(ë“œë¼ì´ë¹™ ê°€ì´ë“œ í¬í•¨)ì˜ ì•ˆë‚´ì‚¬í•­ ë° ì•ˆì „ ìˆ˜ì¹™ì„ ì¤€ìˆ˜í•˜ì—¬ ëª¨ë“  ì•ˆì „ì‚¬ê³ ì— ìœ ì˜í•˜ì‹œê¸° ë°”ëžë‹ˆë‹¤.
+¿©ÇàÀÏÁ¤ ¹× ÀÚÀ¯½Ã°£ Áß °í°´´ÔÀÇ ¾ÈÀüÀ» À§ÇÏ¿© °¡ÀÌµå(µå¶óÀÌºù °¡ÀÌµå Æ÷ÇÔ)ÀÇ ¾È³»»çÇ× ¹× ¾ÈÀü ¼öÄ¢À» ÁØ¼öÇÏ¿© ¸ðµç ¾ÈÀü»ç°í¿¡ À¯ÀÇÇÏ½Ã±â ¹Ù¶ø´Ï´Ù.
 
-íŠ¹ížˆ í˜„ì§€ ì„ íƒ ê´€ê´‘ ë˜ëŠ” ìžìœ ì¼ì •ì€ ê°€ì´ë“œì˜ ì£¼ì˜ì‚¬í•­ ë° ì‚¬ì „ ì•ˆë‚´ë¬¸êµ¬ë¥¼ ìˆ™ì§€ í›„ ì°¸ì—¬ì™€ ê´€ê´‘ì„ ê²°ì •í•˜ì—¬ ì£¼ì‹œê¸° ë°”ë¼ë©°, ì´ìš©ìž ë³¸ì¸ì˜ ê³¼ì‹¤ ë° ë³¸ì¸ ê±´ê°•ìƒíƒœë¡œ ì¸í•˜ì—¬ ë°œìƒí•œ ì•ˆì „ì‚¬ê³ ì— ëŒ€í•´ì„œëŠ” ì´ìš©ìž ë³¸ì¸ì˜ ì±…ìž„ìž„ì„ ì•Œë ¤ë“œë¦½ë‹ˆë‹¤.', 'ì¸ì†”ìžì •ë³´
-â€»ë³¸ ìƒí’ˆì€ ì¸ì†”ìž ë° ê°€ì´ë“œê°€ ë³„ë„ë¡œ ì—†ìœ¼ë©°, ê¸°ì‚¬ë‹˜ì´ ì§„í–‰ í•˜ëŠ” ìƒí’ˆìž…ë‹ˆë‹¤.', 'ì†Œë¹„ìží”¼í•´ê·œì •
-[íŠ¹ë³„ì•½ê´€ ì·¨ì†Œë£Œ ê·œì •]
-ì´ ìƒí’ˆì€ ê¸°ì°¨, í•­ê³µ(ë˜ëŠ” ì„ ë°•)ì¢Œì„ ë˜ëŠ” í˜¸í…”ê°ì‹¤ì— ëŒ€í•œ ë¹„ìš©ì„ ì„ ë‚©í•´ ë†“ì€ ìƒí’ˆìœ¼ë¡œ, ì·¨ì†Œ ë˜ëŠ” ì˜ˆì•½ë³€ê²½ì‹œ í•˜ë‹¨ì˜ ì·¨ì†Œë£Œê°€ ì ìš©ë©ë‹ˆë‹¤.
+Æ¯È÷ ÇöÁö ¼±ÅÃ °ü±¤ ¶Ç´Â ÀÚÀ¯ÀÏÁ¤Àº °¡ÀÌµåÀÇ ÁÖÀÇ»çÇ× ¹× »çÀü ¾È³»¹®±¸¸¦ ¼÷Áö ÈÄ Âü¿©¿Í °ü±¤À» °áÁ¤ÇÏ¿© ÁÖ½Ã±â ¹Ù¶ó¸ç, ÀÌ¿ëÀÚ º»ÀÎÀÇ °ú½Ç ¹× º»ÀÎ °Ç°­»óÅÂ·Î ÀÎÇÏ¿© ¹ß»ýÇÑ ¾ÈÀü»ç°í¿¡ ´ëÇØ¼­´Â ÀÌ¿ëÀÚ º»ÀÎÀÇ Ã¥ÀÓÀÓÀ» ¾Ë·Áµå¸³´Ï´Ù.', 'ÀÎ¼ÖÀÚÁ¤º¸
+¡Øº» »óÇ°Àº ÀÎ¼ÖÀÚ ¹× °¡ÀÌµå°¡ º°µµ·Î ¾øÀ¸¸ç, ±â»ç´ÔÀÌ ÁøÇà ÇÏ´Â »óÇ°ÀÔ´Ï´Ù.', '¼ÒºñÀÚÇÇÇØ±ÔÁ¤
+[Æ¯º°¾à°ü Ãë¼Ò·á ±ÔÁ¤]
+ÀÌ »óÇ°Àº ±âÂ÷, Ç×°ø(¶Ç´Â ¼±¹Ú)ÁÂ¼® ¶Ç´Â È£ÅÚ°´½Ç¿¡ ´ëÇÑ ºñ¿ëÀ» ¼±³³ÇØ ³õÀº »óÇ°À¸·Î, Ãë¼Ò ¶Ç´Â ¿¹¾àº¯°æ½Ã ÇÏ´ÜÀÇ Ãë¼Ò·á°¡ Àû¿ëµË´Ï´Ù.
 
-- ì—¬í–‰ê°œì‹œ 4ì¼ì „ê¹Œì§€(~4) í†µë³´ì‹œ : ê³„ì•½ê¸ˆ í™˜ê¸‰
-- ì—¬í–‰ê°œì‹œ 3ì¼ì „ê¹Œì§€(3~3) í†µë³´ì‹œ: ì—¬í–‰ìš”ê¸ˆì¤‘ 20%ë°°ìƒ
-- ì—¬í–‰ê°œì‹œ 2ì¼ì „ê¹Œì§€(2~2) í†µë³´ì‹œ: ì—¬í–‰ìš”ê¸ˆì¤‘ 50%ë°°ìƒ
-- ì—¬í–‰ê°œì‹œ 1ì¼ì „ê¹Œì§€(1~1) í†µë³´ì‹œ: ì—¬í–‰ìš”ê¸ˆì¤‘ 100%ë°°ìƒ, í™˜ë¶ˆì—†ìŒ');
+- ¿©Çà°³½Ã 4ÀÏÀü±îÁö(~4) Åëº¸½Ã : °è¾à±Ý È¯±Þ
+- ¿©Çà°³½Ã 3ÀÏÀü±îÁö(3~3) Åëº¸½Ã: ¿©Çà¿ä±ÝÁß 20%¹è»ó
+- ¿©Çà°³½Ã 2ÀÏÀü±îÁö(2~2) Åëº¸½Ã: ¿©Çà¿ä±ÝÁß 50%¹è»ó
+- ¿©Çà°³½Ã 1ÀÏÀü±îÁö(1~1) Åëº¸½Ã: ¿©Çà¿ä±ÝÁß 100%¹è»ó, È¯ºÒ¾øÀ½');
 INSERT INTO TOURDETAIL
-VALUES(7, 'íŒ¨í‚¤ì§€ 7ë²ˆ ì—¬í–‰ ê°„ë‹¨ ì†Œê°œ', 'ê°€ì´ë“œì˜ í•œë§ˆë””~', 'ê°•ì› ì¶˜ì²œì‹œ ë‚¨ì‚°ë©´ ë‚¨ì´ì„¬ê¸¸ 1', 'ê°•ì›ë„,ì§€ì—­1,ì§€ì—­2,ì§€ì—­3', '2014ë…„ 8ì›” 7ì¼ë¶€í„° ì¶œë°œí•˜ëŠ” ëª¨ë“  êµ­ë‚´ì—¬í–‰ìƒí’ˆì€ ê°œì¸ì •ë³´ ë³´í˜¸ë²•(ì£¼ë¯¼ë“±ë¡ë²ˆí˜¸ ì²˜ë¦¬ì˜ ì œí•œ)ì— ì˜ê±°í•˜ì—¬ 
-ê°œì¸ì •ë³´(ì£¼ë¯¼ë²ˆí˜¸)ìˆ˜ì§‘ì´ ë¶ˆê°€í•¨ì— ë”°ë¼ ì—¬í–‰ìžë³´í—˜ê°€ìž…ì´ ë¶ˆí¬í•¨ìœ¼ë¡œ ë³€ê²½ë˜ì—ˆìŠµë‹ˆë‹¤. 
-ë‹¨, ì—¬í–‰ì¼ì •ì¤‘ì— ì´ìš©ë˜ëŠ” êµí†µìˆ˜ë‹¨(í•­ê³µ,ì² ë„,ì„ ë°•,ë²„ìŠ¤ ì „ìš©ì°¨ëŸ‰ë“±)ì€ ê°ê° ë³„ë„ì˜ ë³´í—˜ì´ ê°€ìž…ë˜ì–´ ìžˆìŒì„ ì•Œë ¤ë“œë¦½ë‹ˆë‹¤. 
-ì—¬í–‰ìžë³´í—˜ê°€ìž…ì„ ì›í•˜ì‹¤ ê²½ìš°ì—ëŠ” ê°œë³„ê°€ìž…ì„ ê¶Œìž¥í•©ë‹ˆë‹¤. 
+VALUES(7, 'ÆÐÅ°Áö 7¹ø ¿©Çà °£´Ü ¼Ò°³', '°¡ÀÌµåÀÇ ÇÑ¸¶µð~', '°­¿ø ÃáÃµ½Ã ³²»ê¸é ³²ÀÌ¼¶±æ 1', '°­¿øµµ,Áö¿ª1,Áö¿ª2,Áö¿ª3', '2014³â 8¿ù 7ÀÏºÎÅÍ Ãâ¹ßÇÏ´Â ¸ðµç ±¹³»¿©Çà»óÇ°Àº °³ÀÎÁ¤º¸ º¸È£¹ý(ÁÖ¹Îµî·Ï¹øÈ£ Ã³¸®ÀÇ Á¦ÇÑ)¿¡ ÀÇ°ÅÇÏ¿© 
+°³ÀÎÁ¤º¸(ÁÖ¹Î¹øÈ£)¼öÁýÀÌ ºÒ°¡ÇÔ¿¡ µû¶ó ¿©ÇàÀÚº¸Çè°¡ÀÔÀÌ ºÒÆ÷ÇÔÀ¸·Î º¯°æµÇ¾ú½À´Ï´Ù. 
+´Ü, ¿©ÇàÀÏÁ¤Áß¿¡ ÀÌ¿ëµÇ´Â ±³Åë¼ö´Ü(Ç×°ø,Ã¶µµ,¼±¹Ú,¹ö½º Àü¿ëÂ÷·®µî)Àº °¢°¢ º°µµÀÇ º¸ÇèÀÌ °¡ÀÔµÇ¾î ÀÖÀ½À» ¾Ë·Áµå¸³´Ï´Ù. 
+¿©ÇàÀÚº¸Çè°¡ÀÔÀ» ¿øÇÏ½Ç °æ¿ì¿¡´Â °³º°°¡ÀÔÀ» ±ÇÀåÇÕ´Ï´Ù. 
 
-(ë³´í—˜ë¬¸ì˜ : TOURSAFE íˆ¬ì–´ì„¸ì´í”„ 1800-9010 / 010-5458-8679)', 'â—ˆìœ ì˜ì‚¬í•­ ê¼­! ì½ì–´ë³´ì„¸ìš”â—ˆ
+(º¸Çè¹®ÀÇ : TOURSAFE Åõ¾î¼¼ÀÌÇÁ 1800-9010 / 010-5458-8679)', '¢ÂÀ¯ÀÇ»çÇ× ²À! ÀÐ¾îº¸¼¼¿ä¢Â
 
-ì—¬í–‰ì¼ì • ë° ìžìœ ì‹œê°„ ì¤‘ ê³ ê°ë‹˜ì˜ ì•ˆì „ì„ ìœ„í•˜ì—¬ ê°€ì´ë“œ(ë“œë¼ì´ë¹™ ê°€ì´ë“œ í¬í•¨)ì˜ ì•ˆë‚´ì‚¬í•­ ë° ì•ˆì „ ìˆ˜ì¹™ì„ ì¤€ìˆ˜í•˜ì—¬ ëª¨ë“  ì•ˆì „ì‚¬ê³ ì— ìœ ì˜í•˜ì‹œê¸° ë°”ëžë‹ˆë‹¤.
+¿©ÇàÀÏÁ¤ ¹× ÀÚÀ¯½Ã°£ Áß °í°´´ÔÀÇ ¾ÈÀüÀ» À§ÇÏ¿© °¡ÀÌµå(µå¶óÀÌºù °¡ÀÌµå Æ÷ÇÔ)ÀÇ ¾È³»»çÇ× ¹× ¾ÈÀü ¼öÄ¢À» ÁØ¼öÇÏ¿© ¸ðµç ¾ÈÀü»ç°í¿¡ À¯ÀÇÇÏ½Ã±â ¹Ù¶ø´Ï´Ù.
 
-íŠ¹ížˆ í˜„ì§€ ì„ íƒ ê´€ê´‘ ë˜ëŠ” ìžìœ ì¼ì •ì€ ê°€ì´ë“œì˜ ì£¼ì˜ì‚¬í•­ ë° ì‚¬ì „ ì•ˆë‚´ë¬¸êµ¬ë¥¼ ìˆ™ì§€ í›„ ì°¸ì—¬ì™€ ê´€ê´‘ì„ ê²°ì •í•˜ì—¬ ì£¼ì‹œê¸° ë°”ë¼ë©°, ì´ìš©ìž ë³¸ì¸ì˜ ê³¼ì‹¤ ë° ë³¸ì¸ ê±´ê°•ìƒíƒœë¡œ ì¸í•˜ì—¬ ë°œìƒí•œ ì•ˆì „ì‚¬ê³ ì— ëŒ€í•´ì„œëŠ” ì´ìš©ìž ë³¸ì¸ì˜ ì±…ìž„ìž„ì„ ì•Œë ¤ë“œë¦½ë‹ˆë‹¤.', 'ì¸ì†”ìžì •ë³´
-â€»ë³¸ ìƒí’ˆì€ ì¸ì†”ìž ë° ê°€ì´ë“œê°€ ë³„ë„ë¡œ ì—†ìœ¼ë©°, ê¸°ì‚¬ë‹˜ì´ ì§„í–‰ í•˜ëŠ” ìƒí’ˆìž…ë‹ˆë‹¤.', 'ì†Œë¹„ìží”¼í•´ê·œì •
-[íŠ¹ë³„ì•½ê´€ ì·¨ì†Œë£Œ ê·œì •]
-ì´ ìƒí’ˆì€ ê¸°ì°¨, í•­ê³µ(ë˜ëŠ” ì„ ë°•)ì¢Œì„ ë˜ëŠ” í˜¸í…”ê°ì‹¤ì— ëŒ€í•œ ë¹„ìš©ì„ ì„ ë‚©í•´ ë†“ì€ ìƒí’ˆìœ¼ë¡œ, ì·¨ì†Œ ë˜ëŠ” ì˜ˆì•½ë³€ê²½ì‹œ í•˜ë‹¨ì˜ ì·¨ì†Œë£Œê°€ ì ìš©ë©ë‹ˆë‹¤.
+Æ¯È÷ ÇöÁö ¼±ÅÃ °ü±¤ ¶Ç´Â ÀÚÀ¯ÀÏÁ¤Àº °¡ÀÌµåÀÇ ÁÖÀÇ»çÇ× ¹× »çÀü ¾È³»¹®±¸¸¦ ¼÷Áö ÈÄ Âü¿©¿Í °ü±¤À» °áÁ¤ÇÏ¿© ÁÖ½Ã±â ¹Ù¶ó¸ç, ÀÌ¿ëÀÚ º»ÀÎÀÇ °ú½Ç ¹× º»ÀÎ °Ç°­»óÅÂ·Î ÀÎÇÏ¿© ¹ß»ýÇÑ ¾ÈÀü»ç°í¿¡ ´ëÇØ¼­´Â ÀÌ¿ëÀÚ º»ÀÎÀÇ Ã¥ÀÓÀÓÀ» ¾Ë·Áµå¸³´Ï´Ù.', 'ÀÎ¼ÖÀÚÁ¤º¸
+¡Øº» »óÇ°Àº ÀÎ¼ÖÀÚ ¹× °¡ÀÌµå°¡ º°µµ·Î ¾øÀ¸¸ç, ±â»ç´ÔÀÌ ÁøÇà ÇÏ´Â »óÇ°ÀÔ´Ï´Ù.', '¼ÒºñÀÚÇÇÇØ±ÔÁ¤
+[Æ¯º°¾à°ü Ãë¼Ò·á ±ÔÁ¤]
+ÀÌ »óÇ°Àº ±âÂ÷, Ç×°ø(¶Ç´Â ¼±¹Ú)ÁÂ¼® ¶Ç´Â È£ÅÚ°´½Ç¿¡ ´ëÇÑ ºñ¿ëÀ» ¼±³³ÇØ ³õÀº »óÇ°À¸·Î, Ãë¼Ò ¶Ç´Â ¿¹¾àº¯°æ½Ã ÇÏ´ÜÀÇ Ãë¼Ò·á°¡ Àû¿ëµË´Ï´Ù.
 
-- ì—¬í–‰ê°œì‹œ 4ì¼ì „ê¹Œì§€(~4) í†µë³´ì‹œ : ê³„ì•½ê¸ˆ í™˜ê¸‰
-- ì—¬í–‰ê°œì‹œ 3ì¼ì „ê¹Œì§€(3~3) í†µë³´ì‹œ: ì—¬í–‰ìš”ê¸ˆì¤‘ 20%ë°°ìƒ
-- ì—¬í–‰ê°œì‹œ 2ì¼ì „ê¹Œì§€(2~2) í†µë³´ì‹œ: ì—¬í–‰ìš”ê¸ˆì¤‘ 50%ë°°ìƒ
-- ì—¬í–‰ê°œì‹œ 1ì¼ì „ê¹Œì§€(1~1) í†µë³´ì‹œ: ì—¬í–‰ìš”ê¸ˆì¤‘ 100%ë°°ìƒ, í™˜ë¶ˆì—†ìŒ');
+- ¿©Çà°³½Ã 4ÀÏÀü±îÁö(~4) Åëº¸½Ã : °è¾à±Ý È¯±Þ
+- ¿©Çà°³½Ã 3ÀÏÀü±îÁö(3~3) Åëº¸½Ã: ¿©Çà¿ä±ÝÁß 20%¹è»ó
+- ¿©Çà°³½Ã 2ÀÏÀü±îÁö(2~2) Åëº¸½Ã: ¿©Çà¿ä±ÝÁß 50%¹è»ó
+- ¿©Çà°³½Ã 1ÀÏÀü±îÁö(1~1) Åëº¸½Ã: ¿©Çà¿ä±ÝÁß 100%¹è»ó, È¯ºÒ¾øÀ½');
 INSERT INTO TOURDETAIL
-VALUES(8, 'íŒ¨í‚¤ì§€ 8ë²ˆ ì—¬í–‰ ê°„ë‹¨ ì†Œê°œ', 'ê°€ì´ë“œì˜ í•œë§ˆë””~', 'ê°•ì› ì¶˜ì²œì‹œ ë‚¨ì‚°ë©´ ë‚¨ì´ì„¬ê¸¸ 1', 'ê°•ì›ë„,ì§€ì—­1,ì§€ì—­2,ì§€ì—­3', '2014ë…„ 8ì›” 7ì¼ë¶€í„° ì¶œë°œí•˜ëŠ” ëª¨ë“  êµ­ë‚´ì—¬í–‰ìƒí’ˆì€ ê°œì¸ì •ë³´ ë³´í˜¸ë²•(ì£¼ë¯¼ë“±ë¡ë²ˆí˜¸ ì²˜ë¦¬ì˜ ì œí•œ)ì— ì˜ê±°í•˜ì—¬ 
-ê°œì¸ì •ë³´(ì£¼ë¯¼ë²ˆí˜¸)ìˆ˜ì§‘ì´ ë¶ˆê°€í•¨ì— ë”°ë¼ ì—¬í–‰ìžë³´í—˜ê°€ìž…ì´ ë¶ˆí¬í•¨ìœ¼ë¡œ ë³€ê²½ë˜ì—ˆìŠµë‹ˆë‹¤. 
-ë‹¨, ì—¬í–‰ì¼ì •ì¤‘ì— ì´ìš©ë˜ëŠ” êµí†µìˆ˜ë‹¨(í•­ê³µ,ì² ë„,ì„ ë°•,ë²„ìŠ¤ ì „ìš©ì°¨ëŸ‰ë“±)ì€ ê°ê° ë³„ë„ì˜ ë³´í—˜ì´ ê°€ìž…ë˜ì–´ ìžˆìŒì„ ì•Œë ¤ë“œë¦½ë‹ˆë‹¤. 
-ì—¬í–‰ìžë³´í—˜ê°€ìž…ì„ ì›í•˜ì‹¤ ê²½ìš°ì—ëŠ” ê°œë³„ê°€ìž…ì„ ê¶Œìž¥í•©ë‹ˆë‹¤. 
+VALUES(8, 'ÆÐÅ°Áö 8¹ø ¿©Çà °£´Ü ¼Ò°³', '°¡ÀÌµåÀÇ ÇÑ¸¶µð~', '°­¿ø ÃáÃµ½Ã ³²»ê¸é ³²ÀÌ¼¶±æ 1', '°­¿øµµ,Áö¿ª1,Áö¿ª2,Áö¿ª3', '2014³â 8¿ù 7ÀÏºÎÅÍ Ãâ¹ßÇÏ´Â ¸ðµç ±¹³»¿©Çà»óÇ°Àº °³ÀÎÁ¤º¸ º¸È£¹ý(ÁÖ¹Îµî·Ï¹øÈ£ Ã³¸®ÀÇ Á¦ÇÑ)¿¡ ÀÇ°ÅÇÏ¿© 
+°³ÀÎÁ¤º¸(ÁÖ¹Î¹øÈ£)¼öÁýÀÌ ºÒ°¡ÇÔ¿¡ µû¶ó ¿©ÇàÀÚº¸Çè°¡ÀÔÀÌ ºÒÆ÷ÇÔÀ¸·Î º¯°æµÇ¾ú½À´Ï´Ù. 
+´Ü, ¿©ÇàÀÏÁ¤Áß¿¡ ÀÌ¿ëµÇ´Â ±³Åë¼ö´Ü(Ç×°ø,Ã¶µµ,¼±¹Ú,¹ö½º Àü¿ëÂ÷·®µî)Àº °¢°¢ º°µµÀÇ º¸ÇèÀÌ °¡ÀÔµÇ¾î ÀÖÀ½À» ¾Ë·Áµå¸³´Ï´Ù. 
+¿©ÇàÀÚº¸Çè°¡ÀÔÀ» ¿øÇÏ½Ç °æ¿ì¿¡´Â °³º°°¡ÀÔÀ» ±ÇÀåÇÕ´Ï´Ù. 
 
-(ë³´í—˜ë¬¸ì˜ : TOURSAFE íˆ¬ì–´ì„¸ì´í”„ 1800-9010 / 010-5458-8679)', 'â—ˆìœ ì˜ì‚¬í•­ ê¼­! ì½ì–´ë³´ì„¸ìš”â—ˆ
+(º¸Çè¹®ÀÇ : TOURSAFE Åõ¾î¼¼ÀÌÇÁ 1800-9010 / 010-5458-8679)', '¢ÂÀ¯ÀÇ»çÇ× ²À! ÀÐ¾îº¸¼¼¿ä¢Â
 
-ì—¬í–‰ì¼ì • ë° ìžìœ ì‹œê°„ ì¤‘ ê³ ê°ë‹˜ì˜ ì•ˆì „ì„ ìœ„í•˜ì—¬ ê°€ì´ë“œ(ë“œë¼ì´ë¹™ ê°€ì´ë“œ í¬í•¨)ì˜ ì•ˆë‚´ì‚¬í•­ ë° ì•ˆì „ ìˆ˜ì¹™ì„ ì¤€ìˆ˜í•˜ì—¬ ëª¨ë“  ì•ˆì „ì‚¬ê³ ì— ìœ ì˜í•˜ì‹œê¸° ë°”ëžë‹ˆë‹¤.
+¿©ÇàÀÏÁ¤ ¹× ÀÚÀ¯½Ã°£ Áß °í°´´ÔÀÇ ¾ÈÀüÀ» À§ÇÏ¿© °¡ÀÌµå(µå¶óÀÌºù °¡ÀÌµå Æ÷ÇÔ)ÀÇ ¾È³»»çÇ× ¹× ¾ÈÀü ¼öÄ¢À» ÁØ¼öÇÏ¿© ¸ðµç ¾ÈÀü»ç°í¿¡ À¯ÀÇÇÏ½Ã±â ¹Ù¶ø´Ï´Ù.
 
-íŠ¹ížˆ í˜„ì§€ ì„ íƒ ê´€ê´‘ ë˜ëŠ” ìžìœ ì¼ì •ì€ ê°€ì´ë“œì˜ ì£¼ì˜ì‚¬í•­ ë° ì‚¬ì „ ì•ˆë‚´ë¬¸êµ¬ë¥¼ ìˆ™ì§€ í›„ ì°¸ì—¬ì™€ ê´€ê´‘ì„ ê²°ì •í•˜ì—¬ ì£¼ì‹œê¸° ë°”ë¼ë©°, ì´ìš©ìž ë³¸ì¸ì˜ ê³¼ì‹¤ ë° ë³¸ì¸ ê±´ê°•ìƒíƒœë¡œ ì¸í•˜ì—¬ ë°œìƒí•œ ì•ˆì „ì‚¬ê³ ì— ëŒ€í•´ì„œëŠ” ì´ìš©ìž ë³¸ì¸ì˜ ì±…ìž„ìž„ì„ ì•Œë ¤ë“œë¦½ë‹ˆë‹¤.', 'ì¸ì†”ìžì •ë³´
-â€»ë³¸ ìƒí’ˆì€ ì¸ì†”ìž ë° ê°€ì´ë“œê°€ ë³„ë„ë¡œ ì—†ìœ¼ë©°, ê¸°ì‚¬ë‹˜ì´ ì§„í–‰ í•˜ëŠ” ìƒí’ˆìž…ë‹ˆë‹¤.', 'ì†Œë¹„ìží”¼í•´ê·œì •
-[íŠ¹ë³„ì•½ê´€ ì·¨ì†Œë£Œ ê·œì •]
-ì´ ìƒí’ˆì€ ê¸°ì°¨, í•­ê³µ(ë˜ëŠ” ì„ ë°•)ì¢Œì„ ë˜ëŠ” í˜¸í…”ê°ì‹¤ì— ëŒ€í•œ ë¹„ìš©ì„ ì„ ë‚©í•´ ë†“ì€ ìƒí’ˆìœ¼ë¡œ, ì·¨ì†Œ ë˜ëŠ” ì˜ˆì•½ë³€ê²½ì‹œ í•˜ë‹¨ì˜ ì·¨ì†Œë£Œê°€ ì ìš©ë©ë‹ˆë‹¤.
+Æ¯È÷ ÇöÁö ¼±ÅÃ °ü±¤ ¶Ç´Â ÀÚÀ¯ÀÏÁ¤Àº °¡ÀÌµåÀÇ ÁÖÀÇ»çÇ× ¹× »çÀü ¾È³»¹®±¸¸¦ ¼÷Áö ÈÄ Âü¿©¿Í °ü±¤À» °áÁ¤ÇÏ¿© ÁÖ½Ã±â ¹Ù¶ó¸ç, ÀÌ¿ëÀÚ º»ÀÎÀÇ °ú½Ç ¹× º»ÀÎ °Ç°­»óÅÂ·Î ÀÎÇÏ¿© ¹ß»ýÇÑ ¾ÈÀü»ç°í¿¡ ´ëÇØ¼­´Â ÀÌ¿ëÀÚ º»ÀÎÀÇ Ã¥ÀÓÀÓÀ» ¾Ë·Áµå¸³´Ï´Ù.', 'ÀÎ¼ÖÀÚÁ¤º¸
+¡Øº» »óÇ°Àº ÀÎ¼ÖÀÚ ¹× °¡ÀÌµå°¡ º°µµ·Î ¾øÀ¸¸ç, ±â»ç´ÔÀÌ ÁøÇà ÇÏ´Â »óÇ°ÀÔ´Ï´Ù.', '¼ÒºñÀÚÇÇÇØ±ÔÁ¤
+[Æ¯º°¾à°ü Ãë¼Ò·á ±ÔÁ¤]
+ÀÌ »óÇ°Àº ±âÂ÷, Ç×°ø(¶Ç´Â ¼±¹Ú)ÁÂ¼® ¶Ç´Â È£ÅÚ°´½Ç¿¡ ´ëÇÑ ºñ¿ëÀ» ¼±³³ÇØ ³õÀº »óÇ°À¸·Î, Ãë¼Ò ¶Ç´Â ¿¹¾àº¯°æ½Ã ÇÏ´ÜÀÇ Ãë¼Ò·á°¡ Àû¿ëµË´Ï´Ù.
 
-- ì—¬í–‰ê°œì‹œ 4ì¼ì „ê¹Œì§€(~4) í†µë³´ì‹œ : ê³„ì•½ê¸ˆ í™˜ê¸‰
-- ì—¬í–‰ê°œì‹œ 3ì¼ì „ê¹Œì§€(3~3) í†µë³´ì‹œ: ì—¬í–‰ìš”ê¸ˆì¤‘ 20%ë°°ìƒ
-- ì—¬í–‰ê°œì‹œ 2ì¼ì „ê¹Œì§€(2~2) í†µë³´ì‹œ: ì—¬í–‰ìš”ê¸ˆì¤‘ 50%ë°°ìƒ
-- ì—¬í–‰ê°œì‹œ 1ì¼ì „ê¹Œì§€(1~1) í†µë³´ì‹œ: ì—¬í–‰ìš”ê¸ˆì¤‘ 100%ë°°ìƒ, í™˜ë¶ˆì—†ìŒ');
+- ¿©Çà°³½Ã 4ÀÏÀü±îÁö(~4) Åëº¸½Ã : °è¾à±Ý È¯±Þ
+- ¿©Çà°³½Ã 3ÀÏÀü±îÁö(3~3) Åëº¸½Ã: ¿©Çà¿ä±ÝÁß 20%¹è»ó
+- ¿©Çà°³½Ã 2ÀÏÀü±îÁö(2~2) Åëº¸½Ã: ¿©Çà¿ä±ÝÁß 50%¹è»ó
+- ¿©Çà°³½Ã 1ÀÏÀü±îÁö(1~1) Åëº¸½Ã: ¿©Çà¿ä±ÝÁß 100%¹è»ó, È¯ºÒ¾øÀ½');
 INSERT INTO TOURDETAIL
-VALUES(9, 'íŒ¨í‚¤ì§€ 9ë²ˆ ì—¬í–‰ ê°„ë‹¨ ì†Œê°œ', 'ê°€ì´ë“œì˜ í•œë§ˆë””~', 'ê°•ì› ì¶˜ì²œì‹œ ë‚¨ì‚°ë©´ ë‚¨ì´ì„¬ê¸¸ 1', 'ê°•ì›ë„,ì§€ì—­1,ì§€ì—­2,ì§€ì—­3', '2014ë…„ 8ì›” 7ì¼ë¶€í„° ì¶œë°œí•˜ëŠ” ëª¨ë“  êµ­ë‚´ì—¬í–‰ìƒí’ˆì€ ê°œì¸ì •ë³´ ë³´í˜¸ë²•(ì£¼ë¯¼ë“±ë¡ë²ˆí˜¸ ì²˜ë¦¬ì˜ ì œí•œ)ì— ì˜ê±°í•˜ì—¬ 
-ê°œì¸ì •ë³´(ì£¼ë¯¼ë²ˆí˜¸)ìˆ˜ì§‘ì´ ë¶ˆê°€í•¨ì— ë”°ë¼ ì—¬í–‰ìžë³´í—˜ê°€ìž…ì´ ë¶ˆí¬í•¨ìœ¼ë¡œ ë³€ê²½ë˜ì—ˆìŠµë‹ˆë‹¤. 
-ë‹¨, ì—¬í–‰ì¼ì •ì¤‘ì— ì´ìš©ë˜ëŠ” êµí†µìˆ˜ë‹¨(í•­ê³µ,ì² ë„,ì„ ë°•,ë²„ìŠ¤ ì „ìš©ì°¨ëŸ‰ë“±)ì€ ê°ê° ë³„ë„ì˜ ë³´í—˜ì´ ê°€ìž…ë˜ì–´ ìžˆìŒì„ ì•Œë ¤ë“œë¦½ë‹ˆë‹¤. 
-ì—¬í–‰ìžë³´í—˜ê°€ìž…ì„ ì›í•˜ì‹¤ ê²½ìš°ì—ëŠ” ê°œë³„ê°€ìž…ì„ ê¶Œìž¥í•©ë‹ˆë‹¤. 
+VALUES(9, 'ÆÐÅ°Áö 9¹ø ¿©Çà °£´Ü ¼Ò°³', '°¡ÀÌµåÀÇ ÇÑ¸¶µð~', '°­¿ø ÃáÃµ½Ã ³²»ê¸é ³²ÀÌ¼¶±æ 1', '°­¿øµµ,Áö¿ª1,Áö¿ª2,Áö¿ª3', '2014³â 8¿ù 7ÀÏºÎÅÍ Ãâ¹ßÇÏ´Â ¸ðµç ±¹³»¿©Çà»óÇ°Àº °³ÀÎÁ¤º¸ º¸È£¹ý(ÁÖ¹Îµî·Ï¹øÈ£ Ã³¸®ÀÇ Á¦ÇÑ)¿¡ ÀÇ°ÅÇÏ¿© 
+°³ÀÎÁ¤º¸(ÁÖ¹Î¹øÈ£)¼öÁýÀÌ ºÒ°¡ÇÔ¿¡ µû¶ó ¿©ÇàÀÚº¸Çè°¡ÀÔÀÌ ºÒÆ÷ÇÔÀ¸·Î º¯°æµÇ¾ú½À´Ï´Ù. 
+´Ü, ¿©ÇàÀÏÁ¤Áß¿¡ ÀÌ¿ëµÇ´Â ±³Åë¼ö´Ü(Ç×°ø,Ã¶µµ,¼±¹Ú,¹ö½º Àü¿ëÂ÷·®µî)Àº °¢°¢ º°µµÀÇ º¸ÇèÀÌ °¡ÀÔµÇ¾î ÀÖÀ½À» ¾Ë·Áµå¸³´Ï´Ù. 
+¿©ÇàÀÚº¸Çè°¡ÀÔÀ» ¿øÇÏ½Ç °æ¿ì¿¡´Â °³º°°¡ÀÔÀ» ±ÇÀåÇÕ´Ï´Ù. 
 
-(ë³´í—˜ë¬¸ì˜ : TOURSAFE íˆ¬ì–´ì„¸ì´í”„ 1800-9010 / 010-5458-8679)', 'â—ˆìœ ì˜ì‚¬í•­ ê¼­! ì½ì–´ë³´ì„¸ìš”â—ˆ
+(º¸Çè¹®ÀÇ : TOURSAFE Åõ¾î¼¼ÀÌÇÁ 1800-9010 / 010-5458-8679)', '¢ÂÀ¯ÀÇ»çÇ× ²À! ÀÐ¾îº¸¼¼¿ä¢Â
 
-ì—¬í–‰ì¼ì • ë° ìžìœ ì‹œê°„ ì¤‘ ê³ ê°ë‹˜ì˜ ì•ˆì „ì„ ìœ„í•˜ì—¬ ê°€ì´ë“œ(ë“œë¼ì´ë¹™ ê°€ì´ë“œ í¬í•¨)ì˜ ì•ˆë‚´ì‚¬í•­ ë° ì•ˆì „ ìˆ˜ì¹™ì„ ì¤€ìˆ˜í•˜ì—¬ ëª¨ë“  ì•ˆì „ì‚¬ê³ ì— ìœ ì˜í•˜ì‹œê¸° ë°”ëžë‹ˆë‹¤.
+¿©ÇàÀÏÁ¤ ¹× ÀÚÀ¯½Ã°£ Áß °í°´´ÔÀÇ ¾ÈÀüÀ» À§ÇÏ¿© °¡ÀÌµå(µå¶óÀÌºù °¡ÀÌµå Æ÷ÇÔ)ÀÇ ¾È³»»çÇ× ¹× ¾ÈÀü ¼öÄ¢À» ÁØ¼öÇÏ¿© ¸ðµç ¾ÈÀü»ç°í¿¡ À¯ÀÇÇÏ½Ã±â ¹Ù¶ø´Ï´Ù.
 
-íŠ¹ížˆ í˜„ì§€ ì„ íƒ ê´€ê´‘ ë˜ëŠ” ìžìœ ì¼ì •ì€ ê°€ì´ë“œì˜ ì£¼ì˜ì‚¬í•­ ë° ì‚¬ì „ ì•ˆë‚´ë¬¸êµ¬ë¥¼ ìˆ™ì§€ í›„ ì°¸ì—¬ì™€ ê´€ê´‘ì„ ê²°ì •í•˜ì—¬ ì£¼ì‹œê¸° ë°”ë¼ë©°, ì´ìš©ìž ë³¸ì¸ì˜ ê³¼ì‹¤ ë° ë³¸ì¸ ê±´ê°•ìƒíƒœë¡œ ì¸í•˜ì—¬ ë°œìƒí•œ ì•ˆì „ì‚¬ê³ ì— ëŒ€í•´ì„œëŠ” ì´ìš©ìž ë³¸ì¸ì˜ ì±…ìž„ìž„ì„ ì•Œë ¤ë“œë¦½ë‹ˆë‹¤.', 'ì¸ì†”ìžì •ë³´
-â€»ë³¸ ìƒí’ˆì€ ì¸ì†”ìž ë° ê°€ì´ë“œê°€ ë³„ë„ë¡œ ì—†ìœ¼ë©°, ê¸°ì‚¬ë‹˜ì´ ì§„í–‰ í•˜ëŠ” ìƒí’ˆìž…ë‹ˆë‹¤.', 'ì†Œë¹„ìží”¼í•´ê·œì •
-[íŠ¹ë³„ì•½ê´€ ì·¨ì†Œë£Œ ê·œì •]
-ì´ ìƒí’ˆì€ ê¸°ì°¨, í•­ê³µ(ë˜ëŠ” ì„ ë°•)ì¢Œì„ ë˜ëŠ” í˜¸í…”ê°ì‹¤ì— ëŒ€í•œ ë¹„ìš©ì„ ì„ ë‚©í•´ ë†“ì€ ìƒí’ˆìœ¼ë¡œ, ì·¨ì†Œ ë˜ëŠ” ì˜ˆì•½ë³€ê²½ì‹œ í•˜ë‹¨ì˜ ì·¨ì†Œë£Œê°€ ì ìš©ë©ë‹ˆë‹¤.
+Æ¯È÷ ÇöÁö ¼±ÅÃ °ü±¤ ¶Ç´Â ÀÚÀ¯ÀÏÁ¤Àº °¡ÀÌµåÀÇ ÁÖÀÇ»çÇ× ¹× »çÀü ¾È³»¹®±¸¸¦ ¼÷Áö ÈÄ Âü¿©¿Í °ü±¤À» °áÁ¤ÇÏ¿© ÁÖ½Ã±â ¹Ù¶ó¸ç, ÀÌ¿ëÀÚ º»ÀÎÀÇ °ú½Ç ¹× º»ÀÎ °Ç°­»óÅÂ·Î ÀÎÇÏ¿© ¹ß»ýÇÑ ¾ÈÀü»ç°í¿¡ ´ëÇØ¼­´Â ÀÌ¿ëÀÚ º»ÀÎÀÇ Ã¥ÀÓÀÓÀ» ¾Ë·Áµå¸³´Ï´Ù.', 'ÀÎ¼ÖÀÚÁ¤º¸
+¡Øº» »óÇ°Àº ÀÎ¼ÖÀÚ ¹× °¡ÀÌµå°¡ º°µµ·Î ¾øÀ¸¸ç, ±â»ç´ÔÀÌ ÁøÇà ÇÏ´Â »óÇ°ÀÔ´Ï´Ù.', '¼ÒºñÀÚÇÇÇØ±ÔÁ¤
+[Æ¯º°¾à°ü Ãë¼Ò·á ±ÔÁ¤]
+ÀÌ »óÇ°Àº ±âÂ÷, Ç×°ø(¶Ç´Â ¼±¹Ú)ÁÂ¼® ¶Ç´Â È£ÅÚ°´½Ç¿¡ ´ëÇÑ ºñ¿ëÀ» ¼±³³ÇØ ³õÀº »óÇ°À¸·Î, Ãë¼Ò ¶Ç´Â ¿¹¾àº¯°æ½Ã ÇÏ´ÜÀÇ Ãë¼Ò·á°¡ Àû¿ëµË´Ï´Ù.
 
-- ì—¬í–‰ê°œì‹œ 4ì¼ì „ê¹Œì§€(~4) í†µë³´ì‹œ : ê³„ì•½ê¸ˆ í™˜ê¸‰
-- ì—¬í–‰ê°œì‹œ 3ì¼ì „ê¹Œì§€(3~3) í†µë³´ì‹œ: ì—¬í–‰ìš”ê¸ˆì¤‘ 20%ë°°ìƒ
-- ì—¬í–‰ê°œì‹œ 2ì¼ì „ê¹Œì§€(2~2) í†µë³´ì‹œ: ì—¬í–‰ìš”ê¸ˆì¤‘ 50%ë°°ìƒ
-- ì—¬í–‰ê°œì‹œ 1ì¼ì „ê¹Œì§€(1~1) í†µë³´ì‹œ: ì—¬í–‰ìš”ê¸ˆì¤‘ 100%ë°°ìƒ, í™˜ë¶ˆì—†ìŒ');
+- ¿©Çà°³½Ã 4ÀÏÀü±îÁö(~4) Åëº¸½Ã : °è¾à±Ý È¯±Þ
+- ¿©Çà°³½Ã 3ÀÏÀü±îÁö(3~3) Åëº¸½Ã: ¿©Çà¿ä±ÝÁß 20%¹è»ó
+- ¿©Çà°³½Ã 2ÀÏÀü±îÁö(2~2) Åëº¸½Ã: ¿©Çà¿ä±ÝÁß 50%¹è»ó
+- ¿©Çà°³½Ã 1ÀÏÀü±îÁö(1~1) Åëº¸½Ã: ¿©Çà¿ä±ÝÁß 100%¹è»ó, È¯ºÒ¾øÀ½');
 INSERT INTO TOURDETAIL
-VALUES(10, 'íŒ¨í‚¤ì§€ 10ë²ˆ ì—¬í–‰ ê°„ë‹¨ ì†Œê°œ', 'ê°€ì´ë“œì˜ í•œë§ˆë””~', 'ê°•ì› ì¶˜ì²œì‹œ ë‚¨ì‚°ë©´ ë‚¨ì´ì„¬ê¸¸ 1', 'ê°•ì›ë„,ì§€ì—­1,ì§€ì—­2,ì§€ì—­3', '2014ë…„ 8ì›” 7ì¼ë¶€í„° ì¶œë°œí•˜ëŠ” ëª¨ë“  êµ­ë‚´ì—¬í–‰ìƒí’ˆì€ ê°œì¸ì •ë³´ ë³´í˜¸ë²•(ì£¼ë¯¼ë“±ë¡ë²ˆí˜¸ ì²˜ë¦¬ì˜ ì œí•œ)ì— ì˜ê±°í•˜ì—¬ 
-ê°œì¸ì •ë³´(ì£¼ë¯¼ë²ˆí˜¸)ìˆ˜ì§‘ì´ ë¶ˆê°€í•¨ì— ë”°ë¼ ì—¬í–‰ìžë³´í—˜ê°€ìž…ì´ ë¶ˆí¬í•¨ìœ¼ë¡œ ë³€ê²½ë˜ì—ˆìŠµë‹ˆë‹¤. 
-ë‹¨, ì—¬í–‰ì¼ì •ì¤‘ì— ì´ìš©ë˜ëŠ” êµí†µìˆ˜ë‹¨(í•­ê³µ,ì² ë„,ì„ ë°•,ë²„ìŠ¤ ì „ìš©ì°¨ëŸ‰ë“±)ì€ ê°ê° ë³„ë„ì˜ ë³´í—˜ì´ ê°€ìž…ë˜ì–´ ìžˆìŒì„ ì•Œë ¤ë“œë¦½ë‹ˆë‹¤. 
-ì—¬í–‰ìžë³´í—˜ê°€ìž…ì„ ì›í•˜ì‹¤ ê²½ìš°ì—ëŠ” ê°œë³„ê°€ìž…ì„ ê¶Œìž¥í•©ë‹ˆë‹¤. 
+VALUES(10, 'ÆÐÅ°Áö 10¹ø ¿©Çà °£´Ü ¼Ò°³', '°¡ÀÌµåÀÇ ÇÑ¸¶µð~', '°­¿ø ÃáÃµ½Ã ³²»ê¸é ³²ÀÌ¼¶±æ 1', '°­¿øµµ,Áö¿ª1,Áö¿ª2,Áö¿ª3', '2014³â 8¿ù 7ÀÏºÎÅÍ Ãâ¹ßÇÏ´Â ¸ðµç ±¹³»¿©Çà»óÇ°Àº °³ÀÎÁ¤º¸ º¸È£¹ý(ÁÖ¹Îµî·Ï¹øÈ£ Ã³¸®ÀÇ Á¦ÇÑ)¿¡ ÀÇ°ÅÇÏ¿© 
+°³ÀÎÁ¤º¸(ÁÖ¹Î¹øÈ£)¼öÁýÀÌ ºÒ°¡ÇÔ¿¡ µû¶ó ¿©ÇàÀÚº¸Çè°¡ÀÔÀÌ ºÒÆ÷ÇÔÀ¸·Î º¯°æµÇ¾ú½À´Ï´Ù. 
+´Ü, ¿©ÇàÀÏÁ¤Áß¿¡ ÀÌ¿ëµÇ´Â ±³Åë¼ö´Ü(Ç×°ø,Ã¶µµ,¼±¹Ú,¹ö½º Àü¿ëÂ÷·®µî)Àº °¢°¢ º°µµÀÇ º¸ÇèÀÌ °¡ÀÔµÇ¾î ÀÖÀ½À» ¾Ë·Áµå¸³´Ï´Ù. 
+¿©ÇàÀÚº¸Çè°¡ÀÔÀ» ¿øÇÏ½Ç °æ¿ì¿¡´Â °³º°°¡ÀÔÀ» ±ÇÀåÇÕ´Ï´Ù. 
 
-(ë³´í—˜ë¬¸ì˜ : TOURSAFE íˆ¬ì–´ì„¸ì´í”„ 1800-9010 / 010-5458-8679)', 'â—ˆìœ ì˜ì‚¬í•­ ê¼­! ì½ì–´ë³´ì„¸ìš”â—ˆ
+(º¸Çè¹®ÀÇ : TOURSAFE Åõ¾î¼¼ÀÌÇÁ 1800-9010 / 010-5458-8679)', '¢ÂÀ¯ÀÇ»çÇ× ²À! ÀÐ¾îº¸¼¼¿ä¢Â
 
-ì—¬í–‰ì¼ì • ë° ìžìœ ì‹œê°„ ì¤‘ ê³ ê°ë‹˜ì˜ ì•ˆì „ì„ ìœ„í•˜ì—¬ ê°€ì´ë“œ(ë“œë¼ì´ë¹™ ê°€ì´ë“œ í¬í•¨)ì˜ ì•ˆë‚´ì‚¬í•­ ë° ì•ˆì „ ìˆ˜ì¹™ì„ ì¤€ìˆ˜í•˜ì—¬ ëª¨ë“  ì•ˆì „ì‚¬ê³ ì— ìœ ì˜í•˜ì‹œê¸° ë°”ëžë‹ˆë‹¤.
+¿©ÇàÀÏÁ¤ ¹× ÀÚÀ¯½Ã°£ Áß °í°´´ÔÀÇ ¾ÈÀüÀ» À§ÇÏ¿© °¡ÀÌµå(µå¶óÀÌºù °¡ÀÌµå Æ÷ÇÔ)ÀÇ ¾È³»»çÇ× ¹× ¾ÈÀü ¼öÄ¢À» ÁØ¼öÇÏ¿© ¸ðµç ¾ÈÀü»ç°í¿¡ À¯ÀÇÇÏ½Ã±â ¹Ù¶ø´Ï´Ù.
 
-íŠ¹ížˆ í˜„ì§€ ì„ íƒ ê´€ê´‘ ë˜ëŠ” ìžìœ ì¼ì •ì€ ê°€ì´ë“œì˜ ì£¼ì˜ì‚¬í•­ ë° ì‚¬ì „ ì•ˆë‚´ë¬¸êµ¬ë¥¼ ìˆ™ì§€ í›„ ì°¸ì—¬ì™€ ê´€ê´‘ì„ ê²°ì •í•˜ì—¬ ì£¼ì‹œê¸° ë°”ë¼ë©°, ì´ìš©ìž ë³¸ì¸ì˜ ê³¼ì‹¤ ë° ë³¸ì¸ ê±´ê°•ìƒíƒœë¡œ ì¸í•˜ì—¬ ë°œìƒí•œ ì•ˆì „ì‚¬ê³ ì— ëŒ€í•´ì„œëŠ” ì´ìš©ìž ë³¸ì¸ì˜ ì±…ìž„ìž„ì„ ì•Œë ¤ë“œë¦½ë‹ˆë‹¤.', 'ì¸ì†”ìžì •ë³´
-â€»ë³¸ ìƒí’ˆì€ ì¸ì†”ìž ë° ê°€ì´ë“œê°€ ë³„ë„ë¡œ ì—†ìœ¼ë©°, ê¸°ì‚¬ë‹˜ì´ ì§„í–‰ í•˜ëŠ” ìƒí’ˆìž…ë‹ˆë‹¤.', 'ì†Œë¹„ìží”¼í•´ê·œì •
-[íŠ¹ë³„ì•½ê´€ ì·¨ì†Œë£Œ ê·œì •]
-ì´ ìƒí’ˆì€ ê¸°ì°¨, í•­ê³µ(ë˜ëŠ” ì„ ë°•)ì¢Œì„ ë˜ëŠ” í˜¸í…”ê°ì‹¤ì— ëŒ€í•œ ë¹„ìš©ì„ ì„ ë‚©í•´ ë†“ì€ ìƒí’ˆìœ¼ë¡œ, ì·¨ì†Œ ë˜ëŠ” ì˜ˆì•½ë³€ê²½ì‹œ í•˜ë‹¨ì˜ ì·¨ì†Œë£Œê°€ ì ìš©ë©ë‹ˆë‹¤.
+Æ¯È÷ ÇöÁö ¼±ÅÃ °ü±¤ ¶Ç´Â ÀÚÀ¯ÀÏÁ¤Àº °¡ÀÌµåÀÇ ÁÖÀÇ»çÇ× ¹× »çÀü ¾È³»¹®±¸¸¦ ¼÷Áö ÈÄ Âü¿©¿Í °ü±¤À» °áÁ¤ÇÏ¿© ÁÖ½Ã±â ¹Ù¶ó¸ç, ÀÌ¿ëÀÚ º»ÀÎÀÇ °ú½Ç ¹× º»ÀÎ °Ç°­»óÅÂ·Î ÀÎÇÏ¿© ¹ß»ýÇÑ ¾ÈÀü»ç°í¿¡ ´ëÇØ¼­´Â ÀÌ¿ëÀÚ º»ÀÎÀÇ Ã¥ÀÓÀÓÀ» ¾Ë·Áµå¸³´Ï´Ù.', 'ÀÎ¼ÖÀÚÁ¤º¸
+¡Øº» »óÇ°Àº ÀÎ¼ÖÀÚ ¹× °¡ÀÌµå°¡ º°µµ·Î ¾øÀ¸¸ç, ±â»ç´ÔÀÌ ÁøÇà ÇÏ´Â »óÇ°ÀÔ´Ï´Ù.', '¼ÒºñÀÚÇÇÇØ±ÔÁ¤
+[Æ¯º°¾à°ü Ãë¼Ò·á ±ÔÁ¤]
+ÀÌ »óÇ°Àº ±âÂ÷, Ç×°ø(¶Ç´Â ¼±¹Ú)ÁÂ¼® ¶Ç´Â È£ÅÚ°´½Ç¿¡ ´ëÇÑ ºñ¿ëÀ» ¼±³³ÇØ ³õÀº »óÇ°À¸·Î, Ãë¼Ò ¶Ç´Â ¿¹¾àº¯°æ½Ã ÇÏ´ÜÀÇ Ãë¼Ò·á°¡ Àû¿ëµË´Ï´Ù.
 
-- ì—¬í–‰ê°œì‹œ 4ì¼ì „ê¹Œì§€(~4) í†µë³´ì‹œ : ê³„ì•½ê¸ˆ í™˜ê¸‰
-- ì—¬í–‰ê°œì‹œ 3ì¼ì „ê¹Œì§€(3~3) í†µë³´ì‹œ: ì—¬í–‰ìš”ê¸ˆì¤‘ 20%ë°°ìƒ
-- ì—¬í–‰ê°œì‹œ 2ì¼ì „ê¹Œì§€(2~2) í†µë³´ì‹œ: ì—¬í–‰ìš”ê¸ˆì¤‘ 50%ë°°ìƒ
-- ì—¬í–‰ê°œì‹œ 1ì¼ì „ê¹Œì§€(1~1) í†µë³´ì‹œ: ì—¬í–‰ìš”ê¸ˆì¤‘ 100%ë°°ìƒ, í™˜ë¶ˆì—†ìŒ');
+- ¿©Çà°³½Ã 4ÀÏÀü±îÁö(~4) Åëº¸½Ã : °è¾à±Ý È¯±Þ
+- ¿©Çà°³½Ã 3ÀÏÀü±îÁö(3~3) Åëº¸½Ã: ¿©Çà¿ä±ÝÁß 20%¹è»ó
+- ¿©Çà°³½Ã 2ÀÏÀü±îÁö(2~2) Åëº¸½Ã: ¿©Çà¿ä±ÝÁß 50%¹è»ó
+- ¿©Çà°³½Ã 1ÀÏÀü±îÁö(1~1) Åëº¸½Ã: ¿©Çà¿ä±ÝÁß 100%¹è»ó, È¯ºÒ¾øÀ½');
 
 INSERT INTO TOURDETAIL
-VALUES(11, 'íŒ¨í‚¤ì§€ 11ë²ˆ ì—¬í–‰ ê°„ë‹¨ ì†Œê°œ', 'ê°€ì´ë“œì˜ í•œë§ˆë””~', 'ê°•ì› ì¶˜ì²œì‹œ ë‚¨ì‚°ë©´ ë‚¨ì´ì„¬ê¸¸ 1', 'ê°•ì›ë„,ì§€ì—­1,ì§€ì—­2,ì§€ì—­3', '2014ë…„ 8ì›” 7ì¼ë¶€í„° ì¶œë°œí•˜ëŠ” ëª¨ë“  êµ­ë‚´ì—¬í–‰ìƒí’ˆì€ ê°œì¸ì •ë³´ ë³´í˜¸ë²•(ì£¼ë¯¼ë“±ë¡ë²ˆí˜¸ ì²˜ë¦¬ì˜ ì œí•œ)ì— ì˜ê±°í•˜ì—¬ 
-ê°œì¸ì •ë³´(ì£¼ë¯¼ë²ˆí˜¸)ìˆ˜ì§‘ì´ ë¶ˆê°€í•¨ì— ë”°ë¼ ì—¬í–‰ìžë³´í—˜ê°€ìž…ì´ ë¶ˆí¬í•¨ìœ¼ë¡œ ë³€ê²½ë˜ì—ˆìŠµë‹ˆë‹¤. 
-ë‹¨, ì—¬í–‰ì¼ì •ì¤‘ì— ì´ìš©ë˜ëŠ” êµí†µìˆ˜ë‹¨(í•­ê³µ,ì² ë„,ì„ ë°•,ë²„ìŠ¤ ì „ìš©ì°¨ëŸ‰ë“±)ì€ ê°ê° ë³„ë„ì˜ ë³´í—˜ì´ ê°€ìž…ë˜ì–´ ìžˆìŒì„ ì•Œë ¤ë“œë¦½ë‹ˆë‹¤. 
-ì—¬í–‰ìžë³´í—˜ê°€ìž…ì„ ì›í•˜ì‹¤ ê²½ìš°ì—ëŠ” ê°œë³„ê°€ìž…ì„ ê¶Œìž¥í•©ë‹ˆë‹¤. 
+VALUES(11, 'ÆÐÅ°Áö 11¹ø ¿©Çà °£´Ü ¼Ò°³', '°¡ÀÌµåÀÇ ÇÑ¸¶µð~', '°­¿ø ÃáÃµ½Ã ³²»ê¸é ³²ÀÌ¼¶±æ 1', '°­¿øµµ,Áö¿ª1,Áö¿ª2,Áö¿ª3', '2014³â 8¿ù 7ÀÏºÎÅÍ Ãâ¹ßÇÏ´Â ¸ðµç ±¹³»¿©Çà»óÇ°Àº °³ÀÎÁ¤º¸ º¸È£¹ý(ÁÖ¹Îµî·Ï¹øÈ£ Ã³¸®ÀÇ Á¦ÇÑ)¿¡ ÀÇ°ÅÇÏ¿© 
+°³ÀÎÁ¤º¸(ÁÖ¹Î¹øÈ£)¼öÁýÀÌ ºÒ°¡ÇÔ¿¡ µû¶ó ¿©ÇàÀÚº¸Çè°¡ÀÔÀÌ ºÒÆ÷ÇÔÀ¸·Î º¯°æµÇ¾ú½À´Ï´Ù. 
+´Ü, ¿©ÇàÀÏÁ¤Áß¿¡ ÀÌ¿ëµÇ´Â ±³Åë¼ö´Ü(Ç×°ø,Ã¶µµ,¼±¹Ú,¹ö½º Àü¿ëÂ÷·®µî)Àº °¢°¢ º°µµÀÇ º¸ÇèÀÌ °¡ÀÔµÇ¾î ÀÖÀ½À» ¾Ë·Áµå¸³´Ï´Ù. 
+¿©ÇàÀÚº¸Çè°¡ÀÔÀ» ¿øÇÏ½Ç °æ¿ì¿¡´Â °³º°°¡ÀÔÀ» ±ÇÀåÇÕ´Ï´Ù. 
 
-(ë³´í—˜ë¬¸ì˜ : TOURSAFE íˆ¬ì–´ì„¸ì´í”„ 1800-9010 / 010-5458-8679)', 'â—ˆìœ ì˜ì‚¬í•­ ê¼­! ì½ì–´ë³´ì„¸ìš”â—ˆ
+(º¸Çè¹®ÀÇ : TOURSAFE Åõ¾î¼¼ÀÌÇÁ 1800-9010 / 010-5458-8679)', '¢ÂÀ¯ÀÇ»çÇ× ²À! ÀÐ¾îº¸¼¼¿ä¢Â
 
-ì—¬í–‰ì¼ì • ë° ìžìœ ì‹œê°„ ì¤‘ ê³ ê°ë‹˜ì˜ ì•ˆì „ì„ ìœ„í•˜ì—¬ ê°€ì´ë“œ(ë“œë¼ì´ë¹™ ê°€ì´ë“œ í¬í•¨)ì˜ ì•ˆë‚´ì‚¬í•­ ë° ì•ˆì „ ìˆ˜ì¹™ì„ ì¤€ìˆ˜í•˜ì—¬ ëª¨ë“  ì•ˆì „ì‚¬ê³ ì— ìœ ì˜í•˜ì‹œê¸° ë°”ëžë‹ˆë‹¤.
+¿©ÇàÀÏÁ¤ ¹× ÀÚÀ¯½Ã°£ Áß °í°´´ÔÀÇ ¾ÈÀüÀ» À§ÇÏ¿© °¡ÀÌµå(µå¶óÀÌºù °¡ÀÌµå Æ÷ÇÔ)ÀÇ ¾È³»»çÇ× ¹× ¾ÈÀü ¼öÄ¢À» ÁØ¼öÇÏ¿© ¸ðµç ¾ÈÀü»ç°í¿¡ À¯ÀÇÇÏ½Ã±â ¹Ù¶ø´Ï´Ù.
 
-íŠ¹ížˆ í˜„ì§€ ì„ íƒ ê´€ê´‘ ë˜ëŠ” ìžìœ ì¼ì •ì€ ê°€ì´ë“œì˜ ì£¼ì˜ì‚¬í•­ ë° ì‚¬ì „ ì•ˆë‚´ë¬¸êµ¬ë¥¼ ìˆ™ì§€ í›„ ì°¸ì—¬ì™€ ê´€ê´‘ì„ ê²°ì •í•˜ì—¬ ì£¼ì‹œê¸° ë°”ë¼ë©°, ì´ìš©ìž ë³¸ì¸ì˜ ê³¼ì‹¤ ë° ë³¸ì¸ ê±´ê°•ìƒíƒœë¡œ ì¸í•˜ì—¬ ë°œìƒí•œ ì•ˆì „ì‚¬ê³ ì— ëŒ€í•´ì„œëŠ” ì´ìš©ìž ë³¸ì¸ì˜ ì±…ìž„ìž„ì„ ì•Œë ¤ë“œë¦½ë‹ˆë‹¤.', 'ì¸ì†”ìžì •ë³´
-â€»ë³¸ ìƒí’ˆì€ ì¸ì†”ìž ë° ê°€ì´ë“œê°€ ë³„ë„ë¡œ ì—†ìœ¼ë©°, ê¸°ì‚¬ë‹˜ì´ ì§„í–‰ í•˜ëŠ” ìƒí’ˆìž…ë‹ˆë‹¤.', 'ì†Œë¹„ìží”¼í•´ê·œì •
-[íŠ¹ë³„ì•½ê´€ ì·¨ì†Œë£Œ ê·œì •]
-ì´ ìƒí’ˆì€ ê¸°ì°¨, í•­ê³µ(ë˜ëŠ” ì„ ë°•)ì¢Œì„ ë˜ëŠ” í˜¸í…”ê°ì‹¤ì— ëŒ€í•œ ë¹„ìš©ì„ ì„ ë‚©í•´ ë†“ì€ ìƒí’ˆìœ¼ë¡œ, ì·¨ì†Œ ë˜ëŠ” ì˜ˆì•½ë³€ê²½ì‹œ í•˜ë‹¨ì˜ ì·¨ì†Œë£Œê°€ ì ìš©ë©ë‹ˆë‹¤.
+Æ¯È÷ ÇöÁö ¼±ÅÃ °ü±¤ ¶Ç´Â ÀÚÀ¯ÀÏÁ¤Àº °¡ÀÌµåÀÇ ÁÖÀÇ»çÇ× ¹× »çÀü ¾È³»¹®±¸¸¦ ¼÷Áö ÈÄ Âü¿©¿Í °ü±¤À» °áÁ¤ÇÏ¿© ÁÖ½Ã±â ¹Ù¶ó¸ç, ÀÌ¿ëÀÚ º»ÀÎÀÇ °ú½Ç ¹× º»ÀÎ °Ç°­»óÅÂ·Î ÀÎÇÏ¿© ¹ß»ýÇÑ ¾ÈÀü»ç°í¿¡ ´ëÇØ¼­´Â ÀÌ¿ëÀÚ º»ÀÎÀÇ Ã¥ÀÓÀÓÀ» ¾Ë·Áµå¸³´Ï´Ù.', 'ÀÎ¼ÖÀÚÁ¤º¸
+¡Øº» »óÇ°Àº ÀÎ¼ÖÀÚ ¹× °¡ÀÌµå°¡ º°µµ·Î ¾øÀ¸¸ç, ±â»ç´ÔÀÌ ÁøÇà ÇÏ´Â »óÇ°ÀÔ´Ï´Ù.', '¼ÒºñÀÚÇÇÇØ±ÔÁ¤
+[Æ¯º°¾à°ü Ãë¼Ò·á ±ÔÁ¤]
+ÀÌ »óÇ°Àº ±âÂ÷, Ç×°ø(¶Ç´Â ¼±¹Ú)ÁÂ¼® ¶Ç´Â È£ÅÚ°´½Ç¿¡ ´ëÇÑ ºñ¿ëÀ» ¼±³³ÇØ ³õÀº »óÇ°À¸·Î, Ãë¼Ò ¶Ç´Â ¿¹¾àº¯°æ½Ã ÇÏ´ÜÀÇ Ãë¼Ò·á°¡ Àû¿ëµË´Ï´Ù.
 
-- ì—¬í–‰ê°œì‹œ 4ì¼ì „ê¹Œì§€(~4) í†µë³´ì‹œ : ê³„ì•½ê¸ˆ í™˜ê¸‰
-- ì—¬í–‰ê°œì‹œ 3ì¼ì „ê¹Œì§€(3~3) í†µë³´ì‹œ: ì—¬í–‰ìš”ê¸ˆì¤‘ 20%ë°°ìƒ
-- ì—¬í–‰ê°œì‹œ 2ì¼ì „ê¹Œì§€(2~2) í†µë³´ì‹œ: ì—¬í–‰ìš”ê¸ˆì¤‘ 50%ë°°ìƒ
-- ì—¬í–‰ê°œì‹œ 1ì¼ì „ê¹Œì§€(1~1) í†µë³´ì‹œ: ì—¬í–‰ìš”ê¸ˆì¤‘ 100%ë°°ìƒ, í™˜ë¶ˆì—†ìŒ');
-
-
+- ¿©Çà°³½Ã 4ÀÏÀü±îÁö(~4) Åëº¸½Ã : °è¾à±Ý È¯±Þ
+- ¿©Çà°³½Ã 3ÀÏÀü±îÁö(3~3) Åëº¸½Ã: ¿©Çà¿ä±ÝÁß 20%¹è»ó
+- ¿©Çà°³½Ã 2ÀÏÀü±îÁö(2~2) Åëº¸½Ã: ¿©Çà¿ä±ÝÁß 50%¹è»ó
+- ¿©Çà°³½Ã 1ÀÏÀü±îÁö(1~1) Åëº¸½Ã: ¿©Çà¿ä±ÝÁß 100%¹è»ó, È¯ºÒ¾øÀ½');
 
 
 
-/*íŒ¨í‚¤ì§€ì—¬í–‰ í›„ê¸° í…Œì´ë¸”*/
+
+
+/*ÆÐÅ°Áö¿©Çà ÈÄ±â Å×ÀÌºí*/
 CREATE TABLE TOUR_REVIEW
 (  
   TR_NO NUMBER,
@@ -940,51 +940,51 @@ CREATE TABLE TOUR_REVIEW
   CONSTRAINT FK_TR_WID FOREIGN KEY(TR_WRITER_ID) REFERENCES MEMBER,
   CONSTRAINT CHK_TR_GRADE CHECK (TR_GRADE BETWEEN 1.0 AND 10.0)
 );
-COMMENT ON TABLE TOUR_REVIEW IS 'ì—¬í–‰ íŒ¨í‚¤ì§€ í›„ê¸° ê²Œì‹œíŒ';
-COMMENT ON COLUMN TOUR_REVIEW.TR_NO IS 'ê²Œì‹œê¸€ ë²ˆí˜¸';
-COMMENT ON COLUMN TOUR_REVIEW.TR_TOUR_ID IS 'íŒ¨í‚¤ì§€ìƒí’ˆ ID';
-COMMENT ON COLUMN TOUR_REVIEW.TR_DATE IS 'ê²Œì‹œ ë‚ ì§œ';
-COMMENT ON COLUMN TOUR_REVIEW.TR_WRITER_ID IS 'ìž‘ì„±ìž ì•„ì´ë””';
-COMMENT ON COLUMN TOUR_REVIEW.TR_TITLE IS 'ì œëª©';
-COMMENT ON COLUMN TOUR_REVIEW.TR_CONTENT IS 'ë‚´ìš©';
-COMMENT ON COLUMN TOUR_REVIEW.TR_GRADE IS 'í‰ì ';
+COMMENT ON TABLE TOUR_REVIEW IS '¿©Çà ÆÐÅ°Áö ÈÄ±â °Ô½ÃÆÇ';
+COMMENT ON COLUMN TOUR_REVIEW.TR_NO IS '°Ô½Ã±Û ¹øÈ£';
+COMMENT ON COLUMN TOUR_REVIEW.TR_TOUR_ID IS 'ÆÐÅ°Áö»óÇ° ID';
+COMMENT ON COLUMN TOUR_REVIEW.TR_DATE IS '°Ô½Ã ³¯Â¥';
+COMMENT ON COLUMN TOUR_REVIEW.TR_WRITER_ID IS 'ÀÛ¼ºÀÚ ¾ÆÀÌµð';
+COMMENT ON COLUMN TOUR_REVIEW.TR_TITLE IS 'Á¦¸ñ';
+COMMENT ON COLUMN TOUR_REVIEW.TR_CONTENT IS '³»¿ë';
+COMMENT ON COLUMN TOUR_REVIEW.TR_GRADE IS 'ÆòÁ¡';
 
 
 -- TOUR_REVIEW
 INSERT INTO TOUR_REVIEW
-VALUES(1, 1, DEFAULT, 'ib1500', 'ì¢‹ì€ ì—¬í–‰ì´ì˜€ì–´ìš”!!!', 'ê°€ì´ë“œë¶„ë„ ì¹œì ˆí•˜ì‹œê³  ì—¬í–‰ ì¼ì •ë„ ë§ˆìŒì— ë“¤ì—ˆìŠµë‹ˆë‹¤.', 10);
+VALUES(1, 1, DEFAULT, 'ib1500', 'ÁÁÀº ¿©ÇàÀÌ¿´¾î¿ä!!!', '°¡ÀÌµåºÐµµ Ä£ÀýÇÏ½Ã°í ¿©Çà ÀÏÁ¤µµ ¸¶À½¿¡ µé¾ú½À´Ï´Ù.', 10);
 INSERT INTO TOUR_REVIEW
-VALUES(2, 1, DEFAULT, 'ksm1225', 'ê·¸ëŸ­ì €ëŸ­ ê´œì°®ì€ ì—¬í–‰ì´ì˜€ìŠµë‹ˆë‹¤.', 'ë‹¤ìŒì— ë˜ ì°¾ì„ ê²ƒ ê°™ë„¤ìš”', 8);
+VALUES(2, 1, DEFAULT, 'ksm1225', '±×·°Àú·° ±¦ÂúÀº ¿©ÇàÀÌ¿´½À´Ï´Ù.', '´ÙÀ½¿¡ ¶Ç Ã£À» °Í °°³×¿ä', 8);
 INSERT INTO TOUR_REVIEW
-VALUES(3, 1, DEFAULT, 'jnh0930', 'ë‚˜ì˜ì§€ì•Šì€ ì—¬í–‰ì´ì˜€ì–´ìš”!!!', 'ì‹œê°„ì´ ëœë‹¤ë©´ ë˜ ê°€ê³  ì‹¶ìŠµë‹ˆë‹¤.', 10);
+VALUES(3, 1, DEFAULT, 'jnh0930', '³ª»ÚÁö¾ÊÀº ¿©ÇàÀÌ¿´¾î¿ä!!!', '½Ã°£ÀÌ µÈ´Ù¸é ¶Ç °¡°í ½Í½À´Ï´Ù.', 10);
 INSERT INTO TOUR_REVIEW
-VALUES(4, 1, DEFAULT, 'kdy0820', 'ë‚ ì”¨ ë•Œë¬¸ì— ì¢€ ì•„ì‰¬ì› ìŠµë‹ˆë‹¤', 'ë‹¤ìŒì— ë‚ ì”¨ ì¢‹ì„ ë•Œ ë‹¤ì‹œê°€ê³  ì‹¶ë„¤ìš”', 8);
+VALUES(4, 1, DEFAULT, 'kdy0820', '³¯¾¾ ¶§¹®¿¡ Á» ¾Æ½¬¿ü½À´Ï´Ù', '´ÙÀ½¿¡ ³¯¾¾ ÁÁÀ» ¶§ ´Ù½Ã°¡°í ½Í³×¿ä', 8);
 INSERT INTO TOUR_REVIEW
-VALUES(5, 1, DEFAULT, 'usb0119', '2%ì•„ì‰¬ìš´ ì—¬í–‰ì´ì—ˆìŠµë‹ˆë‹¤.', 'ë§›ìžˆëŠ”ê²Œ ë§Žì•„ì„œ ì¢‹ì•˜ìŠµë‹ˆë‹¤. ë­”ê°€ ì•„ì‰¬ìš´ê±° ë¹¼ê³¤..', 10);
+VALUES(5, 1, DEFAULT, 'usb0119', '2%¾Æ½¬¿î ¿©ÇàÀÌ¾ú½À´Ï´Ù.', '¸ÀÀÖ´Â°Ô ¸¹¾Æ¼­ ÁÁ¾Ò½À´Ï´Ù. ¹º°¡ ¾Æ½¬¿î°Å »©°ï..', 10);
 INSERT INTO TOUR_REVIEW
-VALUES(6, 1, DEFAULT, 'iss0426', 'ê°€ê²©ë„ ê´œì°®ì•„ì„œ ì¢‹ì•˜ìŠµë‹ˆë‹¤.', 'ë‹¤ìŒì— ë˜ ì°¾ì„ ê²ƒ ê°™ë„¤ìš”', 8);
+VALUES(6, 1, DEFAULT, 'iss0426', '°¡°Ýµµ ±¦Âú¾Æ¼­ ÁÁ¾Ò½À´Ï´Ù.', '´ÙÀ½¿¡ ¶Ç Ã£À» °Í °°³×¿ä', 8);
 
 INSERT INTO TOUR_REVIEW
-VALUES(7, 3, DEFAULT, 'iss0426', 'ê·¸ëŸ­ì €ëŸ­ ê´œì°®ì€ ì—¬í–‰ì´ì˜€ìŠµë‹ˆë‹¤.', 'ë‹¤ìŒì— ë˜ ì°¾ì„ ê²ƒ ê°™ë„¤ìš”', 9);
+VALUES(7, 3, DEFAULT, 'iss0426', '±×·°Àú·° ±¦ÂúÀº ¿©ÇàÀÌ¿´½À´Ï´Ù.', '´ÙÀ½¿¡ ¶Ç Ã£À» °Í °°³×¿ä', 9);
 INSERT INTO TOUR_REVIEW
-VALUES(8, 2, DEFAULT, 'iss0426', 'ì¢‹ì€ ì—¬í–‰ì´ì˜€ì–´ìš”!!!', 'ê°€ì´ë“œë¶„ë„ ì¹œì ˆí•˜ì‹œê³  ì—¬í–‰ ì¼ì •ë„ ë§ˆìŒì— ë“¤ì—ˆìŠµë‹ˆë‹¤.', 10);
+VALUES(8, 2, DEFAULT, 'iss0426', 'ÁÁÀº ¿©ÇàÀÌ¿´¾î¿ä!!!', '°¡ÀÌµåºÐµµ Ä£ÀýÇÏ½Ã°í ¿©Çà ÀÏÁ¤µµ ¸¶À½¿¡ µé¾ú½À´Ï´Ù.', 10);
 INSERT INTO TOUR_REVIEW
-VALUES(9, 5, DEFAULT, 'ksm1225', 'ê·¸ëŸ­ì €ëŸ­ ê´œì°®ì€ ì—¬í–‰ì´ì˜€ìŠµë‹ˆë‹¤.', 'ë‹¤ìŒì— ë˜ ì°¾ì„ ê²ƒ ê°™ë„¤ìš”', 9);
+VALUES(9, 5, DEFAULT, 'ksm1225', '±×·°Àú·° ±¦ÂúÀº ¿©ÇàÀÌ¿´½À´Ï´Ù.', '´ÙÀ½¿¡ ¶Ç Ã£À» °Í °°³×¿ä', 9);
 INSERT INTO TOUR_REVIEW
-VALUES(10, 9, DEFAULT, 'jnh0930', 'ì¢‹ì€ ì—¬í–‰ì´ì˜€ì–´ìš”!!!', 'ê°€ì´ë“œë¶„ë„ ì¹œì ˆí•˜ì‹œê³  ì—¬í–‰ ì¼ì •ë„ ë§ˆìŒì— ë“¤ì—ˆìŠµë‹ˆë‹¤.', 10);
+VALUES(10, 9, DEFAULT, 'jnh0930', 'ÁÁÀº ¿©ÇàÀÌ¿´¾î¿ä!!!', '°¡ÀÌµåºÐµµ Ä£ÀýÇÏ½Ã°í ¿©Çà ÀÏÁ¤µµ ¸¶À½¿¡ µé¾ú½À´Ï´Ù.', 10);
 INSERT INTO TOUR_REVIEW
-VALUES(11, 10, DEFAULT, 'ib1500', 'ê·¸ëŸ­ì €ëŸ­ ê´œì°®ì€ ì—¬í–‰ì´ì˜€ìŠµë‹ˆë‹¤.', 'ë‹¤ìŒì— ë˜ ì°¾ì„ ê²ƒ ê°™ë„¤ìš”', 5);
+VALUES(11, 10, DEFAULT, 'ib1500', '±×·°Àú·° ±¦ÂúÀº ¿©ÇàÀÌ¿´½À´Ï´Ù.', '´ÙÀ½¿¡ ¶Ç Ã£À» °Í °°³×¿ä', 5);
 
 INSERT INTO TOUR_REVIEW
-VALUES(12, 5, DEFAULT, 'iss0426', 'ê·¸ëŸ­ì €ëŸ­ ê´œì°®ì€ ì—¬í–‰ì´ì˜€ìŠµë‹ˆë‹¤.', 'ë‹¤ìŒì— ë˜ ì°¾ì„ ê²ƒ ê°™ë„¤ìš”', 7);
+VALUES(12, 5, DEFAULT, 'iss0426', '±×·°Àú·° ±¦ÂúÀº ¿©ÇàÀÌ¿´½À´Ï´Ù.', '´ÙÀ½¿¡ ¶Ç Ã£À» °Í °°³×¿ä', 7);
 INSERT INTO TOUR_REVIEW
-VALUES(13, 5, DEFAULT, 'jnh0930', 'ì¢‹ì€ ì—¬í–‰ì´ì˜€ì–´ìš”!!!', 'ê°€ì´ë“œë¶„ë„ ì¹œì ˆí•˜ì‹œê³  ì—¬í–‰ ì¼ì •ë„ ë§ˆìŒì— ë“¤ì—ˆìŠµë‹ˆë‹¤.', 6);
+VALUES(13, 5, DEFAULT, 'jnh0930', 'ÁÁÀº ¿©ÇàÀÌ¿´¾î¿ä!!!', '°¡ÀÌµåºÐµµ Ä£ÀýÇÏ½Ã°í ¿©Çà ÀÏÁ¤µµ ¸¶À½¿¡ µé¾ú½À´Ï´Ù.', 6);
 INSERT INTO TOUR_REVIEW
-VALUES(14, 7, DEFAULT, 'kdy0820', 'ê·¸ëŸ­ì €ëŸ­ ê´œì°®ì€ ì—¬í–‰ì´ì˜€ìŠµë‹ˆë‹¤.', 'ë‹¤ìŒì— ë˜ ì°¾ì„ ê²ƒ ê°™ë„¤ìš”', 8);
+VALUES(14, 7, DEFAULT, 'kdy0820', '±×·°Àú·° ±¦ÂúÀº ¿©ÇàÀÌ¿´½À´Ï´Ù.', '´ÙÀ½¿¡ ¶Ç Ã£À» °Í °°³×¿ä', 8);
 INSERT INTO TOUR_REVIEW
-VALUES(15, 10, DEFAULT, 'ksm1225', 'ì¢‹ì€ ì—¬í–‰ì´ì˜€ì–´ìš”!!!', 'ê°€ì´ë“œë¶„ë„ ì¹œì ˆí•˜ì‹œê³  ì—¬í–‰ ì¼ì •ë„ ë§ˆìŒì— ë“¤ì—ˆìŠµë‹ˆë‹¤.', 6);
+VALUES(15, 10, DEFAULT, 'ksm1225', 'ÁÁÀº ¿©ÇàÀÌ¿´¾î¿ä!!!', '°¡ÀÌµåºÐµµ Ä£ÀýÇÏ½Ã°í ¿©Çà ÀÏÁ¤µµ ¸¶À½¿¡ µé¾ú½À´Ï´Ù.', 6);
 INSERT INTO TOUR_REVIEW
-VALUES(16, 9, DEFAULT, 'ksm1225', 'ê·¸ëŸ­ì €ëŸ­ ê´œì°®ì€ ì—¬í–‰ì´ì˜€ìŠµë‹ˆë‹¤.', 'ë‹¤ìŒì— ë˜ ì°¾ì„ ê²ƒ ê°™ë„¤ìš”', 7);
+VALUES(16, 9, DEFAULT, 'ksm1225', '±×·°Àú·° ±¦ÂúÀº ¿©ÇàÀÌ¿´½À´Ï´Ù.', '´ÙÀ½¿¡ ¶Ç Ã£À» °Í °°³×¿ä', 7);
 
 
 CREATE TABLE TOUR_IMAGE (
@@ -1047,11 +1047,54 @@ INSERT INTO TOUR_IMAGE VALUES('201757882.jpg','201757882.jpg',11);
   CONSTRAINT FK_TRTID FOREIGN KEY(TOUR_ID) REFERENCES TOUR
 );
 
-INSERT INTO TOUR_RESERVE VALUES(1,'ib1500',3,'2017-11-06','ì˜ˆì•½í™•ì¸','2017-11-07','2017-11-09',2,2,206000);
-INSERT INTO TOUR_RESERVE VALUES(2,'ksm1225',3,'2017-11-08','ì˜ˆì•½í™•ì¸','2017-11-09','2017-11-12',1,2,157000);
-INSERT INTO TOUR_RESERVE VALUES(3,'jnh0930',3,'2017-11-10','ì˜ˆì•½í™•ì¸','2017-11-11','2017-11-15',3,4,363000);
-INSERT INTO TOUR_RESERVE VALUES(4,'kdy0820',4,'2017-11-12','ì˜ˆì•½í™•ì¸','2017-11-14','2017-11-18',2,2,224000);
-INSERT INTO TOUR_RESERVE VALUES(5,'usb0119',1,'2017-11-14','ì˜ˆì•½í™•ì¸','2017-11-15','2017-11-19',3,5,417000);
-INSERT INTO TOUR_RESERVE VALUES(6,'iss0426',1,'2017-11-16','ì˜ˆì•½í™•ì¸','2017-11-17','2017-11-21',2,4,342000);
+INSERT INTO TOUR_RESERVE VALUES(1,'ib1500',3,'2017-11-06','¿¹¾àÈ®ÀÎ','2017-11-07','2017-11-09',2,2,206000);
+INSERT INTO TOUR_RESERVE VALUES(2,'ksm1225',3,'2017-11-08','¿¹¾àÈ®ÀÎ','2017-11-09','2017-11-12',1,2,157000);
+INSERT INTO TOUR_RESERVE VALUES(3,'jnh0930',3,'2017-11-10','¿¹¾àÈ®ÀÎ','2017-11-11','2017-11-15',3,4,363000);
+INSERT INTO TOUR_RESERVE VALUES(4,'kdy0820',4,'2017-11-12','¿¹¾àÈ®ÀÎ','2017-11-14','2017-11-18',2,2,224000);
+INSERT INTO TOUR_RESERVE VALUES(5,'usb0119',1,'2017-11-14','¿¹¾àÈ®ÀÎ','2017-11-15','2017-11-19',3,5,417000);
+INSERT INTO TOUR_RESERVE VALUES(6,'iss0426',1,'2017-11-16','¿¹¾àÈ®ÀÎ','2017-11-17','2017-11-21',2,4,342000);
 
 commit;
+
+
+CREATE TABLE BOARD (
+  BOARD_NUM NUMBER,
+  BOARD_TITLE VARCHAR2(50), 
+  BOARD_WRITER VARCHAR2(15), 
+  BOARD_CONTENT VARCHAR2(2000),
+  BOARD_ORIGINAL_FILENAME VARCHAR2(100), 
+  BOARD_RENAME_FILENAME VARCHAR2(100), 
+  BOARD_DATE DATE   DEFAULT SYSDATE, 
+  BOARD_READCOUNT NUMBER   DEFAULT 0, 
+  BOARD_LEVEL NUMBER   DEFAULT 0, 
+  BOARD_REF NUMBER, 
+  BOARD_REPLY_REF NUMBER, 
+  BOARD_REPLY_SEQ NUMBER   DEFAULT 0,
+  CONSTRAINT PK_BOARD PRIMARY KEY (BOARD_NUM),
+  CONSTRAINT FK_BOARD_WR FOREIGN KEY (BOARD_WRITER) 
+      REFERENCES MEMBER (MEMBER_ID) ON DELETE SET NULL,
+  CONSTRAINT FK_BOARD_REF FOREIGN KEY (BOARD_REF) 
+      REFERENCES BOARD (BOARD_NUM) ON DELETE CASCADE,
+  CONSTRAINT FK_BOARD_REPLY_REF FOREIGN KEY (BOARD_REPLY_REF)
+      REFERENCES BOARD (BOARD_NUM) ON DELETE CASCADE
+);
+
+COMMENT ON COLUMN BOARD.BOARD_NUM IS '°Ô½ÃÆÇ¹øÈ£';
+COMMENT ON COLUMN BOARD.BOARD_WRITER IS '°Ô½Ã±ÛÀÛ¼ºÀÚ';
+COMMENT ON COLUMN BOARD.BOARD_TITLE IS '°Ô½Ã±ÛÁ¦¸ñ';
+COMMENT ON COLUMN BOARD.BOARD_CONTENT IS '°Ô½Ã±Û³»¿ë';
+COMMENT ON COLUMN BOARD.BOARD_DATE IS '°Ô½Ã±Û³¯Â¥';
+COMMENT ON COLUMN BOARD.BOARD_ORIGINAL_FILENAME IS 'Ã·ºÎÆÄÀÏ¿ø·¡ÀÌ¸§';
+COMMENT ON COLUMN BOARD.BOARD_RENAME_FILENAME IS 'Ã·ºÎÆÄÀÏº¯°æÀÌ¸§';
+COMMENT ON COLUMN BOARD.BOARD_LEVEL IS '°Ô½Ã¹°·¹º§';
+COMMENT ON COLUMN BOARD.BOARD_REF IS 'ÂüÁ¶¿ø±Û¹øÈ£';
+COMMENT ON COLUMN BOARD.BOARD_REPLY_REF IS 'ÂüÁ¶´ä±Û¹øÈ£';
+COMMENT ON COLUMN BOARD.BOARD_REPLY_SEQ IS '´ñ±Û¼ø¹ø';
+COMMENT ON COLUMN BOARD.BOARD_READCOUNT IS 'Á¶È¸¼ö';
+
+INSERT INTO BOARD VALUES(1, '±Ã±ÝÇØ¼­ ¿Ã·Áº¾´Ï´Ù', 'admin', '½ÅÃ»Àº¾î¶»°ÔÇÏ´Â°Ç°¡¿ä?', null, null, sysdate, 0, 0, 1, null, 0);
+INSERT INTO BOARD VALUES(2, '¾È³çÇÏ¼¼¿ä Áú¹®Á»µå¸³´Ï´Ù', 'ib1500', '¿©Çà°úÁ¤Áß Áß°£¿¡ °¡ÀÌµåÃë¼ÒÇÏ°í½ÍÀ»¶§´Â ¾î¶»°ÔÇÏ³ª¿ä??', null, null, sysdate, 0, 0, 1, null, 0);
+INSERT INTO BOARD VALUES(3, 'Áú¹®¿ä!!!', 'haeyeon', '½ÅÃ»Àº¾î¶»°ÔÇÏ´Â°Ç°¡¿ä?', null, null, sysdate, 0, 0, 1, null, 0);
+
+
+COMMIT;

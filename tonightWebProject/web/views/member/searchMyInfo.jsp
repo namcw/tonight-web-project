@@ -174,6 +174,7 @@ body, html {
 				</form>
 				<div id="resultpwd" style="color:red"></div>
 			</div>
+			<a href="javascript:history.back()" class="forgot-password pull-right">뒤로가기</a>
 		</div>
 	</div>
 </div>

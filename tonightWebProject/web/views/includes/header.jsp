@@ -62,11 +62,11 @@
         <li><a id="logo" class="navbar-brand" href="/tonight/tpopul"><img width="65" src="/tonight/img/logo.png"></a>
         <li><a href="/tonight/alist">숙소</a></li>
         <li class="dropdown">
-        	<a class="dropdown-toggle" data-toggle="dropdown">고객센터
+        	<a class="dropdown-toggle" data-toggle="dropdown" style="cursor:pointer;">고객센터
         	</a>
         	<ul class="dropdown-menu" style="background-color:black">
       		<li><a href="/tonight/flist">FAQ</a></li>
-      		<li><a href="/tonight/qlist">Q&A</a></li>
+      		<li><a href="/tonight/blist">Q&A</a></li>
       		</ul>
         	
         </li>
@@ -106,6 +106,7 @@
 				}
 			});
 		}
+		
 		$('.dropdown-toggle').dropdown();
 	});
 </script>

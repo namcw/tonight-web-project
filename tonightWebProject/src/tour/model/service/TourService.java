@@ -164,4 +164,10 @@ public class TourService {
 		ArrayList<Tour> tpopul=new TourDao().getTourPopularity(con);
 		return tpopul;
 	}
+
+	public ArrayList<Tour> selectGuideTourList(String memberId) {
+		Connection con = getConnection();
+		ArrayList<Tour> tourList = new TourDao().selectGuideTourList(con, memberId);
+		return tourList;
+	}
 }
