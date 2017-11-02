@@ -633,10 +633,11 @@ function check() {
 	<% if(member != null) { %>
 		<% if(member.getMemberType().equals('U')) { %>
 			$("#reserveform").submit();
+			return true;
 		<% } else { %>
 			alert("예약은 일반 회원만 가능합니다.")
+			return false;
 		<% } %>
-		return true;
 	<% } else { %>
 		alert("로그인해야됩니다!");
 		return false;

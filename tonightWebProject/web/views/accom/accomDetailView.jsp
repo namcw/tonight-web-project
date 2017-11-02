@@ -319,9 +319,9 @@ function delete_event() {
 							<%
 								for (Room room : list) {
 							%>
-							<div class="soomgim" id="<%= room.getRoomId() %>">
+							<div class="soomgim" value="<%=room.getRoomName()%>">
 								<hr>
-								<div>
+								<div id="arname">
 									<%=room.getRoomName()%>
 								</div>
 								<hr>
@@ -330,29 +330,39 @@ function delete_event() {
 							<div style="display: none;">
 								<div class="row">
 									<div class="col-xs-4">상세정보</div>
-									<div id="tconf<%= room.getRoomId() %>" class="col-xs-8">
+									<div id="tconf2" class="col-xs-8">
 										<%=room.getRoomDetails()%>
 									</div>
 								</div>
 								<hr>
 								<div class="row">
-									<div class="col-xs-4">주중 성인 가격</div>
-									<div id="wdaprice<%= room.getRoomId() %>" class="col-xs-8"><%=room.getWeekdaysAdultPrice()%></div>
+									<div class="col-xs-4">성인 가격</div>
+									<div id="tconf4" class="col-xs-8">
+										<%=room.getWeekdaysAdultPrice()%>
+
+									</div>
 								</div>
 								<hr>
 								<div class="row">
-									<div class="col-xs-4">주중 소인 가격</div>
-									<div id="wdcprice<%= room.getRoomId() %>" class="col-xs-8"><%=room.getWeekdaysChildPrice()%></div>
+									<div class="col-xs-4">소인 가격</div>
+									<div id="tconf5" class="col-xs-8">
+										<%=room.getWeekdaysChildPrice()%>
+									</div>
 								</div>
 								<hr>
 								<div class="row">
-									<div class="col-xs-4">주말 성인 가격</div>
-									<div id="wkaprice<%= room.getRoomId() %>" class="col-xs-8"><%=room.getWeekendAdultPrice()%></div>
+									<div class="col-xs-4">성인 가격</div>
+									<div id="tconf4" class="col-xs-8">
+										<%=room.getWeekendAdultPrice()%>
+
+									</div>
 								</div>
 								<hr>
 								<div class="row">
-									<div class="col-xs-4">주말 소인 가격</div>
-									<div id="wkcprice<%= room.getRoomId() %>" class="col-xs-8"><%=room.getWeekendChildPrice()%></div>
+									<div class="col-xs-4">소인 가격</div>
+									<div id="tconf5" class="col-xs-8">
+										<%=room.getWeekendChildPrice()%>
+									</div>
 								</div>
 							</div>
 
@@ -872,34 +882,9 @@ function delete_event() {
 		src="/tonight/js/pignose.calendar.min.js"></script>
 	<script
 		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=1524280cea98188e73c2051d02dc247c&libraries=services"></script>
-	
-	
-	<script>
-$(document).on('click', '.number-spinner a', function () {
-    var btn = $(this),
-    input = btn.closest('.number-spinner').find('input'),
-    oldValue = input.val().trim();
-	
-if (btn.attr('data-dir') == 'up') {
-  if(oldValue < input.attr('max')){
-    oldValue++;
-  }
-} else {
-  if (oldValue > input.attr('min')) {
-    oldValue--;
-  }
-}
-input.val(oldValue);
-input.next().val(oldValue);
-
-});
-</script>
-	
-	
-	
 	<script type="text/javascript">
 $(function() {
-	
+
    /* affix 스크롤 */
    var stickyElement = '.panel-affix', bottomElement = '#fake-footer';
    if ($(stickyElement).length) {
@@ -928,8 +913,6 @@ $(function() {
    var day = dateObj.getDate();
    var today = year + "-" + month + "-" + day;
    
-   var night = 0;
-   
    $('.calendar-schedules').pignoseCalendar({
        scheduleOptions: {
            colors: {
@@ -939,30 +922,6 @@ $(function() {
        },
        
        multiple: true,
-       /* select : function onSelectHandler(date, context) {
-
-           var $element = context.element;
-           var $calendar = context.calendar;
-           var $box = $element.siblings('.box').show();
-           var text = 'date ';
-
-           if (date[0] !== null) {
-               text += date[0].format('YYYY-MM-DD');
-           }
-
-           if (date[0] !== null && date[1] !== null) {
-               text += ' ~ ';
-           }
-           else if (date[0] === null && date[1] == null) {
-               text += 'nothing';
-           }
-
-           if (date[1] !== null) {
-               text += date[1].format('YYYY-MM-DD');
-           }
-
-           $box.text(text);
-       }, */
        select : function onSelectHandler(date, context) {
 
            var $element = context.element;
@@ -974,23 +933,19 @@ $(function() {
 
            if (date[0] !== null) {
                checkin = date[0].format('YYYY-MM-DD');
-               night=1;
            }
 
            if (date[0] !== null && date[1] !== null) {
                text += ' ~ ';
-               night = Math.ceil((date[1]-date[0])/(1000*60*60*24));
            }
            else if (date[0] === null && date[1] == null) {
                text += 'nothing';
-               night=0;
            }
 
            if (date[1] !== null) {
                checkout = date[1].format('YYYY-MM-DD');
-               night=1;
            }
-		   changeTotalPrice();
+
            $('#checkin').val(checkin);
            $('#checkout').val(checkout);
        },
@@ -999,7 +954,7 @@ $(function() {
    });
    
    
-   <%-- function moveCalendar() {
+    <%-- function moveCalendar() {
 	   var months = (parseInt('<%=tconfList.get(0).getStartDate()%>'.substring(0,4))-parseInt(today.substring(0,4)))*12;
 		months += (parseInt('<%=tconfList.get(0).getStartDate()%>'.substring(5,7))-parseInt(today.substring(5,7)));
 		
@@ -1026,11 +981,6 @@ $(function() {
    moveCalendar(); --%>
 
 });
-
-function changeTotalPrice() {
-	$('#totalPrice').text(night+"Aaa");
-	
-}
 </script>
 
 	<script>
@@ -1111,9 +1061,13 @@ $('.soomgim').on('click', function() {
        slideUp();
        $(target).addClass('on').next().slideDown();
        $(target).addClass('bg-info');
-       /* alert($('#wdaprice'+$(target).attr('id')).text());
-       alert($('#wdcprice'+$(target).attr('id')).text()); */
-       //alert($('#checkout').value-$('#checkin').value));
+       
+       alert(document.getElementById('.soomgim').value);
+       <%-- <% for(Room room : list) { %>
+       		$('#adult').val(<%=room.getWeekdaysAdultPrice()%>);	
+       		$('#child').val(<%=room.getWeekdaysAdultPrice()%>);
+       <% } %> --%>
+       
      }
 
      function slideUp() {
